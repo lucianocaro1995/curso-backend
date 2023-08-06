@@ -77,11 +77,6 @@ class ProductManager {
 
 
 
-//Creo los productos y autoincremento el id
-const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", 10, [])
-const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", 30, [])
-const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, [])
-
 class Product {
     constructor(title, description, price, code, stock, thumbnail) {
         this.title = title
@@ -103,6 +98,11 @@ class Product {
     }
 }
 
+//Creo los productos y autoincremento el id
+const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", 10, "ejemploImagen1.jpg")
+const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", 30, "ejemploImagen2.jpg")
+const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, "ejemploImagen3.jpg")
+
 
 
 
@@ -112,18 +112,22 @@ const productManager = new ProductManager()
 
 //Utilizo los 5 métodos creados
 //Para ver en la terminal escribo node nombre_del_archivo. En este caso node entrega2.js
-//1) Consulto por todos los productos
-productManager.getProducts();
+async function metodos() {
+    //1) Consulto por todos los productos
+    await productManager.getProducts();
 
-//2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
-productManager.getProductById(3);
+    //2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
+    await productManager.getProductById(3);
 
-//3) Creo un producto que no existe, por lo tanto se va a agregar al json
-const producto4 = new Product("Producto 4", "Este es el producto 4", 900, "PROD004", 25, [])
-productManager.addProduct(producto4);
+    //3) Creo un producto que no existe, por lo tanto se va a agregar al json
+    const producto4 = new Product("Producto 4", "Este es el producto 4", 900, "PROD004", 25, "ejemploImagen4.jpg");
+    await productManager.addProduct(producto4);
 
-//4) Actualizo un producto gracias a la función updateProduct
-productManager.updateProduct(1, { title: "Producto 50" });
+    //4) Actualizo un producto gracias a la función updateProduct
+    await productManager.updateProduct(2, { title: "Producto 50" });
 
-//5) Elimino un producto
-productManager.deleteProduct(1);
+    //5) Elimino un producto
+    await productManager.deleteProduct(3);
+}
+
+metodos();
