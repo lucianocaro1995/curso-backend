@@ -77,7 +77,7 @@ class ProductManager {
 
 
 
-//Creo los productos
+//Creo los productos y autoincremento el id
 const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", 10, [])
 const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", 30, [])
 const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, [])
@@ -111,11 +111,11 @@ class Product {
 const productManager = new ProductManager()
 
 //Utilizo los 5 métodos creados
-//Para ver en la terminal escribo node nombre_del_archivo. En este caso node ejemplo.js
-//1)
+//Para ver en la terminal escribo node nombre_del_archivo. En este caso node entrega2.js
+//1) Consulto por todos los productos
 productManager.getProducts();
 
-//2) Llamo a la función con un parámetro indicado para saber si existe ese producto
+//2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
 productManager.getProductById(3);
 
 //3) Creo un producto que no existe, por lo tanto se va a agregar al json
