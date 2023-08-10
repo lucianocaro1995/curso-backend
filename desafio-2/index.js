@@ -100,6 +100,9 @@ class Product {
         this.id = Product.incrementarId()
     }
 
+    //Static hace que todos los productos de la clase Product compartan el resultado del método incrementarId
+    //En este caso estoy creando un contador de id que todos los productos van a compartir, en vez de tener un contador separado para cada producto
+    //Es decir todos los productos van a compartir un id que se autoincrementa
     static incrementarId() {
         if (this.idIncrement) {
             this.idIncrement++;
@@ -119,7 +122,7 @@ const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD0
 
 
 
-//Creo un nuevo objeto de la clase "productManager". Al ser una clase tengo que generar un objeto de la misma
+//Esto me sirve para crear una nueva clase ProductManager y utilizarla con otros métodos. Pero en este desafío no estoy utilizando esa 2da clase ProductManager (solamente la inicié)
 const productManager = new ProductManager()
 
 //Utilizo los 5 métodos creados
@@ -132,8 +135,11 @@ async function metodos() {
     //2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
     await productManager.getProductById(2);
 
-    //3) Yo cree los productos en la línea 114 (que no existen en el json), por lo tanto con addProduct los agrego al json
-    await productManager.addProduct(producto1, producto2, producto3);
+    //3) Yo cree los productos en la línea 117 (que no existen en el json), por lo tanto con addProduct los agrego al json
+    //Tengo que crear un bucle porque addProduct solamente agrega 1 producto
+    for (let x of [producto1, producto2, producto3]) {
+        await productManager.addProduct(x);
+    }
 
     //4) Actualizo un producto gracias a la función updateProduct. Solamente modifico el title
     await productManager.updateProduct(2, { "title":"Producto title cambiado", "description":"Este es el producto 2", "price":600, "code":"PROD002", "stock":30, "thumbnail":"ejemploImagen2.jpg" });
