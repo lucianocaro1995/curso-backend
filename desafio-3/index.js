@@ -123,8 +123,7 @@ const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD0
 const productManager = new ProductManager()
 
 //Utilizo los 5 métodos creados
-//Para ver en la terminal escribo node nombre_del_archivo, en este caso node index.js
-//Tengo que hacerlo 1 vez para que se agreguen los productos, y 2 para verlo reflejado en consola
+//Para ver en la terminal escribo node nombre_del_archivo. En este caso node entrega2.js
 async function metodos() {
     //1) Consulto por todos los productos
     await productManager.getProducts();
@@ -132,7 +131,7 @@ async function metodos() {
     //2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
     await productManager.getProductById(2);
 
-    //3) Yo cree los productos en la línea 114 (que no existen en el json), por lo tanto con addProduct los agrego al json
+    //3) Yo cree los productos en la línea 101 (que no existen en el json), por lo tanto con addProduct los agrego al json
     await productManager.addProduct(producto1, producto2, producto3);
 
     //4) Actualizo un producto gracias a la función updateProduct. Solamente modifico el title

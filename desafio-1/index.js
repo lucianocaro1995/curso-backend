@@ -79,7 +79,7 @@ const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD0
 const productManager = new ProductManager()
 
 //Utilizo los 3 métodos creados en ProductManager
-//Para ver en la terminal escribo node nombre_del_archivo. En este caso node ejemplo.js
+//Para ver en la terminal escribo node nombre_del_archivo. En este caso node index.js
 //1)
 productManager.addProduct(producto1)
 productManager.addProduct(producto2)
