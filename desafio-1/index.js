@@ -1,6 +1,8 @@
 //La clase ProductManager va a gestionar una cantidad de productos
 class ProductManager {
     constructor() {
+        //En este desafío sí necesito crear un array vacío
+        //En el desafío 2 no porque trabajamos con variables que consultan los productos que tenemos en el JSON
         this.products = []
     }
 

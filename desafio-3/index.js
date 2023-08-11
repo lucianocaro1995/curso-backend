@@ -6,9 +6,7 @@ const path = "./productos.json";
 
 
 class ProductManager {
-    constructor() {
-        this.products = [];
-    }
+    constructor() {}
 
     async getProducts() {
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
@@ -100,6 +98,8 @@ const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD0
 
 
 
+
+const productManager = new ProductManager();
 
 async function metodos() {
     await productManager.getProducts();

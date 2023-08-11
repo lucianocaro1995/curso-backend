@@ -11,9 +11,7 @@ const path = "./productos.json";
 //JSON.parse: de json a objeto
 //JSON.stringify: de objeto a json
 class ProductManager {
-    constructor() {
-        this.products = [];
-    }
+    constructor() {}
 
     //1) Método getProducts: consulto TODOS los productos en mi archivo json
     async getProducts() {
@@ -21,7 +19,7 @@ class ProductManager {
         console.log(prods);
     }
 
-    //2) Método getProductByID: recibo un id de parámetro, y consulto por un sólo producto dado su id
+    //2) Método getProductByID: consulto por un sólo producto, utilizo su id como parámetro
     async getProductById(id) {
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         const producto = prods.find(prod => prod.id === id);
@@ -33,7 +31,7 @@ class ProductManager {
         }
     }
 
-    //3) Método addProduct: si existe este producto no lo agrego. Si no existe entonces sí lo agrego
+    //3) Método addProduct: agrego un producto
     async addProduct(product) {
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         const producto = prods.find(prod => prod.id === product.id);
@@ -49,7 +47,8 @@ class ProductManager {
         }
     }
 
-    //4) Método updateProduct para modificar: pide 2 parámetros, un id para consultar y un producto para modificar. FindIndex me devuelve la posición del elemento en el array
+    //4) Método updateProduct: modifico un producto. Pide 2 parámetros, un id para consultar y un producto para modificar
+    //FindIndex me devuelve la posición del elemento en el array
     async updateProduct(id, product) {
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         const indice = prods.findIndex(prod => prod.id === id);
@@ -70,7 +69,7 @@ class ProductManager {
         }
     }
 
-    //5) Método deleteProduct para eliminar: pide 1 parámetro, el id
+    //5) Método deleteProduct: elimino un producto, utilizo su id como parámetro
     async deleteProduct(id) {
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         const producto = prods.find(prod => prod.id === id);
@@ -123,7 +122,8 @@ const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD0
 
 
 //Esto me sirve para crear una nueva clase ProductManager y utilizarla con otros métodos. Pero en este desafío no estoy utilizando esa 2da clase ProductManager (solamente la inicié)
-const productManager = new ProductManager()
+//También me sirve para asignarle un valor a la variable productManager. Lo necesito para utilizar la variable en la función métodos()
+const productManager = new ProductManager();
 
 //Utilizo los 5 métodos creados
 //Para ver en la terminal escribo node nombre_del_archivo, en este caso node index.js
@@ -135,7 +135,7 @@ async function metodos() {
     //2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
     await productManager.getProductById(2);
 
-    //3) Yo cree los productos en la línea 117 (que no existen en el json), por lo tanto con addProduct los agrego al json
+    //3) Yo cree los productos en la línea 116 (que no existen en el json), por lo tanto con addProduct los agrego al json
     //Tengo que crear un bucle porque addProduct solamente agrega 1 producto
     for (let x of [producto1, producto2, producto3]) {
         await productManager.addProduct(x);
