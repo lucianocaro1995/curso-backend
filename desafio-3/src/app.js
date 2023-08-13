@@ -41,8 +41,6 @@ const app = express()
 
 //Importo el ProductManager y el json
 import productManager from "./ProductManager.js";
-const data = "./products.json";
-const productManager = new ProductManager(data);
 
 
 

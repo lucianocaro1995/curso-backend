@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-const path = "./productos.json";
+const path = "./src/productos.json";
 
 
 
@@ -137,4 +137,4 @@ const producto4 = new Product("Producto 4", "Este es el producto 4", 1200, "PROD
 
 
 
-export default ProductManager;
+export default new ProductManager;
