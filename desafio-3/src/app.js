@@ -25,7 +25,7 @@ server.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
 })
 
-//Haciendo todo esto, abro el navegador, escribo localhost:4000 y me va a llegar a mi página
+//Haciendo todo esto, abro el navegador, escribo localhost:4000 y me va a llevar a mi página
 */
 
 
@@ -33,17 +33,20 @@ server.listen(PORT, () => {
 
 
 //Ahora genero un servidor, pero utilizando express (es un framework): esto simplifica la creación de servidores
-//Antes tenemos que instalarlo poniendo en la terminal npm i express
+//Antes tenemos que instalarlo poniendo en la terminal npm i express. Luego lo importo
 import express from "express"
 const PORT = 4000
 //Genero una instancia de express en app
 const app = express()
-//Importo el ProductManager
-import ProductManager from "./ProductManager.js";
+
+//Importo el ProductManager y el json
+import productManager from "./ProductManager.js";
+const data = "./products.json";
+const productManager = new ProductManager(data);
 
 
 
-//Genero un array de productos. Pero luego utilizo los productos de mi json
+//Genero un array de productos para practicar. Pero luego utilizo los productos de mi json
 // const prods = [
 //     { id: 1, nombre: "Zapatillas", categoria: "Calzado" },
 //     { id: 2, nombre: "Botas", categoria: "Calzado" },
@@ -69,7 +72,7 @@ app.get("/", (req, res) => {
 //     }
 // })
 
-//Ahora consulto por el id
+//Ahora consulto un producto por su id
 // app.get("/products/:id", (req, res) => {
 //     //Todo lo que me ingrese desde el cliente va a ser un string, entonces lo tenemos que convertir a número. Por eso el parseInt
 //     const prod = prods.find(prod => prod.id === parseInt(req.params.id))
@@ -83,7 +86,7 @@ app.get("/", (req, res) => {
 
 //Genero una ruta para definir mis productos, con un límite de resultados
 app.get("/products/", async (req, res) => {
-    const products = await ProductManager.getProducts();
+    const products = await productManager.getProducts();
     const limit = req.query.limit;
 
     //Aplicar el límite si se proporciona
@@ -97,9 +100,9 @@ app.get("/products/", async (req, res) => {
 
 //Genero una ruta la cual debe recibir por req.params el pid (product Id) y devolver sólo el producto solicitado
 app.get('/products/:pid', async (req, res) => {
-    const {pid} = req.params;
+    const { pid } = req.params;
 
-    const product = await ProductManager.getProductById(parseInt(pid));
+    const product = await productManager.getProductById(parseInt(pid));
     if (!product) {
         res.status(404).send({});
         return;
@@ -109,9 +112,13 @@ app.get('/products/:pid', async (req, res) => {
 })
 
 //Inicializo el servidor
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`)
-})
+try {
+    app.listen(PORT, () => {
+        console.log(`Servidor escuchando en el puerto ${PORT}`);
+    });
+} catch (error) {
+    console.error("Error al intentar iniciar el servidor:", error);
+}
 //Debo ejecutar npm run dev en la terminal para poder ver el localhost:4000 en mi navegador
 
 

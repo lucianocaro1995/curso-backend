@@ -116,21 +116,25 @@ const producto4 = new Product("Producto 4", "Este es el producto 4", 1200, "PROD
 
 
 
+//No ejecuto los métodos en este desafío porque lo estoy haciendo desde app.js
+// const productManager = new ProductManager();
 
-const productManager = new ProductManager();
+// async function metodos() {
+//     await productManager.getProducts();
 
-async function metodos() {
-    await productManager.getProducts();
+//     await productManager.getProductById(2);
 
-    await productManager.getProductById(2);
+//     for (let x of [producto1, producto2, producto3, producto4]) {
+//         await productManager.addProduct(x);
+//     }
 
-    for (let x of [producto1, producto2, producto3, producto4]) {
-        await productManager.addProduct(x);
-    }
+//     await productManager.updateProduct(2, { "title": "Producto title cambiado", "description": "Este es el producto 2", "price": 600, "code": "PROD002", "stock": 30, "thumbnail": "ejemploImagen2.jpg" });
 
-    await productManager.updateProduct(2, { "title": "Producto title cambiado", "description": "Este es el producto 2", "price": 600, "code": "PROD002", "stock": 30, "thumbnail": "ejemploImagen2.jpg" });
+//     await productManager.deleteProduct(4);
+// }
 
-    await productManager.deleteProduct(4);
-}
+// metodos()
 
-metodos()
+
+
+export default ProductManager;
