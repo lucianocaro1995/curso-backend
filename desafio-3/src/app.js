@@ -83,6 +83,7 @@ app.get("/", (req, res) => {
 // })
 
 //Genero una ruta para definir mis productos, con un límite de resultados
+//Poner esto en la ruta: localhost:4000/products/?limit=1
 app.get("/products/", async (req, res) => {
     const products = await productManager.getProducts();
     const limit = req.query.limit;
@@ -97,6 +98,7 @@ app.get("/products/", async (req, res) => {
 })
 
 //Genero una ruta la cual debe recibir por req.params el pid (product Id) y devolver sólo el producto solicitado
+//Poner esto en la ruta: localhost:4000/products/1
 app.get('/products/:pid', async (req, res) => {
     const { pid } = req.params;
 
