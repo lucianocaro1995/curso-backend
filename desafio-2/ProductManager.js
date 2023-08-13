@@ -33,11 +33,24 @@ class ProductManager {
 
     //3) Método addProduct: agrego un producto
     async addProduct(product) {
+        //Validar campos obligatorios
+        if (
+            !product.title ||
+            !product.description ||
+            !product.price ||
+            !product.code ||
+            !product.stock ||
+            !product.thumbnail
+        ) {
+            console.log("Todos los campos son obligatorios");
+            return;
+        }
+
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         const producto = prods.find(prod => prod.id === product.id);
 
         if (producto) {
-            console.log("Producto ya agregado");
+            console.log("Este producto ya existe");
         } else {
             //Si no existe lo pusheo a ese array
             prods.push(product);
@@ -122,11 +135,12 @@ const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD0
 
 
 //Esto me sirve para crear una nueva clase ProductManager y utilizarla con otros métodos. Pero en este desafío no estoy utilizando esa 2da clase ProductManager (solamente la inicié)
-//También me sirve para asignarle un valor a la variable productManager. Lo necesito para utilizar la variable en la función métodos()
+//También me sirve para asignarle un valor al objeto productManager. Lo necesito para utilizar este objeto en la función métodos()
+//Es un objeto, no variable. La variable sólo almacena un valor, el objeto almacena múltiples valores o funciones o clases
 const productManager = new ProductManager();
 
 //Utilizo los 5 métodos creados
-//Para ver en la terminal escribo node nombre_del_archivo, en este caso node index.js
+//Para ver en la terminal escribo node nombre_del_archivo, en este caso node ProductManager.js
 //Tengo que hacerlo 1 vez para que se agreguen los productos, y 2 para verlo reflejado en consola
 async function metodos() {
     //1) Consulto por todos los productos
@@ -135,8 +149,9 @@ async function metodos() {
     //2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
     await productManager.getProductById(2);
 
-    //3) Yo cree los productos en la línea 116 (que no existen en el json), por lo tanto con addProduct los agrego al json
+    //3) Yo cree los productos en la línea 129 (que no existen en el json), por lo tanto con addProduct los agrego al json
     //Tengo que crear un bucle porque addProduct solamente agrega 1 producto
+    //O sino podría escribir una línea de código por cada producto para agregar como hice en el desafío 1, pero el bucle es más conveniente
     for (let x of [producto1, producto2, producto3]) {
         await productManager.addProduct(x);
     }

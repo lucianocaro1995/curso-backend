@@ -16,5 +16,14 @@
         "stock": 30,
         "thumbnail": "ejemploImagen2.jpg",
         "id": 2
+    },
+    {
+        "title": "Producto 3",
+        "description": "Este es el producto 3",
+        "price": 400,
+        "code": "PROD003",
+        "stock": 15,
+        "thumbnail": "ejemploImagen3.jpg",
+        "id": 3
     }
 ]

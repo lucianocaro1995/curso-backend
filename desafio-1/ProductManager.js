@@ -8,13 +8,27 @@ class ProductManager {
 
     //1) Método para agregar un producto
     addProduct(product) {
-        //El método find te devuelve el objeto si existe, y undefined si no existe
-        const prod = this.products.find(prod => prod.code === product.code)
+        //Validar campos obligatorios
+        if (
+            !product.title ||
+            !product.description ||
+            !product.price ||
+            !product.code ||
+            !product.stock ||
+            !product.thumbnail
+        ) {
+            console.log("Todos los campos son obligatorios");
+            return;
+        }
+
+        //Verificar si el código ya existe. El método find te devuelve el objeto si existe, y undefined si no existe
+        const prod = this.products.find(prod => prod.code === product.code);
 
         if (prod) {
-            console.log("Producto encontrado");
+            console.log("Producto con el mismo código ya existe");
         } else {
-            this.products.push(product)
+            this.products.push(product);
+            console.log("Producto agregado correctamente");
         }
     }
 
@@ -81,7 +95,7 @@ const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD0
 const productManager = new ProductManager()
 
 //Utilizo los 3 métodos creados en ProductManager
-//Para ver en la terminal escribo node nombre_del_archivo. En este caso node index.js
+//Para ver en la terminal escribo node nombre_del_archivo. En este caso node ProductManager.js
 //1)
 productManager.addProduct(producto1)
 productManager.addProduct(producto2)
