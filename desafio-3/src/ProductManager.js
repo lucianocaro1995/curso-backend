@@ -11,7 +11,8 @@ class ProductManager {
     //1)
     async getProducts() {
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
-        console.log(prods);
+        //Que me muestre los productos en el localhost, no en la terminal como hacía antes:
+        return prods;
     }
 
     //2)
@@ -20,9 +21,10 @@ class ProductManager {
         const producto = prods.find(prod => prod.id === id);
 
         if (producto) {
-            console.log(producto);
+            //Que me muestre los productos en el localhost, no en la terminal como hacía antes:
+            return producto;
         } else {
-            console.log("Producto no encontrado");
+            return null;
         }
     }
 
