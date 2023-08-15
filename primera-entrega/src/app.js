@@ -1,3 +1,4 @@
+//Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:4000 en mi navegador
 import express from "express"
 const PORT = 4000
 const app = express()
@@ -14,7 +15,7 @@ app.get("/", (req, res) => {
     res.send("Hola, buenos días")
 })
 
-//Genero una ruta para definir mis productos, con un límite de resultados
+//Genero una ruta para definir mis productos, con un límite de resultados.
 //Poner esto en la ruta: localhost:4000/products/?limit=1
 app.get("/products/", async (req, res) => {
     const products = await productManager.getProducts();
@@ -50,4 +51,3 @@ try {
 } catch (error) {
     console.error("Error al intentar iniciar el servidor:", error);
 }
-//Debo ejecutar npm run dev en la terminal para poder ver el localhost:4000 en mi navegador

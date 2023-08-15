@@ -45,12 +45,17 @@ class ProductManager {
             console.log("Todos los campos son obligatorios");
             return;
         }
-
+    
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
-        const producto = prods.find(prod => prod.id === product.id);
-
-        if (producto) {
-            console.log("Este producto ya existe");
+        //El método find te devuelve el objeto si existe, y undefined si no existe
+        //Que no se repita el "id"
+        const prodId = prods.find(prod => prod.id === product.id);
+        //Que no se repita el "code"
+        const prodCode = prods.find(prod => prod.code === product.code);
+        
+        //Si el id o el código ya existe, decímelo en la terminal, sino agrega el producto
+        if (prodId || prodCode) {
+            console.log("Ya existe un producto con este id/código");
         } else {
             //Si no existe lo pusheo a ese array
             prods.push(product);
@@ -58,7 +63,7 @@ class ProductManager {
             //Para modificar un array, debo pisar el anterior contenido porque ahora tengo un contenido nuevo
             await fs.writeFile(path, JSON.stringify(prods));
         }
-    }
+    }  
 
     //4) Método updateProduct: modifico un producto. Pide 2 parámetros, un id para consultar y un producto para modificar
     //FindIndex me devuelve la posición del elemento en el array
@@ -116,6 +121,7 @@ class Product {
     //En este caso estoy creando un contador de id que todos los productos van a compartir, en vez de tener un contador separado para cada producto
     //Es decir todos los productos van a compartir un id que se autoincrementa
     static incrementarId() {
+        //Si el contador de id existe, la aumento en 1. Sino la creo con id 1
         if (this.idIncrement) {
             this.idIncrement++;
         } else {
@@ -146,17 +152,17 @@ async function metodos() {
     //1) Consulto por todos los productos
     await productManager.getProducts();
 
-    //2) Llamo a la función con un parámetro indicado para saber si existe ese producto en particular
+    //2) Llamo al método getProductById con un parámetro indicado para saber si existe ese producto en particular
     await productManager.getProductById(2);
 
-    //3) Yo cree los productos en la línea 129 (que no existen en el json), por lo tanto con addProduct los agrego al json
+    //3) Yo cree los productos en la línea 134 (que no existen en el json), por lo tanto con addProduct los agrego al json
     //Tengo que crear un bucle porque addProduct solamente agrega 1 producto
     //O sino podría escribir una línea de código por cada producto para agregar como hice en el desafío 1, pero el bucle es más conveniente
     for (let x of [producto1, producto2, producto3]) {
         await productManager.addProduct(x);
     }
 
-    //4) Actualizo un producto gracias a la función updateProduct. Solamente modifico el title
+    //4) Actualizo un producto gracias al método updateProduct. Solamente modifico el title
     await productManager.updateProduct(2, { "title":"Producto title cambiado", "description":"Este es el producto 2", "price":600, "code":"PROD002", "stock":30, "thumbnail":"ejemploImagen2.jpg" });
 
     //5) Elimino un producto

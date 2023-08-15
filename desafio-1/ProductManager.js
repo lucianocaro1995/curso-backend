@@ -7,7 +7,7 @@ class ProductManager {
     }
 
     //1) Método para agregar un producto
-    addProduct(product) {
+    async addProduct(product) {
         //Validar campos obligatorios
         if (
             !product.title ||
@@ -21,14 +21,22 @@ class ProductManager {
             return;
         }
 
-        //Verificar si el código ya existe. El método find te devuelve el objeto si existe, y undefined si no existe
-        const prod = this.products.find(prod => prod.code === product.code);
-
-        if (prod) {
-            console.log("Producto con el mismo código ya existe");
+        const prods = JSON.parse(await fs.readFile(path, "utf-8"));
+        //El método find te devuelve el objeto si existe, y undefined si no existe
+        //Que no se repita el "id"
+        const prodId = prods.find(prod => prod.id === product.id);
+        //Que no se repita el "code"
+        const prodCode = prods.find(prod => prod.code === product.code);
+        
+        //Si el id o el código ya existe, decímelo en la terminal, sino agrega el producto
+        if (prodId || prodCode) {
+            console.log("Ya existe un producto con este id/código");
         } else {
-            this.products.push(product);
-            console.log("Producto agregado correctamente");
+            //Si no existe lo pusheo a ese array
+            prods.push(product);
+            //Modifico el json con el nuevo contenido
+            //Para modificar un array, debo pisar el anterior contenido porque ahora tengo un contenido nuevo
+            await fs.writeFile(path, JSON.stringify(prods));
         }
     }
 
@@ -69,7 +77,7 @@ class Product {
     El id autoincrementable lo puedo generar con ++ pero también hay otras formas de lograrlo
     */
     static incrementarId() {
-        //Si existe esta propiedad la aumento en 1. Sino la creo con id 1
+        //Si el contador de id existe, la aumento en 1. Sino la creo con id 1
         //Esta propiedad id es propia del método static, no la conoce el objeto
         if (this.idIncrement) {
             this.idIncrement++;

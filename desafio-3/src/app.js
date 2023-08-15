@@ -1,10 +1,15 @@
 /*
-//Desafio 3:
-//Para este desafío instalamos 2 dependencias: nodemon y express
-//Comandos para poner en la terminal:
-//npm init --yes: genero un package.json. Luego agrego "type": "module" a ese package.json
-//npm i nodemon -D: instalo nodemon
-//node i express: instalo express
+Desafio 3:
+Para este desafío instalamos 2 dependencias: nodemon y express
+Comandos para poner en la terminal:
+1) npm init --yes: genero un package.json. A este package.json le agregamos/modificamos 3 cosas:
+"type": "module",
+"main": "app.js",
+"scripts": {
+    "dev": "nodemon src/app.js"
+},
+2) npm i nodemon -D: instalo nodemon. Esto me agrega el package-lock.json y node_modules
+3) npm i express: instalo express
 
 //Importo el módulo http:
 import http from "http"
@@ -25,7 +30,7 @@ server.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
 })
 
-//Haciendo todo esto, abro el navegador, escribo localhost:4000 y me va a llevar a mi página
+//Haciendo todo esto, escribo en la terminal "npm run dev" para ejecutar. Abro el navegador, escribo localhost:4000 en la ruta y me va a llevar a mi página
 */
 
 
@@ -39,8 +44,9 @@ const PORT = 4000
 //Genero una instancia de express en app
 const app = express()
 
-//Importo el ProductManager y el json
-import productManager from "./ProductManager.js";
+//Importo el ProductManager
+import ProductManager from "./ProductManager.js";
+const productManager = new ProductManager();
 
 
 
@@ -88,7 +94,7 @@ app.get("/products/", async (req, res) => {
     const products = await productManager.getProducts();
     const limit = req.query.limit;
 
-    //Aplicar el límite si se proporciona
+    //Aplicar el límite si se proporciona, sino mostrar todos los productos
     if (limit) {
         const limitedProducts = products.slice(0, parseInt(limit));
         res.send({ products: limitedProducts });
@@ -119,7 +125,7 @@ try {
 } catch (error) {
     console.error("Error al intentar iniciar el servidor:", error);
 }
-//Debo ejecutar npm run dev en la terminal para poder ver el localhost:4000 en mi navegador
+//Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:4000 en mi navegador
 
 
 
@@ -130,6 +136,4 @@ Cómo identificar un query param: tiene un signo de pregunta en la ruta
 Para definir un query param, tengo que poner en la ruta "?" y luego busco un elemento
 Ejemplo buscando por su categoria:
 localhost:4000/products?categoria=Calzado
-Ejemplo buscando por su id:
-localhost:4000/products/2
 */

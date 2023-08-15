@@ -41,17 +41,18 @@ class ProductManager {
             console.log("Todos los campos son obligatorios");
             return;
         }
-
+    
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
-        const producto = prods.find(prod => prod.id === product.id);
-
-        if (producto) {
-            console.log("Este producto ya existe");
+        const prodId = prods.find(prod => prod.id === product.id);
+        const prodCode = prods.find(prod => prod.code === product.code);
+        
+        if (prodId || prodCode) {
+            console.log("Ya existe un producto con este id/código");
         } else {
             prods.push(product);
             await fs.writeFile(path, JSON.stringify(prods));
         }
-    }
+    }    
 
     //4)
     async updateProduct(id, product) {
@@ -118,6 +119,7 @@ const producto4 = new Product("Producto 4", "Este es el producto 4", 1200, "PROD
 
 
 
+
 //No ejecuto los métodos en este desafío porque lo estoy haciendo desde app.js
 // const productManager = new ProductManager();
 
@@ -139,4 +141,4 @@ const producto4 = new Product("Producto 4", "Este es el producto 4", 1200, "PROD
 
 
 
-export default new ProductManager;
+export default ProductManager;
