@@ -21,22 +21,18 @@ class ProductManager {
             return;
         }
 
-        const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         //El método find te devuelve el objeto si existe, y undefined si no existe
-        //Que no se repita el "id"
-        const prodId = prods.find(prod => prod.id === product.id);
-        //Que no se repita el "code"
-        const prodCode = prods.find(prod => prod.code === product.code);
+        //Buscame en mi array si existe un objeto cuyo "id" sea igual al ingresado
+        const prodId = this.products.find(prod => prod.id === product.id);
+        //Buscame en mi array si existe un objeto cuyo "code" sea igual al ingresado
+        const prodCode = this.products.find(prod => prod.code === product.code);
         
         //Si el id o el código ya existe, decímelo en la terminal, sino agrega el producto
         if (prodId || prodCode) {
             console.log("Ya existe un producto con este id/código");
         } else {
             //Si no existe lo pusheo a ese array
-            prods.push(product);
-            //Modifico el json con el nuevo contenido
-            //Para modificar un array, debo pisar el anterior contenido porque ahora tengo un contenido nuevo
-            await fs.writeFile(path, JSON.stringify(prods));
+            this.products.push(product);
         }
     }
 
@@ -100,6 +96,8 @@ const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD0
 const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, [])
 
 //Creo un nuevo objeto de la clase "productManager". Al ser una clase tengo que generar un objeto de la misma
+//Esto es necesario para inicializar y crear una instancia de la clase ProductManager
+//Sin esta línea, no tendría una instancia de ProductManager con la que trabajar y no podría usar sus funcionalidades(los métodos creados)
 const productManager = new ProductManager()
 
 //Utilizo los 3 métodos creados en ProductManager

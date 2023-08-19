@@ -1,47 +1,35 @@
 //Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:4000 en mi navegador
+
+
+
+//Importo módulos
 import express from "express"
+//Importo rutas de mi aplicación
+import prodsRouter from "./routes/products.routes.js";
+
+
+
+//Middlewares:
+//Para poder trabajar con json. No puedo enviar json desde postman sin esta línea porque express no lo entiende
+app.use(express.json())
+//Para enviar a la url de mi aplicación varias consultas querys al mismo tiempo, querys extensos. Sin esta línea solamente podría enviar un query pequeño
+app.use(express.urlencoded({ extended: true }))
+
+
+
+//Constantes
 const PORT = 4000
 const app = express()
 
 
 
-import ProductManager from "./ProductManager.js";
-const productManager = new ProductManager();
+//Rutas:
+//Incluyo api porque es una api rest la que quiero generar
+//El api/products puedo definirlo acá o en la carpeta routes, pero se recomienda hacerlo acá para hacerlo una sola vez
+//En lugar de escribir las rutas en app.js, lo hago en la carpeta routes y lo traigo aquí con prodsRouter
+app.use("/api/products", prodsRouter)
 
 
-
-//Voy a generar la ruta inicial de mi app con "/"
-app.get("/", (req, res) => {
-    res.send("Hola, buenos días")
-})
-
-//Genero una ruta para definir mis productos, con un límite de resultados.
-//Poner esto en la ruta: localhost:4000/products/?limit=1
-app.get("/products/", async (req, res) => {
-    const products = await productManager.getProducts();
-    const limit = req.query.limit;
-
-    if (limit) {
-        const limitedProducts = products.slice(0, parseInt(limit));
-        res.send({ products: limitedProducts });
-    } else {
-        res.send({ products });
-    }
-})
-
-//Genero una ruta la cual debe recibir por req.params el pid (product Id) y devolver sólo el producto solicitado
-//Poner esto en la ruta: localhost:4000/products/1
-app.get('/products/:pid', async (req, res) => {
-    const { pid } = req.params;
-
-    const product = await productManager.getProductById(parseInt(pid));
-    if (!product) {
-        res.status(404).send({});
-        return;
-    }
-
-    res.send(product);
-})
 
 //Inicializo el servidor
 try {

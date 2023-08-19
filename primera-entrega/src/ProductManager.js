@@ -1,23 +1,35 @@
 import { promises as fs } from "fs";
-const path = "./src/productos.json";
 
 
 
 
 
 class ProductManager {
-    constructor() { }
+    //Paso filePath como parámetro
+    constructor(filePath) {
+        /*
+        Ubico el path como argumento de la clase ProductManager, y no fuera de la clase como hacía antes
+        La diferencia es que haciendo esto, puedo utilizar varios path para distintas clases en el mismo archivo
+        Estoy definiendo que este path le pertenece a esta clase. filePath es una variable
+        Puedo utilizar esto:
+        const productManager = new ProductManager("./src/productos.json");
+        O esto:
+        const filePath = "./src/productos.json";
+        const productManager = new ProductManager(filePath);
+        */
+        this.path = filePath;
+    }
 
     //1)
     async getProducts() {
-        const prods = JSON.parse(await fs.readFile(path, "utf-8"));
+        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         //Que me muestre los productos en el localhost, no en la terminal como hacía antes:
         return prods;
     }
 
     //2)
     async getProductById(id) {
-        const prods = JSON.parse(await fs.readFile(path, "utf-8"));
+        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const producto = prods.find(prod => prod.id === id);
 
         if (producto) {
@@ -42,7 +54,7 @@ class ProductManager {
             return;
         }
     
-        const prods = JSON.parse(await fs.readFile(path, "utf-8"));
+        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const prodId = prods.find(prod => prod.id === product.id);
         const prodCode = prods.find(prod => prod.code === product.code);
         
@@ -56,7 +68,7 @@ class ProductManager {
 
     //4)
     async updateProduct(id, product) {
-        const prods = JSON.parse(await fs.readFile(path, "utf-8"));
+        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const indice = prods.findIndex(prod => prod.id === id);
 
         if (indice != -1) {
@@ -75,7 +87,7 @@ class ProductManager {
 
     //5)
     async deleteProduct(id) {
-        const prods = JSON.parse(await fs.readFile(path, "utf-8"));
+        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const producto = prods.find(prod => prod.id === id);
 
         if (producto) {

@@ -11,6 +11,11 @@ Comandos para poner en la terminal:
 2) npm i nodemon -D: instalo nodemon. Esto me agrega el package-lock.json y node_modules
 3) npm i express: instalo express
 
+
+
+
+
+ESTO SIRVE PARA CREAR UN SERVIDOR DE LA FORMA ANTIGUA, SIN EL MÓDULO EXPRESS:
 //Importo el módulo http:
 import http from "http"
 
@@ -36,7 +41,7 @@ server.listen(PORT, () => {
 
 
 
-
+//ESTO SIRVE PARA CREAR UN SERVIDOR UTILIZANDO EXPRESS:
 //Ahora genero un servidor, pero utilizando express (es un framework): esto simplifica la creación de servidores
 //Antes tenemos que instalarlo poniendo en la terminal npm i express. Luego lo importo
 import express from "express"
@@ -46,49 +51,53 @@ const app = express()
 
 //Importo el ProductManager
 import ProductManager from "./ProductManager.js";
+//Esta línea de código está creando una nueva instancia de la clase ProductManager y almacenándola en la constante productManager
+//Lo que me permitirá trabajar con métodos y propiedades definidos en la clase ProductManager
 const productManager = new ProductManager();
 
 
 
-//Genero un array de productos para practicar. Pero luego utilizo los productos de mi json
-// const prods = [
-//     { id: 1, nombre: "Zapatillas", categoria: "Calzado" },
-//     { id: 2, nombre: "Botas", categoria: "Calzado" },
-//     { id: 3, nombre: "Remera", categoria: "Indumentaria" }
-// ]
+/*
+Si yo consulto una base de datos o un file system asincrónico, la ruta también debe ser asincrónica
+Para trabajar con asincronía siempre debo utilizar async y await
 
-//Voy a generar la ruta inicial de mi app con "/"
+Req: request, pedido
+Res: response, respuesta
+
+res.status(número): sirve para devolverme una respuesta, ya sea producto no encontrado(404), producto encontrado(200), etc
+req.query: se utiliza para consultar por los parámetros mediante el método GET
+Estos son los valores que se encuentran después del signo de interrogación en una URL, como "?nombre=Juan&edad=25"
+Se puede acceder a estos valores utilizando req.query.nombre, req.query.edad, etc
+req.params: se utiliza para consultar por un sólo un parámetro, comúnmente el id
+req.body: se utiliza para pedir todo el contenido de mi producto
+*/
+
+
+
+//1) GET
+//Método para ver todos los productos. Acá genero la primera ruta de mi aplicación con "/"
+//Poner esto en la ruta: localhost:4000
 app.get("/", (req, res) => {
     res.send("Hola, buenos días")
 })
 
-//Genero una ruta para definir mis productos, filtrando por categoria
-// app.get("/products", (req, res) => {
-//     //Consulto por los querys de mi url
-//     //console.log(req.query)
-//     const { categoria } = req.query
-//     //Filtro por categoria, sino mostrame todo
-//     if (categoria) {
-//         const products = prods.filter(prod => prod.categoria === categoria)
-//         res.send(products) //Siempre retorna en formato string, es decir cadena de texto. Lo pasa de objeto a JSON
-//     } else {
-//         res.send(prods)
-//     }
-// })
+//2) GET(id)
+//Método para consultar por un producto gracias a su id
+//Poner esto en la ruta: localhost:4000/products/1
+app.get('/products/:pid', async (req, res) => {
+    const { pid } = req.params;
 
-//Ahora consulto un producto por su id
-// app.get("/products/:id", (req, res) => {
-//     //Todo lo que me ingrese desde el cliente va a ser un string, entonces lo tenemos que convertir a número. Por eso el parseInt
-//     const prod = prods.find(prod => prod.id === parseInt(req.params.id))
+    //Todo lo que me ingrese desde el cliente va a ser un string, entonces lo tenemos que convertir a número. Por eso el parseInt
+    const product = await productManager.getProductById(parseInt(pid));
+    if (product) {
+        res.send(product)
+    } else {
+        res.send("Producto no existente")
+    }
+})
 
-//     if (prod) {
-//         res.send(prod)
-//     } else {
-//         res.send("Producto no existente")
-//     }
-// })
-
-//Genero una ruta para definir mis productos, con un límite de resultados
+//3) GET, agregando un query param
+//Genero una ruta para ver mis productos y le agrego un límite de resultados con query param
 //Poner esto en la ruta: localhost:4000/products/?limit=1
 app.get("/products/", async (req, res) => {
     const products = await productManager.getProducts();
@@ -103,19 +112,63 @@ app.get("/products/", async (req, res) => {
     }
 })
 
-//Genero una ruta la cual debe recibir por req.params el pid (product Id) y devolver sólo el producto solicitado
-//Poner esto en la ruta: localhost:4000/products/1
-app.get('/products/:pid', async (req, res) => {
-    const { pid } = req.params;
+/*
+COMENTO LOS MÉTODOS RESTANTES PORQUE FUE VISTO EN CLASE, PERO NO SE PIDIÓ PARA EL DESAFÍO 3
+//4) POST
+//Método para agregar un producto
+//Post no necesita un id, porque un producto cuando se crea y agrega no necesita un id. Post necesita el código
+//El código me ayuda a verificar si el producto existe o no en un método post
+app.post('/products', (req, res) => {
+    //No puedo utilizar params porque estoy enviando todo el contenido de mi producto
+    //No puedo utilizar query porque eso se utiliza para hacer consultas
+    //Por eso se utiliza el body para método POST
+    const producto = prods.find(prod => prod.code === req.body.code)
 
-    const product = await productManager.getProductById(parseInt(pid));
-    if (!product) {
-        res.status(404).send({});
-        return;
+    if (producto) {
+        res.status(400).send("Producto ya existente")
+    } else {
+        prods.push(req.body)
+        res.status(200).send("Producto creado")
     }
-
-    res.send(product);
 })
+
+//5) PUT
+//Método para actualizar todo el producto con todos sus atributos
+app.put('/products/:id', (req, res) => {
+    //Primero consulto por el id (que no se modifica) y luego consulto por todos los otros atributos que SÍ puedo modificar
+    const { id } = req.params
+    const { title, description, price, code, stock, thumbnail } = req.body
+
+    //FindIndex me devuelve la posición del elemento en el array
+    const productIndex = prods.findIndex(prod => prod.id === parseInt(id))
+
+    if (productIndex != -1) {
+        prods[productIndex].title = title
+        prods[productIndex].description = description
+        prods[productIndex].price = price
+        prods[productIndex].code = code
+        prods[productIndex].stock = stock
+        prods[productIndex].thumbnail = thumbnail
+        res.status(200).send(`Producto ${title} actualizado`)
+    } else {
+        res.status(404).send("Producto no encontrado")
+    }
+})
+
+//6) DELETE
+app.delete('/products/:id', (req, res) => {
+    const { id } = req.params
+
+    const productIndex = prods.findIndex(prod => prod.id === parseInt(id))
+
+    if (productIndex != -1) {
+        prods = prods.filter(prod => prod.id != parseInt(id))
+        res.status(200).send(`Producto eliminado`)
+    } else {
+        res.status(404).send("Producto no encontrado")
+    }
+})
+*/
 
 //Inicializo el servidor
 try {
@@ -125,15 +178,7 @@ try {
 } catch (error) {
     console.error("Error al intentar iniciar el servidor:", error);
 }
-//Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:4000 en mi navegador
 
 
 
-
-
-/*
-Cómo identificar un query param: tiene un signo de pregunta en la ruta
-Para definir un query param, tengo que poner en la ruta "?" y luego busco un elemento
-Ejemplo buscando por su categoria:
-localhost:4000/products?categoria=Calzado
-*/
+//IMPORTANTE: Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:4000 en mi navegador

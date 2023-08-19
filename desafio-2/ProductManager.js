@@ -8,13 +8,14 @@ const path = "./productos.json";
 
 //Genero 5 métodos para la clase ProductManager que hagan lo que yo necesito hacer: consultar, agregar y modificar mi proyecto
 //Estos 5 se pueden crear como funciones separadas, o también como métodos de una clase
-//JSON.parse: de json a objeto
-//JSON.stringify: de objeto a json
 class ProductManager {
-    constructor() {}
+    constructor() { }
 
     //1) Método getProducts: consulto TODOS los productos en mi archivo json
     async getProducts() {
+        //En este desafío empezamos a trabajar con archivo JSON
+        //JSON.parse: de json a objeto
+        //JSON.stringify: de objeto a json
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         console.log(prods);
     }
@@ -45,14 +46,14 @@ class ProductManager {
             console.log("Todos los campos son obligatorios");
             return;
         }
-    
+
         const prods = JSON.parse(await fs.readFile(path, "utf-8"));
         //El método find te devuelve el objeto si existe, y undefined si no existe
         //Que no se repita el "id"
         const prodId = prods.find(prod => prod.id === product.id);
         //Que no se repita el "code"
         const prodCode = prods.find(prod => prod.code === product.code);
-        
+
         //Si el id o el código ya existe, decímelo en la terminal, sino agrega el producto
         if (prodId || prodCode) {
             console.log("Ya existe un producto con este id/código");
@@ -63,7 +64,7 @@ class ProductManager {
             //Para modificar un array, debo pisar el anterior contenido porque ahora tengo un contenido nuevo
             await fs.writeFile(path, JSON.stringify(prods));
         }
-    }  
+    }
 
     //4) Método updateProduct: modifico un producto. Pide 2 parámetros, un id para consultar y un producto para modificar
     //FindIndex me devuelve la posición del elemento en el array
@@ -155,7 +156,7 @@ async function metodos() {
     //2) Llamo al método getProductById con un parámetro indicado para saber si existe ese producto en particular
     await productManager.getProductById(2);
 
-    //3) Yo cree los productos en la línea 134 (que no existen en el json), por lo tanto con addProduct los agrego al json
+    //3) Yo cree los productos en la línea 136 (que no existen en el json), por lo tanto con addProduct los agrego al json
     //Tengo que crear un bucle porque addProduct solamente agrega 1 producto
     //O sino podría escribir una línea de código por cada producto para agregar como hice en el desafío 1, pero el bucle es más conveniente
     for (let x of [producto1, producto2, producto3]) {
@@ -163,7 +164,7 @@ async function metodos() {
     }
 
     //4) Actualizo un producto gracias al método updateProduct. Solamente modifico el title
-    await productManager.updateProduct(2, { "title":"Producto title cambiado", "description":"Este es el producto 2", "price":600, "code":"PROD002", "stock":30, "thumbnail":"ejemploImagen2.jpg" });
+    await productManager.updateProduct(2, { "title": "Producto title cambiado", "description": "Este es el producto 2", "price": 600, "code": "PROD002", "stock": 30, "thumbnail": "ejemploImagen2.jpg" });
 
     //5) Elimino un producto
     await productManager.deleteProduct(3);
