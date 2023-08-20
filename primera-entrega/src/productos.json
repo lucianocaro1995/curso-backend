@@ -4,7 +4,9 @@
         "description": "Este es el producto 1",
         "price": 300,
         "code": "PROD001",
+        "status": false,
         "stock": 10,
+        "category": "Indumentaria",
         "thumbnail": "ejemploImagen1.jpg",
         "id": 1
     },
@@ -13,7 +15,9 @@
         "description": "Este es el producto 2",
         "price": 600,
         "code": "PROD002",
+        "status": true,
         "stock": 30,
+        "category": "Calzado",
         "thumbnail": "ejemploImagen2.jpg",
         "id": 2
     },
@@ -22,7 +26,9 @@
         "description": "Este es el producto 3",
         "price": 400,
         "code": "PROD003",
+        "status": true,
         "stock": 15,
+        "category": "Ropa deportiva",
         "thumbnail": "ejemploImagen3.jpg",
         "id": 3
     }

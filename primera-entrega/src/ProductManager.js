@@ -16,6 +16,7 @@ class ProductManager {
         O esto:
         const filePath = "./src/productos.json";
         const productManager = new ProductManager(filePath);
+        También se puede poner como argumento this.path = "./src/productos.json" y no pasarle parámetro al constructor
         */
         this.path = filePath;
     }
@@ -23,7 +24,6 @@ class ProductManager {
     //1)
     async getProducts() {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
-        //Que me muestre los productos en el localhost, no en la terminal como hacía antes:
         return prods;
     }
 
@@ -33,7 +33,6 @@ class ProductManager {
         const producto = prods.find(prod => prod.id === id);
 
         if (producto) {
-            //Que me muestre los productos en el localhost, no en la terminal como hacía antes:
             return producto;
         } else {
             return null;
@@ -76,7 +75,9 @@ class ProductManager {
             prods[indice].description = product.description;
             prods[indice].price = product.price;
             prods[indice].code = product.code;
+            prods[indice].status = product.status;
             prods[indice].stock = product.stock;
+            prods[indice].category = product.category;
             prods[indice].thumbnail = product.thumbnail;
 
             await fs.writeFile(path, JSON.stringify(prods));
@@ -103,12 +104,14 @@ class ProductManager {
 
 
 class Product {
-    constructor(title, description, price, code, stock, thumbnail) {
+    constructor(title, description, price, code, status, stock, category, thumbnail) {
         this.title = title
         this.description = description
         this.price = price
         this.code = code
+        this.status = status
         this.stock = stock
+        this.category = category
         this.thumbnail = thumbnail
         this.id = Product.incrementarId()
     }
@@ -123,33 +126,10 @@ class Product {
     }
 }
 
-const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", 10, "ejemploImagen1.jpg");
-const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", 30, "ejemploImagen2.jpg");
-const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, "ejemploImagen3.jpg");
-const producto4 = new Product("Producto 4", "Este es el producto 4", 1200, "PROD004", 2, "ejemploImagen4.jpg");
-
-
-
-
-
-//No ejecuto los métodos en este desafío porque lo estoy haciendo desde app.js
-// const productManager = new ProductManager();
-
-// async function metodos() {
-//     await productManager.getProducts();
-
-//     await productManager.getProductById(2);
-
-//     for (let x of [producto1, producto2, producto3, producto4]) {
-//         await productManager.addProduct(x);
-//     }
-
-//     await productManager.updateProduct(2, { "title": "Producto title cambiado", "description": "Este es el producto 2", "price": 600, "code": "PROD002", "stock": 30, "thumbnail": "ejemploImagen2.jpg" });
-
-//     await productManager.deleteProduct(4);
-// }
-
-// metodos()
+const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", false, 10, "Indumentaria", "ejemploImagen1.jpg");
+const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", true, 30, "Calzado", "ejemploImagen2.jpg");
+const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", true, 15, "Ropa deportiva", "ejemploImagen3.jpg");
+const producto4 = new Product("Producto 4", "Este es el producto 4", 1200, "PROD004", true, 2, "Calzado", "ejemploImagen4.jpg");
 
 
 

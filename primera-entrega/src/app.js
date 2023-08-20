@@ -1,11 +1,18 @@
-//Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:4000 en mi navegador
+//IMPORTANTE: Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:8080 en mi navegador
 
 
 
-//Importo módulos
-import express from "express"
-//Importo rutas de mi aplicación
-import prodsRouter from "./routes/products.routes.js";
+//Importo módulos:
+import express from 'express';
+//Importo rutas de mi aplicación:
+import prodsRouter from './routes/products.routes.js';
+import cartsRouter from './routes/carts.routes.js';
+
+
+
+//Constantes del servidor:
+const PORT = 8080
+const app = express()
 
 
 
@@ -17,21 +24,16 @@ app.use(express.urlencoded({ extended: true }))
 
 
 
-//Constantes
-const PORT = 4000
-const app = express()
-
-
-
 //Rutas:
 //Incluyo api porque es una api rest la que quiero generar
 //El api/products puedo definirlo acá o en la carpeta routes, pero se recomienda hacerlo acá para hacerlo una sola vez
 //En lugar de escribir las rutas en app.js, lo hago en la carpeta routes y lo traigo aquí con prodsRouter
-app.use("/api/products", prodsRouter)
+app.use('/api/products/', prodsRouter)
+app.use('/api/carts/', cartsRouter)
 
 
 
-//Inicializo el servidor
+//Inicializo el servidor:
 try {
     app.listen(PORT, () => {
         console.log(`Servidor escuchando en el puerto ${PORT}`);

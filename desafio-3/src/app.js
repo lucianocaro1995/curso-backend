@@ -82,7 +82,7 @@ app.get("/", (req, res) => {
 })
 
 //2) GET(id)
-//Método para consultar por un producto gracias a su id
+//Método para consultar por un producto, utilizando su id
 //Poner esto en la ruta: localhost:4000/products/1
 app.get('/products/:pid', async (req, res) => {
     const { pid } = req.params;
@@ -96,8 +96,8 @@ app.get('/products/:pid', async (req, res) => {
     }
 })
 
-//3) GET, agregando un query param
-//Genero una ruta para ver mis productos y le agrego un límite de resultados con query param
+//3) GET, agregando un req.query (o query param)
+//Genero una ruta para ver mis productos y le agrego un límite de resultados con req.query
 //Poner esto en la ruta: localhost:4000/products/?limit=1
 app.get("/products/", async (req, res) => {
     const products = await productManager.getProducts();
@@ -132,8 +132,8 @@ app.post('/products', (req, res) => {
     }
 })
 
-//5) PUT
-//Método para actualizar todo el producto con todos sus atributos
+//5) PUT(id)
+//Método para actualizar todos los atributos de un producto, utilizando su id
 app.put('/products/:id', (req, res) => {
     //Primero consulto por el id (que no se modifica) y luego consulto por todos los otros atributos que SÍ puedo modificar
     const { id } = req.params
@@ -155,7 +155,8 @@ app.put('/products/:id', (req, res) => {
     }
 })
 
-//6) DELETE
+//6) DELETE(id)
+//Método para eliminar un producto, utilizando su id
 app.delete('/products/:id', (req, res) => {
     const { id } = req.params
 
