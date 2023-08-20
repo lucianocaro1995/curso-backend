@@ -57,11 +57,15 @@ class CartManager {
         return newId;
     }
 
-    //Guardo datos de carritos en el json. El 2 mejora la legibilidad del json
+    //Guardo datos de carritos en el json. El tercer parámetro que es el 2, es para mejorar la legibilidad del json
     async saveCartsToFile() {
-        const cartData = JSON.stringify(this.carts, 2);
-        await fs.promises.writeFile(this.path, cartData);
-    }
+        try {
+            const cartData = JSON.stringify(this.carts, null, 2);
+            await fs.promises.writeFile(this.path, cartData);
+        } catch (error) {
+            console.error("Error guardando datos de carritos en el json:", error);
+        }
+    }    
 }
 
 

@@ -14,6 +14,7 @@ const productManager = new ProductManager('./src/productos.json');
 
 //1) GET
 //Método para ver todos los productos. Acá genero la primera ruta de mi aplicación
+//Poner esto en la ruta: localhost:8080
 prodsRouter.get('/', async (req, res) => {
     const prods = await productManager.getProducts();
     res.status(200).send(prods)
@@ -21,9 +22,10 @@ prodsRouter.get('/', async (req, res) => {
 
 //2) GET(pid = product id)
 //Método para consultar por un producto, utilizando su id
+//Poner esto en la ruta: localhost:8080/1
 prodsRouter.get('/:pid', async (req, res) => {
-    const { id } = req.params;
-    const product = await productManager.getProductById(parseInt(id));
+    const id = parseInt(req.params.pid);
+    const product = await productManager.getProductById(id);
 
     if (product) {
         res.status(200).send(product)
@@ -33,26 +35,30 @@ prodsRouter.get('/:pid', async (req, res) => {
 })
 
 //3) POST
-//Método para agregar un producto
+//Método para agregar un producto, utilizando su code
+//Poner esto en la ruta: localhost:8080
 prodsRouter.post('/', async (req, res) => {
-    const product = await productManager.addProduct();
+    const { code } = req.body;
+    const prodCode = await productManager.getProductByCode(code)
 
-    if (product) {
-        res.status(400).send("Producto ya existente")
+    if(prodCode) {
+        res.status(400).send("Producto ya existente");
     } else {
-        prods.push(req.body)
-        res.status(200).send("Producto creado")
+        const product = req.body;
+        await productManager.addProduct(product);
+        res.status(201).send("Producto agregado");
     }
 })
 
 //4) PUT(pid = product id)
 //Método para actualizar todos los atributos de un producto, utilizando su id
+//Poner esto en la ruta: localhost:8080/1
 prodsRouter.put('/:pid', async (req, res) => {
-    const { id } = req.params;
-    const product = await productManager.getProductById(parseInt(req.params.id));
+    const id = parseInt(req.params.pid);
+    const product = await productManager.getProductById(id);
 
     if(product) {
-        await productManager.updateProduct(parseInt(id), req.body)
+        await productManager.updateProduct(id, req.body)
         res.status(200).send("Producto actualizado")
     } else {
         res.status(404).send("Producto no encontrado")
@@ -61,12 +67,13 @@ prodsRouter.put('/:pid', async (req, res) => {
 
 //5) DELETE(pid = product id)
 //Método para eliminar un producto, utilizando su id
+//Poner esto en la ruta: localhost:8080/1
 prodsRouter.delete('/:pid', async (req, res) => {
-    const { id } = req.params;
-    const product = await productManager.getProductById(parseInt(req.params.id));
+    const id = parseInt(req.params.pid);
+    const product = await productManager.getProductById(id);
 
     if(product) {
-        await productManager.deleteProduct(parseInt(id))
+        await productManager.deleteProduct(id)
         res.status(200).send("Producto eliminado")
     } else {
         res.status(404).send("Producto no encontrado")
