@@ -47,7 +47,7 @@ class CartManager {
     }
 
     //Estos 2 métodos solamente los utilizo acá. No en './routes/carts.routes.js'
-    //Genero un id único
+    //Genero un id único. El id es autoincrementable para que cada carrito tenga un id único
     async generateUniqueId() {
         const usedIds = this.carts.map(cart => cart.id);
         let newId = 1;
