@@ -127,10 +127,6 @@ class Product {
         if (this.idIncrement) {
             this.idIncrement++;
         } else {
-            // Acá yo leeria products.json y verificaría su longitud.
-            // Por ej, si productos.json tiene 3 productos, entonces id tiene que empezar desde 4.
-            // const jsonlen = (fs.readFileSync()).length(); = 3
-            // Sería: this.idIncrement = jsonlen + 1 = 4
             this.idIncrement = 1;
         }
         return this.idIncrement;
@@ -138,30 +134,6 @@ class Product {
 }
 
 
-
-//const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", 10, "ejemploImagen1.jpg");
-//const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", 30, "ejemploImagen2.jpg");
-//const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, "ejemploImagen3.jpg");
-//const producto4 = new Product("Producto 4", "Este es el producto 4", 1200, "PROD004", 2, "ejemploImagen4.jpg");
-
-//No ejecuto los métodos en este desafío porque lo estoy haciendo desde app.js
-// const productManager = new ProductManager();
-
-// async function metodos() {
-//     await productManager.getProducts();
-
-//     await productManager.getProductById(2);
-
-//     for (let x of [producto1, producto2, producto3, producto4]) {
-//         await productManager.addProduct(x);
-//     }
-
-//     await productManager.updateProduct(2, { "title": "Producto title cambiado", "description": "Este es el producto 2", "price": 600, "code": "PROD002", "stock": 30, "thumbnail": "ejemploImagen2.jpg" });
-
-//     await productManager.deleteProduct(4);
-// }
-
-// metodos()
 
 
 

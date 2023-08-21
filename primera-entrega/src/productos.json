@@ -1,1 +1,57 @@
-[{"title":"Producto 1","description":"Este es el producto 1","price":300,"code":"PROD001","status":false,"stock":10,"category":"Indumentaria","thumbnail":"ejemploImagen1.jpg","id":1},{"title":"Producto title cambiado","description":"Este es el producto 2","price":600,"code":"PROD002","status":true,"stock":30,"category":"Calzado","thumbnail":"ejemploImagen2.jpg","id":2},{"title":"Producto 3","description":"Este es el producto 3","price":400,"code":"PROD003","status":true,"stock":15,"category":"Ropa deportiva","thumbnail":"ejemploImagen3.jpg","id":3},{"title":"Producto 214","description":"Este es el producto 214","price":600,"code":"PROD214","status":true,"stock":30,"category":"Calzado","thumbnail":"ejemploImagen214.jpg","id":4},{"title":"Producto 500","description":"Este es el producto 500","price":600,"code":"PROD500","status":true,"stock":30,"category":"Calzado","thumbnail":"ejemploImagen500.jpg","id":5}]
+[
+    {
+        "title": "Producto 1",
+        "description": "Este es el producto 1",
+        "price": 300,
+        "code": "PROD001",
+        "status": false,
+        "stock": 10,
+        "category": "Indumentaria",
+        "thumbnail": "ejemploImagen1.jpg",
+        "id": 1
+    },
+    {
+        "title": "Producto title cambiado",
+        "description": "Este es el producto 2",
+        "price": 600,
+        "code": "PROD002",
+        "status": true,
+        "stock": 30,
+        "category": "Calzado",
+        "thumbnail": "ejemploImagen2.jpg",
+        "id": 2
+    },
+    {
+        "title": "Producto 3",
+        "description": "Este es el producto 3",
+        "price": 400,
+        "code": "PROD003",
+        "status": true,
+        "stock": 15,
+        "category": "Ropa deportiva",
+        "thumbnail": "ejemploImagen3.jpg",
+        "id": 3
+    },
+    {
+        "title": "Producto 214",
+        "description": "Este es el producto 214",
+        "price": 600,
+        "code": "PROD214",
+        "status": true,
+        "stock": 30,
+        "category": "Calzado",
+        "thumbnail": "ejemploImagen214.jpg",
+        "id": 4
+    },
+    {
+        "title": "Producto 500",
+        "description": "Este es el producto 500",
+        "price": 600,
+        "code": "PROD500",
+        "status": true,
+        "stock": 30,
+        "category": "Calzado",
+        "thumbnail": "ejemploImagen500.jpg",
+        "id": 5
+    }
+]

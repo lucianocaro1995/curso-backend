@@ -16,42 +16,55 @@ const cartManager = new CartManager('./src/carts.json');
 //Método para crear un nuevo carrito. Sólo vamos a usar uno
 //Poner esto en la ruta: localhost:8080/api/carts
 cartsRouter.post('/', async (req, res) => {
-    const newCart = await cartManager.createCart();
+    try {
+        const newCart = await cartManager.createCart();
 
-    if (newCart) {
-        res.status(201).json({ message: "Carrito creado exitosamente", newCart });
-    } else {
-        res.status(404).json({ message: "No se pudo crear el carrito" });
+        if (newCart) {
+            res.status(200).json({ message: "Carrito creado exitosamente", newCart })
+        } else {
+            res.status(404).json({ message: "No se pudo crear un carrito" })
+        }
+    } catch (error) {
+        console.error("Hubo un error al procesar la solicitud:", error);
+        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
     }
-});
+})
 
-//2) POST(cid = cart id) NO FUNCIONA
+//2) POST(cid = cart id)
 //Método para agregar un nuevo producto al carrito seleccionado, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/carts/1/product/3
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
-    const { cid, pid } = req.params;
-    const success = await cartManager.addProductToCart(parseInt(cid), parseInt(pid));
-    
-    if (success) {
-        res.status(200).json({ message: "Producto agregado exitosamente" });
-    } else {
-        res.status(404).json({ message: "No se encontró el carrito especificado" });
-    }
-});
+    try {
+        const product = await cartManager.addProductToCart(req.params.cid, req.params.pid)
 
-//3) GET(cid = cart id) NO FUNCIONA
+        if (!product) {
+            res.status(200).json({ message: "Producto agregado al carrito", product})
+        } else {
+            res.status(404).json({ message: "No se pudo agregar el producto al carrito" })
+        }
+    } catch (error) {
+        console.error("Hubo un error al procesar la solicitud:", error);
+        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+    }
+})
+
+//3) GET(cid = cart id)
 //Método para mostrar los productos del carrito seleccionado, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/carts/1
-cartsRouter.get('/:cid', async (req, res) => {
-    const cartId = parseInt(req.params.cid);
-    const cart = await cartManager.getCartById(cartId);
-    
-    if (cart) {
-        res.status(200).json(cart);
-    } else {
-        res.status(404).json({ message: "No se encontró el carrito especificado" });
+cartsRouter.get('/:id', async (req, res) => {
+    try {
+        const productsInCart = await cartManager.getCartById(req.params.id)
+
+        if (productsInCart) {
+            res.status(200).json(productsInCart)
+        } else {
+            res.status(404).json({ message: "No se puede ver los productos del carrito" })
+        }
+    } catch (error) {
+        console.error("Hubo un error al procesar la solicitud:", error);
+        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
     }
-});
+})
 
 
 

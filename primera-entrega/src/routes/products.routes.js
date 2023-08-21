@@ -33,6 +33,7 @@ prodsRouter.get('/', async (req, res) => {
         //Enviar la respuesta con los productos limitados
         res.status(200).json(limitedProducts);
     } catch (error) {
+        //Console.error es para la terminal de vsc - Res.status es para la terminal de Postman
         console.error("Hubo un error al procesar la solicitud:", error);
         res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
     }
