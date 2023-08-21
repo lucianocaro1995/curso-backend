@@ -14,32 +14,41 @@ const cartManager = new CartManager('./src/carts.json');
 
 //1) POST
 //Método para crear un nuevo carrito. Sólo voy a crear uno
-//Poner esto en la ruta: localhost:8080
+//Poner esto en la ruta: localhost:8080/api/carts
 cartsRouter.post('/', async (req, res) => {
-    const cart = await cartManager.createCart();
-    res.status(201).send("Carrito creado exitosamente", cart)
-})
+    const cartId = await cartManager.createCart();
+    res.status(201).send({ message: "Carrito creado exitosamente", cartId });
+});
+
+
 
 //2) POST(cid = cart id)
 //Método para agregar un nuevo producto al carrito seleccionado, utilizando su id
-//Poner esto en la ruta: localhost:8080/1/product/3
+//Poner esto en la ruta: localhost:8080/api/carts/1/product/3
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
-    const product = await cartManager.addProductToCart(req.params.cid, req.params.pid);
-
-    if (product) {
-        res.status(200).send("Producto agregado exitosamente al carrito seleccionado");
+    const { cid, pid } = req.params;
+    const success = await cartManager.addProductToCart(parseInt(cid), parseInt(pid));
+    
+    if (success) {
+        res.status(200).json({ message: "Producto agregado exitosamente" });
     } else {
-        res.status(400).send("Producto ya existente en el carrito seleccionado");
+        res.status(404).json({ message: "No se encontró el carrito especificado" });
     }
 });
 
 //3) GET(cid = cart id)
 //Método para mostrar los productos del carrito seleccionado, utilizando su id
-//Poner esto en la ruta: localhost:8080/1
+//Poner esto en la ruta: localhost:8080/api/carts/1
 cartsRouter.get('/:cid', async (req, res) => {
-    const prods = await cartManager.getCartById(req.params.cid);
-    res.status(200).send(prods)
-})
+    const cartId = parseInt(req.params.cid);
+    const cart = await cartManager.getCartById(cartId);
+    
+    if (cart) {
+        res.status(200).json(cart);
+    } else {
+        res.status(404).json({ message: "No se encontró el carrito especificado" });
+    }
+});
 
 
 

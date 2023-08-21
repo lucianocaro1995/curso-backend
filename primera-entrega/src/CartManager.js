@@ -60,10 +60,9 @@ class CartManager {
     //Guardo datos de carritos en el json. El tercer parámetro que es el 2, es para mejorar la legibilidad del json
     async saveCartsToFile() {
         try {
-            const cartData = JSON.stringify(this.carts, null, 2);
-            await fs.promises.writeFile(this.path, cartData);
+            await fs.writeFile(this.path, JSON.stringify(this.carts, null, 2));
         } catch (error) {
-            console.error("Error guardando datos de carritos en el json:", error);
+            console.error("Error al guardar los carritos:", error);
         }
     }    
 }
@@ -78,12 +77,18 @@ class Cart {
         this.products = [];
     }
 
+    //Asigno como parámetro un identificador único a cada producto que agregue
     addProduct(productId) {
-        const productIndex = this.products.findIndex(p => p.product === productId);
+        //Busco si ya existe un producto con el mismo "productId" en el carrito
+        const productIndex = this.products.findIndex(eachProduct => eachProduct.id === productId);
 
+        //Si no existe, findIndex me devuelve -1 y lo agrega al carrito con una cantidad inicial de 1
+        //Si el producto no existe en el carrito, se agrega un nuevo objeto al array products del constructor
         if (productIndex === -1) {
             this.products.push({ product: productId, quantity: 1 });
         } else {
+            //Si existe, findIndex me devuelve el índice de ese objeto, lo agrega al carrito y modifica la cantidad
+            //Quantity: cada vez que se agrega un producto al carrito, se actualiza esta propiedad para mantener un registro de las cantidades
             this.products[productIndex].quantity += 1;
         }
     }

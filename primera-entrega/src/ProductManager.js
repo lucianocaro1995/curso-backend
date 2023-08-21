@@ -16,7 +16,7 @@ class ProductManager {
     O esto:
     const filePath = "./src/productos.json";
     const productManager = new ProductManager(filePath);
-    También se puede poner como argumento this.path = "./src/productos.json" y no pasarle parámetro al constructor
+    O también se puede poner como argumento this.path = "./src/productos.json" y no pasarle parámetro al constructor
     */
         this.path = filePath;
     }

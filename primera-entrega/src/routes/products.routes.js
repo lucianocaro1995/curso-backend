@@ -13,16 +13,19 @@ const productManager = new ProductManager('./src/productos.json');
 
 
 //1) GET
-//Método para ver todos los productos. Acá genero la primera ruta de mi aplicación
-//Poner esto en la ruta: localhost:8080
+//Método para ver todos los productos. Acá genero la primera ruta de mi aplicación. Debo incluir la limitación ?limit por pedido de la consigna
+//Poner esto en la ruta: localhost:8080/api/products
 prodsRouter.get('/', async (req, res) => {
-    const prods = await productManager.getProducts();
-    res.status(200).send(prods)
+    const {limit} = req.query 
+    const prods = await Manager.getProducts()
+    const products = prods.slice(0, limit)
+
+    res.status(200).send(products)
 })
 
 //2) GET(pid = product id)
 //Método para consultar por un producto, utilizando su id
-//Poner esto en la ruta: localhost:8080/1
+//Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.get('/:pid', async (req, res) => {
     const id = parseInt(req.params.pid);
     const product = await productManager.getProductById(id);
@@ -36,7 +39,7 @@ prodsRouter.get('/:pid', async (req, res) => {
 
 //3) POST
 //Método para agregar un producto, utilizando su code
-//Poner esto en la ruta: localhost:8080
+//Poner esto en la ruta: localhost:8080/api/products
 prodsRouter.post('/', async (req, res) => {
     const { code } = req.body;
     const prodCode = await productManager.getProductByCode(code)
@@ -52,7 +55,7 @@ prodsRouter.post('/', async (req, res) => {
 
 //4) PUT(pid = product id)
 //Método para actualizar todos los atributos de un producto, utilizando su id
-//Poner esto en la ruta: localhost:8080/1
+//Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.put('/:pid', async (req, res) => {
     const id = parseInt(req.params.pid);
     const product = await productManager.getProductById(id);
@@ -67,7 +70,7 @@ prodsRouter.put('/:pid', async (req, res) => {
 
 //5) DELETE(pid = product id)
 //Método para eliminar un producto, utilizando su id
-//Poner esto en la ruta: localhost:8080/1
+//Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.delete('/:pid', async (req, res) => {
     const id = parseInt(req.params.pid);
     const product = await productManager.getProductById(id);
