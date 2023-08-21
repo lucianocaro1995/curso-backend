@@ -19,7 +19,7 @@ cartsRouter.post('/', async (req, res) => {
     const newCart = await cartManager.createCart();
 
     if (newCart) {
-        res.status(201).json({ message: "Carrito creado exitosamente", cartId });
+        res.status(201).json({ message: "Carrito creado exitosamente", newCart });
     } else {
         res.status(404).json({ message: "No se pudo crear el carrito" });
     }
@@ -27,7 +27,7 @@ cartsRouter.post('/', async (req, res) => {
 
 //2) POST(cid = cart id) NO FUNCIONA
 //Método para agregar un nuevo producto al carrito seleccionado, utilizando su id
-//Poner esto en la ruta: localhost:8080/api/carts/:1/product/:3
+//Poner esto en la ruta: localhost:8080/api/carts/1/product/3
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     const { cid, pid } = req.params;
     const success = await cartManager.addProductToCart(parseInt(cid), parseInt(pid));
