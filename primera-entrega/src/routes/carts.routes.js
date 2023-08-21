@@ -17,7 +17,7 @@ const cartManager = new CartManager('./src/carts.json');
 //Poner esto en la ruta: localhost:8080/api/carts
 cartsRouter.post('/', async (req, res) => {
     const cartId = await cartManager.createCart();
-    res.status(201).send({ message: "Carrito creado exitosamente", cartId });
+    res.status(201).json({ message: "Carrito creado exitosamente", cartId });
 });
 
 
