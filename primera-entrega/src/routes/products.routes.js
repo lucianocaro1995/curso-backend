@@ -12,7 +12,7 @@ const productManager = new ProductManager('./src/productos.json');
 
 
 //1) GET
-//Método para ver todos los productos. Acá genero la primera ruta de mi aplicación. Debo incluir la limitación ?limit por pedido de la consigna
+//Método para ver todos los productos. Debo incluir la req.query "?limit" por pedido de la consigna
 //Poner esto en la ruta: localhost:8080/api/products?limit=1
 prodsRouter.get('/', async (req, res) => {
     try {
@@ -40,13 +40,23 @@ prodsRouter.get('/', async (req, res) => {
 });
 
 
+
 //2) GET(pid = product id)
 //Método para consultar por un producto, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.get('/:pid', async (req, res) => {
     try {
-        const id = parseInt(req.params.pid);
-        const product = await productManager.getProductById(id);
+        //No parsear el PID ingresado por el cliente, así reconozco si ingresa letras para no permitirlo ingresarlas
+        const pid = req.params.pid;
+
+        //Error en caso de que ingrese letras
+        if (!/^\d+$/.test(pid)) {
+            return res.status(400).json({ error: "El ID del producto debe ser un número" });
+        }
+
+        //Ahora sí parseo, para que Postman me tome como número el pid, y no como string. Sino no me encuentra el producto
+        const pidAsNumber = parseInt(pid);
+        const product = await productManager.getProductById(pidAsNumber);
 
         if (product) {
             res.status(200).json(product)
@@ -59,11 +69,15 @@ prodsRouter.get('/:pid', async (req, res) => {
     }
 })
 
+
+
 //3) POST
 //Método para agregar un producto desde Postman. Debo escribir el producto entero con todos sus atributos en Postman
 //Poner esto en la ruta: localhost:8080/api/products
 prodsRouter.post('/', async (req, res) => {
     try {
+        //Creo una variable newProduct y le envío los datos estándar del cuerpo (Es decir, los datos que tendrán TODOS los productos)
+        //Tengo que crear esta variable newProduct porque estoy agregando el nuevo producto desde afuera, desde Postman
         const newProduct = req.body;
         const existingProductById = await productManager.getProductById(newProduct.id);
         const existingProductByCode = await productManager.getProductByCode(newProduct.code);
@@ -80,36 +94,58 @@ prodsRouter.post('/', async (req, res) => {
     }
 });
 
+
+
 //4) PUT(pid = product id)
 //Método para actualizar todos los atributos de un producto, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.put('/:pid', async (req, res) => {
     try {
-        const id = parseInt(req.params.pid);
-        const product = await productManager.getProductById(id);
+        //No parsear el PID ingresado por el cliente, así reconozco si ingresa letras para no permitirlo ingresarlas
+        const pid = req.params.pid;
+
+        //Error en caso de que ingrese letras
+        if (!/^\d+$/.test(pid)) {
+            return res.status(400).json({ error: "El ID del producto debe ser un número" });
+        }
+
+        //Ahora sí parseo, para que Postman me tome como número el pid, y no como string. Sino no me encuentra el producto
+        const pidAsNumber = parseInt(pid);
+        const product = await productManager.getProductById(pidAsInt);
 
         if (product) {
-            await productManager.updateProduct(id, req.body)
-            res.status(200).json({ message: "Producto actualizado" })
+            await productManager.updateProduct(pidAsNumber, req.body);
+            res.status(200).json({ message: "Producto actualizado" });
         } else {
-            res.status(404).json({ message: "No se encontró un producto con ese ID" })
+            res.status(404).json({ message: "No se encontró un producto con ese ID" });
         }
     } catch (error) {
         console.error("Hubo un error al procesar la solicitud:", error);
         res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
     }
-})
+});
+
+
 
 //5) DELETE(pid = product id)
 //Método para eliminar un producto, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.delete('/:pid', async (req, res) => {
     try {
-        const id = parseInt(req.params.pid);
-        const product = await productManager.getProductById(id);
+        //No parsear el PID ingresado por el cliente, así reconozco si ingresa letras para no permitirlo ingresarlas
+        const pid = req.params.pid;
+
+        //Error en caso de que ingrese letras
+        if (!/^\d+$/.test(pid)) {
+            return res.status(400).json({ error: "El ID del producto debe ser un número" });
+        }
+
+        //Ahora sí parseo, para que Postman me tome como número el pid, y no como string. Sino no me encuentra el producto
+        const pidAsNumber = parseInt(pid);
+        const product = await productManager.getProductById(pidAsNumber);
 
         if (product) {
-            await productManager.deleteProduct(id)
+            await productManager.deleteProduct(pidAsNumber)
             res.status(200).json({ message: "Producto eliminado" })
         } else {
             res.status(404).json({ message: "No se encontró un producto con ese ID" })

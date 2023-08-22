@@ -30,41 +30,67 @@ cartsRouter.post('/', async (req, res) => {
     }
 })
 
+
+
 //2) POST(cid = cart id)
 //Método para agregar un nuevo producto al carrito seleccionado, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/carts/1/product/3
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     try {
-        const product = await cartManager.addProductToCart(req.params.cid, req.params.pid)
+        //No parsear el CID/PID ingresado por el cliente, así reconozco si ingresa letras para no permitirlo ingresarlas
+        const cid = req.params.cid;
+        const pid = req.params.pid;
+
+        //Error en caso de que ingrese letras
+        if (!/^\d+$/.test(cid)) {
+            return res.status(400).json({ error: "El ID del carrito debe ser un número" });
+        }
+
+        //Error en caso de que ingrese letras
+        if (!/^\d+$/.test(pid)) {
+            return res.status(400).json({ error: "El ID del producto debe ser un número" });
+        }
+
+        const product = await cartManager.addProductToCart(cid, parseInt(pid));
 
         if (!product) {
-            res.status(200).json({ message: "Producto agregado al carrito", product})
+            res.status(200).json({ message: "Producto agregado al carrito", product });
         } else {
-            res.status(404).json({ message: "No se pudo agregar el producto al carrito" })
+            res.status(404).json({ message: "No se pudo agregar el producto al carrito" });
         }
     } catch (error) {
         console.error("Hubo un error al procesar la solicitud:", error);
         res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
     }
-})
+});
+
+
 
 //3) GET(cid = cart id)
 //Método para mostrar los productos del carrito seleccionado, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/carts/1
-cartsRouter.get('/:id', async (req, res) => {
+cartsRouter.get('/:cid', async (req, res) => {
     try {
-        const productsInCart = await cartManager.getCartById(req.params.id)
+        //No parsear el CID ingresado por el cliente, así reconozco si ingresa letras para no permitirlo ingresarlas
+        const cid = req.params.cid;
+
+        //Error en caso de que ingrese letras
+        if (!/^\d+$/.test(cid)) {
+            return res.status(400).json({ error: "El ID del carrito debe ser un número" });
+        }
+
+        const productsInCart = await cartManager.getCartById(cid);
 
         if (productsInCart) {
-            res.status(200).json(productsInCart)
+            res.status(200).json(productsInCart);
         } else {
-            res.status(404).json({ message: "No se puede ver los productos del carrito" })
+            res.status(404).json({ message: "No existe un carrito con ese ID" });
         }
     } catch (error) {
         console.error("Hubo un error al procesar la solicitud:", error);
         res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
     }
-})
+});
 
 
 

@@ -31,27 +31,5 @@
         "category": "Ropa deportiva",
         "thumbnail": "ejemploImagen3.jpg",
         "id": 3
-    },
-    {
-        "title": "Producto 214",
-        "description": "Este es el producto 214",
-        "price": 600,
-        "code": "PROD214",
-        "status": true,
-        "stock": 30,
-        "category": "Calzado",
-        "thumbnail": "ejemploImagen214.jpg",
-        "id": 4
-    },
-    {
-        "title": "Producto 500",
-        "description": "Este es el producto 500",
-        "price": 600,
-        "code": "PROD500",
-        "status": true,
-        "stock": 30,
-        "category": "Calzado",
-        "thumbnail": "ejemploImagen500.jpg",
-        "id": 5
     }
 ]
