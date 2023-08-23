@@ -11,12 +11,13 @@ class ProductManager {
         Ubico el path como argumento de la clase ProductManager, y no fuera de la clase como hacía antes
         La diferencia es que haciendo esto, puedo utilizar varios path para distintas clases en el mismo archivo
         Estoy definiendo que este path le pertenece a esta clase. filePath es una variable
-        Puedo utilizar esto:
+        1) Puedo utilizar esto:
         const productManager = new ProductManager("./src/productos.json");
-        O esto:
+        2) O esto:
         const filePath = "./src/productos.json";
         const productManager = new ProductManager(filePath);
-        O también se puede poner como argumento this.path = "./src/productos.json" y no pasarle parámetro al constructor
+        3) O también se puede poner como argumento this.path = "./src/productos.json" y no pasarle parámetro al constructor
+        4) O como hice en este código: this.path = filePath y paso el parámetro filePath al constructor
         */
         this.path = filePath;
     }
@@ -111,7 +112,7 @@ class ProductManager {
 
 
 class Product {
-    constructor(title, description, price, code, stock, category, thumbnail, status = false) {
+    constructor(title, description, price, code, status, stock, category, thumbnail) {
         this.title = title;
         this.description = description;
         this.price = price;

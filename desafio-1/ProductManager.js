@@ -91,9 +91,9 @@ El código es algo que yo mismo voy a generar para identificar ese producto, no 
 */
 
 //Creo los productos
-const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", 10, [])
-const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", 30, [])
-const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, [])
+const producto1 = new Product("Producto 1", "Este es el producto 1", 300, "PROD001", 10, "ejemploImagen1.jpg")
+const producto2 = new Product("Producto 2", "Este es el producto 2", 600, "PROD002", 30, "ejemploImagen1.jpg")
+const producto3 = new Product("Producto 3", "Este es el producto 3", 400, "PROD003", 15, "ejemploImagen1.jpg")
 
 //Creo un nuevo objeto de la clase "productManager". Al ser una clase tengo que generar un objeto de la misma
 //Esto es necesario para inicializar y crear una instancia de la clase ProductManager

@@ -37,21 +37,9 @@ cartsRouter.post('/', async (req, res) => {
 //Poner esto en la ruta: localhost:8080/api/carts/1/product/3
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     try {
-        //No parsear el CID/PID ingresado por el cliente, así reconozco si ingresa letras para no permitirlo ingresarlas
         const cid = req.params.cid;
         const pid = req.params.pid;
-
-        //Error en caso de que ingrese letras
-        if (!/^\d+$/.test(cid)) {
-            return res.status(400).json({ error: "El ID del carrito debe ser un número" });
-        }
-
-        //Error en caso de que ingrese letras
-        if (!/^\d+$/.test(pid)) {
-            return res.status(400).json({ error: "El ID del producto debe ser un número" });
-        }
-
-        const product = await cartManager.addProductToCart(cid, parseInt(pid));
+        const product = await cartManager.addProductToCart(cid, pid);
 
         if (!product) {
             res.status(200).json({ message: "Producto agregado al carrito", product });
@@ -71,14 +59,7 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
 //Poner esto en la ruta: localhost:8080/api/carts/1
 cartsRouter.get('/:cid', async (req, res) => {
     try {
-        //No parsear el CID ingresado por el cliente, así reconozco si ingresa letras para no permitirlo ingresarlas
         const cid = req.params.cid;
-
-        //Error en caso de que ingrese letras
-        if (!/^\d+$/.test(cid)) {
-            return res.status(400).json({ error: "El ID del carrito debe ser un número" });
-        }
-
         const productsInCart = await cartManager.getCartById(cid);
 
         if (productsInCart) {

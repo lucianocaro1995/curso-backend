@@ -4,7 +4,7 @@ import { promises as fs } from "fs";
 
 
 
-//En esta clase detallo la información de los carritos
+//En esta clase detallo el array de carritos. Con esto manejo TODOS los carritos, aunque sólo vamos a utilizar un carrito
 class CartManager {
     constructor(filePath) {
         this.path = filePath;
@@ -27,20 +27,19 @@ class CartManager {
     async addProductToCart(cartId, productId) {
         const chosenCart = await this.getCartById(cartId);
 
-        // Si el carrito elegido por el id existe, agrégale el producto
+        //Si el carrito elegido por el id existe, agrégale el producto
         if (chosenCart) {
-            // Al carrito, agrégale o asígnale un objeto (el producto)
+            //Al carrito, agregale o asígnale un objeto (el producto)
             const cart = Object.assign(new Cart(), chosenCart);
-            // Al carrito, le agrego lo que se detalla en el addProduct de la clase Cart
+            //Al carrito, le agrego lo que se detalla en el addProduct de la clase Cart
             cart.addProduct(productId);
-            // Guardar en el archivo JSON
+            //Guardar en el archivo JSON
             await this.saveToFile();
         } else {
             console.log("Carrito no encontrado");
         }
     }
-
-
+    
     //3) BIEN
     //Método para mostrar los productos del carrito seleccionado, utilizando su id
     async getCartById(id) {
@@ -94,7 +93,8 @@ class CartManager {
 
 
 
-//En esta clase detallo la información de los productos (que van dentro del carrito)
+//En esta clase detallo la información que tendrá cada carrito
+//Cada carrito tendrá un id único autoincrementable y una lista vacía de productos (que el cliente llenará con lo que desee comprar)
 class Cart {
     constructor(id) {
         this.id = id;
