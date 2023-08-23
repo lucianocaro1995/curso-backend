@@ -37,8 +37,8 @@ cartsRouter.post('/', async (req, res) => {
 //Poner esto en la ruta: localhost:8080/api/carts/1/product/3
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     try {
-        const cid = req.params.cid;
-        const pid = req.params.pid;
+        const cid = parseInt(req.params.cid);
+        const pid = parseInt(req.params.pid);
         const product = await cartManager.addProductToCart(cid, pid);
 
         if (!product) {
@@ -59,7 +59,7 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
 //Poner esto en la ruta: localhost:8080/api/carts/1
 cartsRouter.get('/:cid', async (req, res) => {
     try {
-        const cid = req.params.cid;
+        const cid = parseInt(req.params.cid);
         const productsInCart = await cartManager.getCartById(cid);
 
         if (productsInCart) {

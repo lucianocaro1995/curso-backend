@@ -46,7 +46,10 @@ prodsRouter.get('/', async (req, res) => {
 //Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.get('/:pid', async (req, res) => {
     try {
-        const pid = req.params.pid;
+        //Como yo tengo el id como número en el json, tengo que parsear acá para que Postman me tome el id como número y no como string
+        //Cuando utilicemos base de datos, el id lo va a autogenerar esa base. En ese caso el id va a ser un string
+        //Las bases de datos les ponen tanto números como letras al id, por eso va a ser un string
+        const pid = parseInt(req.params.pid);
         const product = await productManager.getProductById(pid);
 
         if (product) {
@@ -92,10 +95,11 @@ prodsRouter.post('/', async (req, res) => {
 //Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.put('/:pid', async (req, res) => {
     try {
-        const pid = req.params.pid;
+        const pid = parseInt(req.params.pid);
         const product = await productManager.getProductById(pid);
 
         if (product) {
+            //Le paso 2 parámetros: el id para identificar al producto, y el body (resto de los atributos) que va a ser actualizado
             await productManager.updateProduct(pid, req.body);
             res.status(200).json({ message: "Producto actualizado" });
         } else {
@@ -114,7 +118,7 @@ prodsRouter.put('/:pid', async (req, res) => {
 //Poner esto en la ruta: localhost:8080/api/products/1
 prodsRouter.delete('/:pid', async (req, res) => {
     try {
-        const pid = req.params.pid;
+        const pid = parseInt(req.params.pid);
         const product = await productManager.getProductById(pid);
 
         if (product) {

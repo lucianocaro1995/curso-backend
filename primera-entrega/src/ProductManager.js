@@ -80,20 +80,28 @@ class ProductManager {
         }
     }
 
-    //5)
+    //5) Actualicé este código haciéndolo más eficiente
     async updateProduct(id, product) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const indice = prods.findIndex(prod => prod.id === id);
-
-        if (indice != -1) {
-            prods[indice] = product;
+    
+        if (indice !== -1) {
+            //Guarda el valor del id antes de actualizar el producto
+            const productId = prods[indice].id;
+            
+            //Actualiza los campos del producto, excepto el id
+            const updatedProduct = { ...product, id: productId };
+            prods[indice] = updatedProduct;
+            
             await fs.writeFile(this.path, JSON.stringify(prods));
         } else {
             console.log("Producto no encontrado");
         }
     }
+    
 
-    //6)
+    //6) Actualicé este código haciéndolo más eficiente
+    //Antes utilizaba find y filter. Ahora findIndex y splice
     async deleteProduct(id) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const productoIndex = prods.findIndex(prod => prod.id === id);
