@@ -10,8 +10,6 @@ const productManager = new ProductManager();
 
 
 
-
-
 //1) GET
 //Método para ver todos los productos. Debo incluir la req.query "?limit" por pedido de la consigna
 //Poner esto en la ruta: localhost:8080/api/products?limit=1
@@ -32,8 +30,6 @@ prodsRouter.get('/', async (req, res) => {
     }
 });
 
-
-
 //2) GET(pid = product id)
 //Método para consultar por un producto, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/products/1
@@ -46,8 +42,6 @@ prodsRouter.get('/:pid', async (req, res) => {
         res.status(500).json(error.message);
     }
 })
-
-
 
 //3) POST
 //Método para agregar un producto desde Postman. Debo escribir el producto entero con todos sus atributos en Postman
@@ -62,8 +56,6 @@ prodsRouter.post('/', async (req, res) => {
     }
 });
 
-
-
 //4) PUT(pid = product id)
 //Método para actualizar todos los atributos de un producto, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/products/1
@@ -77,8 +69,6 @@ prodsRouter.put('/:pid', async (req, res) => {
     }
 });
 
-
-
 //5) DELETE(pid = product id)
 //Método para eliminar un producto, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/products/1
@@ -91,8 +81,6 @@ prodsRouter.delete('/:pid', async (req, res) => {
         res.status(500).json(error.message);
     }
 });
-
-
 
 
 

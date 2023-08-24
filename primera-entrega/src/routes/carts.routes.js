@@ -10,8 +10,6 @@ const cartManager = new CartManager('./src/carts.json');
 
 
 
-
-
 //1) POST
 //Método para crear un nuevo carrito. Sólo vamos a usar uno
 //Poner esto en la ruta: localhost:8080/api/carts
@@ -23,8 +21,6 @@ cartsRouter.post('/', async (req, res) => {
         res.status(500).json(error.message);
     }
 })
-
-
 
 //2) POST(cid = cart id)
 //Método para agregar un nuevo producto al carrito seleccionado, utilizando su id
@@ -42,8 +38,6 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     }
 });
 
-
-
 //3) GET(cid = cart id)
 //Método para mostrar los productos del carrito seleccionado, utilizando su id
 //Poner esto en la ruta: localhost:8080/api/carts/1
@@ -56,8 +50,6 @@ cartsRouter.get('/:cid', async (req, res) => {
         res.status(500).json(error.message);
     }
 });
-
-
 
 
 

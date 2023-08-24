@@ -2,14 +2,10 @@ import { promises as fs } from "fs";
 
 
 
-
-
 class ProductManager {
     constructor() {
         this.path = './src/productos.json';
     }
-
-
 
     //1)
     async getProducts() {
@@ -23,8 +19,6 @@ class ProductManager {
         }
     }
 
-
-
     //2)
     async getProductById(id) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -37,8 +31,6 @@ class ProductManager {
             throw new Error("No existe un producto con ese ID");
         }
     }
-
-
 
     //3)
     async addProduct(product) {
@@ -79,8 +71,6 @@ class ProductManager {
         }
     }
 
-
-
     //4)
     async updateProduct(id, product) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -99,8 +89,6 @@ class ProductManager {
         }
     }
 
-
-
     //5)
     async deleteProduct(id) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -115,8 +103,6 @@ class ProductManager {
         }
     }
 }
-
-
 
 
 
@@ -142,8 +128,6 @@ class Product {
         return this.idIncrement;
     }
 }
-
-
 
 
 

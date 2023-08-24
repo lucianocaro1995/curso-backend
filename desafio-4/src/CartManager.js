@@ -2,16 +2,11 @@ import { promises as fs } from "fs";
 
 
 
-
-
-
 class CartManager {
     constructor() {
         this.path = './src/carts.json';
         this.loadCartsFromFile();
     }
-
-
 
     async loadCartsFromFile() {
         try {
@@ -24,8 +19,6 @@ class CartManager {
             this.carts = [];                                   
         }
     }
-
-
 
     //1)
     async createCart() {
@@ -40,8 +33,6 @@ class CartManager {
             throw new Error("No se pudo crear un nuevo carrito", error);
         }
     }
-
-
 
     //2)
     async addProductToCart(cid, pid) {
@@ -58,8 +49,6 @@ class CartManager {
         }
     }
 
-
-
     //3)
     async getCartById(id) {
         const chosenCart = this.carts.find(cart => Number(cart.id) === Number(id));
@@ -72,8 +61,6 @@ class CartManager {
         }
     }
 }
-
-
 
 
 
@@ -93,8 +80,6 @@ class Cart {
         }
     }
 }
-
-
 
 
 

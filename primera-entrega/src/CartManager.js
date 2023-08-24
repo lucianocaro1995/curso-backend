@@ -2,16 +2,12 @@ import { promises as fs } from "fs";
 
 
 
-
-
 //En esta clase detallo el array de carritos. Con esto manejo TODOS los carritos, aunque sólo vamos a utilizar un carrito
 class CartManager {
     constructor(filePath) {
         this.path = filePath;
         this.loadCartsFromFile();
     }
-
-
 
     //Este método solamente lo utilizo acá. No en './routes/carts.routes.js'
     //Este método sirve para 3 cosas:
@@ -30,8 +26,6 @@ class CartManager {
         }
     }
 
-
-
     //1)
     //Método para crear un nuevo carrito. Sólo vamos a usar uno
     async createCart() {
@@ -49,8 +43,6 @@ class CartManager {
         }
     }
 
-
-
     //2)
     //Método para agregar un nuevo producto al carrito seleccionado, utilizando su id
     async addProductToCart(cid, pid) {
@@ -67,8 +59,6 @@ class CartManager {
         }
     }
 
-
-
     //3)
     //Método para mostrar los productos del carrito seleccionado, utilizando su id
     async getCartById(id) {
@@ -82,8 +72,6 @@ class CartManager {
         }
     }
 }
-
-
 
 
 
@@ -112,8 +100,6 @@ class Cart {
         }
     }
 }
-
-
 
 
 

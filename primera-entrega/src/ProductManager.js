@@ -2,8 +2,6 @@ import { promises as fs } from "fs";
 
 
 
-
-
 class ProductManager {
     //Paso filePath como parámetro
     constructor(filePath) {
@@ -22,8 +20,6 @@ class ProductManager {
         this.path = filePath;
     }
 
-
-    
     /*
     IMPORTANTE:
     Console.error es para la terminal de vsc - Throw new error es para la terminal de Postman
@@ -31,8 +27,6 @@ class ProductManager {
     Pero las respuestas exitosas como "res.status(200).json" no pueden recibir mensajes de nadie
     En esos casos, hay que poner "res.status(200).json" en el archivo de rutas, y "console.log" acá
     */
-
-
     
     //1)
     async getProducts() {
@@ -46,8 +40,6 @@ class ProductManager {
         }
     }
 
-
-
     //2)
     async getProductById(id) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -60,8 +52,6 @@ class ProductManager {
             throw new Error("No existe un producto con ese ID");
         }
     }
-
-
 
     //3)
     async addProduct(product) {
@@ -104,8 +94,6 @@ class ProductManager {
         }
     }
 
-
-
     //4)
     async updateProduct(id, product) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -127,8 +115,6 @@ class ProductManager {
         }
     }
 
-
-
     //5)
     async deleteProduct(id) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -143,8 +129,6 @@ class ProductManager {
         }
     }
 }
-
-
 
 
 
@@ -170,8 +154,6 @@ class Product {
         return this.idIncrement;
     }
 }
-
-
 
 
 
