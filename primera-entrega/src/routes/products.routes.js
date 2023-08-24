@@ -33,9 +33,7 @@ prodsRouter.get('/', async (req, res) => {
         //Enviar la respuesta con los productos limitados
         res.status(200).json(limitedProducts);
     } catch (error) {
-        //Console.error es para la terminal de vsc - Res.status es para la terminal de Postman
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 });
 
@@ -51,15 +49,9 @@ prodsRouter.get('/:pid', async (req, res) => {
         //Las bases de datos les ponen tanto números como letras al id, por eso va a ser un string
         const pid = parseInt(req.params.pid);
         const product = await productManager.getProductById(pid);
-
-        if (product) {
-            res.status(200).json(product)
-        } else {
-            res.status(404).json({ message: "No se encontró un producto con ese ID" })
-        }
+        res.status(200).json(product);
     } catch (error) {
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 })
 
@@ -73,18 +65,10 @@ prodsRouter.post('/', async (req, res) => {
         //Creo una variable newProduct y le envío los datos estándar del cuerpo (Es decir, los datos que tendrán TODOS los productos)
         //Tengo que crear esta variable newProduct porque estoy agregando el nuevo producto desde afuera, desde Postman
         const newProduct = req.body;
-        const existingProductById = await productManager.getProductById(newProduct.id);
-        const existingProductByCode = await productManager.getProductByCode(newProduct.code);
-
-        if (existingProductById || existingProductByCode) {
-            res.status(400).json({ error: "Ya existe un producto con ese ID o código" });
-        } else {
-            await productManager.addProduct(newProduct);
-            res.status(201).json({ message: "Producto agregado exitosamente" });
-        }
+        await productManager.addProduct(newProduct);
+        res.status(201).json({ message: "Producto agregado exitosamente" });
     } catch (error) {
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 });
 
@@ -98,16 +82,12 @@ prodsRouter.put('/:pid', async (req, res) => {
         const pid = parseInt(req.params.pid);
         const product = await productManager.getProductById(pid);
 
-        if (product) {
-            //Le paso 2 parámetros: el id para identificar al producto, y el body (resto de los atributos) que va a ser actualizado
-            await productManager.updateProduct(pid, req.body);
-            res.status(200).json({ message: "Producto actualizado" });
-        } else {
-            res.status(404).json({ message: "No se encontró un producto con ese ID" });
-        }
+        //Le paso 2 parámetros: el id para identificar al producto, y el body (resto de los atributos) que va a ser actualizado
+        await productManager.updateProduct(pid, req.body);
+        res.status(200).json({ message: "Producto actualizado" });
+
     } catch (error) {
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 });
 
@@ -120,16 +100,10 @@ prodsRouter.delete('/:pid', async (req, res) => {
     try {
         const pid = parseInt(req.params.pid);
         const product = await productManager.getProductById(pid);
-
-        if (product) {
-            await productManager.deleteProduct(pid)
-            res.status(200).json({ message: "Producto eliminado" })
-        } else {
-            res.status(404).json({ message: "No se encontró un producto con ese ID" })
-        }
+        await productManager.deleteProduct(product)
+        res.status(200).json({ message: "Producto eliminado" })
     } catch (error) {
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 })
 
