@@ -66,7 +66,7 @@ prodsRouter.post('/', async (req, res) => {
         //Tengo que crear esta variable newProduct porque estoy agregando el nuevo producto desde afuera, desde Postman
         const newProduct = req.body;
         await productManager.addProduct(newProduct);
-        res.status(201).json({ message: "Producto agregado exitosamente" });
+        res.status(201).json("Producto agregado exitosamente");
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -80,12 +80,9 @@ prodsRouter.post('/', async (req, res) => {
 prodsRouter.put('/:pid', async (req, res) => {
     try {
         const pid = parseInt(req.params.pid);
-        const product = await productManager.getProductById(pid);
-
         //Le paso 2 parámetros: el id para identificar al producto, y el body (resto de los atributos) que va a ser actualizado
         await productManager.updateProduct(pid, req.body);
-        res.status(200).json({ message: "Producto actualizado" });
-
+        res.status(200).json("Producto actualizado");
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -99,13 +96,13 @@ prodsRouter.put('/:pid', async (req, res) => {
 prodsRouter.delete('/:pid', async (req, res) => {
     try {
         const pid = parseInt(req.params.pid);
-        const product = await productManager.getProductById(pid);
-        await productManager.deleteProduct(product)
-        res.status(200).json({ message: "Producto eliminado" })
+        await productManager.deleteProduct(pid);
+        res.status(200).json("Producto eliminado");
     } catch (error) {
         res.status(500).json(error.message);
     }
-})
+});
+
 
 
 

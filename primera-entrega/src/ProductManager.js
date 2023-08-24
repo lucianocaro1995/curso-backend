@@ -22,6 +22,8 @@ class ProductManager {
         this.path = filePath;
     }
 
+
+    
     /*
     IMPORTANTE:
     Console.error es para la terminal de vsc - Throw new error es para la terminal de Postman
@@ -77,7 +79,7 @@ class ProductManager {
         const missingField = requiredFields.find(field => !product[field]);
 
         if (missingField) {
-            console.log("Todos los campos son obligatorios. El campo que te falta completar es:", missingField);
+            console.log("Todos los campos son obligatorios. El campo que te falta completar es: ", missingField);
             throw new Error("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
         }
 
@@ -128,14 +130,12 @@ class ProductManager {
 
 
     //5)
-    //Antes para hacer este código utilizaba find y filter. Ahora findIndex y splice, lo que consume menos tiempo y recursos
     async deleteProduct(id) {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
-        const productoIndex = prods.findIndex(prod => prod.id === id);
+        const producto = prods.find(prod => prod.id === id);
 
-        if (productoIndex == -1) {
-            prods.splice(productoIndex, 1);
-            await fs.writeFile(this.path, JSON.stringify(prods));
+        if (producto) {
+            await fs.writeFile(this.path, JSON.stringify(prods.filter(prod => prod.id != id)));
             console.log("Producto eliminado");
         } else {
             console.log("No se encontró un producto con ese ID");

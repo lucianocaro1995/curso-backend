@@ -20,16 +20,5 @@
         "category": "Calzado",
         "thumbnail": "ejemploImagen2.jpg",
         "id": 2
-    },
-    {
-        "title": "Producto 3",
-        "description": "Este es el producto 3",
-        "price": 400,
-        "code": "PROD003",
-        "status": true,
-        "stock": 15,
-        "category": "Ropa deportiva",
-        "thumbnail": "ejemploImagen3.jpg",
-        "id": 3
     }
 ]

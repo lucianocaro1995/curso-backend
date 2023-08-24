@@ -18,15 +18,9 @@ const cartManager = new CartManager('./src/carts.json');
 cartsRouter.post('/', async (req, res) => {
     try {
         const newCart = await cartManager.createCart();
-
-        if (newCart) {
-            res.status(200).json({ message: "Carrito creado exitosamente", newCart })
-        } else {
-            res.status(404).json({ message: "No se pudo crear un carrito" })
-        }
+        res.status(200).json({ message: "Carrito creado exitosamente", newCart });
     } catch (error) {
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 })
 
@@ -39,16 +33,10 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     try {
         const cid = parseInt(req.params.cid);
         const pid = parseInt(req.params.pid);
-        const product = await cartManager.addProductToCart(cid, pid);
-
-        if (!product) {
-            res.status(200).json({ message: "Producto agregado al carrito", product });
-        } else {
-            res.status(404).json({ message: "No se pudo agregar el producto al carrito" });
-        }
+        const productInCart = await cartManager.addProductToCart(cid, pid);
+        res.status(200).json({ message: "Producto agregado al carrito", productInCart });
     } catch (error) {
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 });
 
@@ -61,15 +49,9 @@ cartsRouter.get('/:cid', async (req, res) => {
     try {
         const cid = parseInt(req.params.cid);
         const productsInCart = await cartManager.getCartById(cid);
-
-        if (productsInCart) {
-            res.status(200).json(productsInCart);
-        } else {
-            res.status(404).json({ message: "No existe un carrito con ese ID" });
-        }
+        res.status(200).json(productsInCart);
     } catch (error) {
-        console.error("Hubo un error al procesar la solicitud:", error);
-        res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+        res.status(500).json(error.message);
     }
 });
 
