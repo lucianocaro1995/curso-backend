@@ -33,8 +33,10 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     try {
         const cid = parseInt(req.params.cid);
         const pid = parseInt(req.params.pid);
-        const productInCart = await cartManager.addProductToCart(cid, pid);
-        res.status(200).json({ message: "Producto agregado al carrito", productInCart });
+        await cartManager.addProductToCart(cid, pid);
+        const chosenCart = await cartManager.getCartById(cid);      //Obtener el carrito correspondiente al cid
+        const cartContent = chosenCart.products;                    //Aquí obtenemos los productos del carrito
+        res.status(200).json({ message: "Producto agregado al carrito", cartContent });
     } catch (error) {
         res.status(500).json(error.message);
     }

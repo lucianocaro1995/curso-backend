@@ -56,8 +56,8 @@ class ProductManager {
         if (producto) {
             return producto;
         } else {
-            console.log("No se encontró un producto con ese ID");
-            throw new Error("No se encontró un producto con ese ID");
+            console.log("No existe un producto con ese ID");
+            throw new Error("No existe un producto con ese ID");
         }
     }
 
@@ -122,8 +122,8 @@ class ProductManager {
             await fs.writeFile(this.path, JSON.stringify(prods));
             console.log("Producto actualizado");
         } else {
-            console.log("No se encontró un producto con ese ID");
-            throw new Error("No se encontró un producto con ese ID");
+            console.log("No existe un producto con ese ID");
+            throw new Error("No existe un producto con ese ID");
         }
     }
 
@@ -138,8 +138,8 @@ class ProductManager {
             await fs.writeFile(this.path, JSON.stringify(prods.filter(prod => prod.id != id)));
             console.log("Producto eliminado");
         } else {
-            console.log("No se encontró un producto con ese ID");
-            throw new Error("No se encontró un producto con ese ID");
+            console.log("No existe un producto con ese ID");
+            throw new Error("No existe un producto con ese ID");
         }
     }
 }

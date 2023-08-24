@@ -11,6 +11,7 @@ const productManager = new ProductManager('./src/productos.json');
 
 
 
+
 //1) GET
 //Método para ver todos los productos. Debo incluir la req.query "?limit" por pedido de la consigna
 //Poner esto en la ruta: localhost:8080/api/products?limit=1
