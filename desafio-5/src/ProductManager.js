@@ -3,31 +3,10 @@ import { promises as fs } from "fs";
 
 
 class ProductManager {
-    //Paso filePath como parámetro
-    constructor(filePath) {
-        /*
-        Ubico el path como argumento de la clase ProductManager, y no fuera de la clase como hacía antes
-        La diferencia es que haciendo esto, puedo utilizar varios path para distintas clases en el mismo archivo
-        Estoy definiendo que este path le pertenece a esta clase. filePath es una variable
-        1) Puedo utilizar esto:
-        const productManager = new ProductManager("./src/productos.json");
-        2) O esto:
-        const filePath = "./src/productos.json";
-        const productManager = new ProductManager(filePath);
-        3) O también se puede poner como argumento this.path = "./src/productos.json" y no pasarle parámetro al constructor
-        4) O como hice en este código: this.path = filePath y paso el parámetro filePath al constructor
-        */
-        this.path = filePath;
+    constructor() {
+        this.path = './src/productos.json';
     }
 
-    /*
-    IMPORTANTE:
-    Console.error es para la terminal de vsc - Throw new error es para la terminal de Postman
-    trow new Error me envía el mensaje a los "res.status(500).json(error.message)" del archivo de rutas
-    Pero las respuestas exitosas como "res.status(200).json" no pueden recibir mensajes de nadie
-    En esos casos, hay que poner "res.status(200).json" en el archivo de rutas, y "console.log" acá
-    */
-    
     //1)
     async getProducts() {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -69,12 +48,10 @@ class ProductManager {
         const missingField = requiredFields.find(field => !product[field]);
 
         if (missingField) {
-            console.log("Todos los campos son obligatorios. El campo que te falta completar es: ", missingField);
+            console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
             throw new Error("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
         }
 
-        //Cuando creo un nuevo producto desde Postman con todos sus atributos, si pongo "status = false" por defecto Postman no me deja agregar el producto
-        //Es por esta razón que tengo que agregar una verificación en caso de que el status sea false
         if (product.status === false) {
             console.log("El estado del producto es false, no se puede agregar");
             throw new Error("El estado del producto es false, no se puede agregar");
@@ -100,10 +77,7 @@ class ProductManager {
         const indice = prods.findIndex(prod => prod.id === id);
 
         if (indice !== -1) {
-            //Guarda el valor del id antes de actualizar el producto
             const productId = prods[indice].id;
-
-            //Actualiza los campos del producto, excepto el id
             const updatedProduct = { ...product, id: productId };
             prods[indice] = updatedProduct;
 
