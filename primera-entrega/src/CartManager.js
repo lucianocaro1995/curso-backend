@@ -13,8 +13,8 @@ class CartManager {
 
 
 
-    //Este método solamente los utilizo acá. No en './routes/carts.routes.js'
-    //Este método sirve para leer lo que tengo en el JSON (carts.json)
+    //Este método solamente lo utilizo acá. No en './routes/carts.routes.js'
+    //Este método sirve para 3 cosas:
     //Lee el contenido de la ruta especificada (this.path), lo analiza como JSON y almacena el resultado en la ruta especificada (this.carts)
     //Sin esto, utilizo el método para crear un carrito y se crea 1 pero se borran todos los demás
     //Sin esto, no encuentra ningún ID de ningún carrito
@@ -34,11 +34,12 @@ class CartManager {
 
     //1)
     //Método para crear un nuevo carrito. Sólo vamos a usar uno
-    //El tercer parámetro que es el 2, es para mejorar la legibilidad del json
     async createCart() {
         try {
+            //Con esto genero el id autoincrementable
             const cart = new Cart(this.carts.length + 1);
             this.carts.push(cart);
+            //El tercer parámetro que es el 2, es para mejorar la legibilidad del json
             await fs.writeFile(this.path, JSON.stringify(this.carts, null, 2));
             console.log("Carrito creado exitosamente");
             return cart;
@@ -87,7 +88,7 @@ class CartManager {
 
 
 //En esta clase detallo la información que tendrá cada carrito
-//Cada carrito tendrá un id único autoincrementable y una lista vacía de productos (que el cliente llenará con lo que desee comprar)
+//Cada carrito tendrá un id único y una lista vacía de productos (que el cliente llenará con lo que desee comprar)
 class Cart {
     constructor(id) {
         this.id = id;
