@@ -29,7 +29,7 @@ class CartManager {
             console.log("Carrito creado exitosamente");
             return cart;
         } catch (error) {
-            console.log("No se pudo crear un nuevo carrito:", error);
+            console.log("No se pudo crear un nuevo carrito", error);
             throw new Error("No se pudo crear un nuevo carrito", error);
         }
     }

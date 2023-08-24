@@ -33,12 +33,12 @@ class CartManager {
             //Con esto genero el id autoincrementable
             const cart = new Cart(this.carts.length + 1);
             this.carts.push(cart);
-            //El tercer parámetro que es el 2, es para mejorar la legibilidad del json
+            //Los parámetros null y 2 se utilizan para mejorar la legibilidad del json
             await fs.writeFile(this.path, JSON.stringify(this.carts, null, 2));
             console.log("Carrito creado exitosamente");
             return cart;
         } catch (error) {
-            console.log("No se pudo crear un nuevo carrito:", error);
+            console.log("No se pudo crear un nuevo carrito", error);
             throw new Error("No se pudo crear un nuevo carrito", error);
         }
     }

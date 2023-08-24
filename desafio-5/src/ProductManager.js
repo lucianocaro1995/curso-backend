@@ -42,7 +42,8 @@ class ProductManager {
             "status",
             "stock",
             "category",
-            "thumbnail"
+            "thumbnail",
+            "id"
         ];
 
         const missingField = requiredFields.find(field => !product[field]);
@@ -66,7 +67,7 @@ class ProductManager {
             throw new Error("Ya existe un producto con ese ID o código");
         } else {
             prods.push(product);
-            await fs.writeFile(this.path, JSON.stringify(prods));
+            await fs.writeFile(this.path, JSON.stringify(prods, null, 2));
             console.log("Producto agregado exitosamente");
         }
     }
@@ -80,8 +81,7 @@ class ProductManager {
             const productId = prods[indice].id;
             const updatedProduct = { ...product, id: productId };
             prods[indice] = updatedProduct;
-
-            await fs.writeFile(this.path, JSON.stringify(prods));
+            await fs.writeFile(this.path, JSON.stringify(prods, null, 2));
             console.log("Producto actualizado");
         } else {
             console.log("No existe un producto con ese ID");
@@ -95,7 +95,7 @@ class ProductManager {
         const producto = prods.find(prod => prod.id === id);
 
         if (producto) {
-            await fs.writeFile(this.path, JSON.stringify(prods.filter(prod => prod.id != id)));
+            await fs.writeFile(this.path, JSON.stringify(prods.filter(prod => prod.id != id), null, 2));
             console.log("Producto eliminado");
         } else {
             console.log("No existe un producto con ese ID");
