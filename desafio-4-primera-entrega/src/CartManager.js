@@ -34,6 +34,7 @@ class CartManager {
             const cart = new Cart(this.carts.length + 1);
             this.carts.push(cart);
             //Los parámetros null y 2 se utilizan para mejorar la legibilidad del json
+            //Utilizando estos parámetros no tengo que clickear "format document" cada vez que actualice el json
             await fs.writeFile(this.path, JSON.stringify(this.carts, null, 2));
             console.log("Carrito creado exitosamente");
             return cart;

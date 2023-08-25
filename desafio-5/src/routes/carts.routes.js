@@ -44,8 +44,9 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
 cartsRouter.get('/:cid', async (req, res) => {
     try {
         const cid = parseInt(req.params.cid);
-        const productsInCart = await cartManager.getCartById(cid);
-        res.status(200).json(productsInCart);
+        const chosenCart = await cartManager.getCartById(cid);
+        const cartContent = chosenCart.products;
+        res.status(200).json({ message: "Mostrando los productos dentro del carrito con id:" + cid , cartContent });
     } catch (error) {
         res.status(500).json(error.message);
     }

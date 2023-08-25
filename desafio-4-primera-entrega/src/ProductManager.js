@@ -27,7 +27,7 @@ class ProductManager {
     Pero las respuestas exitosas como "res.status(200).json" no pueden recibir mensajes de nadie
     En esos casos, hay que poner "res.status(200).json" en el archivo de rutas, y "console.log" acá
     */
-    
+
     //1)
     async getProducts() {
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -91,6 +91,7 @@ class ProductManager {
         } else {
             prods.push(product);
             //Los parámetros null y 2 se utilizan para mejorar la legibilidad del json
+            //Utilizando estos parámetros no tengo que clickear "format document" cada vez que actualice el json
             await fs.writeFile(this.path, JSON.stringify(prods, null, 2));
             console.log("Producto agregado exitosamente");
         }
@@ -98,6 +99,24 @@ class ProductManager {
 
     //4)
     async updateProduct(id, product) {
+        const requiredFields = [
+            "title",
+            "description",
+            "price",
+            "code",
+            "status",
+            "stock",
+            "category",
+            "thumbnail"
+        ];
+
+        const missingField = requiredFields.find(field => !product[field]);
+
+        if (missingField) {
+            console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
+            throw new Error("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
+        }
+
         const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const indice = prods.findIndex(prod => prod.id === id);
 
