@@ -3,7 +3,7 @@ ACLARACIÓN IMPORTANTE:
 En este desafío, en el ProductManager.js realizo todo lo necesario en los métodos de la clase ProductManager
 Mientras que en CartManager.js creo métodos en la clase Cart y luego los utilizo en la clase CartManager
 Logro esto llamando a una nueva instancia de Cart en los métodos de CartManager
-Hice los dos archivos de diferente forma para practicar
+Hice los dos archivos de diferente forma para practicar y ver las diferencias
 */
 import { promises as fs } from "fs";
 
@@ -162,7 +162,7 @@ class Product {
     /*
     El id autoincrementable ahora lo borré de acá. Puedo hacerlo de 2 formas:
     1) Una forma de hacerlo es no crearlo acá (como hice ahora), sino directamente incrementar el id en el método "addProduct"
-    2) También puedo crear un método en esta clase manejar el id y utilizar su función en otra clase
+    2) También puedo crear un método en esta clase para manejar el id y utilizar su función en otra clase
     ¿Cómo lo hago? Llamo a la clase Product en el método que lo necesite, en este caso "addProduct" de la clase ProductManager
     Se lo llama creando una nueva instancia, es decir "new Product"
     Explicación:

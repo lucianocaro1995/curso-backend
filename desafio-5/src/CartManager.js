@@ -3,7 +3,7 @@ ACLARACIÓN IMPORTANTE:
 En este desafío, en el ProductManager.js realizo todo lo necesario en los métodos de la clase ProductManager
 Mientras que en CartManager.js creo métodos en la clase Cart y luego los utilizo en la clase CartManager
 Logro esto llamando a una nueva instancia de Cart en los métodos de CartManager
-Hice los dos archivos de diferente forma para practicar
+Hice los dos archivos de diferente forma para practicar y ver las diferencias
 */
 import { promises as fs } from "fs";
 
@@ -90,7 +90,7 @@ class Cart {
         this.products = [];
     }
 
-    //En caso de que el último id sea nulo, undefined, o no exista el campo "id", se asigna al nuevo carrito creado el siguiente valor numérico
+    //En caso de que el último ID sea nulo, undefined, o no exista el campo ID, se asigna al nuevo carrito el siguiente valor numérico
     static findLastID(arrayForCarts) {
         let lastId = 0;
     

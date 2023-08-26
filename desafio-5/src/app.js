@@ -1,43 +1,89 @@
-//IMPORTANTE: Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:8080 en mi navegador
-
-
+/*
+IMPORTANTE: Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:8080 en mi navegador
+Para este desafío instalamos 2 dependencias:
+Instalo multer con: "npm i multer" para poder subir imágenes a nuestro servidor. Ya que json no maneja imágenes
+Instalo express-handlebars con: "npm i express-handlebars"
+*/
 
 //Importo módulos:
-//Por errores de código que no entendí muy bien, para ver el index.html tuve que importar path y { fileURLToPath }
 import express from 'express';
+import { engine } from 'express-handlebars'; //Importamos lo que vamos a utilizar de handlebars y no todo el módulo
+import multer from 'multer';
+//Importo path:
+import { __dirname } from './path.js';
 import path from 'path';
-import { fileURLToPath } from 'url';
 //Importo rutas de mi aplicación:
 import prodsRouter from './routes/products.routes.js';
 import cartsRouter from './routes/carts.routes.js';
-
-
-
 //Constantes del servidor:
-//Por errores de código que no entendí muy bien, para ver el index.html tuve que crear las constantes __filename y _dirname
 const PORT = 8080
 const app = express()
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
+
+
+//Configuración de multer:
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        //Null hace referencia a que callback(cb) no devuelva errores. Pongo ruta donde quiero que se guarden las imágenes
+        cb(null, 'src/public/img')
+    },
+    filename: (req, file, cb) => {
+        //Concateno el nombre original de mi archivo con milisegundos con Date.now()
+        cb(null, `${Date.now()}${file.originalname}`)
+    }
+})
 
 
 
 //Middlewares:
-//Para poder trabajar con json. No puedo enviar json desde postman sin esta línea porque express no lo entiende
 app.use(express.json())
-//Para enviar a la url de mi aplicación varias consultas querys al mismo tiempo, querys extensos. Sin esta línea solamente podría enviar un query pequeño
 app.use(express.urlencoded({ extended: true }))
+app.use('/static', express.static(path.join(__dirname, '/public'))) //Path.join: unir rutas en una sola concatenandolas
+const upload = multer({ storage: storage }) //Genero una constante que va a contener la configuración de multer
+//Configuración de handlebars:
+app.engine('handlebars', engine()) //Defino que motor de plantillas voy a utilizar y su config
+app.set('view engine', 'handlebars') //Configuración de mi aplicación de handlebars
+app.set('views', path.resolve(__dirname, './views')) //Path.resolve: resolver rutas absolutas a través de rutas relativas
 
 
 
 //Rutas:
-//Incluyo api porque es una api rest la que quiero generar
-//El api/products puedo definirlo acá o en la carpeta routes, pero se recomienda hacerlo acá para hacerlo una sola vez
-//En lugar de escribir las rutas en app.js, lo hago en la carpeta routes y lo traigo aquí con prodsRouter
-//Necesito SÍ O SÍ el index.html para poder hacer funcionar la ruta "localhost:8080", pero las demás rutas sí funcionan
 app.use('/api/products', prodsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/static', express.static(path.join(__dirname, '/public')))
+//Voy a definir que la ruta static me muestre el contenido de handlebars
+app.get('/static', (req, res) => {
+    //El tutor va a poder ver los cursos después de haberse verificado. Puedo ponerle "Alumno" y no te va a dejar ver los cursos
+    const user = {
+        nombre: "Maria",
+        cargo: "Tutor"
+    }
+
+    const cursos = [
+        { numCurso: 123, dia: "S", horario: "Mañana" },
+        { numCurso: 456, dia: "MyJ", horario: "Tarde" },
+        { numCurso: 789, dia: "LyM", horario: "Noche" }
+    ]
+    //Defino que voy a utilizar "home.handlebars" y no "products.handlebars" u otra
+    res.render('home', {
+        user: user,
+        //Defino que en el <link> del "main.handlebars" voy a utilizar este css
+        css: "style.css",
+        //Defino que en el <title> del "main.handlebars" voy a utilizar esta palabra
+        title: "Home",
+        //Verificación para saber si el usuario es tutor o no. Puedo ponerle "Alumno" y no te va a dejar ver los cursos
+        esTutor: user.cargo === "Tutor",
+        //Envío el array de cursos al motor de plantillas
+        cursos: cursos
+    })
+})
+//Genero una ruta para que se suban imágenes gracias a multer
+app.post('/upload', upload.single('product'), (req, res) => {
+    console.log(req.file)
+    console.log(req.body)
+    res.status(200).send("Imagen cargada")
+})
+
 
 
 //Inicializo el servidor:

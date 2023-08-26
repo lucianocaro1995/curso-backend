@@ -1,5 +1,5 @@
 /*
-Desafio 3:
+ACLARACIÓN IMPORTANTE:
 Para este desafío instalamos 2 dependencias: nodemon y express
 Comandos para poner en la terminal:
 1) npm init --yes: genero un package.json. A este package.json le agregamos/modificamos 3 cosas:
