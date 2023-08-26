@@ -30,7 +30,7 @@ class CartManager {
             }
             //Creo una nueva instancia de la clase Cart para poder usar el método findLastId en esta clase
             const lastId = Cart.findLastID(arrayForCarts);
-            const newCart = new Cart(lastId + 1);
+            const newCart = new Cart(lastId);
             arrayForCarts.push(newCart);
             
             await fs.writeFile(this.path, JSON.stringify(arrayForCarts, null, 4));
@@ -91,15 +91,16 @@ class Cart {
     }
 
     //En caso de que el último ID sea nulo, undefined, o no exista el campo ID, se asigna al nuevo carrito el siguiente valor numérico
+    //En caso de que haya un carrito con id:2, la próxima vez que ejecute createCart se creará un carrito con id:1, y luego id:3
     static findLastID(arrayForCarts) {
-        let lastId = 0;
-    
-        for (const cart of arrayForCarts) {
-            if (typeof cart.id === 'number' && !isNaN(cart.id)) {
-                lastId = Math.max(lastId, cart.id);
-            }
+        let newId = 1;
+        const existingIds = new Set(arrayForCarts.map(cart => cart.id));
+
+        while (existingIds.has(newId)) {
+            newId++;
         }
-        return lastId;
+        
+        return newId;
     }
     
     //Incremento la cantidad en caso de que haya más de un producto con el mismo ID en el carrito
@@ -113,6 +114,7 @@ class Cart {
         }
     }
 }
+
 
 
 
