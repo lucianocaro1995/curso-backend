@@ -9,10 +9,10 @@ class ProductManager {
 
     //1)
     async getProducts() {
-        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
+        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
 
-        if (prods) {
-            return prods;
+        if (arrayForProds) {
+            return arrayForProds;
         } else {
             console.log("No se encontraron los productos");
             throw new Error("No se encontraron los productos");
@@ -21,11 +21,11 @@ class ProductManager {
 
     //2)
     async getProductById(id) {
-        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
-        const producto = prods.find(prod => prod.id === id);
+        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
+        const product = arrayForProds.find(prod => prod.id === id);
 
-        if (producto) {
-            return producto;
+        if (product) {
+            return product;
         } else {
             console.log("No existe un producto con ese ID");
             throw new Error("No existe un producto con ese ID");
@@ -34,6 +34,17 @@ class ProductManager {
 
     //3)
     async addProduct(product) {
+        const existingData = await fs.readFile(this.path, 'utf-8');
+        let arrayForProds = [];
+        try {
+            arrayForProds = JSON.parse(existingData);
+            if (!Array.isArray(arrayForProds)) {
+                arrayForProds = [];
+            }
+        } catch (parseError) {
+            console.log("El JSON no contiene un array, se creará uno");
+        }
+
         const requiredFields = [
             "title",
             "description",
@@ -42,8 +53,7 @@ class ProductManager {
             "status",
             "stock",
             "category",
-            "thumbnail",
-            "id"
+            "thumbnail"
         ];
 
         const missingField = requiredFields.find(field => !product[field]);
@@ -58,16 +68,21 @@ class ProductManager {
             throw new Error("El estado del producto es false, no se puede agregar");
         }
 
-        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
-        const prodId = prods.find(prod => prod.id === product.id);
-        const prodCode = prods.find(prod => prod.code === product.code);
+        const prodId = arrayForProds.find(prod => prod.id === product.id);
+        const prodCode = arrayForProds.find(prod => prod.code === product.code);
 
         if (prodId || prodCode) {
             console.log("Ya existe un producto con ese ID o código");
             throw new Error("Ya existe un producto con ese ID o código");
         } else {
-            prods.push(product);
-            await fs.writeFile(this.path, JSON.stringify(prods, null, 2));
+            const existingIds = new Set(arrayForProds.map(prod => prod.id));
+            let newId = 1;
+            while (existingIds.has(newId)) {
+                newId++;
+            }
+            product.id = newId;
+            arrayForProds.push(product);
+            await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
             console.log("Producto agregado exitosamente");
         }
     }
@@ -91,15 +106,15 @@ class ProductManager {
             console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
             throw new Error("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
         }
-        
-        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
-        const indice = prods.findIndex(prod => prod.id === id);
+
+        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
+        const indice = arrayForProds.findIndex(prod => prod.id === id);
 
         if (indice !== -1) {
-            const productId = prods[indice].id;
+            const productId = arrayForProds[indice].id;
             const updatedProduct = { ...product, id: productId };
-            prods[indice] = updatedProduct;
-            await fs.writeFile(this.path, JSON.stringify(prods, null, 2));
+            arrayForProds[indice] = updatedProduct;
+            await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
             console.log("Producto actualizado");
         } else {
             console.log("No existe un producto con ese ID");
@@ -109,11 +124,11 @@ class ProductManager {
 
     //5)
     async deleteProduct(id) {
-        const prods = JSON.parse(await fs.readFile(this.path, "utf-8"));
-        const producto = prods.find(prod => prod.id === id);
+        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
+        const product = arrayForProds.find(prod => prod.id === id);
 
-        if (producto) {
-            await fs.writeFile(this.path, JSON.stringify(prods.filter(prod => prod.id != id), null, 2));
+        if (product) {
+            await fs.writeFile(this.path, JSON.stringify(arrayForProds.filter(prod => prod.id != id), null, 4));
             console.log("Producto eliminado");
         } else {
             console.log("No existe un producto con ese ID");
@@ -134,16 +149,7 @@ class Product {
         this.stock = stock;
         this.category = category;
         this.thumbnail = thumbnail;
-        this.id = Product.incrementarId();
-    }
-
-    static incrementarId() {
-        if (this.idIncrement) {
-            this.idIncrement++;
-        } else {
-            this.idIncrement = 1;
-        }
-        return this.idIncrement;
+        this.id = id;
     }
 }
 

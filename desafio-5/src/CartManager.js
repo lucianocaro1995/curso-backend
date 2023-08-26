@@ -46,30 +46,61 @@ class CartManager {
         }
     }
 
-    //2)
+    //2) 
     async addProductToCart(cid, pid) {
         const existingData = await fs.readFile(this.path, 'utf-8');
         const arrayForCarts = JSON.parse(existingData);
         const chosenCartIndex = arrayForCarts.findIndex(cart => cart.id === cid);
-        //Comprueba si el producto con el ID dado ya existe en el carrito elegido
+        //Busco el carrito elegido
         if (chosenCartIndex !== -1) {
             const chosenCart = arrayForCarts[chosenCartIndex];
             const prodIndex = chosenCart.products.findIndex(prod => prod.id === pid);
-            //Si no existe, agrega el producto al carrito y guarda los cambios en el json
-            if (prodIndex === -1) {
-                chosenCart.products.push({ id: pid, quantity: 1 });
-                arrayForCarts[chosenCartIndex] = chosenCart;
-                await fs.writeFile(this.path, JSON.stringify(arrayForCarts, null, 4));
-                console.log("Producto agregado al carrito");
+            //Si el producto ya existe, incremento la cantidad
+            if (prodIndex !== -1) {
+                chosenCart.products[prodIndex].quantity++;
             } else {
-                console.log("El producto con el id:" + pid + " ya existe en el carrito");
-                throw new Error("El producto con el id:" + pid + " ya existe en el carrito");
+                //Si no existe, agrego el producto al carrito
+                chosenCart.products.push({ id: pid, quantity: 1 });
             }
+            //Actualizo el carrito en el array y guardo en el archivo json
+            arrayForCarts[chosenCartIndex] = chosenCart;
+            await fs.writeFile(this.path, JSON.stringify(arrayForCarts, null, 4));
+            console.log("Producto agregado al carrito");
         } else {
             console.log("No existe un carrito con ese ID");
             throw new Error("No existe un carrito con ese ID");
         }
     }
+
+    // En esta otra forma de hacerlo, creo una nueva instancia de Cart para utilizar el método cartContent acá
+    // async addProductToCart(cid, pid) {
+    //     try {
+    //         const existingData = await fs.readFile(this.path, 'utf-8');
+    //         const arrayForCarts = JSON.parse(existingData);
+    //         const chosenCartIndex = arrayForCarts.findIndex(cart => cart.id === cid);
+    
+    //         if (chosenCartIndex !== -1) {
+    //             //Agarro el carrito elegido dentro del array de carritos
+    //             const chosenCart = arrayForCarts[chosenCartIndex];
+    //             //Creo una instancia de la clase Cart para poder utilizar el método cartContent
+    //             const cartInstance = new Cart(chosenCart.id);
+    //             //Copio los productos existentes del carrito dentro de la nueva instancia
+    //             cartInstance.products = chosenCart.products.slice();
+    //             //Utilizo el método cartContent
+    //             cartInstance.cartContent(pid);
+    //             //Actualizo la variable cartInstance en el array
+    //             arrayForCarts[chosenCartIndex] = cartInstance;
+    //             await fs.writeFile(this.path, JSON.stringify(arrayForCarts, null, 4));
+    //             console.log("Producto agregado al carrito");
+    //         } else {
+    //             console.log("No existe un carrito con ese ID");
+    //             throw new Error("No existe un carrito con ese ID");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error al agregar producto al carrito:", error);
+    //         throw error;
+    //     }
+    // }
 
     //3)
     async getCartById(id) {
@@ -96,15 +127,18 @@ class Cart {
         this.products = [];
     }
 
-    cartContent(productId) {
-        const productIndex = this.products.findIndex(eachProduct => eachProduct.id === productId);
+    //Puedo pushear un producto con su id y cantidad desde acá
+    //Y luego crear una nueva instancia de Cart(new Cart) en los métodos de cartManager para utilizar este método cartContent
+    //O simplemente puedo borrar esto y pushear(con los atributos id y quantity) en los métodos de cartManager
+    // cartContent(productId) {
+    //     const productIndex = this.products.findIndex(eachProduct => eachProduct.id === productId);
 
-        if (productIndex === -1) {
-            this.products.push({ id: productId, quantity: 1 });
-        } else {
-            this.products[productIndex].quantity += 1;
-        }
-    }
+    //     if (productIndex === -1) {
+    //         this.products.push({ id: productId, quantity: 1 });
+    //     } else {
+    //         this.products[productIndex].quantity += 1;
+    //     }
+    // }
 }
 
 
