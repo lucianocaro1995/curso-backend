@@ -11,12 +11,13 @@ import { promises as fs } from "fs";
 
 class ProductManager {
     constructor() {
-        this.path = './src/productos.json';
+        this.path = '.src/products/json';
     }
 
     //1)
     async getProducts() {
-        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
+        const readJson = await fs.readFile(this.path, 'utf-8');
+        const arrayForProds = JSON.parse(readJson);
 
         if (arrayForProds) {
             return arrayForProds;
@@ -28,7 +29,8 @@ class ProductManager {
 
     //2)
     async getProductById(id) {
-        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
+        const readJson = await fs.readFile(this.path, 'utf-8');
+        const arrayForProds = JSON.parse(readJson);
         const product = arrayForProds.find(prod => prod.id === id);
 
         if (product) {
@@ -41,10 +43,10 @@ class ProductManager {
 
     //3)
     async addProduct(product) {
-        const existingData = await fs.readFile(this.path, 'utf-8');
+        const readJson = await fs.readFile(this.path, 'utf-8');
         let arrayForProds = [];
         try {
-            arrayForProds = JSON.parse(existingData);
+            arrayForProds = JSON.parse(readJson);
             if (!Array.isArray(arrayForProds)) {
                 arrayForProds = [];
             }
@@ -96,6 +98,9 @@ class ProductManager {
 
     //4)
     async updateProduct(id, product) {
+        const readJson = await fs.readFile(this.path, 'utf-8');
+        const arrayForProds = JSON.parse(readJson);
+
         const requiredFields = [
             "title",
             "description",
@@ -108,15 +113,13 @@ class ProductManager {
         ];
 
         const missingField = requiredFields.find(field => !product[field]);
-
+        
         if (missingField) {
             console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
             throw new Error("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
         }
 
-        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
         const indice = arrayForProds.findIndex(prod => prod.id === id);
-
         if (indice !== -1) {
             const productId = arrayForProds[indice].id;
             const updatedProduct = { ...product, id: productId };
@@ -131,7 +134,8 @@ class ProductManager {
 
     //5)
     async deleteProduct(id) {
-        const arrayForProds = JSON.parse(await fs.readFile(this.path, "utf-8"));
+        const readJson = await fs.readFile(this.path, 'utf-8');
+        const arrayForProds = JSON.parse(readJson);
         const product = arrayForProds.find(prod => prod.id === id);
 
         if (product) {

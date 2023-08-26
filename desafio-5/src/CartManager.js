@@ -16,39 +16,40 @@ class CartManager {
         this.path = './src/carts.json';
     }
 
+    //1)
     async createCart() {
         try {
-            const existingData = await fs.readFile(this.path, 'utf-8');
+            const readJson = await fs.readFile(this.path, 'utf-8');
             let arrayForCarts = [];
             try {
-                arrayForCarts = JSON.parse(existingData);
+                arrayForCarts = JSON.parse(readJson);
                 if (!Array.isArray(arrayForCarts)) {
                     arrayForCarts = [];
                 }
             } catch (parseError) {
                 console.log("El JSON no contiene un array, se creará uno");
             }
-            //Creo una nueva instancia de la clase Cart para poder usar el método findLastId en esta clase
-            const lastId = Cart.findLastID(arrayForCarts);
-            const newCart = new Cart(lastId);
+            
+            //Creo una nueva instancia de la clase Cart para poder usar el método generateId en esta clase
+            const findId = Cart.generateId(arrayForCarts);
+            const newCart = new Cart(findId);
             arrayForCarts.push(newCart);
             
             await fs.writeFile(this.path, JSON.stringify(arrayForCarts, null, 4));
             console.log("Carrito creado exitosamente");
-            
             return newCart;
         } catch (error) {
             console.log("No se pudo crear un nuevo carrito", error);
             throw new Error("No se pudo crear un nuevo carrito", error);
         }
     }
-    
-    //2) 
+
+    //2)
     async addProductToCart(cid, pid) {
-        const existingData = await fs.readFile(this.path, 'utf-8');
-        const arrayForCarts = JSON.parse(existingData);
+        const readJson = await fs.readFile(this.path, 'utf-8');
+        const arrayForCarts = JSON.parse(readJson);
         const chosenCartIndex = arrayForCarts.findIndex(cart => cart.id === cid);
-    
+
         if (chosenCartIndex !== -1) {
             //Creo una nueva instancia de la clase Cart para poder usar el método incrementQuantity en esta clase
             const chosenCart = new Cart(arrayForCarts[chosenCartIndex].id);
@@ -64,13 +65,12 @@ class CartManager {
             throw new Error("No existe un carrito con ese ID");
         }
     }
-    
+
     //3)
     async getCartById(id) {
-        const existingData = await fs.readFile(this.path, 'utf-8');
-        const arrayForCarts = JSON.parse(existingData);
-
-        const chosenCart = arrayForCarts.find(cart => Number(cart.id) === Number(id));
+        const readJson = await fs.readFile(this.path, 'utf-8');
+        const arrayForCarts = JSON.parse(readJson);
+        const chosenCart = arrayForCarts.find(eachCart => Number(eachCart.id) === Number(id));
 
         if (chosenCart) {
             console.log("Mostrando los productos dentro del carrito con id:" + id, chosenCart);
@@ -92,17 +92,18 @@ class Cart {
 
     //En caso de que el último ID sea nulo, undefined, o no exista el campo ID, se asigna al nuevo carrito el siguiente valor numérico
     //En caso de que haya un carrito con id:2, la próxima vez que ejecute createCart se creará un carrito con id:1, y luego id:3
-    static findLastID(arrayForCarts) {
+    static generateId(allCarts) {
         let newId = 1;
-        const existingIds = new Set(arrayForCarts.map(cart => cart.id));
+        //Creo un conjunto de IDs existentes para comparar y evitar duplicados al manejar los carritos
+        //Set es palabra reservada de Javascript
+        const existingIds = new Set(allCarts.map(cart => cart.id));
 
         while (existingIds.has(newId)) {
             newId++;
         }
-        
         return newId;
     }
-    
+
     //Incremento la cantidad en caso de que haya más de un producto con el mismo ID en el carrito
     incrementQuantity(productId) {
         const productIndex = this.products.findIndex(eachProduct => eachProduct.id === productId);
@@ -114,7 +115,6 @@ class Cart {
         }
     }
 }
-
 
 
 
