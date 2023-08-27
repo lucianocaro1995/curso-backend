@@ -1,22 +1,35 @@
-<!--El valor de la variable "nombre" se define en app.js-->
-<h1>Hola, {{nombre}}</h1>
-<!--Partials es palabra reservada, así que si yo pongo ">" ya se sabe que quiero ir a partials-->
-<!--Voy a counter y luego a counter.handlebars. No necesito poner handlebars porque ya lo definí con engine-->
-{{>counter/counter}}
+<!--Lista de productos agregados hasta el momento-->
+<!--Este archivo no se está viendo en mi body, hasta que clickeen "Mostrar productos"-->
+<!--Esta vista debe consultar a la raíz "/" get products. Ejecutar este método con handlebars-->
 
-<!--
-Ejemplo visto en clase sobre condicionales con handlebars
-Si sos tutor, te deja ver los cursos. En caso de que no seas tutor, vas a ver el <p>
--->
-{{#if esTutor}}
-<!--Esto es un bucle en handlebars, lo hizo el profesor para poder ver los cursos-->
-{{#each cursos}}
-<div>
-    <!--El this hace referencia a cada objeto del forEach-->
-    <p>{{this.numCurso}} {{this.dia}} {{this.horario}}</p>
-</div>
-{{/each}}
-
-{{else}}
-<p>No sos tutor</p>
-{{/if}}
+<table id="productsTable" class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Título</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Thumbnail</th>
+            <th scope="col">Código</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Estado</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <!--Esto es un bucle en handlebars-->
+        {{#each products}}
+        <tr>
+            <!--El this hace referencia a cada objeto del forEach-->
+            <td>{{this.id}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.thumbnail}}</td>
+            <td>{{this.code}}</td>
+            <td>{{this.stock}}</td>
+            <td>{{this.status}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

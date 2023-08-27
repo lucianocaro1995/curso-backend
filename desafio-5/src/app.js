@@ -9,14 +9,19 @@ Instalo socket.io con: "npm i socket.io"
 //Importo módulos:
 import express from 'express';
 import multer from 'multer';
-import { engine } from 'express-handlebars'; //Importamos lo que vamos a utilizar de handlebars y no todo el módulo
-import { Server } from 'socket.io'; //Importo al servidor de Socket.io para poder utilizarlo
+import { engine } from 'express-handlebars';
+import { Server } from 'socket.io';
 //Importo path:
 import { __dirname } from './path.js';
 import path from 'path';
 //Importo rutas de mi aplicación:
 import prodsRouter from './routes/products.routes.js';
 import cartsRouter from './routes/carts.routes.js';
+import ProductManager from './ProductManager.js';
+import router from './routes/views.routes.js';
+//Constantes:
+const manager = new ProductManager();
+const viewsRouter = router;
 //Constantes del servidor:
 const PORT = 8080
 const app = express()
@@ -49,85 +54,71 @@ const serverExpress = app.listen(PORT, () => {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/static', express.static(path.join(__dirname, '/public'))) //Path.join: unir rutas en una sola concatenandolas
-const upload = multer({ storage: storage }) //Genero una constante que va a contener la configuración de multer
 //Configuración de handlebars:
-app.engine('handlebars', engine()) //Defino que motor de plantillas voy a utilizar y su config
+app.engine('handlebars', engine()) //Defino que motor de plantillas voy a utilizar y su configuración
 app.set('view engine', 'handlebars') //Configuración de mi aplicación de handlebars
 app.set('views', path.resolve(__dirname, './views')) //Path.resolve: resolver rutas absolutas a través de rutas relativas
-//Servidos Socket.io
+app.use('/realtimeproducts', express.static(path.join(__dirname, '/public')))
+//Configuración de multer (genero una constante que va a contener la configuración de multer):
+const upload = multer({ storage: storage })
+
+
+
+//Servidor Socket.io
 const io = new Server(serverExpress)
-const mensajes = []
-const prods = []
+const prods = [];
 
 
 
 //Establezco la conexión con el servidor Socket.io
-io.on('connection', (socket) => {
-    console.log("Servidor Socket.io conectado")
-    socket.on('mensajeConexion', (user) => {
-        if (user.rol === "Admin") {
-            socket.emit('credencialesConexion', "Usuario valido")
-        } else {
-            socket.emit('credencialesConexion', "Usuario no valido")
-        }
+io.on('connection', (socket)=> {
+    console.log('servidor de socket io conectado')
+
+    //Agregar producto
+    socket.on('nuevoProducto', async (nuevoProd) => {
+        const { title, description, price, thumbnail, code, stock } = nuevoProd;
+        await manager.addProduct(title, description, price, thumbnail, code, stock);
+        const products = await manager.getProducts();
+        socket.emit('products-data', products);
     })
 
-    //Los mensajes del chat los guardo en el array mensajes
-    socket.on('mensaje', (infoMensaje) => {
-        console.log(infoMensaje)
-        mensajes.push(infoMensaje)
-        //Socket.emit es como un return
-        socket.emit('mensajes', mensajes)
-    })
+    //Actualizar producto
+    socket.on('update-products', async () => {
+        const products = await manager.getProducts();
+        socket.emit('products-data', products);
+    });
 
-    //Los productos los guardo en el array prods
-    socket.on('nuevoProducto', (nuevoProd) => {
-        prods.push(nuevoProd)
-        socket.emit('prods', prods)
+    //Eliminar producto
+    socket.on('remove-product', async (code) => {
+        console.log("inicio remove socket")
+        await manager.removeProduct(code) ;
+        const products = await manager.getProducts();
+        socket.emit('products-data', products);
     })
 })
 
 
 
 //Rutas:
+app.use('/', viewsRouter)
 app.use('/api/products', prodsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/static', express.static(path.join(__dirname, '/public')))
 
-/*
-//Voy a definir que la ruta static me muestre el contenido de handlebars
+//Genero una ruta static utilizando "home" como body
 app.get('/static', (req, res) => {
-    //El tutor va a poder ver los cursos después de haberse verificado. Puedo ponerle "Alumno" y no te va a dejar ver los cursos
-    const user = {
-        nombre: "Maria",
-        cargo: "Tutor"
-    }
-
-    const cursos = [
-        { numCurso: 123, dia: "S", horario: "Mañana" },
-        { numCurso: 456, dia: "MyJ", horario: "Tarde" },
-        { numCurso: 789, dia: "LyM", horario: "Noche" }
-    ]
-    //Defino que voy a utilizar "home.handlebars" y no "products.handlebars" u otra
     res.render('home', {
-        user: user,
-        //Defino que en el <link> del "main.handlebars" voy a utilizar este css
         css: "style.css",
-        //Defino que en el <title> del "main.handlebars" voy a utilizar esta palabra
         title: "Home",
-        //Verificación para saber si el usuario es tutor o no. Puedo ponerle "Alumno" y no te va a dejar ver los cursos
-        esTutor: user.cargo === "Tutor",
-        //Envío el array de cursos al motor de plantillas
-        cursos: cursos
+        js: "home.js"
     })
 })
-*/
 
-//Genero otra ruta static, pero esta vez utilizando "realTimeProducts" en vez de "home"
-app.get('/static', (req, res) => {
+//Genero una ruta para mostrar los productos en tiempo real
+app.get('/realtimeproducts', (req, res) => {
     res.render('realTimeProducts', {
         css: "style.css",
-        title: "Form",
+        title: "Products",
         js: "realTimeProducts.js"
     })
 })
