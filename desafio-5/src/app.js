@@ -18,10 +18,8 @@ import path from 'path';
 import prodsRouter from './routes/products.routes.js';
 import cartsRouter from './routes/carts.routes.js';
 import ProductManager from './ProductManager.js';
-import router from './routes/views.routes.js';
 //Constantes:
 const manager = new ProductManager();
-const viewsRouter = router;
 //Constantes del servidor:
 const PORT = 8080
 const app = express()
@@ -100,7 +98,6 @@ io.on('connection', (socket)=> {
 
 
 //Rutas:
-app.use('/', viewsRouter)
 app.use('/api/products', prodsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/static', express.static(path.join(__dirname, '/public')))

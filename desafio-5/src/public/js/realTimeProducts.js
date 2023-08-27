@@ -1,8 +1,12 @@
+//Este código es Javascript con Socket.io
+
 const socket = io();
 const form = document.getElementById('idForm');
 const botonProds = document.getElementById('botonProductos');
 
-// Código del evento 'submit' para el formulario 'form'
+
+
+//Código del evento 'submit' para el formulario 'form'
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const datForm = new FormData(e.target);
@@ -13,7 +17,7 @@ form.addEventListener('submit', async (e) => {
     e.target.reset();
 });
 
-// Código para ver la lista de productos
+//Código para ver la lista de productos
 botonProds.addEventListener('click', () => {
     window.location.href = "http://localhost:8080/home";
 });

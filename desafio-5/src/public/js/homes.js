@@ -1,3 +1,5 @@
+//Este código es Javascript con Socket.io
+
 const socket = io();
 const tableBody = document.querySelector("#productsTable tbody");
 
