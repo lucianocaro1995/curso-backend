@@ -22,7 +22,7 @@ socket.on('credencialesConexion', (info) => {
 })
 */
 
-//Código hecho en clase para el "chat"
+//Código hecho en clase para practicar generando un chat
 const socket = io()
 
 const botonChat = document.getElementById('botonChat')

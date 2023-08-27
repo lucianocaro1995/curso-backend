@@ -11,7 +11,7 @@ import { promises as fs } from "fs";
 
 class ProductManager {
     constructor() {
-        this.path = './src/products/json';
+        this.path = './src/products.json';
     }
 
     //1)

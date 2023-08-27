@@ -91,7 +91,7 @@ io.on('connection', (socket)=> {
     //Eliminar producto
     socket.on('remove-product', async (code) => {
         console.log("inicio remove socket")
-        await manager.removeProduct(code) ;
+        await manager.deleteProduct(code) ;
         const products = await manager.getProducts();
         socket.emit('products-data', products);
     })

@@ -2,12 +2,10 @@ const socket = io.connect('http://localhost:8080')
 const form = document.getElementById('idForm')
 const botonProds = document.getElementById('botonProductos')
 
-
-
-    socket.on('products-data', (products) => {
-        const tableBody = document.querySelector("#productsTable tbody");
-        let tableContent = '';
-        if (products && Array.isArray(products)) {
+socket.on('products-data', (products) => {
+    const tableBody = document.querySelector("#productsTable tbody");
+    let tableContent = '';
+    if (products && Array.isArray(products)) {
         products.forEach(product => {
             tableContent += `
                 <tr>
@@ -25,10 +23,7 @@ const botonProds = document.getElementById('botonProductos')
     } else {
         console.error('Productos no definidos o no es un array:', products);
     }
+    tableBody.innerHTML = tableContent;
+});
 
-        tableBody.innerHTML = tableContent;
-        
-    });
-
-    
-    socket.emit('update-products');
+socket.emit('update-products');
