@@ -1,7 +1,9 @@
-<!--Formulario para agregar productos-->
-<!--Este archivo hace de mi body-->
-<!--Esta vista debe estar en el endpoint "/realtimeproducts". Esta contendrá la misma lista de productos pero trabajará con websockets-->
+<!--Este código es puro HTML. La única diferencia es que handlebars permite utilizar plantillas para el main-->
+<!--Este archivo hace de mi body en el endpoint "localhost:8080/realtimeproducts"-->
 
+
+
+<!-- Formulario para agregar productos -->
 <h1>Crear Nuevo Producto</h1>
 <form id="idForm">
     <label for="title">Title</label>
@@ -17,6 +19,9 @@
     <label for="code">Code</label>
     <input type="text" required name="code">
     <button type="submit">Enviar</button>
-</form><br><br>
+</form>
 
-<button id="botonProductos">Mostrar Productos</button>
+<br><br>
+<a href="http://localhost:8080/home">
+    <button id="botonProductos">Mostrar Productos</button>
+</a>

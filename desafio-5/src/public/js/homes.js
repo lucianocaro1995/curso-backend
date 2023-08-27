@@ -1,9 +1,10 @@
-const socket = io.connect('http://localhost:8080')
-const form = document.getElementById('idForm')
-const botonProds = document.getElementById('botonProductos')
+const socket = io();
+const tableBody = document.querySelector("#productsTable tbody");
 
+
+
+//Código para mostrar los productos en la tabla
 socket.on('products-data', (products) => {
-    const tableBody = document.querySelector("#productsTable tbody");
     let tableContent = '';
     if (products && Array.isArray(products)) {
         products.forEach(product => {
@@ -17,6 +18,9 @@ socket.on('products-data', (products) => {
                     <td>${product.code}</td>
                     <td>${product.stock}</td>
                     <td>${product.status}</td>
+                    <td>
+                        <button class="removeButton" data-product-id="${product.id}">Eliminar producto</button>
+                    </td>
                 </tr>
             `;
         });
@@ -26,4 +30,13 @@ socket.on('products-data', (products) => {
     tableBody.innerHTML = tableContent;
 });
 
+//Manejo de eventos para eliminar productos
+tableBody.addEventListener('click', (event) => {
+    if (event.target.classList.contains('removeButton')) {
+        const productId = event.target.getAttribute('data-product-id');
+        socket.emit('remove-product', productId);
+    }
+});
+
+//Iniciar la solicitud de datos de productos
 socket.emit('update-products');

@@ -31,8 +31,8 @@ class CartManager {
             }
             
             //Creo una nueva instancia de la clase Cart para poder usar el método generateId en esta clase
-            const findId = Cart.generateId(arrayForCarts);
-            const newCart = new Cart(findId);
+            const findNextId = Cart.generateId(arrayForCarts);
+            const newCart = new Cart(findNextId);
             arrayForCarts.push(newCart);
             
             await fs.writeFile(this.path, JSON.stringify(arrayForCarts, null, 4));

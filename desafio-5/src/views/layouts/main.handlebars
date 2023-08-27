@@ -14,7 +14,7 @@
     <!--El símbolo ">" significa que el nav y footer están en partials. Partials es palabra reservada-->
     <!--En body entra todo lo que esté en la carpeta views pero no en una subcarpeta, así se configuró. En mi caso home y realTimeProducts-->
     {{>nav}}
-    {{{body}}}
+    {{{body}}} <!--El body es home o realTimeProducts, dependiendo de la ruta ingresada-->
     {{>footer}}
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js"></script>

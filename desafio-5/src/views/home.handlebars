@@ -1,8 +1,11 @@
-<!--Lista de productos agregados hasta el momento-->
-<!--Este archivo no se está viendo en mi body, hasta que clickeen "Mostrar productos"-->
-<!--Esta vista debe consultar a la raíz "/" get products. Ejecutar este método con handlebars-->
+<!--Este código es puro HTML. La única diferencia es que handlebars permite utilizar plantillas para el main-->
+<!--Este archivo hace de mi body en el endpoint "localhost:8080/home"-->
 
+
+
+<!--Lista de productos -->
 <table id="productsTable" class="table">
+    <!--Parte superior de la tabla con los nombres de los campos -->
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -15,12 +18,13 @@
             <th scope="col">Estado</th>
         </tr>
     </thead>
-    
+
+    <!--Cuerpo de la tabla con los productos agregados a la lista -->
     <tbody>
-        <!--Esto es un bucle en handlebars-->
+        <!--Esto es un bucle en handlebars -->
         {{#each products}}
         <tr>
-            <!--El this hace referencia a cada objeto del forEach-->
+            <!--El this hace referencia a cada objeto del forEach -->
             <td>{{this.id}}</td>
             <td>{{this.title}}</td>
             <td>{{this.description}}</td>
@@ -29,6 +33,9 @@
             <td>{{this.code}}</td>
             <td>{{this.stock}}</td>
             <td>{{this.status}}</td>
+            <td>
+                <button class="removeButton">Eliminar producto</button>
+            </td>
         </tr>
         {{/each}}
     </tbody>
