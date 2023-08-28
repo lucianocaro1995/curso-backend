@@ -99,11 +99,11 @@ io.on('connection', (socket) => {
 //Rutas:
 app.use('/api/products', prodsRouter)
 app.use('/api/carts', cartsRouter)
-app.use('/static', express.static(path.join(__dirname, '/public')))
+app.use('/home', express.static(path.join(__dirname, '/public')))
 
-//Genero una ruta utilizando "home" como body
+//Genero una ruta utilizando "home.handlebars" como body
 //Acá va a haber una lista de los productos agregados. Esta va a a ser una ruta estática
-app.get('/static', (req, res) => {
+app.get('/home', (req, res) => {
     res.render('home', {
         css: "style.css",
         title: "Home",
@@ -111,8 +111,8 @@ app.get('/static', (req, res) => {
     })
 })
 
-//Genero una ruta utilizando "realTimeProducts" como body
-//Acá va a haber un formulario para agregar productos y verlos en tiempo real gracias a websocket(socket.on y socket.emit)
+//Genero una ruta utilizando "realTimeProducts.handlebars" como body
+//Acá va a haber un formulario para agregar y eliminar productos, y poder ver los cambios en tiempo real gracias a socket io
 app.get('/realtimeproducts', (req, res) => {
     res.render('realTimeProducts', {
         css: "style.css",
