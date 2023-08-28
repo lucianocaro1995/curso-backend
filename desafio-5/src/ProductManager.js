@@ -40,9 +40,9 @@ class ProductManager {
     }
 
     //3)
-    async addProduct(title, description, category, price, stock, code) {
+    async addProduct(title, description, category, thumbnail, price, stock, code) {
         try {
-            // Leer el archivo JSON y parsear su contenido
+            //Leer el archivo JSON y parsear su contenido
             let arrayForProds = [];
             try {
                 const readJson = await fs.readFile(this.path, 'utf-8');
@@ -54,11 +54,12 @@ class ProductManager {
                 console.log("El JSON no contiene un array, se creará uno");
             }
 
-            // Verificar si todos los campos requeridos tienen valores
+            //Verificar si todos los campos requeridos tienen valores
             const requiredFields = [
                 title,
                 description,
                 category,
+                thumbnail,
                 price,
                 stock,
                 code,
@@ -71,25 +72,26 @@ class ProductManager {
                 return;
             }
 
-            // Verificar si el código ya existe en la lista de productos
+            //Verificar si el código ya existe en la lista de productos
             const codeExists = arrayForProds.some(prod => prod.code === code);
             if (codeExists) {
                 console.log("Ya existe un producto con ese código");
                 return;
             }
 
-            // Generar un nuevo ID único
+            //Generar un nuevo ID único
             const existingIds = new Set(arrayForProds.map(prod => prod.id));
             let newId = 1;
             while (existingIds.has(newId)) {
                 newId++;
             }
 
-            // Crear un nuevo producto y agregarlo al array de productos
+            //Crear un nuevo producto y agregarlo al array de productos
             const newProduct = {
                 title,
                 description,
                 category,
+                thumbnail,
                 price,
                 stock,
                 code,
@@ -97,7 +99,7 @@ class ProductManager {
             };
             arrayForProds.push(newProduct);
 
-            // Guardar el nuevo array de productos en el archivo JSON
+            //Guardar el nuevo array de productos en el archivo JSON
             await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
             console.log("Producto agregado exitosamente.");
         } catch (error) {
@@ -111,14 +113,13 @@ class ProductManager {
         const arrayForProds = JSON.parse(readJson);
 
         const requiredFields = [
-            "title",
-            "description",
-            "price",
-            "code",
-            "status",
-            "stock",
-            "category",
-            "thumbnail"
+            title,
+            description,
+            category,
+            thumbnail,
+            price,
+            stock,
+            code,
         ];
 
         const missingField = requiredFields.find(field => !product[field]);
@@ -126,7 +127,6 @@ class ProductManager {
         if (missingField) {
             console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
         }
-
 
         const indice = arrayForProds.findIndex(prod => prod.id === id);
         if (indice !== -1) {
@@ -144,7 +144,7 @@ class ProductManager {
     async deleteProduct(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
         const arrayForProds = JSON.parse(readJson);
-        //Increíble pero real: el código no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
+        //Increíble pero real: el id no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
         const product = arrayForProds.find(prod => prod.id == id);
 
         if (product) {

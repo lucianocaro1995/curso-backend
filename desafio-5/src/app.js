@@ -102,7 +102,7 @@ app.use('/api/products', prodsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/static', express.static(path.join(__dirname, '/public')))
 
-//Genero una ruta utilizando "home" como body. Acá va a estar la lista de productos agregados
+//Genero una ruta utilizando "home" como body. Acá va a estar la lista de productos agregados de forma estática
 app.get('/static', (req, res) => {
     res.render('home', {
         css: "style.css",

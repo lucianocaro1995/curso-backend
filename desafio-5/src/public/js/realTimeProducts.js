@@ -26,6 +26,7 @@ form.addEventListener('submit', async (e) => {
 
 
 
+//POR QUÉ NO ME APARECE EN LA CONSOLA DEL NAVEGADOR QUE NO SE ENCONTRÓ EL ID CUANDO INGRESO UN ID QUE NO EXISTE?!
 //Código para eliminar un producto
 removeform.addEventListener('submit', async (e) => {
     e.preventDefault();
