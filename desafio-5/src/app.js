@@ -64,12 +64,12 @@ const upload = multer({ storage: storage })
 
 //Servidor Socket.io
 const io = new Server(serverExpress)
-const prods = [];
-
-
-
 //Establezco la conexión con el servidor Socket.io
-io.on('connection', (socket)=> {
+//Websockets sirve para enviar datos y eventos desde un cliente a un servidor (o entre diferentes clientes) en una aplicación web en tiempo real
+//Sintaxis de websockets: se utiliza socket.on y socket.emit
+//Sintaxis de socket.emit: socket.emit('nombreEvento', variable);
+//TODO este código io.on es para "realTimeProducts" ya que esa va a ser nuestra ruta que se pueda ver en tiempo real
+io.on('connection', (socket) => {
     console.log('servidor de socket io conectado')
 
     //Agrega un producto y envía la lista actualizada al cliente
@@ -80,16 +80,16 @@ io.on('connection', (socket)=> {
         socket.emit('products-data', products);
     })
 
-    //Obtiene productos y actualiza la lista en el cliente
+    //Obtiene los productos y envía la lista actualizada en el cliente
     socket.on('update-products', async () => {
         const products = await manager.getProducts();
         socket.emit('products-data', products);
     });
 
-    //Botón "Eliminar producto" en la ruta "realTimeProducts". Elimina un producto y actualiza la lista en el cliente
+    //Elimina un producto y envía la lista actualizada al cliente
     socket.on('remove-product', async (id) => {
         console.log("inicio remove socket")
-        await manager.deleteProduct(id) ;
+        await manager.deleteProduct(id);
         const products = await manager.getProducts();
         socket.emit('products-data', products);
     })
@@ -102,7 +102,8 @@ app.use('/api/products', prodsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/static', express.static(path.join(__dirname, '/public')))
 
-//Genero una ruta utilizando "home" como body. Acá va a estar la lista de productos agregados de forma estática
+//Genero una ruta utilizando "home" como body
+//Acá va a haber una lista de los productos agregados. Esta va a a ser una ruta estática
 app.get('/static', (req, res) => {
     res.render('home', {
         css: "style.css",
@@ -111,7 +112,8 @@ app.get('/static', (req, res) => {
     })
 })
 
-//Genero una ruta utilizando "realTimeProducts" como body. Acá va a haber un formulario para agregar productos
+//Genero una ruta utilizando "realTimeProducts" como body
+//Acá va a haber un formulario para agregar productos y verlos en tiempo real gracias a websocket(socket.on y socket.emit)
 app.get('/realtimeproducts', (req, res) => {
     res.render('realTimeProducts', {
         css: "style.css",
