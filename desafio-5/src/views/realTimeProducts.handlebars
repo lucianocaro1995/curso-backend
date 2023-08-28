@@ -3,26 +3,74 @@
 <!--Este archivo hace de mi body en el endpoint "localhost:8080/realtimeproducts"-->
 
 
-
-<!--Formulario para agregar productos -->
+<!--Formulario donde agrego los campos requeridos y agrego un producto-->
 <h1>Crear Nuevo Producto</h1>
-<form id="idForm">
+<form id="addForm">
+
     <label for="title">Title</label>
     <input type="text" required name="title">
+
     <label for="description">Description</label>
     <input type="text" required name="description">
+
     <label for="category">Category</label>
     <input type="text" required name="category">
+
     <label for="price">Price</label>
     <input type="number" required name="price">
+
+    <label for="thumbnail">Thumbnail</label>
+    <input type="text" required name="thumbnail">
+
     <label for="stock">Stock</label>
     <input type="number" required name="stock">
+
     <label for="code">Code</label>
     <input type="text" required name="code">
+
     <button type="submit">Enviar</button>
+
+</form><br><br>
+
+
+
+<!--Formulario donde agrego un id y elimino un producto-->
+<h1>Eliminar un Producto</h1>
+<form id="removeForm">
+    <div>
+        <label for="code">Id</label>
+        <input type="text" required name="id">
+    </div>
+    <div>
+        <button type="submit">Enviar</button>
+    </div>
 </form>
 
-<br><br>
-<a href="http://localhost:8080/home">
-    <button id="botonProductos">Mostrar Productos</button>
-</a>
+<table id="productsTable">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Título</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Thumbnail</th>
+            <th scope="col">Código</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.thumbnail}}</td>
+            <td>{{this.code}}</td>
+            <td>{{this.stock}}</td>
+            <td>{{this.status}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

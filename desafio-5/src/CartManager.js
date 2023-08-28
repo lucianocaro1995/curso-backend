@@ -40,7 +40,6 @@ class CartManager {
             return newCart;
         } catch (error) {
             console.log("No se pudo crear un nuevo carrito", error);
-            throw new Error("No se pudo crear un nuevo carrito", error);
         }
     }
 
@@ -62,7 +61,6 @@ class CartManager {
             console.log("Producto agregado al carrito");
         } else {
             console.log("No existe un carrito con ese ID");
-            throw new Error("No existe un carrito con ese ID");
         }
     }
 
@@ -77,7 +75,6 @@ class CartManager {
             return chosenCart;
         } else {
             console.log("No existe un carrito con ese ID");
-            throw new Error("No existe un carrito con ese ID");
         }
     }
 }

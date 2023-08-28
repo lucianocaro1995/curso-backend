@@ -23,7 +23,6 @@ class ProductManager {
             return arrayForProds;
         } else {
             console.log("No se encontraron los productos");
-            throw new Error("No se encontraron los productos");
         }
     }
 
@@ -37,62 +36,72 @@ class ProductManager {
             return product;
         } else {
             console.log("No existe un producto con ese ID");
-            throw new Error("No existe un producto con ese ID");
         }
     }
 
     //3)
-    async addProduct(product) {
-        const readJson = await fs.readFile(this.path, 'utf-8');
-        let arrayForProds = [];
+    async addProduct(title, description, category, price, stock, code) {
         try {
-            arrayForProds = JSON.parse(readJson);
-            if (!Array.isArray(arrayForProds)) {
-                arrayForProds = [];
+            // Leer el archivo JSON y parsear su contenido
+            let arrayForProds = [];
+            try {
+                const readJson = await fs.readFile(this.path, 'utf-8');
+                arrayForProds = JSON.parse(readJson);
+                if (!Array.isArray(arrayForProds)) {
+                    arrayForProds = [];
+                }
+            } catch (parseError) {
+                console.log("El JSON no contiene un array, se creará uno");
             }
-        } catch (parseError) {
-            console.log("El JSON no contiene un array, se creará uno");
-        }
 
-        const requiredFields = [
-            "title",
-            "description",
-            "price",
-            "code",
-            "status",
-            "stock",
-            "category",
-            "thumbnail"
-        ];
+            // Verificar si todos los campos requeridos tienen valores
+            const requiredFields = [
+                title,
+                description,
+                category,
+                price,
+                stock,
+                code,
+            ];
 
-        const missingField = requiredFields.find(field => !product[field]);
+            const missingField = requiredFields.find(field => !field);
 
-        if (missingField) {
-            console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
-            throw new Error("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
-        }
+            if (missingField) {
+                console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
+                return;
+            }
 
-        if (product.status === false) {
-            console.log("El estado del producto es false, no se puede agregar");
-            throw new Error("El estado del producto es false, no se puede agregar");
-        }
+            // Verificar si el código ya existe en la lista de productos
+            const codeExists = arrayForProds.some(prod => prod.code === code);
+            if (codeExists) {
+                console.log("Ya existe un producto con ese código");
+                return;
+            }
 
-        const prodId = arrayForProds.find(prod => prod.id === product.id);
-        const prodCode = arrayForProds.find(prod => prod.code === product.code);
-
-        if (prodId || prodCode) {
-            console.log("Ya existe un producto con ese ID o código");
-            throw new Error("Ya existe un producto con ese ID o código");
-        } else {
+            // Generar un nuevo ID único
             const existingIds = new Set(arrayForProds.map(prod => prod.id));
             let newId = 1;
             while (existingIds.has(newId)) {
                 newId++;
             }
-            product.id = newId;
-            arrayForProds.push(product);
+
+            // Crear un nuevo producto y agregarlo al array de productos
+            const newProduct = {
+                title,
+                description,
+                category,
+                price,
+                stock,
+                code,
+                id: newId
+            };
+            arrayForProds.push(newProduct);
+
+            // Guardar el nuevo array de productos en el archivo JSON
             await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
-            console.log("Producto agregado exitosamente");
+            console.log("Producto agregado exitosamente.");
+        } catch (error) {
+            console.log("Error al agregar el producto:", error);
         }
     }
 
@@ -113,11 +122,11 @@ class ProductManager {
         ];
 
         const missingField = requiredFields.find(field => !product[field]);
-        
+
         if (missingField) {
             console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
-            throw new Error("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
         }
+
 
         const indice = arrayForProds.findIndex(prod => prod.id === id);
         if (indice !== -1) {
@@ -128,7 +137,6 @@ class ProductManager {
             console.log("Producto actualizado");
         } else {
             console.log("No existe un producto con ese ID");
-            throw new Error("No existe un producto con ese ID");
         }
     }
 
@@ -136,14 +144,14 @@ class ProductManager {
     async deleteProduct(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
         const arrayForProds = JSON.parse(readJson);
-        const product = arrayForProds.find(prod => prod.id === id);
+        //Increíble pero real: el código no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
+        const product = arrayForProds.find(prod => prod.id == id);
 
         if (product) {
             await fs.writeFile(this.path, JSON.stringify(arrayForProds.filter(prod => prod.id != id), null, 4));
             console.log("Producto eliminado");
         } else {
             console.log("No existe un producto con ese ID");
-            throw new Error("No existe un producto con ese ID");
         }
     }
 }
@@ -151,16 +159,15 @@ class ProductManager {
 
 
 class Product {
-    constructor(title, description, price, code, status, stock, category, thumbnail) {
+    constructor(title, description, category, thumbnail, price, stock, code, status) {
         this.title = title;
         this.description = description;
-        this.price = price;
-        this.code = code;
-        this.status = status;
-        this.stock = stock;
         this.category = category;
         this.thumbnail = thumbnail;
-        this.id = id;
+        this.price = price;
+        this.stock = stock;
+        this.code = code;
+        this.status = status;
     }
 
     /*
