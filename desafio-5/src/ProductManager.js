@@ -40,19 +40,13 @@ class ProductManager {
     }
 
     //3)
+    //En este método puedo pasarle los campos de Product como parámetro
+    //O también puedo no pasarle ningún parámetro y que quede "async addProduct() {" y llamar a una nueva instancia de Product más abajo
     async addProduct(title, description, category, thumbnail, price, stock, code) {
         try {
-            //Leer el archivo JSON y parsear su contenido
-            const readJson = await fs.readFile(this.path, 'utf-8')
-            let arrayForProds = [];
-            try {
-                arrayForProds = JSON.parse(readJson);
-                if (!Array.isArray(arrayForProds)) {
-                    arrayForProds = [];
-                }
-            } catch (parseError) {
-                console.log("El JSON no contiene un array válido:", parseError);
-            }
+            //Leer el archivo JSON
+            const readJson = await fs.readFile(this.path, 'utf-8');
+            let arrayForProds = JSON.parse(readJson);
 
             //Verificar si todos los campos requeridos tienen valores
             const requiredFields = [
@@ -73,7 +67,7 @@ class ProductManager {
             }
 
             //Verificar si el código ya existe en la lista de productos
-            const codeExists = arrayForProds.some(prod => prod.code == code);
+            const codeExists = arrayForProds.some(prod => prod.code === code);
             if (codeExists) {
                 console.log("Ya existe un producto con ese código");
                 return;
@@ -88,6 +82,7 @@ class ProductManager {
 
             //Crear un nuevo producto y agregarlo al array de productos
             const newProduct = {
+                status: "disponible",
                 title,
                 description,
                 category,
@@ -110,7 +105,7 @@ class ProductManager {
     //4)
     async updateProduct(id, product) {
         const readJson = await fs.readFile(this.path, 'utf-8');
-        const arrayForProds = JSON.parse(readJson);
+        let arrayForProds = JSON.parse(readJson);
 
         const requiredFields = [
             title,
@@ -143,7 +138,7 @@ class ProductManager {
     //5)
     async deleteProduct(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
-        const arrayForProds = JSON.parse(readJson);
+        let arrayForProds = JSON.parse(readJson);
         //El id no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
         const product = arrayForProds.find(prod => prod.id == id);
 
@@ -159,7 +154,7 @@ class ProductManager {
 
 
 class Product {
-    constructor(title, description, category, thumbnail, price, stock, code, id, status) {
+    constructor(title, description, category, thumbnail, price, stock, code, id) {
         this.title = title;
         this.description = description;
         this.category = category;
@@ -168,7 +163,7 @@ class Product {
         this.stock = stock;
         this.code = code;
         this.id = id;
-        this.status = true;
+        this.status = "disponible";
     }
 
     /*

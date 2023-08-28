@@ -44,30 +44,35 @@
         <button type="submit">Eliminar</button>
 </form>
 
+
+
+<!--Tabla donde muestro los productos en tiempo real-->
 <table id="productsTable">
     <thead>
         <tr>
-            <th scope="col">ID</th>
+            <th scope="col">Estado</th>
             <th scope="col">Título</th>
             <th scope="col">Descripción</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Precio</th>
-            <th scope="col">Thumbnail</th>
-            <th scope="col">Código</th>
             <th scope="col">Stock</th>
-            <th scope="col">Estado</th>
+            <th scope="col">Código</th>
+            <th scope="col">ID</th>
         </tr>
     </thead>
     <tbody>
         {{#each products}}
         <tr>
-            <td>{{this.id}}</td>
+            <td>{{this.status}}</td>
             <td>{{this.title}}</td>
             <td>{{this.description}}</td>
-            <td>{{this.price}}</td>
+            <td>{{this.category}}</td>
             <td>{{this.thumbnail}}</td>
-            <td>{{this.code}}</td>
+            <td>{{this.price}}</td>
             <td>{{this.stock}}</td>
-            <td>{{this.status}}</td>
+            <td>{{this.code}}</td>
+            <td>{{this.id}}</td>
         </tr>
         {{/each}}
     </tbody>

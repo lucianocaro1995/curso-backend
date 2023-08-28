@@ -51,7 +51,7 @@ socket.on('products-data', (products) => {
         products.forEach(product => {
             tableContent += `
                 <tr>
-                    <td>${product.id}</td>
+                    <td>${product.status}</td>
                     <td>${product.title}</td>
                     <td>${product.description}</td>
                     <td>${product.category}</td>
@@ -59,7 +59,7 @@ socket.on('products-data', (products) => {
                     <td>${product.price}</td>
                     <td>${product.stock}</td>
                     <td>${product.code}</td>
-                    <td>${product.status}</td>
+                    <td>${product.id}</td>
                 </tr>
             `;
         });
