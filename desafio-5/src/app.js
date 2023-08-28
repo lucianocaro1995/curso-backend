@@ -62,16 +62,22 @@ const upload = multer({ storage: storage })
 
 
 
-//Servidor Socket.io
+//Declaro la variable para el servidor Socket.io
 const io = new Server(serverExpress)
 //Establezco la conexión con el servidor Socket.io
 //Socket.io sirve para enviar datos y eventos desde un cliente a un servidor (o entre diferentes clientes) en una aplicación web en tiempo real
 //Sintaxis: se utiliza socket.on y socket.emit
 //Sintaxis de socket.emit: socket.emit('nombreEvento', variable);
 io.on('connection', (socket) => {
-    console.log('servidor de socket io conectado')
+    console.log('Servidor de socket io conectado')
 
-    //Agrega un producto y envía la lista actualizada al cliente
+    //Obtiene los productos y envía la lista actualizada en el cliente. Esto lo uso en "home.js"
+    socket.on('update-products', async () => {
+        const products = await manager.getProducts();
+        socket.emit('products-data', products);
+    });
+
+    //Agrega un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
     socket.on('nuevoProducto', async (nuevoProd) => {
         const { title, description, category, thumbnail, price, stock, code } = nuevoProd;
         await manager.addProduct(title, description, category, thumbnail, price, stock, code);
@@ -79,18 +85,13 @@ io.on('connection', (socket) => {
         socket.emit('products-data', products);
     })
 
-    //Obtiene los productos y envía la lista actualizada en el cliente
-    socket.on('update-products', async () => {
-        const products = await manager.getProducts();
-        socket.emit('products-data', products);
-    });
-
-    //Elimina un producto y envía la lista actualizada al cliente
+    //Elimina un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
     socket.on('remove-product', async (id) => {
         await manager.deleteProduct(id);
         const products = await manager.getProducts();
         socket.emit('products-data', products);
-    })
+        console.log('Producto eliminado exitosamente');
+    });
 })
 
 

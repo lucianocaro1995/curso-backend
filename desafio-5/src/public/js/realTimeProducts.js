@@ -11,34 +11,20 @@ addForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const datForm = new FormData(e.target); // Genera un objeto iterador
     const prod = Object.fromEntries(datForm); // Convierte el objeto iterable en un objeto simple
-    console.log(prod);
-
-    try {
-        await socket.emit('nuevoProducto', prod);
-        await socket.emit('update-products');
-        console.log('Producto agregado exitosamente');
-        e.target.reset();
-    } catch (error) {
-        console.error('No se pudo agregar el producto:', error);
-    }
+    await socket.emit('nuevoProducto', prod);
+    await socket.emit('update-products');
+    e.target.reset();
 });
 
 
 
-//POR QUÉ NO ME APARECE EN LA CONSOLA DEL NAVEGADOR QUE NO SE ENCONTRÓ EL ID CUANDO INGRESO UN ID QUE NO EXISTE?!
 //Código para eliminar un producto
 removeform.addEventListener('submit', async (e) => {
     e.preventDefault();
     const id = removeform.elements["id"].value;
-
-    try {
-        await socket.emit('remove-product', id);
-        await socket.emit('update-products');
-        console.log('Producto eliminado exitosamente');
-        e.target.reset();
-    } catch (error) {
-        console.error('No se encontró un producto con ese ID:', error);
-    }
+    await socket.emit('remove-product', id);
+    await socket.emit('update-products');
+    e.target.reset();
 });
 
 

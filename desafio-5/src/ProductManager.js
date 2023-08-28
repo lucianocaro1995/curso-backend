@@ -18,12 +18,7 @@ class ProductManager {
     async getProducts() {
         const readJson = await fs.readFile(this.path, 'utf-8');
         const arrayForProds = JSON.parse(readJson);
-
-        if (arrayForProds) {
-            return arrayForProds;
-        } else {
-            console.log("No se encontraron los productos");
-        }
+        return arrayForProds;
     }
 
     //2)
@@ -40,8 +35,6 @@ class ProductManager {
     }
 
     //3)
-    //En este método puedo pasarle los campos de Product como parámetro
-    //O también puedo no pasarle ningún parámetro y que quede "async addProduct() {" y llamar a una nueva instancia de Product más abajo
     async addProduct(title, description, category, thumbnail, price, stock, code) {
         try {
             //Leer el archivo JSON
@@ -63,14 +56,12 @@ class ProductManager {
 
             if (missingField) {
                 console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
-                return;
             }
 
             //Verificar si el código ya existe en la lista de productos
             const codeExists = arrayForProds.some(prod => prod.code === code);
             if (codeExists) {
                 console.log("Ya existe un producto con ese código");
-                return;
             }
 
             //Generar un nuevo ID único
@@ -98,7 +89,7 @@ class ProductManager {
             await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
             console.log("Producto agregado exitosamente.");
         } catch (error) {
-            console.log("Error al agregar el producto:", error);
+            console.log("Error al agregar el producto");
         }
     }
 
@@ -139,7 +130,7 @@ class ProductManager {
     async deleteProduct(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
         let arrayForProds = JSON.parse(readJson);
-        //El id no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
+        //El "eliminar producto" no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
         const product = arrayForProds.find(prod => prod.id == id);
 
         if (product) {

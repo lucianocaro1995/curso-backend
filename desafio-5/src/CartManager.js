@@ -20,15 +20,7 @@ class CartManager {
     async createCart() {
         try {
             const readJson = await fs.readFile(this.path, 'utf-8');
-            let arrayForCarts = [];
-            try {
-                arrayForCarts = JSON.parse(readJson);
-                if (!Array.isArray(arrayForCarts)) {
-                    arrayForCarts = [];
-                }
-            } catch (parseError) {
-                console.log("El JSON no contiene un array, se creará uno");
-            }
+            let arrayForCarts = JSON.parse(readJson);
             
             //Creo una nueva instancia de la clase Cart para poder usar el método generateId en esta clase
             const findNextId = Cart.generateId(arrayForCarts);
@@ -39,7 +31,7 @@ class CartManager {
             console.log("Carrito creado exitosamente");
             return newCart;
         } catch (error) {
-            console.log("No se pudo crear un nuevo carrito", error);
+            console.log("No se pudo crear un nuevo carrito");
         }
     }
 
