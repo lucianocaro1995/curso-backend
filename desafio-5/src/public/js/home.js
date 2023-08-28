@@ -1,10 +1,10 @@
-const socket = io.connect('http://localhost:8080')
-const form = document.getElementById('idForm')
-const botonProds = document.getElementById('botonProductos')
+//Este código es Javascript con Socket.io
+
+const socket = io.connect('http://localhost:8080');
 
 
 
-//Muestro los productos en esta tabla, pero no en tiempo real
+//Muestro los productos en esta tabla. Debo refrescar la página para ver nuevos productos agregados, no es en tiempo real
 socket.on('products-data', (products) => {
     const tableBody = document.querySelector("#productsTable tbody");
     let tableContent = '';
@@ -12,13 +12,14 @@ socket.on('products-data', (products) => {
         products.forEach(product => {
             tableContent += `
                 <tr>
-                    <td>${product.id}</td>
                     <td>${product.title}</td>
                     <td>${product.description}</td>
-                    <td>${product.price}</td>
+                    <td>${product.category}</td>
                     <td>${product.thumbnail}</td>
-                    <td>${product.code}</td>
+                    <td>${product.price}</td>
                     <td>${product.stock}</td>
+                    <td>${product.code}</td>
+                    <td>${product.id}</td>
                     <td>${product.status}</td>
                 </tr>
             `;
@@ -29,5 +30,5 @@ socket.on('products-data', (products) => {
     tableBody.innerHTML = tableContent;
 });
 
-//Iniciar la solicitud de datos de productos
+//Solicitar la actualización de los productos al cargar la página
 socket.emit('update-products');

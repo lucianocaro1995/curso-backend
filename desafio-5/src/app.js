@@ -68,14 +68,13 @@ const io = new Server(serverExpress)
 //Socket.io sirve para enviar datos y eventos desde un cliente a un servidor (o entre diferentes clientes) en una aplicación web en tiempo real
 //Sintaxis: se utiliza socket.on y socket.emit
 //Sintaxis de socket.emit: socket.emit('nombreEvento', variable);
-//TODO este código io.on es para "realTimeProducts" ya que esa va a ser nuestra ruta que se pueda ver en tiempo real
 io.on('connection', (socket) => {
     console.log('servidor de socket io conectado')
 
     //Agrega un producto y envía la lista actualizada al cliente
     socket.on('nuevoProducto', async (nuevoProd) => {
-        const { title, description, price, thumbnail, code, stock } = nuevoProd;
-        await manager.addProduct(title, description, price, thumbnail, code, stock);
+        const { title, description, category, thumbnail, price, stock, code } = nuevoProd;
+        await manager.addProduct(title, description, category, thumbnail, price, stock, code);
         const products = await manager.getProducts();
         socket.emit('products-data', products);
     })

@@ -43,15 +43,15 @@ class ProductManager {
     async addProduct(title, description, category, thumbnail, price, stock, code) {
         try {
             //Leer el archivo JSON y parsear su contenido
+            const readJson = await fs.readFile(this.path, 'utf-8')
             let arrayForProds = [];
             try {
-                const readJson = await fs.readFile(this.path, 'utf-8');
                 arrayForProds = JSON.parse(readJson);
                 if (!Array.isArray(arrayForProds)) {
                     arrayForProds = [];
                 }
             } catch (parseError) {
-                console.log("El JSON no contiene un array, se creará uno");
+                console.log("El JSON no contiene un array válido:", parseError);
             }
 
             //Verificar si todos los campos requeridos tienen valores
@@ -73,7 +73,7 @@ class ProductManager {
             }
 
             //Verificar si el código ya existe en la lista de productos
-            const codeExists = arrayForProds.some(prod => prod.code === code);
+            const codeExists = arrayForProds.some(prod => prod.code == code);
             if (codeExists) {
                 console.log("Ya existe un producto con ese código");
                 return;
@@ -128,7 +128,7 @@ class ProductManager {
             console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
         }
 
-        const indice = arrayForProds.findIndex(prod => prod.id === id);
+        const indice = arrayForProds.findIndex(prod => prod.id == id);
         if (indice !== -1) {
             const productId = arrayForProds[indice].id;
             const updatedProduct = { ...product, id: productId };
@@ -144,7 +144,7 @@ class ProductManager {
     async deleteProduct(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
         const arrayForProds = JSON.parse(readJson);
-        //Increíble pero real: el id no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
+        //El id no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
         const product = arrayForProds.find(prod => prod.id == id);
 
         if (product) {
@@ -159,7 +159,7 @@ class ProductManager {
 
 
 class Product {
-    constructor(title, description, category, thumbnail, price, stock, code, status) {
+    constructor(title, description, category, thumbnail, price, stock, code, id, status) {
         this.title = title;
         this.description = description;
         this.category = category;
@@ -167,7 +167,8 @@ class Product {
         this.price = price;
         this.stock = stock;
         this.code = code;
-        this.status = status;
+        this.id = id;
+        this.status = true;
     }
 
     /*
