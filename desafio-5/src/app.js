@@ -65,8 +65,8 @@ const upload = multer({ storage: storage })
 //Servidor Socket.io
 const io = new Server(serverExpress)
 //Establezco la conexión con el servidor Socket.io
-//Websockets sirve para enviar datos y eventos desde un cliente a un servidor (o entre diferentes clientes) en una aplicación web en tiempo real
-//Sintaxis de websockets: se utiliza socket.on y socket.emit
+//Socket.io sirve para enviar datos y eventos desde un cliente a un servidor (o entre diferentes clientes) en una aplicación web en tiempo real
+//Sintaxis: se utiliza socket.on y socket.emit
 //Sintaxis de socket.emit: socket.emit('nombreEvento', variable);
 //TODO este código io.on es para "realTimeProducts" ya que esa va a ser nuestra ruta que se pueda ver en tiempo real
 io.on('connection', (socket) => {
@@ -88,7 +88,6 @@ io.on('connection', (socket) => {
 
     //Elimina un producto y envía la lista actualizada al cliente
     socket.on('remove-product', async (id) => {
-        console.log("inicio remove socket")
         await manager.deleteProduct(id);
         const products = await manager.getProducts();
         socket.emit('products-data', products);
