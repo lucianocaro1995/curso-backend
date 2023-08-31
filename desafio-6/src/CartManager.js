@@ -66,9 +66,9 @@ class CartManager {
 
 
 class Cart {
-    constructor(id) {
+    constructor(id, products = []) {
         this.id = id;
-        this.products = [];
+        this.products = products;
     }
 
     static generateId(allCarts) {

@@ -37,7 +37,7 @@ class ProductManager {
         if (product) {
             return product;
         } else {
-            console.log("No existe un producto con ese Código");
+            console.log("No existe un producto con ese código");
             return false;
         }
     }
@@ -49,7 +49,7 @@ class ProductManager {
             let arrayForProds = JSON.parse(readJson);
 
             const requiredFields = [title, description, category, thumbnail, price, stock, code];
-            const missingField = requiredFields.find(field => [field]);
+            const missingField = requiredFields.find(field => !field);
             if (missingField) {
                 console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
                 return false;
@@ -82,7 +82,6 @@ class ProductManager {
 
             const requiredFields = ['title', 'description', 'category', 'thumbnail', 'price', 'stock', 'code'];
             const missingField = requiredFields.find(field => !(field in updatedFields));
-
             if (missingField) {
                 console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
                 return false;
