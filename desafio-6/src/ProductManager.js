@@ -47,34 +47,24 @@ class ProductManager {
         try {
             const readJson = await fs.readFile(this.path, 'utf-8');
             let arrayForProds = JSON.parse(readJson);
-    
-            const requiredFields = [
-                title,
-                description,
-                category,
-                thumbnail,
-                price,
-                stock,
-                code,
-            ];
-    
-            const missingField = requiredFields.find(field => !field);
-    
+
+            const requiredFields = [title, description, category, thumbnail, price, stock, code];
+            const missingField = requiredFields.find(field => [field]);
             if (missingField) {
                 console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
                 return false;
             }
-    
+
             const codeExists = arrayForProds.some(prod => prod.code === code);
             if (codeExists) {
                 console.log("Ya existe un producto con ese código");
                 return false;
             }
-    
+
             const newId = Product.generateId(arrayForProds);
             const newProduct = new Product(title, description, category, thumbnail, price, stock, code, newId);
             arrayForProds.push(newProduct);
-    
+
             await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
             console.log("Producto agregado exitosamente");
             return true;
@@ -85,37 +75,35 @@ class ProductManager {
     }
 
     //5)
-    async updateProduct(id, product) {
-        const readJson = await fs.readFile(this.path, 'utf-8');
-        let arrayForProds = JSON.parse(readJson);
+    async updateProduct(id, updatedFields) {
+        try {
+            const readJson = await fs.readFile(this.path, 'utf-8');
+            let arrayForProds = JSON.parse(readJson);
 
-        const requiredFields = [
-            title,
-            description,
-            category,
-            thumbnail,
-            price,
-            stock,
-            code,
-        ];
+            const requiredFields = ['title', 'description', 'category', 'thumbnail', 'price', 'stock', 'code'];
+            const missingField = requiredFields.find(field => !(field in updatedFields));
 
-        const missingField = requiredFields.find(field => !product[field]);
+            if (missingField) {
+                console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
+                return false;
+            }
 
-        if (missingField) {
-            console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
-            return false;
-        }
+            const index = arrayForProds.findIndex(prod => prod.id == id);
 
-        const indice = arrayForProds.findIndex(prod => prod.id == id);
-        if (indice !== -1) {
-            const productId = arrayForProds[indice].id;
-            const updatedProduct = { ...product, id: productId };
-            arrayForProds[indice] = updatedProduct;
-            await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
-            console.log("Producto actualizado");
-            return true;
-        } else {
-            console.log("No existe un producto con ese ID");
+            if (index !== -1) {
+                const productId = arrayForProds[index].id;
+                const updatedProduct = { ...arrayForProds[index], ...updatedFields, id: productId };
+                arrayForProds[index] = updatedProduct;
+
+                await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
+                console.log("Producto actualizado");
+                return true;
+            } else {
+                console.log("No existe un producto con ese ID");
+                return false;
+            }
+        } catch (error) {
+            console.log("Error al actualizar el producto");
             return false;
         }
     }
@@ -137,7 +125,6 @@ class ProductManager {
         }
     }
 }
-
 
 
 
