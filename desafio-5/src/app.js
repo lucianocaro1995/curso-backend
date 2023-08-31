@@ -71,27 +71,59 @@ const io = new Server(serverExpress)
 io.on('connection', (socket) => {
     console.log('Servidor de socket io conectado')
 
-    //Obtiene los productos y envía la lista actualizada en el cliente. Esto lo uso en "home.js"
-    socket.on('update-products', async () => {
+
+
+    //1) Obtiene los productos y envía la lista actualizada en el cliente. Esto lo uso en ambas páginas, "home.js" y "realTimeProducts.js"
+    socket.on('actualizarProductos', async () => {
         const products = await manager.getProducts();
         socket.emit('products-data', products);
     });
 
-    //Agrega un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
+
+
+    //2) Agrega un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
+    //La verificación de completar todos los campos existentes no tengo que hacerla sobre la consola, porque el navegador ya obliga al cliente a rellenar todos los campos
     socket.on('nuevoProducto', async (nuevoProd) => {
         const { title, description, category, thumbnail, price, stock, code } = nuevoProd;
-        await manager.addProduct(title, description, category, thumbnail, price, stock, code);
-        const products = await manager.getProducts();
-        socket.emit('products-data', products);
-    })
 
-    //Elimina un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
-    socket.on('remove-product', async (id) => {
-        await manager.deleteProduct(id);
-        const products = await manager.getProducts();
-        socket.emit('products-data', products);
-        console.log('Producto eliminado exitosamente');
+        const codeAlreadyExists = await manager.getProductByCode(code);
+        if (codeAlreadyExists) {
+            socket.emit('code-exists', 'Ya existe un producto con ese código');
+            return;
+        }
+
+        try {
+            await manager.addProduct(title, description, category, thumbnail, price, stock, code);
+            const products = await manager.getProducts();
+            socket.emit('products-data', products);
+            socket.emit('product-added', 'Producto agregado exitosamente');
+        } catch (error) {
+            socket.emit('product-add-error', 'Error al agregar producto');
+            console.error(error);
+        }
     });
+
+
+
+    //3) Elimina un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
+    socket.on('eliminarProducto', async (id) => {
+        try {
+            const idNotFound = await manager.deleteProduct(id);
+            
+            if (idNotFound) {
+                socket.emit('product-removed', 'Producto eliminado exitosamente');
+            } else {
+                socket.emit('product-not-found', 'No existe un producto con ese ID');
+            }
+            
+            const products = await manager.getProducts();
+            socket.emit('products-data', products);
+        } catch (error) {
+            socket.emit('product-remove-error', 'Error al eliminar producto');
+            console.error(error);
+        }
+    });
+    
 })
 
 

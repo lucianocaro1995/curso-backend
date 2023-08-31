@@ -1,32 +1,33 @@
-<!--Este código es HTML con handlebars-->
+<!--Este código es HTML agregando handlebars-->
 <!--La única diferencia es que handlebars permite utilizar plantillas con llaves. Como puse en el main-->
 <!--Este archivo hace de mi body en el endpoint "localhost:8080/realtimeproducts"-->
+
 
 
 <!--Formulario donde agrego los campos requeridos y agrego un producto-->
 <h1>Crear Nuevo Producto</h1>
 <form id="addForm">
 
-    <label for="title">Title</label>
-    <input type="text" required name="title">
+    <label for="title-addform">Title</label>
+    <input type="text" required name="title" id="title-addform">
 
-    <label for="description">Description</label>
-    <input type="text" required name="description">
+    <label for="description-addform">Description</label>
+    <input type="text" required name="description" id="description-addform">
 
-    <label for="category">Category</label>
-    <input type="text" required name="category">
+    <label for="category-addform">Category</label>
+    <input type="text" required name="category" id="category-addform">
 
-    <label for="thumbnail">Thumbnail</label>
-    <input type="text" required name="thumbnail">
+    <label for="thumbnail-addform">Thumbnail</label>
+    <input type="text" required name="thumbnail" id="thumbnail-addform">
 
-    <label for="price">Price</label>
-    <input type="number" required name="price">
+    <label for="price-addform">Price</label>
+    <input type="number" required name="price" id="price-addform">
 
-    <label for="stock">Stock</label>
-    <input type="number" required name="stock">
+    <label for="stock-addform">Stock</label>
+    <input type="number" required name="stock" id="stock-addform">
 
-    <label for="code">Code</label>
-    <input type="text" required name="code">
+    <label for="code-addform">Code</label>
+    <input type="text" required name="code" id="code-addform">
 
     <button type="submit">Enviar</button>
 
@@ -39,7 +40,7 @@
 <form id="removeForm">
 
         <label for="id">Id</label>
-        <input type="number" required name="id">
+        <input type="number" required name="id" id="id-removeform">
     
         <button type="submit">Eliminar</button>
 </form>
@@ -62,6 +63,7 @@
         </tr>
     </thead>
     <tbody>
+        <!--Uso de Handlebars para iterar a través de los productos-->
         {{#each products}}
         <tr>
             <td>{{this.status}}</td>

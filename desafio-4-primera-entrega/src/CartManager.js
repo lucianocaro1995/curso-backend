@@ -6,6 +6,7 @@ import { promises as fs } from "fs";
 class CartManager {
     constructor(filePath) {
         this.path = filePath;
+        //Al poner este método como argumento del constructor, no necesito ponerlo en los demás métodos para que cumpla su función
         this.loadCartsFromFile();
     }
 

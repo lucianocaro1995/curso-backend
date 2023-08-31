@@ -5,8 +5,8 @@
         "description": "1",
         "category": "1",
         "thumbnail": "1",
-        "price": "1",
-        "stock": "1",
+        "price": 1,
+        "stock": 1,
         "code": "1",
         "id": 1
     },
@@ -16,20 +16,9 @@
         "description": "2",
         "category": "2",
         "thumbnail": "2",
-        "price": "2",
-        "stock": "2",
+        "price": 2,
+        "stock": 2,
         "code": "2",
         "id": 2
-    },
-    {
-        "status": "disponible",
-        "title": "3",
-        "description": "3",
-        "category": "3",
-        "thumbnail": "3",
-        "price": "3",
-        "stock": "3",
-        "code": "3",
-        "id": 3
     }
 ]

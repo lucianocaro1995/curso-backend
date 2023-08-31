@@ -32,6 +32,7 @@ class CartManager {
             return newCart;
         } catch (error) {
             console.log("No se pudo crear un nuevo carrito");
+            return false;
         }
     }
 
@@ -51,8 +52,10 @@ class CartManager {
             arrayForCarts[chosenCartIndex] = chosenCart;
             await fs.writeFile(this.path, JSON.stringify(arrayForCarts, null, 4));
             console.log("Producto agregado al carrito");
+            return true;
         } else {
             console.log("No existe un carrito con ese ID");
+            return false;
         }
     }
 
@@ -67,6 +70,7 @@ class CartManager {
             return chosenCart;
         } else {
             console.log("No existe un carrito con ese ID");
+            return false;
         }
     }
 }
