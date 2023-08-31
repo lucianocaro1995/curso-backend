@@ -1,10 +1,3 @@
-/*
-ACLARACIÓN IMPORTANTE:
-En este desafío, en el ProductManager.js realizo todo lo necesario en los métodos de la clase ProductManager
-Mientras que en CartManager.js creo métodos en la clase Cart y luego los utilizo en la clase CartManager
-Logro esto llamando a una nueva instancia de Cart en los métodos de CartManager
-Hice los dos archivos de diferente forma para practicar y ver las diferencias
-*/
 import { promises as fs } from "fs";
 
 
@@ -52,11 +45,9 @@ class ProductManager {
     //4)
     async addProduct(title, description, category, thumbnail, price, stock, code) {
         try {
-            //Leer el archivo JSON
             const readJson = await fs.readFile(this.path, 'utf-8');
             let arrayForProds = JSON.parse(readJson);
-
-            //Verificar si todos los campos requeridos tienen valores
+    
             const requiredFields = [
                 title,
                 description,
@@ -66,44 +57,24 @@ class ProductManager {
                 stock,
                 code,
             ];
-
+    
             const missingField = requiredFields.find(field => !field);
-
+    
             if (missingField) {
                 console.log("Todos los campos son obligatorios. El campo que te falta completar es: " + missingField);
-                //Si el error está sobre el try, conviene agregarle un return para que no aparezca en consola "Producto agregado exitosamente"
                 return false;
             }
-
-            //Verificar si el código ya existe en la lista de productos
+    
             const codeExists = arrayForProds.some(prod => prod.code === code);
             if (codeExists) {
                 console.log("Ya existe un producto con ese código");
                 return false;
             }
-
-            //Generar un nuevo ID único
-            const existingIds = new Set(arrayForProds.map(prod => prod.id));
-            let newId = 1;
-            while (existingIds.has(newId)) {
-                newId++;
-            }
-
-            //Crear un nuevo producto y agregarlo al array de productos
-            const newProduct = {
-                status: "disponible",
-                title,
-                description,
-                category,
-                thumbnail,
-                price,
-                stock,
-                code,
-                id: newId
-            };
+    
+            const newId = Product.generateId(arrayForProds);
+            const newProduct = new Product(title, description, category, thumbnail, price, stock, code, newId);
             arrayForProds.push(newProduct);
-
-            //Guardar el nuevo array de productos en el archivo JSON
+    
             await fs.writeFile(this.path, JSON.stringify(arrayForProds, null, 4));
             console.log("Producto agregado exitosamente");
             return true;
@@ -153,8 +124,6 @@ class ProductManager {
     async deleteProduct(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
         let arrayForProds = JSON.parse(readJson);
-        //El "eliminar producto" no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
-        //De todas maneras conviene parsear en realTimeProducts.js que es mi cliente, y poner 3 iguales acá
         const productIndex = arrayForProds.findIndex(prod => prod.id === id);
 
         if (productIndex !== -1) {
@@ -185,15 +154,15 @@ class Product {
         this.id = id;
     }
 
-    /*
-    El id autoincrementable ahora lo borré de acá. Puedo hacerlo de 2 formas:
-    1) Una forma de hacerlo es no crearlo acá (como hice ahora), sino directamente incrementar el id en el método "addProduct"
-    2) También puedo crear un método en esta clase para manejar el id y utilizar su función en otra clase
-    ¿Cómo lo hago? Llamo a la clase Product en el método que lo necesite, en este caso "addProduct" de la clase ProductManager
-    Se lo llama creando una nueva instancia, es decir "new Product"
-    Explicación:
-    Se crea una nueva instancia de una clase(Product) para poder utilizar sus métodos en otra clase(ProductManager)
-    */
+    static generateId(allProducts) {
+        let newId = 1;
+        const existingIds = new Set(allProducts.map(product => product.id));
+
+        while (existingIds.has(newId)) {
+            newId++;
+        }
+        return newId;
+    }
 }
 
 

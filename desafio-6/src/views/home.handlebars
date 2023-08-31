@@ -1,0 +1,34 @@
+<!--Lista de productos -->
+<table id="productsTable" class="table">
+    <!--Parte superior de la tabla con los nombres de los campos -->
+    <thead>
+        <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Thumbnail</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Código</th>
+            <th scope="col">ID</th>
+            <th scope="col">Estado</th>
+        </tr>
+    </thead>
+    
+    <!--Cuerpo de la tabla con los productos agregados a la lista -->
+    <tbody>
+        {{#each products}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.category}}</td>
+            <td>{{this.thumbnail}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.stock}}</td>
+            <td>{{this.code}}</td>
+            <td>{{this.id}}</td>
+            <td>{{this.status}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
