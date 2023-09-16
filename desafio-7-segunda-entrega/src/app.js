@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 //Rutas
 import userRouter from './routes/users.routes.js'
 import productRouter from './routes/products.routes.js'
-import cartRouter from './routes/cart.routes.js'
+import cartRouter from './routes/carts.routes.js'
 import messageRouter from './routes/messages.routes.js'
 //Servidor
 const PORT = 4000
