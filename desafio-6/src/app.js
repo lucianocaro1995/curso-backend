@@ -16,6 +16,7 @@ Esta dependencia nos permite manipular las colecciones y documentos de la base d
 */
 
 
+
 //Módulos
 import express from 'express';
 import mongoose from 'mongoose';
@@ -39,7 +40,7 @@ Debo conseguir 2 cosas para lograr la conexión:
 Para conseguir la URL hago lo siguiente:
 En la página web de MongoDB Atlas clickeo la pestaña "database", clickeo "Connect", clickeo "Drivers" y se me va a abrir una ventana con mi URL
 Debo modificar esa URL, pongo mi contraseña donde dice "<password>". Luego de entregar este desafío cambio la contraseña
-En la línea 43 pego mi URL y contraseña
+En la línea 52 pego mi URL y contraseña
 
 ¿Cómo cambio mi contraseña?
 Clickeo la pestaña "Database Access" y clickeo "Edit" sobre el usuario que desea cambiarle la contraseña
