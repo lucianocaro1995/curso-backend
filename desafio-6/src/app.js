@@ -55,8 +55,6 @@ mongoose.connect('mongodb+srv://luciano1995:primerabasededatos@cluster0.azwpqmd.
 
 
 
-
-
 //Para probar las rutas y cruds(create, read, update o up, delete) en Postman:
 app.use(express.json())
 

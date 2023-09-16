@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { productModel } from "../dao/models/products.models.js"; //Para poder utilizar la colección products
+import { ProductManager } from "../dao/models/productsManager.js"
 
 
 
@@ -7,13 +7,12 @@ const productRouter = Router()
 
 //1) GET
 productRouter.get('/', async (req, res) => {
-    const { limit } = req.query
-
+    const {limit} = req.query
     try {
-        const prods = await productModel.find().limit(limit)
-        res.status(200).send({ respuesta: 'OK', mensaje: prods })
-    } catch (error) {
-        res.status(400).send({ respuesta: 'Error en consultar productos', mensaje: error })
+        const products = await ProductManager.findAll(limit);
+        res.status(200).send({respuesta: 'ok', mensaje: products})
+    } catch (error){
+        res.status(400).send({respuesta: 'Error', mensaje: error})
     }
 })
 
@@ -22,7 +21,7 @@ productRouter.get('/:id', async (req, res) => {
     const { id } = req.params
 
     try {
-        const prod = await productModel.findById(id)
+        const prod = await ProductManager.findById(id)
         if (prod)
             res.status(200).send({ respuesta: 'OK', mensaje: prod })
         else
@@ -36,26 +35,26 @@ productRouter.get('/:id', async (req, res) => {
 productRouter.post('/', async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {
-        const prod = await productModel.create({ title, description, stock, code, price, category })
+        const prod = await ProductManager.create({ title, description, stock, code, price, category })
         res.status(200).send({ respuesta: 'OK', mensaje: prod })
     } catch (error) {
         res.status(400).send({ respuesta: 'Error en crear productos', mensaje: error })
     }
 })
 
-//4) PUT(id)
-productRouter.put('/:id', async (req, res) => {
-    const { id } = req.params
-    const { title, description, stock, status, code, price, category } = req.body
-
+//4) PUT(code)
+productRouter.put('/:code', async (req, res) => {
+    const { code } = req.params;
+    console.log(code)
+    const {title, description, price, status, stock, category} = req.body
     try {
-        const prod = await productModel.findByIdAndUpdate(id, { title, description, stock, status, code, price, category })
-        if (prod)
-            res.status(200).send({ respuesta: 'OK', mensaje: 'Producto actualizado' })
-        else
-            res.status(404).send({ respuesta: 'Error en actualizar Producto', mensaje: 'Not Found' })
-    } catch (error) {
-        res.status(400).send({ respuesta: 'Error en actualizar producto', mensaje: error })
+        const product = await ProductManager.updateByCode({ code: code }, { title, description, price, code,  stock, category, status});
+        if (product)
+            res.status(200).send({respuesta: 'ok product updated', mensaje: product})
+        else 
+            res.status(404).send({respuesta: 'Error', mensaje: 'Product not found'})
+    } catch (error){
+        res.status(400).send({respuesta: 'Error updating product', mensaje: error})
     }
 })
 
@@ -64,7 +63,7 @@ productRouter.delete('/:id', async (req, res) => {
     const { id } = req.params
 
     try {
-        const prod = await productModel.findByIdAndDelete(id)
+        const prod = await ProductManager.deleteById(id)
         if (prod)
             res.status(200).send({ respuesta: 'OK', mensaje: 'Producto eliminado' })
         else

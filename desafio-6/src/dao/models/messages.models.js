@@ -1,21 +1,28 @@
-//Acá yo estoy creando mi colección que va a aparecer en MongoDB Atlas con el nombre messages
+//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre messages
 
 
 
 import { Schema, model } from "mongoose";
 
+const getCurrentDate = () => {
+    const now = new Date();
+    const offset = now.getTimezoneOffset() * 60000; //Conversión a milisegundos
+    const localDate = new Date(now.getTime() - offset);
+    return localDate.toISOString().slice(0, 16).replace("T", " ");
+};
+
 const messagesSchema = new Schema({
-    email: {
+    email:{
         type: String,
         required: true
     },
-    message: {
+    message:{
         type: String,
         required: true
     },
     postTime: {
-        type: Date,
-        default: Date.now //Devuelve la fecha actual
+        type: String,
+        default: getCurrentDate //Me devuelve algo así: "2023-09-16 14:30"
     }
 })
 

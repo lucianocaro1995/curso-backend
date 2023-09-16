@@ -1,4 +1,4 @@
-//Acá yo estoy creando mi colección que va a aparecer en MongoDB Atlas con el nombre products
+//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre products
 
 
 
