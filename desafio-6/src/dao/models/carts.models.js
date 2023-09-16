@@ -28,11 +28,4 @@ const cartSchema = new Schema({
 }
 )
 
-//Este código configura un middleware que se ejecuta antes de buscar en la colección "carts"
-//La función "populate" reemplaza los ObjectId en el campo "products.id_prod" con los datos reales de los productos relacionados
-//Esto facilita la obtención de información completa de los productos al buscar en los carritos
-cartSchema.pre('findOne', function () {
-    this.populate('products.id_prod')
-})
-
 export const cartModel = model('carts', cartSchema)

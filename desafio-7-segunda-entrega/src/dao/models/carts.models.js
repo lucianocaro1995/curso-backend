@@ -18,6 +18,7 @@ const cartSchema = new Schema({
                 quantity: {
                     type: Number,
                     required: true
+                    //En Postman debo poner {"quantity": 1} para que funcione agregar un producto al carrito
                 }
             }
         ],

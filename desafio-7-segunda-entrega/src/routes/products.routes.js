@@ -32,6 +32,7 @@ productRouter.get('/:id', async (req, res) => {
 })
 
 //3) POST
+//Poner esto en la ruta: localhost:4000/api/products
 productRouter.post('/', async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {

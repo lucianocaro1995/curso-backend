@@ -8,14 +8,32 @@ import { Schema, model } from 'mongoose';
 //El schema va a ser la definición de mi usuario, va a caracterizar a mi usuario
 //Primero trabajamos con usuarios. Luego con products y carts
 const userSchema = new Schema({
-    nombre: String,
-    apellido: String,
-    edad: Number,
+    nombre: {
+        type: String,
+        required: true
+    },
+    apellido: {
+        type: String,
+        required: true,
+        index: true
+        //Me genera un index en la base de datos para los apellidos. ID y email ya tienen un index por tener atributo unique
+        //Los index o índices se utilizan para mejorar las consultas y encontrar fácilmente el elemento solicitado
+        //¿Cómo encuentro los índices de mis colecciones?
+        //Clickeo database, clickeo browse collections, clickeo sobre alguna colección creada, clickeo indexes
+    },
+    edad: {
+        type: Number,
+        required: true
+    },
     email: {
         type: String,
-        unique: true //Que salte un error si intento crear 2 usuarios con el mismo mail
+        unique: true, //Que salte un error si intento crear 2 usuarios con el mismo mail
+        required: true
     },
-    password: String
+    password: {
+        type: String,
+        required: true
+    }
 })
 
 //Exporto una constante llamada userModel que va a ser igual al modelo de mi base de datos

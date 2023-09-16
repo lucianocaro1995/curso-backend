@@ -41,6 +41,7 @@ cartRouter.post('/', async (req, res) => {
 })
 
 //4) POST(cid/pid)
+//Poner esto en la ruta: localhost:4000/api/carts/650634b0d93e20a1d2393a17/products/650636d0d3c359de670f30a8
 cartRouter.post('/:cid/products/:pid', async (req, res) =>{
     const {cid, pid} = req.params
     const {quantity} = req.body
