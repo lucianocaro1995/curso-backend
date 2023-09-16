@@ -20,5 +20,16 @@
         "stock": 2,
         "code": "2",
         "id": 2
+    },
+    {
+        "status": true,
+        "title": "3",
+        "description": "3",
+        "category": "3",
+        "thumbnail": "3",
+        "price": 3,
+        "stock": 3,
+        "code": "3",
+        "id": 3
     }
 ]

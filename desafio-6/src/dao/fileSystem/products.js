@@ -88,7 +88,6 @@ class ProductManager {
             }
 
             const index = arrayForProds.findIndex(prod => prod.id == id);
-
             if (index !== -1) {
                 const productId = arrayForProds[index].id;
                 const updatedProduct = { ...arrayForProds[index], ...updatedFields, id: productId };
@@ -129,7 +128,7 @@ class ProductManager {
 
 class Product {
     constructor(title, description, category, thumbnail, price, stock, code, id) {
-        this.status = "disponible";
+        this.status = true;
         this.title = title;
         this.description = description;
         this.category = category;

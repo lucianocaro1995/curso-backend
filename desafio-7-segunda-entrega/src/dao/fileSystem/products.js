@@ -1,8 +1,3 @@
-/*
-ACLARACIÓN IMPORTANTE:
-En este desafío creo métodos en la clase Product y Cart. Luego los utilizo en la clase ProductManager y CartManager
-Logro esto llamando a una nueva instancia de Product y Cart en los métodos de los Manager
-*/
 import { promises as fs } from "fs";
 
 
@@ -115,8 +110,6 @@ class ProductManager {
     async deleteProduct(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
         let arrayForProds = JSON.parse(readJson);
-        //El "eliminar producto" no me funcionaba porque puse 3 iguales en vez de 2. Estar atento a eso
-        //De todas maneras conviene parsear en realTimeProducts.js que es mi cliente, y poner 3 iguales acá
         const productIndex = arrayForProds.findIndex(prod => prod.id === id);
 
         if (productIndex !== -1) {

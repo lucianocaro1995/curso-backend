@@ -51,7 +51,7 @@ class CartManager {
     async getCartById(id) {
         const readJson = await fs.readFile(this.path, 'utf-8');
         const arrayForCarts = JSON.parse(readJson);
-        const chosenCart = arrayForCarts.find(eachCart => Number(eachCart.id) === Number(id));
+        const chosenCart = arrayForCarts.find(cart => cart.id === id);
 
         if (chosenCart) {
             console.log("Mostrando los productos dentro del carrito con id:" + id, chosenCart);

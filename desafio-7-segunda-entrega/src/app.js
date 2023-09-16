@@ -1,7 +1,7 @@
 /*
 IMPORTANTE: Debo ejecutar "npm run dev" en la terminal para poder ver el localhost:4000 en mi navegador
 
-Para este desafío sólo vamos a practicar en utilizar una base de datos, así que nos vamos a olvidar de las vistas (handlebars) y public (css-img-js) por el momento
+Para este desafío sólo vamos a practicar en utilizar una base de datos, así que nos vamos a olvidar de las vistas (handlebars) por el momento
 Hay 2 formas de utilizar una base de datos: local y remota
 
 Para utilizar una base de datos local vamos a la página de Mongo e instalamos 2 herramientas:
@@ -22,7 +22,7 @@ import mongoose from 'mongoose';
 //Rutas
 import userRouter from './routes/users.routes.js'
 import productRouter from './routes/products.routes.js'
-import cartRouter from './routes/carts.routes.js'
+import cartRouter from './routes/cart.routes.js'
 import messageRouter from './routes/messages.routes.js'
 //Servidor
 const PORT = 4000

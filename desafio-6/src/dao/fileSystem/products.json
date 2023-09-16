@@ -1,6 +1,6 @@
 [
     {
-        "status": "disponible",
+        "status": true,
         "title": "1",
         "description": "1",
         "category": "1",
@@ -11,7 +11,7 @@
         "id": 1
     },
     {
-        "status": "disponible",
+        "status": true,
         "title": "2",
         "description": "2",
         "category": "2",
@@ -22,7 +22,7 @@
         "id": 2
     },
     {
-        "status": "disponible",
+        "status": true,
         "title": "3",
         "description": "3",
         "category": "3",
