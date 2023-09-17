@@ -4,6 +4,8 @@
 
 //Genero los datos que yo necesito para trabajar con mi usuario
 import { Schema, model } from 'mongoose';
+//Paginación
+import paginate from 'mongoose-paginate-v2'
 
 //El schema va a ser la definición de mi usuario, va a caracterizar a mi usuario
 //Primero trabajamos con usuarios. Luego con products y carts
@@ -35,6 +37,9 @@ const userSchema = new Schema({
         required: true
     }
 })
+
+//Implementar el método paginate en el schema
+userSchema.plugin(paginate)
 
 //Exporto una constante llamada userModel que va a ser igual al modelo de mi base de datos
 //Parámetro 1: nombre de la colección - Parámetro 2: Schema

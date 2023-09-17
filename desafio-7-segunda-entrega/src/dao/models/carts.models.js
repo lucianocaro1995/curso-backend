@@ -29,9 +29,16 @@ const cartSchema = new Schema({
 }
 )
 
-//Este código configura un middleware que se ejecuta antes de buscar en la colección "carts"
-//La función "populate" reemplaza los ObjectId en el campo "products.id_prod" con los datos reales de los productos relacionados
-//Esto facilita la obtención de información completa de los productos al buscar en los carritos
+/*
+Populate:
+Esto se puede hacer en app.js o directamente acá en el schema (para que el método findOne siempre trabaje con populate)
+Cuando me hagan una consulta findOne, me va a ejecutar el populate
+Con el método find no va a funcionar porque no le puse que trabaje con populate, pero con findOne sí
+
+¿Para qué se utiliza populate?
+Facilita la obtención de información completa de los productos al buscar en los carritos
+Entonces cada vez que hagan referencia al método findOne para buscar toda la información que tiene mi carrito, también te traigo la información de los productos
+*/
 cartSchema.pre('findOne', function () {
     this.populate('products.id_prod')
 })
