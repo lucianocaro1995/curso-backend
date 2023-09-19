@@ -2,7 +2,7 @@
 
 
 
-import { productModel } from "./products.models.js";
+import { productModel } from "../models/products.models.js";
 
 class ProductDAO {
     async findAll(limit) {

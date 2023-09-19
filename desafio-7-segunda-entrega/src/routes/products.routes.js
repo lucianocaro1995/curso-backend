@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ProductManager } from "../dao/models/productsManager.js"
+import { ProductManager } from "../dao/DB/productsManager.js"
 
 
 
@@ -15,7 +15,7 @@ productRouter.get('/', async (req, res) => {
 
         const response = {
             status: "success",
-            payload: result.docs, // Resultado de los productos solicitados
+            payload: result.docs, //Resultado de los productos solicitados
             totalPages: result.totalPages,
             prevPage: result.prevPage,
             nextPage: result.nextPage,

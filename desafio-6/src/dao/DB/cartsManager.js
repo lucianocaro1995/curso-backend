@@ -2,8 +2,8 @@
 
 
 
-import { cartModel } from "./carts.models.js";
-import { productModel } from "./products.models.js";
+import { cartModel } from "../models/carts.models.js";
+import { productModel } from "../models/products.models.js";
 
 class CartDAO {
     async findAll(limit) {

@@ -2,7 +2,7 @@
 
 
 
-import { messageModel } from "./messages.models.js"
+import { messageModel } from "../models/messages.models.js"
 
 class MessageDAO {
     async findAll(limit) {

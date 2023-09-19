@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { MessagesManager } from "../dao/models/messagesManager.js";
+import { MessagesManager } from "../dao/DB/messagesManager.js";
 
 
 

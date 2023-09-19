@@ -1,11 +1,12 @@
 import { Router } from "express"
-import { MessagesManager } from "../dao/models/messagesManager.js";
+import { MessagesManager } from "../dao/DB/messagesManager.js";
 
 
 
 const messageRouter = Router();
 
 //1) GET
+//Poner esto en la ruta: localhost:4000/api/messages
 messageRouter.get('/', async (req, res) => {
     const {limit} = req.query
     try {
@@ -17,6 +18,7 @@ messageRouter.get('/', async (req, res) => {
 })
 
 //2) POST
+//Poner esto en la ruta: localhost:4000/api/messages
 messageRouter.post('/', async (req, res) => {
     const {email, message} = req.body
     try {
