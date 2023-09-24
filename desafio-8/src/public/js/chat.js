@@ -1,10 +1,6 @@
-/*const socket = io()
-
-socket.emit('mensajeConexion', { user: "Francisco", rol: "User" })
-
-socket.on('credencialesConexion', (info) => {
-    console.log(info)
-})*/
+//Los archivos js de esta carpeta los utilizo para la lógica del socket.io
+//Socket.io es una biblioteca de JavaScript que se utiliza para desarrollar aplicaciones web en tiempo real
+//Su principal función es permitir la comunicación bidireccional en tiempo real entre el servidor y el cliente a través de WebSocket, una tecnología que habilita conexiones persistentes y de baja latencia
 
 const socket = io()
 
