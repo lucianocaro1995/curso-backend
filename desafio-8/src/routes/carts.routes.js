@@ -18,7 +18,7 @@ cartRouter.get('/', async (req, res) => {
 })
 
 //2) GET(cid)
-//Poner esto en la ruta: localhost:4000/api/carts/650634b0d93e20a1d2393a17
+//Poner esto en la ruta: localhost:4000/api/carts/cid
 cartRouter.get('/:id', async (req, res) => {
     const {id} = req.params
     try {
@@ -44,7 +44,7 @@ cartRouter.post('/', async (req, res) => {
 })
 
 //4) POST(cid/pid)
-//Poner esto en la ruta: localhost:4000/api/carts/650634b0d93e20a1d2393a17/products/650636d0d3c359de670f30a8
+//Poner esto en la ruta: localhost:4000/api/carts/cid/products/pid
 cartRouter.post('/:cid/products/:pid', async (req, res) =>{
     const {cid, pid} = req.params
     const {quantity} = req.body
@@ -58,7 +58,7 @@ cartRouter.post('/:cid/products/:pid', async (req, res) =>{
 })
 
 //5) PUT(cid)
-//Poner esto en la ruta: localhost:4000/api/carts/650634b0d93e20a1d2393a17
+//Poner esto en la ruta: localhost:4000/api/carts/cid
 cartRouter.put('/:cid', async (req, res) => {
     const { cid } = req.params;
     const productsArray = req.body.products;
@@ -76,7 +76,7 @@ cartRouter.put('/:cid', async (req, res) => {
 })
 
 //6) PUT(cid/pid)
-//Poner esto en la ruta: localhost:4000/api/carts/650634b0d93e20a1d2393a17/products/650636d0d3c359de670f30a8
+//Poner esto en la ruta: localhost:4000/api/carts/cid/products/pid
 cartRouter.put('/:cid/products/:pid', async (req, res) =>{
     const {cid, pid} = req.params
     const {quantity} = req.body
@@ -90,7 +90,7 @@ cartRouter.put('/:cid/products/:pid', async (req, res) =>{
 })
 
 //7) DELETE(cid)
-//Poner esto en la ruta: localhost:4000/api/carts/650634b0d93e20a1d2393a17
+//Poner esto en la ruta: localhost:4000/api/carts/cid
 cartRouter.delete('/:id', async (req, res) => {
     const {id} = req.params
     try {
@@ -102,7 +102,7 @@ cartRouter.delete('/:id', async (req, res) => {
 })
 
 //8) DELETE(cid/pid)
-//Poner esto en la ruta: localhost:4000/api/carts/650634b0d93e20a1d2393a17/products/650636d0d3c359de670f30a8
+//Poner esto en la ruta: localhost:4000/api/carts/cid/products/pid
 cartRouter.delete('/:cid/products/:pid', async (req, res) =>{
     const {cid, pid} = req.params
     

@@ -33,7 +33,7 @@ productRouter.get('/', async (req, res) => {
 })
 
 //2) GET(id)
-//Poner esto en la ruta: localhost:4000/api/products/650636d0d3c359de670f30a8
+//Poner esto en la ruta: localhost:4000/api/products/id
 productRouter.get('/:id', async (req, res) => {
     const { id } = req.params
 
@@ -61,7 +61,7 @@ productRouter.post('/', async (req, res) => {
 })
 
 //4) PUT(code)
-//Poner esto en la ruta: localhost:4000/api/products/PROD001
+//Poner esto en la ruta: localhost:4000/api/products/code
 productRouter.put('/:code', async (req, res) => {
     const { code } = req.params;
     console.log(code)
@@ -78,7 +78,7 @@ productRouter.put('/:code', async (req, res) => {
 })
 
 //5) DELETE(id)
-//Poner esto en la ruta: localhost:4000/api/products/650636d0d3c359de670f30a8
+//Poner esto en la ruta: localhost:4000/api/products/id
 productRouter.delete('/:id', async (req, res) => {
     const { id } = req.params
 

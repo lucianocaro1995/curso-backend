@@ -4,10 +4,6 @@ import { userModel } from "../dao/models/users.models.js";
 
 
 const userRouter = Router()
-/*
-Los métodos CRUD(Create, Read, Update o Put, Delete) ya existen en Mongoose
-Entonces esta vez no tenemos que crearlos nosotros mismos como hacíamos en CartManager.js y ProductManager.js
-*/
 
 //1) GET
 //Poner esto en la ruta: localhost:4000/api/users
@@ -21,9 +17,7 @@ userRouter.get('/', async (req, res) => {
 })
 
 //2) GET(id)
-//Envío el ID como string y Mongoose me lo transforma a ObjectId para poder buscarlo en la base de datos
-//El ID lo crea automáticamente Mongodb
-//Poner esto en la ruta: localhost:4000/api/users/64ffc8ccbfab666b1860a251
+//Poner esto en la ruta: localhost:4000/api/users/id
 userRouter.get('/:id', async (req, res) => {
     const { id } = req.params
     try {
@@ -40,11 +34,11 @@ userRouter.get('/:id', async (req, res) => {
 
 //3) POST
 //Poner esto en la ruta: localhost:4000/api/users
+//Agregar por una única vez el parámetro rol, luego de password, para crear al usuario que va a ser admin
 userRouter.post('/', async (req, res) => {
-    //Consulto del body lo que yo necesito para crear a mi usuario
-    const { nombre, apellido, edad, email, password } = req.body
+    const { first_name, last_name, age, email, password } = req.body
     try {
-        const respuesta = await userModel.create({ nombre, apellido, edad, email, password })
+        const respuesta = await userModel.create({ first_name, last_name, age, email, password })
         res.status(200).send({ respuesta: 'OK', mensaje: respuesta })
     } catch (error) {
         res.status(400).send({ respuesta: 'Error en crear usuario', mensaje: error })
@@ -52,8 +46,7 @@ userRouter.post('/', async (req, res) => {
 })
 
 //4) PUT(id)
-//Poner esto en la ruta: localhost:4000/api/users/64ffc8ccbfab666b1860a251
-//Debo modificarle algún atributo en Postman cuando ejecute Put, y luego ejecuto Get para ver los cambios
+//Poner esto en la ruta: localhost:4000/api/users/id
 userRouter.put('/:id', async (req, res) => {
     const { id } = req.params
     const { nombre, apellido, edad, email, password } = req.body
@@ -70,7 +63,7 @@ userRouter.put('/:id', async (req, res) => {
 })
 
 //5) DELETE(id)
-//Poner esto en la ruta: localhost:4000/api/users/64ffc8ccbfab666b1860a251
+//Poner esto en la ruta: localhost:4000/api/users/id
 userRouter.delete('/:id', async (req, res) => {
     const { id } = req.params
     try {
