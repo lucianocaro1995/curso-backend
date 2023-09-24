@@ -1,7 +1,11 @@
-## Comentarios generales:
+## Comentarios:
 
 1. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver el localhost:4000 en mi navegador
 2. En este desafío sí utilizamos las vistas(handlebars) a diferencia de los 2 desafíos anteriores
+3. El usuario principal que es admin está por defecto en el formulario de /login. Nosotros debemos crear por una única vez a ese usuario admin
+4. Solo /signup es una ruta accesible sin tener el /login hecho previamente
+5. Una vez hecho el login se genera un sesión en MongoDB Atlas y una cookie de forma local, en cada renderización se evalua la existencia de ambos elementos y que corresponda al mismo usuario
+6. La ruta /realTimeProducts sólo está disponible para los usarios cuyo rol es admin, en caso de que no se pueda autenticar se envía a la ruta /home o al /login según el caso
 
 
 
@@ -43,9 +47,9 @@
     Duración de la sesión en la base de datos en segundos, no en milisegundos
 
 5. resave: false <br>
-    Resave permite mantener la sesión activa en caso de que la sesión se mantenga inactiva
+    Resave permite mantener la sesión activa en caso de que la sesión se mantenga inactiva <br>
     Si se deja en false, la sesión morirá en caso de que exista cierto tiempo de inactividad
 
-6. saveUninitialized: false
-    SaveUninitialized permite guardar cualquier sesión aún cuando el objeto de sesión no tenga nada por contener
+6. saveUninitialized: false <br>
+    SaveUninitialized permite guardar cualquier sesión aún cuando el objeto de sesión no tenga nada por contener <br>
     Si se deja en false, la sesión no se guardará si el objeto de sesión está vacío al final de la consulta

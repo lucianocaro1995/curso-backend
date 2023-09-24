@@ -43,13 +43,13 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 
-//4) Configuración del servidor Express:
+//4) Configuración del servidor Express
 //Middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser(process.env.SIGNED_COOKIE))
 app.use(session({
-    //Configuración de sesiones en la base de datos MongoDB
+    //Configuración de sesiones en la base de datos
     store: MongoStore.create({
         mongoUrl: process.env.MONGO_URL,
         mongoOptions: {
@@ -67,64 +67,64 @@ app.use(session({
 
 
 
-//5) Configuración de handlebars:
+//5) Configuración de handlebars
 //Middlewares
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', path.resolve(__dirname, './views'))
-app.use('/static', express.static(path.join(__dirname, '/public')))
-app.use('/realTimeProducts', express.static(path.join(__dirname, '/public')))
-app.use('/chat', express.static(path.join(__dirname, '/public')))
+app.use('/home', express.static(path.join(__dirname, '/public')))
+app.use('/realtimeproducts', express.static(path.join(__dirname, '/public')))
 app.use('/login', express.static(path.join(__dirname, '/public')))
-app.use('/signIn', express.static(path.join(__dirname, '/public')))
-app.use('/logOut', express.static(path.join(__dirname, '/public')))
+app.use('/logout', express.static(path.join(__dirname, '/public')))
+app.use('/signup', express.static(path.join(__dirname, '/public')))
+app.use('/chat', express.static(path.join(__dirname, '/public')))
 
 //Unión entre HTML(handlebars) y public(JS, CSS, IMG)
+app.get('/home', (req, res) => {
+    res.render('home', {
+        css: "style.css",
+        js: "home.js",
+        title: "Home"
+    })
+})
+
 app.get('/realTimeProducts', (req, res) => {
     res.render('realTimeProducts', {
+        css: "style.css",
         js: "realTimeProducts.js",
-        css: "style.css",
         title: "Products",
-    })
-})
-
-app.get('/static', (req, res) => {
-    res.render('home', {
-        js: "home.js",
-        css: "style.css",
-        title: "Home",
-    })
-})
-
-app.get('/chat', (req, res) => {
-    res.render('chat', {
-        globalCss: 'style.css',
-        title: 'Chat Socket.io',
-        js: 'chat.js',
     })
 })
 
 app.get('/login', (req, res) => {
     res.render('login', {
+        css: "style.css",
         js: "login.js",
-        css: "style.css",
-        title: "Login",
+        title: "Login"
     })
 })
 
-app.get('/signIn', (req, res) => {
-    res.render('signIn', {
-        js: "signIn.js",
+app.get('/logout', (req, res) => {
+    res.render('logout', {
         css: "style.css",
-        title: "SignIn",
+        js: "logout.js",
+        title: "Logout"
     })
 })
 
-app.get('/logOut', (req, res) => {
-    res.render('logOut', {
-        js: "logOut.js",
+app.get('/signup', (req, res) => {
+    res.render('signup', {
         css: "style.css",
-        title: "LogOut",
+        js: "signup.js",
+        title: "Signup"
+    })
+})
+
+app.get('/chat', (req, res) => {
+    res.render('chat', {
+        css: "style.css",
+        js: "chat.js",
+        title: "Chat Socket.io"
     })
 })
 
