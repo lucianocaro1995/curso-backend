@@ -5,8 +5,8 @@
 //Genero los datos que yo necesito para trabajar con mi usuario
 import { Schema, model } from 'mongoose';
 
-//El schema va a ser la definición de mi usuario, va a caracterizar a mi usuario
-//Primero trabajamos con usuarios. Luego con products y carts
+//Un schema/esquema en Mongoose especifica qué campos deben estar presentes en un documento
+//También qué tipo de datos deben contener esos campos y otras restricciones (como si un campo es requerido o si tiene un valor predeterminado)
 const userSchema = new Schema({
     nombre: String,
     apellido: String,

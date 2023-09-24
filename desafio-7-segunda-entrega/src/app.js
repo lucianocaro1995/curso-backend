@@ -24,26 +24,25 @@ const app = express()
 
 //Conectar Mongodb Atlas con mi aplicación de visual studio code:
 mongoose.connect('mongodb+srv://luciano1995:primerabasededatos@cluster0.azwpqmd.mongodb.net/?retryWrites=true&w=majority')
-    .then(() => {
-        console.log('Base de datos conectada');
-        
-        /*
-        Paginate:
-        En los paréntesis agregamos 2 filtros al paginate, separados con llaves
-        Primer filtro: es un filtro de algún atributo, como el password de los usuarios
-        Segundo filtro: tiene varias opciones a elegir, acá puse limit y sort (hay también page, populate, projection, etc)
-        
-        Parámetro limit: la cantidad de elementos por página
-        Parámetro sort: ordenar los resultados de forma ascendente o descendente según un atributo dado, como la edad
-        */
-        return userModel.paginate({ password: '1234' }, { limit: 20, page: 1, sort: { edad: 'asc' } });
-    })
-    .then((resultado) => {
-        console.log(resultado);
-    })
-    .catch((error) => {
-        console.log('Error al conectarse a la base de datos:', error);
-    });
+.then(async () => {
+    console.log('Base de datos conectada');
+
+    /*
+    Paginate:
+    En los paréntesis agregamos 2 filtros al paginate, separados con llaves
+    Primer filtro: es un filtro de algún atributo, como el password de los usuarios
+    Segundo filtro: tiene varias opciones a elegir, acá puse limit y sort (hay también page, populate, projection, etc)
+
+    Parámetro limit: la cantidad de elementos por página
+    Parámetro sort: ordenar los resultados de forma ascendente o descendente según un atributo dado, como la edad
+    */
+    const resultado = await userModel.paginate({ password: '1234' }, { limit: 20, page: 1, sort: { edad: 'asc' } });
+    console.log(resultado);
+})
+.catch((error) => {
+    console.log('Error al conectarse a la base de datos:', error);
+});
+
 
 
 
