@@ -19,9 +19,9 @@ import cartRouter from "./routes/carts.routes.js"
 import messageRouter from "./routes/messages.routes.js"
 import sessionRouter from './routes/sessions.routes.js'
 //Modelos
-import { cartModel } from "./dao/models/carts.models.js"
-import { productModel } from './dao/models/products.models.js'
+import { cartModel } from './dao/models/carts.models.js'
 import { messageModel } from './dao/models/messages.models.js'
+import { productModel } from './dao/models/products.models.js'
 import { userModel } from './dao/models/users.models.js'
 
 
@@ -167,31 +167,31 @@ const io = new Server(serverExpress);
 
 io.on('connection', (socket)=> {
     console.log('servidor de socket io conectado')
-
+    //chat.js
     socket.on('add-message', async ({email, mensaje}) => {
         console.log(mensaje)
         await messageModel.create({email: email, message: mensaje})
         const messages = await messageModel.find();
         socket.emit('show-messages', messages);
     })
-
-    socket.on('display-inicial', async() =>{
+    //chat.js
+    socket.on('load-chat', async() =>{
         const messages = await messageModel.find();
         socket.emit('show-messages', messages);
     })
-
+    //realTimeProducts.js
     socket.on('add-product', async (nuevoProd) => {
-        const { title, description, price, code, stock, category } = nuevoProd;
-        await productModel.create({title: title, description: description, price: price, code: code, stock: stock, category: category});
+        const { title, description, category, thumbnail, price, stock, code } = nuevoProd;
+        await productModel.create(title, description, category, thumbnail, price, stock, code);
         const products = await productModel.find();
         socket.emit('show-products', products);
     })
-
+    //realTimeProducts.js - home.js
     socket.on('update-products', async () => {
         const products = await productModel.find();
         socket.emit('show-products', products);
     });
-
+    //realTimeProducts.js
     socket.on('remove-product', async ({ code }) => {
         try {
             console.log("inicio remove socket")
@@ -201,6 +201,11 @@ io.on('connection', (socket)=> {
         }catch (error) {
             console.error('Error eliminando producto:', error);
         }
+    })
+    //signup.js
+    socket.on('new-user', async (newUser) => {
+        const user = await userModel.create(newUser)
+        socket.emit('registered', user)
     })
 })
 

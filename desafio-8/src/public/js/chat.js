@@ -3,48 +3,40 @@
 //Su principal función es permitir la comunicación bidireccional en tiempo real entre el servidor y el cliente a través de WebSocket, una tecnología que habilita conexiones persistentes y de baja latencia
 
 
-const socket = io();
 
-const btnChat = document.getElementById("botonChat");
+const socket = io.connect('http://localhost:4000')
+const botonChat = document.getElementById("botonChat");
 const parrafosMensajes = document.getElementById("parrafosMensajes");
 const valueInput = document.getElementById("chatBox");
-
 let userEmail;
+
+
 
 Swal.fire({
     title: "Ingrese un usuario",
     text: "Por favor ingrese su usuario",
     input: "text",
     inputValidator: (valor) => {
-        return !valor && "ingrese un usuario correctamente";
+        return !valor && "Ingrese un usuario correctamente";
     },
     allowOutsideClick: false,
 }).then((resultado) => {
     userEmail = resultado.value;
-    socket.emit("loadChats");
+    socket.emit("load-chat"); //Evento personalizado load-chat creado en app.js
 });
 
-btnChat.addEventListener("click", () => {
+botonChat.addEventListener('click', () => {
+    let fechaActual = new Date().toLocaleString()
+
     if (valueInput.value.trim().length > 0) {
-        socket.emit("newMessage", { email: userEmail, message: valueInput.value });
-        valueInput.value = "";
-        socket.on();
+        socket.emit('add-message', { fecha: fechaActual, email: userEmail, mensaje: valueInput.value }) //Evento personalizado add-message creado en app.js
+        valueInput.value = ""
     }
-});
+})
 
-socket.on("showMessages", (arrayMessages) => {
-    parrafosMensajes.innerHTML = "";
-
-    arrayMessages.forEach((element) => {
-        parrafosMensajes.innerHTML += `
-            <li class="liParrafosMensajes">
-                <div class="spanContainer">
-                    <p>${element.postTime}</p>
-                    <p>${element.email}:</p>
-                </div>
-            <p class="userMessage">${element.message}
-            </p>
-            </li>
-        `;
-    });
-});
+socket.on("show-messages", (arrayMensajes) => { //Evento personalizado show-messages creado en app.js
+    parrafosMensajes.innerHTML = ""
+    arrayMensajes.forEach(mensaje => {
+        parrafosMensajes.innerHTML += `<p>${mensaje.fecha}: el usuario ${mensaje.user} escribio ${mensaje.mensaje} </p>`
+    })
+})
