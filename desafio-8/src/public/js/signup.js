@@ -43,6 +43,7 @@ form.addEventListener('submit', async (event) => {
             }
         });
 
+        //Se genera una solicitud POST usando fetch
         const response = await fetch('/api/users', {
             method: 'POST',
             headers: {

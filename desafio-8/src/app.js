@@ -85,7 +85,7 @@ app.get('/chat', (req, res) => {
     res.render('chat', {
         css: "style.css",
         js: "chat.js",
-        title: "Chat Socket.io"
+        title: "Chat"
     })
 })
 
@@ -172,14 +172,13 @@ io.on('connection', (socket)=> {
     })
     //signup.js
     socket.on("new-user", async (user) => {
-        const { name, surname, age, email, password } = user;
+        const { first_name, last_name, age, email, password } = user;
         try {
-            if (!name || !surname || !age || !email || !password) {
+            if (!first_name || !last_name || !age || !email || !password) {
                 socket.emit("user", { success: false, message: "Todos los campos son obligatorios." });
                 return;
             }
-            //Código para crear el usuario en la base de datos
-            await userModel.create({ name, surname, age, email, password });
+            await userModel.create({ first_name, last_name, age, email, password });
             socket.emit("user", { success: true });
         } catch (error) {
             console.error('Hubo un error al registrar el usuario:', error);
