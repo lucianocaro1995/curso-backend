@@ -22,7 +22,6 @@ import sessionRouter from './routes/sessions.routes.js'
 import { cartModel } from './dao/models/carts.models.js'
 import { messageModel } from './dao/models/messages.models.js'
 import { productModel } from './dao/models/products.models.js'
-import { userModel } from './dao/models/users.models.js'
 
 
 
