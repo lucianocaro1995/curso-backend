@@ -2,15 +2,17 @@
 
 
 
-//Evento para acceder utilizando email y contraseña
-document.getElementById('loginForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
+const login = document.getElementById("loginForm")
 
+
+
+login.addEventListener('submit', async function(event) {
+    event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-
     try {
+        //Se genera una solicitud POST usando fetch
         const response = await fetch('/api/sessions/login', {
             method: 'POST',
             headers: {
@@ -21,12 +23,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                 password: password
             })
         });
-
         const data = await response.json();
-        //console.log(data)
 
+        //Si el login es exitoso te redirecciona a /home, sino te muestra error
         if (response.status === 200 || response.status === 401 ) {
-            console.log("llego hasta aca")
             window.location.href = "/home";
         } else {
             Swal.fire({

@@ -4,6 +4,8 @@
 
 const form = document.getElementById('signupForm');
 
+
+
 //Evento para registrarse
 form.addEventListener('submit', async (event) => {
     event.preventDefault(); //Evita que el formulario se envíe de la manera tradicional
@@ -26,9 +28,9 @@ form.addEventListener('submit', async (event) => {
             },
             body: JSON.stringify(formData)
         });
-
         const data = await response.json();
 
+        //Si el registro es exitoso te redirecciona a /login, sino te muestra error
         if (response.ok) {
             try {
                 Swal.fire({
@@ -49,7 +51,6 @@ form.addEventListener('submit', async (event) => {
                     confirmButtonText: 'Ok'
                 });
             }
-            // window.location.href = '/rutaDondeQuieresRedirigir'; 
         } else {
             alert(`Error: ${data.mensaje}`);
         }
