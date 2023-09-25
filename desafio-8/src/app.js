@@ -19,6 +19,7 @@ import cartRouter from "./routes/carts.routes.js"
 import messageRouter from "./routes/messages.routes.js"
 import sessionRouter from './routes/sessions.routes.js'
 //Modelos
+import { cartModel } from "./dao/models/carts.models.js"
 import { productModel } from './dao/models/products.models.js'
 import { messageModel } from './dao/models/messages.models.js'
 import { userModel } from './dao/models/users.models.js'
@@ -79,20 +80,43 @@ app.use('/logout', express.static(path.join(__dirname, '/public')))
 app.use('/signup', express.static(path.join(__dirname, '/public')))
 app.use('/chat', express.static(path.join(__dirname, '/public')))
 
-//Unión entre HTML(handlebars) y public(JS, CSS, IMG)
+//Unión entre handlebars(HTML) y public(JS, CSS, IMG)
+app.get('/carts/:cid', async (req, res) => { //Este es distinto a los demás porque hay que obtener el cid
+    try {
+        const cid = req.params.cid;
+        const cart = await cartModel.findById(cid);
+        console.log(cart);
+
+        if (cart) {
+            res.render('carts', {
+                products: cart.products,
+                css: "style.css",
+                js: "carts.js", //No lo creé todavía
+                title: "Carrito"
+            });
+        } else {
+            res.status(404).send({ respuesta: 'Error', mensaje: 'Carrito no encontrado' });
+        }
+
+    } catch (error) {
+        res.status(400).send({ respuesta: 'Error', mensaje: error.message });
+    }
+});
+
+
+app.get('/chat', (req, res) => {
+    res.render('chat', {
+        css: "style.css",
+        js: "chat.js",
+        title: "Chat Socket.io"
+    })
+})
+
 app.get('/home', (req, res) => {
     res.render('home', {
         css: "style.css",
         js: "home.js",
         title: "Home"
-    })
-})
-
-app.get('/realTimeProducts', (req, res) => {
-    res.render('realTimeProducts', {
-        css: "style.css",
-        js: "realTimeProducts.js",
-        title: "Products",
     })
 })
 
@@ -112,19 +136,27 @@ app.get('/logout', (req, res) => {
     })
 })
 
+app.get('/products', (req, res) => {
+    res.render('products', {
+        css: "style.css",
+        js: "products.js",
+        title: "Products",
+    })
+})
+
+app.get('/realtimeproducts', (req, res) => {
+    res.render('realTimeProducts', {
+        css: "style.css",
+        js: "realTimeProducts.js",
+        title: "Products",
+    })
+})
+
 app.get('/signup', (req, res) => {
     res.render('signup', {
         css: "style.css",
         js: "signup.js",
         title: "Signup"
-    })
-})
-
-app.get('/chat', (req, res) => {
-    res.render('chat', {
-        css: "style.css",
-        js: "chat.js",
-        title: "Chat Socket.io"
     })
 })
 
@@ -169,11 +201,6 @@ io.on('connection', (socket)=> {
         }catch (error) {
             console.error('Error eliminando producto:', error);
         }
-    })
-
-    socket.on('nuevoUsuario', async (newUser) => {
-        const user = await userModel.create(newUser)
-        socket.emit('registrado', user)
     })
 })
 
