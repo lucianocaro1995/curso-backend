@@ -181,7 +181,7 @@ io.on('connection', (socket)=> {
     //realTimeProducts.js
     socket.on('add-product', async (nuevoProd) => {
         const { title, description, category, thumbnail, price, stock, code } = nuevoProd;
-        await productModel.create(title, description, category, thumbnail, price, stock, code);
+        await productModel.create({title: title, description: description, category: category, thumbnail: thumbnail, price: price, stock: stock, code: code});
         const products = await productModel.find();
         socket.emit('show-products', products);
     })
@@ -193,7 +193,6 @@ io.on('connection', (socket)=> {
     //realTimeProducts.js
     socket.on('remove-product', async ({ code }) => {
         try {
-            console.log("inicio remove socket")
             await productModel.deleteOne({ code: code });
             const products = await productModel.find();
             socket.emit('show-products', products);
