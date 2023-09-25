@@ -1,19 +1,60 @@
-//Los archivos js de esta carpeta los utilizo para la lógica del socket.io
-//Socket.io es una biblioteca de JavaScript que se utiliza para desarrollar aplicaciones web en tiempo real
-//Su principal función es permitir la comunicación bidireccional en tiempo real entre el servidor y el cliente a través de WebSocket, una tecnología que habilita conexiones persistentes y de baja latencia
+//Acá no utilizo socket.io
 
 
-const socket = io.connect('http://localhost:4000')
-const form = document.getElementById("form")
 
-form.addEventListener('submit', (e) =>{
-    e.preventDefault()
-    const datForm = new FormData(e.target)
-    const newUser = Object.fromEntries(datForm)
-    console.log(newUser)
-    socket.emit("new-user", newUser) //Evento personalizado new-user creado en app.js
-})
+const form = document.getElementById('signupForm');
 
-socket.on('registered', (user) =>{ //Evento personalizado registered creado en app.js
-    window.location.href = '/login'
-})
+//Evento para registrarse
+form.addEventListener('submit', async (event) => {
+    event.preventDefault(); //Evita que el formulario se envíe de la manera tradicional
+
+    //Recoge los valores del formulario
+    const formData = {
+        first_name: e.target.first_name.value,
+        last_name: e.target.last_name.value,
+        age: parseInt(e.target.age.value),
+        email: e.target.email.value,
+        password: e.target.password.value
+    };
+
+    try {
+        //Se genera una solicitud POST usando fetch
+        const response = await fetch('/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            try {
+                Swal.fire({
+                    title: '¡Registro exitoso!',
+                    text: 'Serás redirigido a la página de inicio de sesión.',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/login';
+                    }
+                });
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Ha ocurrido un error durante el registro.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            }
+            // window.location.href = '/rutaDondeQuieresRedirigir'; 
+        } else {
+            alert(`Error: ${data.mensaje}`);
+        }
+    } catch (error) {
+        console.error('Hubo un error al registrar el usuario:', error);
+        alert('Hubo un error al registrar. Inténtalo nuevamente.');
+    }
+});

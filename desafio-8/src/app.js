@@ -202,11 +202,6 @@ io.on('connection', (socket)=> {
             console.error('Error eliminando producto:', error);
         }
     })
-    //signup.js
-    socket.on('new-user', async (newUser) => {
-        const user = await userModel.create(newUser)
-        socket.emit('registered', user)
-    })
 })
 
 

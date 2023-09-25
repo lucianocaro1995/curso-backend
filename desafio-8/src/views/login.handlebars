@@ -4,13 +4,19 @@
 
 
 
-<h1>Acceder</h1>
-<form id="login">
-    <label for="email">Email</label>
-    <input type="text" required name="email">
+<h1>Iniciar sesión</h1>
+<div>
+    <form id="loginForm">
+        <label for="email">Email</label>
+        <input type="text" id="email" placeholder="Ingrese su email" required>
 
-    <label for="password">Password</label>
-    <input type="text" required name="password">
+        <label for="password">Password</label>
+        <input type="text" id="password" placeholder="Ingrese su contraseña" required>
 
-    <button type="submit">Enviar</button>
-</form><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+<div>
+    <p>¿Aún no tenés una cuenta? <a href="/signup">Regístrate aquí</a></p>
+</div>
