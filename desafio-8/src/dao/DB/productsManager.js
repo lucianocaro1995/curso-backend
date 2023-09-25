@@ -7,23 +7,25 @@ import { productModel } from "../models/products.models.js";
 
 class ProductDAO {
     //1)
+    //Utilizo 4 parámetros en este método: limit, page, category y sort
     async findAll(limit, page, category, sort) {
         let query = {};
-        if (category) {
-            query.category = category;
-        }
-
+        //Limit y page: devuelvo 10 productos por cada página
         let options = {
             limit: parseInt(limit) || 10,
             page: parseInt(page) || 1
         };
-
+        //Category: si se indica una categoría, devuelvo los productos que pertenezcan a esa categoría
+        if (category) {
+            query.category = category;
+        }
+        //Sort: es ascendente, así que se ordenan los productos de menor a mayor precio
         if (sort) {
             options.sort = {
                 price: sort === 'asc' ? 1 : -1
             };
         }
-
+        //Paginate: lo utilizo para buscar productos con filtros, paginación y ordenamiento personalizado según los parámetros proporcionados
         return await productModel.paginate(query, options);
     }
 

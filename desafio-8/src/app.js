@@ -2,16 +2,17 @@
 //Módulos
 import 'dotenv/config'
 import express from 'express'
-import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
+//MongoDB
+import mongoose from 'mongoose'
 import MongoStore from 'connect-mongo'
-//Vistas
-import { engine } from 'express-handlebars';
-import { Server }  from 'socket.io'
 //Path
-import { __dirname } from './path.js';
-import path from 'path';
+import path from 'path'
+import { __dirname } from './path.js'
+//Vistas
+import { engine } from 'express-handlebars'
+import { Server } from 'socket.io'
 //Rutas
 import userRouter from './routes/users.routes.js'
 import productRouter from './routes/products.routes.js'
@@ -19,9 +20,9 @@ import cartRouter from "./routes/carts.routes.js"
 import messageRouter from "./routes/messages.routes.js"
 import sessionRouter from './routes/sessions.routes.js'
 //Modelos
-import { cartModel } from './dao/models/carts.models.js'
 import { messageModel } from './dao/models/messages.models.js'
 import { productModel } from './dao/models/products.models.js'
+import { userModel } from './dao/models/users.models.js'
 
 
 
@@ -72,37 +73,14 @@ app.use(session({
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', path.resolve(__dirname, './views'))
+app.use('/chat', express.static(path.join(__dirname, '/public')))
 app.use('/home', express.static(path.join(__dirname, '/public')))
-app.use('/realtimeproducts', express.static(path.join(__dirname, '/public')))
 app.use('/login', express.static(path.join(__dirname, '/public')))
 app.use('/logout', express.static(path.join(__dirname, '/public')))
+app.use('/realtimeproducts', express.static(path.join(__dirname, '/public')))
 app.use('/signup', express.static(path.join(__dirname, '/public')))
-app.use('/chat', express.static(path.join(__dirname, '/public')))
 
 //Unión entre handlebars(HTML) y public(JS, CSS, IMG)
-app.get('/carts/:cid', async (req, res) => { //Este es distinto a los demás porque hay que obtener el cid
-    try {
-        const cid = req.params.cid;
-        const cart = await cartModel.findById(cid);
-        console.log(cart);
-
-        if (cart) {
-            res.render('carts', {
-                products: cart.products,
-                css: "style.css",
-                js: "carts.js", //No lo creé todavía
-                title: "Carrito"
-            });
-        } else {
-            res.status(404).send({ respuesta: 'Error', mensaje: 'Carrito no encontrado' });
-        }
-
-    } catch (error) {
-        res.status(400).send({ respuesta: 'Error', mensaje: error.message });
-    }
-});
-
-
 app.get('/chat', (req, res) => {
     res.render('chat', {
         css: "style.css",
@@ -132,14 +110,6 @@ app.get('/logout', (req, res) => {
         css: "style.css",
         js: "logout.js",
         title: "Logout"
-    })
-})
-
-app.get('/products', (req, res) => {
-    res.render('products', {
-        css: "style.css",
-        js: "products.js",
-        title: "Products",
     })
 })
 
@@ -196,10 +166,26 @@ io.on('connection', (socket)=> {
             await productModel.deleteOne({ code: code });
             const products = await productModel.find();
             socket.emit('show-products', products);
-        }catch (error) {
-            console.error('Error eliminando producto:', error);
+        } catch (error) {
+            console.error('Error al eliminar producto:', error);
         }
     })
+    //signup.js
+    socket.on("new-user", async (user) => {
+        const { name, surname, age, email, password } = user;
+        try {
+            if (!name || !surname || !age || !email || !password) {
+                socket.emit("user", { success: false, message: "Todos los campos son obligatorios." });
+                return;
+            }
+            //Código para crear el usuario en la base de datos
+            await userModel.create({ name, surname, age, email, password });
+            socket.emit("user", { success: true });
+        } catch (error) {
+            console.error('Hubo un error al registrar el usuario:', error);
+            socket.emit("user", { success: false, message: "Hubo un error al registrar el usuario. Inténtalo nuevamente." });
+        }
+    });
 })
 
 

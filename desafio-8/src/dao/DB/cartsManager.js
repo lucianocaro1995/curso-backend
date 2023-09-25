@@ -1,5 +1,6 @@
 //Acá creo métodos que voy a utilizar en "routes"
 //Importante a saber: yo acá utilizo algunos métodos ya creados por Mongoose. Puedo ver todos los métodos que crearon en la página web de Mongoose
+//addOrUpdateProductInCart, removeProductbyId y updateCartWithProducts los creo yo
 
 
 
