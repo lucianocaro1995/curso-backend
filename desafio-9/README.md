@@ -39,7 +39,7 @@ Aquí vamos a generar 2 funciones:
     Sirve para hacer el proceso inverso, desencriptar la contraseña <br>
     passwordSend: contraseña enviada por el usuario, sin encriptar <br>
     passwordBDD: contraseña de la base de datos, la que se guardó encriptada gracias a la primera función <br>
-    compareSync: es para ver si las contraseñas coinciden. Esto devuelve true si coinciden <br>
+    compareSync: es para ver si las contraseñas coinciden. Esto devuelve true si coinciden <br><br>
 
 Para hacer console.log de las 2 funciones:
 
@@ -50,7 +50,7 @@ Para hacer console.log de las 2 funciones:
 3. Segunda función: <br>
     const passwordEnc = createHash('lucianocoderhouse') <br>
     console.log(validatePassword('lucianocoderhouse', passwordEnc)) <br>
-4. Ubicados en la carpeta utils, ingresamos en la terminal node bcrypt.js <br>
+4. Ubicados en la carpeta utils, ingresamos en la terminal node bcrypt.js <br><br>
 
 Para ejecutar de manera local utils: <br>
 Nos paramos en la carpeta utils utilizando cd, e ingresamos node bcrypt.js
