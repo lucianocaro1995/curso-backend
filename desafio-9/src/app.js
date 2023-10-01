@@ -1,15 +1,20 @@
 //1) Imports
-//Módulos
-import 'dotenv/config'
+//Servidor express
 import express from 'express'
-import cookieParser from 'cookie-parser'
 import session from 'express-session'
-//MongoDB
-import mongoose from 'mongoose'
-import MongoStore from 'connect-mongo'
 //Path
 import path from 'path'
 import { __dirname } from './path.js'
+//MongoDB
+import mongoose from 'mongoose'
+import MongoStore from 'connect-mongo'
+//.Env
+import 'dotenv/config'
+//Cookies
+import cookieParser from 'cookie-parser'
+//Passport
+import passport from 'passport'
+import initializePassport from './config/passport.js'
 //Vistas
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io'
@@ -65,6 +70,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+//Middlewares de passport
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 

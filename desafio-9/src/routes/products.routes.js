@@ -6,7 +6,7 @@ import { ProductManager } from "../dao/DB/productsManager.js"
 const productRouter = Router()
 
 //1) GET
-//Poner esto en la ruta: localhost:4000/api/products
+//Poner esto en la ruta: http://localhost:4000/api/products
 productRouter.get('/', async (req, res) => {
     const { limit, page, category, sort } = req.query;
 
@@ -33,7 +33,7 @@ productRouter.get('/', async (req, res) => {
 })
 
 //2) GET(id)
-//Poner esto en la ruta: localhost:4000/api/products/id
+//Poner esto en la ruta: http://localhost:4000/api/products/id
 productRouter.get('/:id', async (req, res) => {
     const { id } = req.params
 
@@ -49,7 +49,7 @@ productRouter.get('/:id', async (req, res) => {
 })
 
 //3) POST
-//Poner esto en la ruta: localhost:4000/api/products
+//Poner esto en la ruta: http://localhost:4000/api/products
 productRouter.post('/', async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {
@@ -61,7 +61,7 @@ productRouter.post('/', async (req, res) => {
 })
 
 //4) PUT(code)
-//Poner esto en la ruta: localhost:4000/api/products/code
+//Poner esto en la ruta: http://localhost:4000/api/products/code
 productRouter.put('/:code', async (req, res) => {
     const { code } = req.params;
     console.log(code)
@@ -78,7 +78,7 @@ productRouter.put('/:code', async (req, res) => {
 })
 
 //5) DELETE(id)
-//Poner esto en la ruta: localhost:4000/api/products/id
+//Poner esto en la ruta: http://localhost:4000/api/products/id
 productRouter.delete('/:id', async (req, res) => {
     const { id } = req.params
 
