@@ -26,7 +26,7 @@
 
 ## Comentarios sobre el archivo "bcrypt.js"
 
-    Aquí vamos a generar 2 funciones:
+Aquí vamos a generar 2 funciones:
 
 1. export const createHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(parseInt(process.env.SALT))) <br>
     Esta recibe una contraseña (la que me ingrese mi usuario) y la devuelve encriptada. Esto me permite a mí poder ingresar una contraseña desde el usuario <br>
@@ -41,7 +41,7 @@
     passwordBDD: contraseña de la base de datos, la que se guardó encriptada gracias a la primera función <br>
     compareSync: es para ver si las contraseñas coinciden. Esto devuelve true si coinciden
 
-    Para hacer console.log de las 2 funciones:
+Para hacer console.log de las 2 funciones:
 
 1. Importo el .env para tener los datos de las contraseñas: <br>
     import 'dotenv/config' <br>
@@ -52,5 +52,5 @@
     console.log(validatePassword('lucianocoderhouse', passwordEnc)) <br>
 4. Ubicados en la carpeta utils, ingresamos en la terminal node bcrypt.js <br><br>
 
-    Para ejecutar de manera local utils: <br>
-    Nos paramos en la carpeta utils utilizando cd, e ingresamos node bcrypt.js
+Para ejecutar de manera local utils: <br>
+Nos paramos en la carpeta utils utilizando cd, e ingresamos node bcrypt.js
