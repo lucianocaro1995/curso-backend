@@ -4,7 +4,9 @@
 2. En este desafío trabajamos autenticación de manera local (ingresar a nuestra aplicación con email y contraseña) y autenticación por terceros (ingresar a nuestra aplicación utilizando github)
 3. Incluimos un archivo "bcrypt.js" para generar un hasheo de contraseña. Nos permite encriptar las contraseñas guardadas en la base de datos
 4. Incluimos un archivo "passport.js" en donde creamos los códigos necesarios para registrarnos y loguearnos
-
+5. No estamos trabajando con vistas(handlebars) en este desafío. Todo probado desde Postman <br>
+    Cuando trabaje con vistas, voy a tener que limpiar código porque tanto en los archivos JS como en "session.routes.js" estoy redirigiendo <br>
+    En "session.routes.js" creamos la lógica para register, login y logout, y también register y login utilizando github <br>
 
 
 ## Dependencias instaladas para este desafío:

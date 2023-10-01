@@ -76,7 +76,7 @@ const initializePassport = () => {
             console.log(profile._json)
             const user = await userModel.findOne({ email: profile._json.email })
             if (user) {
-                done(null, user)
+                done(null, user) //CAMBIADO DE FALSE A USER
             } else {
                 //Elimino los espacios que tengo en el nombre de github: Luciano Caro
                 const nombre_github_sin_espacios = profile._json.name.replace(/\s/g, '');

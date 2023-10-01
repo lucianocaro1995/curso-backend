@@ -45,7 +45,7 @@ socket.emit('update-products'); //Evento personalizado update-products creado en
 window.onload = async() =>{
     response = await fetch('/api/sessions/user')
     user = await response.json()
-    document.getElementById("bienvenido").innerHTML = `Bienvenido ${user.firstName}`
+    document.getElementById("bienvenido").innerHTML = `Bienvenido ${user.first_name}`
     document.getElementById("email").innerHTML = `Email: ${user.email}`
     document.getElementById("age").innerHTML = `Edad: ${user.age}`
 }
