@@ -43,7 +43,7 @@ const initializePassport = () => {
         }))
 
     //2) Estrategia login
-    //Logearse con 2 parámetros: email y contraseña
+    //Loguearse con 2 parámetros: email y contraseña
     passport.use('login', new LocalStrategy(
         { usernameField: 'email' }, async (username, password, done) => {
             try {
@@ -69,7 +69,7 @@ const initializePassport = () => {
         clientSecret: process.env.SECRET_CLIENT,
         callbackURL: process.env.CALLBACK_URL
     }, async (accessToken, refreshToken, profile, done) => {
-        //Consulto los datos del usuario que se quiere logear
+        //Consulto los datos del usuario que se quiere loguear
         try {
             console.log(accessToken)
             console.log(refreshToken)
@@ -95,7 +95,7 @@ const initializePassport = () => {
         }
     }))
 
-    //4) Cuando yo me logeo/accedo, generamos una sesión en la base de datos
+    //4) Cuando yo me logueo/accedo, generamos una sesión en la base de datos
     //Cada sesión debe ser única, esto lo hacemos otorgándole un id único
     passport.serializeUser((user, done) => {
         done(null, user._id)

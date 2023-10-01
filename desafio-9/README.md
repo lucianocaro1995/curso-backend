@@ -3,7 +3,7 @@
 1. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver el localhost:4000 en mi navegador
 2. En este desafío trabajamos autenticación de manera local (ingresar a nuestra aplicación con email y contraseña) y autenticación por terceros (ingresar a nuestra aplicación utilizando github)
 3. Incluimos un archivo "bcrypt.js" para generar un hasheo de contraseña. Nos permite encriptar las contraseñas guardadas en la base de datos
-4. Incluimos un archivo "passport.js" en donde creamos los códigos necesarios para registrarnos y logearnos
+4. Incluimos un archivo "passport.js" en donde creamos los códigos necesarios para registrarnos y loguearnos
 
 
 
@@ -39,7 +39,7 @@ Aquí vamos a generar 2 funciones:
     Sirve para hacer el proceso inverso, desencriptar la contraseña <br>
     passwordSend: contraseña enviada por el usuario, sin encriptar <br>
     passwordBDD: contraseña de la base de datos, la que se guardó encriptada gracias a la primera función <br>
-    compareSync: es para ver si las contraseñas coinciden. Esto devuelve true si coinciden
+    compareSync: es para ver si las contraseñas coinciden. Esto devuelve true si coinciden <br>
 
 Para hacer console.log de las 2 funciones:
 
@@ -50,7 +50,7 @@ Para hacer console.log de las 2 funciones:
 3. Segunda función: <br>
     const passwordEnc = createHash('lucianocoderhouse') <br>
     console.log(validatePassword('lucianocoderhouse', passwordEnc)) <br>
-4. Ubicados en la carpeta utils, ingresamos en la terminal node bcrypt.js <br><br>
+4. Ubicados en la carpeta utils, ingresamos en la terminal node bcrypt.js <br>
 
 Para ejecutar de manera local utils: <br>
 Nos paramos en la carpeta utils utilizando cd, e ingresamos node bcrypt.js
