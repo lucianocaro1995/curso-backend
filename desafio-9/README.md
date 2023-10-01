@@ -1,55 +1,56 @@
 ## Comentarios:
 
 1. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver el localhost:4000 en mi navegador
-2. En este desafío sí utilizamos las vistas(handlebars) a diferencia de los 2 desafíos anteriores
-3. El usuario principal que es admin está por defecto en el formulario de /login. Nosotros debemos crear por una única vez a ese usuario admin
-4. Solo /signup es una ruta accesible sin tener el /login hecho previamente
-5. Una vez hecho el login se genera un sesión en MongoDB Atlas
-6. La ruta /realtimeproducts sólo está disponible para el o los usarios cuyo rol sea admin
+2. En este desafío trabajamos autenticación de manera local (ingresar a nuestra aplicación con email y contraseña) y autenticación por terceros (ingresar a nuestra aplicación utilizando github)
+3. Incluimos un archivo "bcrypt.js" para generar un hasheo de contraseña. Nos permite encriptar las contraseñas guardadas en la base de datos
+4. Incluimos un archivo "passport.js" en donde creamos los códigos necesarios para registrarnos y logearnos
 
 
 
 ## Dependencias instaladas para este desafío:
 
-1. **dotenv**
-   - Instalación: `npm i dotenv`
-   - Nos permite manejar variables de entorno dentro de nuestra aplicación. Sirve para ocultar contraseñas y no subirlas a GitHub <br>
-    Copio toda la URL que escribí en la conexión con MongoDB Atlas y la pego en el archivo ".env". Luego donde estaba la URL pongo "process.env.MONGO_URL" <br>
-    En la versión nueva de Node lo tenemos de forma nativa, pero en esta versión tengo que instalarlo desde la terminal
+1.  **bcrypt**
+   - Instalación: `npm i bcrypt`
+   - Nos permite encriptar las contraseñas guardadas en la base de datos
 
-2. **cookie-parser**
-   - Instalación: `npm i cookie-parser`
-   - Nos permite trabajar con cookies. Cookies: formas de guardar información en el cliente
+2.  **passport** y **passport-local**
+   - Instalación: `npm i passport passport-local`
+   - Passport sirve para facilitar el uso de varias formas de autenticarse. Agrupa todas las estrategias de autenticación, así sea por email, por contraseña, por redes sociales, etc <br>
+    Passport-local es una estrategia que vamos a utilizar, es decir vamos a utilizar email y contraseña para acceder a nuestra aplicación
 
-
-3. **express-session**
-   - Instalación: `npm i express-session`
-   - Nos permite manejar las sesiones de mi aplicación que se guardan en el servidor, no en la base de datos. No tiene nada que ver con las cookies
-
-4. **connect-mongo**
-   - Instalación: `npm i connect-mongo`
-   - Nos permite trabajar con sesiones guardadas en la base de datos MongoDB (ya que guardarlas en un servidor no es recomendable porque se caen seguido)
+3.  **passport-github2**
+   - Instalación: `npm i passport-github2`
+   - Esto nos permite poder autenticarnos con github para ingresar a nuestra aplicación, en vez de utilizar una autenticación local ingresando nuestro email y contraseña
 
 
 
-## Comentarios sobre la configuración del servidor Express en "app.js"
+## Comentarios sobre el archivo "bcrypt.js"
 
-1. app.use(cookieParser(process.env.SIGNED_COOKIE)) <br>
-    En esta línea de código la cookie está firmada, eso la hace más segura
+    Aquí vamos a generar 2 funciones: <br><br>
 
-2. useNewUrlParser: true <br>
-    Establezco que la conexión sea mediante URL
+1.  export const createHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(parseInt(process.env.SALT))) <br>
+    Esta recibe una contraseña (la que me ingrese mi usuario) y la devuelve encriptada. Esto me permite a mí poder ingresar una contraseña desde el usuario <br>
+    Agregamos SALT = 15 en el .env <br>
+    SaltRounds o SALT es la cantidad de veces que se encriptó esta contraseña <br>
+    Como 10 es el valor por defecto, se recomienda ingresar cualquier valor exceptuando el 10. Cualquier hacker va a intentar primero con el valor por defecto <br>
+    Hay que parsear el valor de SALT ya que en el .env es un string <br>
 
-3. useUnifiedTopology: true <br>
-    Manejo de clusters de manera dinámica
+2.  export const validatePassword = (passwordSend, passwordBDD) => bcrypt.compareSync(passwordSend, passwordBDD) <br>
+    Sirve para hacer el proceso inverso, desencriptar la contraseña <br>
+    passwordSend: contraseña enviada por el usuario, sin encriptar <br>
+    passwordBDD: contraseña de la base de datos, la que se guardó encriptada gracias a la primera función <br>
+    compareSync: es para ver si las contraseñas coinciden. Esto devuelve true si coinciden <br><br>
 
-4. ttl: 60 <br>
-    Duración de la sesión en la base de datos en segundos, no en milisegundos
+    Para hacer console.log de las 2 funciones: <br><br>
 
-5. resave: false <br>
-    Resave permite mantener la sesión activa en caso de que la sesión se mantenga inactiva <br>
-    Si se deja en false, la sesión morirá en caso de que exista cierto tiempo de inactividad
+1.  Importo el .env para tener los datos de las contraseñas: <br>
+    import 'dotenv/config' <br>
+2.  Primera función: <br>
+    console.log(createHash('lucianocoderhouse')) <br>
+3.  Segunda función: <br>
+    const passwordEnc = createHash('lucianocoderhouse') <br>
+    console.log(validatePassword('lucianocoderhouse', passwordEnc)) <br>
+4.  Ubicados en la carpeta utils, ingresamos en la terminal node bcrypt.js <br><br>
 
-6. saveUninitialized: false <br>
-    SaveUninitialized permite guardar cualquier sesión aún cuando el objeto de sesión no tenga nada por contener <br>
-    Si se deja en false, la sesión no se guardará si el objeto de sesión está vacío al final de la consulta
+    Para ejecutar de manera local utils: <br>
+    Nos paramos en la carpeta utils utilizando cd, e ingresamos node bcrypt.js <br>
