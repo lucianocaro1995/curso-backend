@@ -149,11 +149,11 @@ io.on('connection', (socket)=> {
     console.log('servidor de socket io conectado')
     //chat.js
     socket.on('add-message', async ({email, mensaje}) => {
-        console.log(mensaje)
-        await messageModel.create({email: email, message: mensaje})
+        console.log(mensaje);
+        await messageModel.create({email: email, message: mensaje});
         const messages = await messageModel.find();
         socket.emit('show-messages', messages);
-    })
+    });
     //chat.js
     socket.on('load-chat', async() =>{
         const messages = await messageModel.find();
