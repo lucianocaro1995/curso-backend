@@ -4,11 +4,12 @@
 2. En este desafío trabajamos autenticación de manera local (ingresar a nuestra aplicación con email y contraseña) y autenticación por terceros (ingresar a nuestra aplicación utilizando github)
 3. Incluimos un archivo "bcrypt.js" para generar un hasheo de contraseña. Nos permite encriptar las contraseñas guardadas en la base de datos
 4. Incluimos un archivo "passport.js" en donde creamos los códigos necesarios para registrarnos y loguearnos
-5. No estamos trabajando con vistas(handlebars) en este desafío. Todo probado desde Postman <br>
+5. No estamos trabajando con vistas (handlebars) en este desafío. Todo probado desde Postman <br>
     En "session.routes.js" creamos la lógica para register, login y logout de manera local, y también register y login utilizando github <br>
-    Es común tener redirecciones tanto en el servidor("session.routes.js") como en el cliente("signup.js", "login.js", "logout.js") <br>
+    Es común tener redirecciones tanto en el servidor ("session.routes.js") como en el cliente ("signup.js", "login.js", "logout.js") <br>
     En el servidor, la redirección se utiliza para indicar al navegador que debe cargar la página de inicio de sesión. Esto es importante para garantizar que el navegador del usuario sepa a dónde debe ir después de realizar la acción de registro <br>
     En el cliente, la redirección se maneja después de recibir la respuesta del servidor. Aquí, la redirección se utiliza para cambiar efectivamente la ubicación del navegador después de completar el registro y mostrar un mensaje de éxito. Es una buena práctica manejar las redirecciones del lado del cliente para proporcionar una experiencia de usuario más fluida
+
 
 
 ## Dependencias instaladas para este desafío:
