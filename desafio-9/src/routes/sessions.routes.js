@@ -8,6 +8,7 @@ const sessionRouter = Router()
 
 //1) POST: register
 //Poner esto en la ruta: http://localhost:4000/api/sessions/register
+//Acá utilizamos passport como middleware, y utilizamos la estrategia register que creamos en "passport.js"
 sessionRouter.post('/register', passport.authenticate('register'), async (req, res) => {
     try {
         if (!req.user) {
@@ -25,7 +26,6 @@ sessionRouter.post('/register', passport.authenticate('register'), async (req, r
 //2) POST: login
 //Poner esto en la ruta: http://localhost:4000/api/sessions/login
 //Acá utilizamos passport como middleware, y utilizamos la estrategia login que creamos en "passport.js"
-//Los middleware trabajan de esta forma: si resulta exitoso, sigo con el resto del código
 sessionRouter.post('/login', passport.authenticate('login'), async (req, res) => {
     try {
         //Si no existe el usuario, enviamos un mensaje
@@ -61,6 +61,7 @@ sessionRouter.get('/logout', (req, res) => {
 
 //4) GET: github (para registrarme)
 //Poner esto en la ruta: http://localhost:4000/api/sessions/github
+//Acá utilizamos passport como middleware, y utilizamos la estrategia github que creamos en "passport.js"
 sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => {
     //res.status(200).send({ mensaje: 'Usuario registrado' })
     res.redirect(301, '/home')
@@ -69,6 +70,7 @@ sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:ema
 
 //5) GET: githubCallback (para logearme)
 //Poner esto en la ruta: http://localhost:4000/api/sessions/githubCallback
+//Acá utilizamos passport como middleware, y utilizamos la estrategia github que creamos en "passport.js"
 sessionRouter.get('/githubCallback', passport.authenticate('github'), async (req, res) => {
     req.session.user = req.user
     //res.status(200).send({ mensaje: 'Usuario registrado' })
