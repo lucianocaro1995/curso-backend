@@ -181,21 +181,6 @@ io.on('connection', (socket)=> {
             console.error('Error al eliminar producto:', error);
         }
     })
-    //signup.js
-    socket.on("new-user", async (user) => {
-        const { first_name, last_name, age, email, password } = user;
-        try {
-            if (!first_name || !last_name || !age || !email || !password) {
-                socket.emit("user", { success: false, message: "Todos los campos son obligatorios." });
-                return;
-            }
-            await userModel.create({ first_name, last_name, age, email, password });
-            socket.emit("user", { success: true });
-        } catch (error) {
-            console.error('Hubo un error al registrar el usuario:', error);
-            socket.emit("user", { success: false, message: "Hubo un error al registrar el usuario. Inténtalo nuevamente." });
-        }
-    });
 })
 
 

@@ -1,11 +1,18 @@
-const login = document.getElementById("loginForm");
+//Acá no utilizo socket.io
 
-login.addEventListener('submit', async function(event) {
+
+
+const loginButton = document.getElementById("loginButton");
+
+
+
+loginButton.addEventListener('click', async function(event) {
     event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
     try {
+        //Se genera una solicitud POST usando fetch
         const response = await fetch('/api/sessions/login', {
             method: 'POST',
             headers: {

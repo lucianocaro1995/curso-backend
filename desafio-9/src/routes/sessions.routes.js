@@ -5,20 +5,22 @@ import passport from "passport";
 
 const sessionRouter = Router()
 
+
 //1) POST: register
 //Poner esto en la ruta: http://localhost:4000/api/sessions/register
 sessionRouter.post('/register', passport.authenticate('register'), async (req, res) => {
     try {
         if (!req.user) {
-            return res.status(400).send({ mensaje: "Usuario ya existente" })
+            return res.status(400).json({ success: false, message: "Usuario ya existente" });
         }
         //res.status(200).send({ mensaje: 'Usuario registrado' })
-        res.redirect(301, '/login')
+        res.redirect(301, '/login');
         console.log('Usuario registrado con éxito y redirigido a /login');
     } catch (error) {
-        res.status(500).send({ mensaje: `Error al registrar usuario ${error}` })
+        return res.status(500).json({ success: false, message: `Error al registrar usuario ${error}` });
     }
-})
+});
+
 
 //2) POST: login
 //Poner esto en la ruta: http://localhost:4000/api/sessions/login
@@ -75,7 +77,7 @@ sessionRouter.get('/githubCallback', passport.authenticate('github'), async (req
 })
 
 //6)
-//Para mostrar información personalizada en "/home". Código necesario para "home.js"
+//Código necesario para "home.js" así muestro información personalizada para dar la bienvenida en "/home"
 sessionRouter.get('/user', (req, res) => {
     if (req.session.user) {
         const user = req.session.user

@@ -1,10 +1,7 @@
-//Este archivo js lo utilizo junto con la lógica del socket.io
-//Socket.io es una biblioteca de JavaScript que se utiliza para desarrollar aplicaciones web en tiempo real
-//Su principal función es permitir la comunicación bidireccional en tiempo real entre el servidor y el cliente a través de WebSocket, una tecnología que habilita conexiones persistentes y de baja latencia
+//Acá no utilizo socket.io
 
 
 
-const socket = io.connect('http://localhost:4000');
 const form = document.getElementById('signupForm');
 const submitButton = document.getElementById('submitButton');
 
@@ -24,27 +21,8 @@ form.addEventListener('submit', async (event) => {
     };
 
     try {
-        socket.emit("new-user", formData); //Evento personalizado new-user creado en app.js
-
-        socket.on("user", (data) => { //Evento personalizado user creado en app.js
-            if (data.success) {
-                Swal.fire({
-                    title: '¡Registro exitoso!',
-                    text: 'Serás redirigido a la página de inicio de sesión.',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '/login';
-                    }
-                });
-            } else {
-                alert(`Error: ${data.message}`);
-            }
-        });
-
         //Se genera una solicitud POST usando fetch
-        const response = await fetch('/api/users', {
+        const response = await fetch('/api/sessions/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,10 +30,20 @@ form.addEventListener('submit', async (event) => {
             body: JSON.stringify(formData)
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            alert(`Error: ${data.message}`);
+        if (response.ok) {
+            //Si la respuesta es una redirección, asumimos que el registro fue exitoso
+            Swal.fire({
+                title: '¡Registro exitoso!',
+                text: 'Serás redirigido a la página de inicio de sesión.',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/login';
+                }
+            });
+        } else {
+            throw new Error(`Error: ${response.statusText}`);
         }
     } catch (error) {
         console.error('Hubo un error al registrar el usuario:', error);
