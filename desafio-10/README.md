@@ -5,7 +5,8 @@
 3. No estamos trabajando con vistas (handlebars) en este desafío. Todo probado desde Postman
 4. Incluimos un archivo "jwt.js" en la carpeta "utils" en donde nosotros generamos el token. Luego una vez ya generado el token, hacemos la validación. Si pasamos estos filtros, vamos a generar sesión
 5. Incluimos un archivo "messagesError.js" en la carpeta "utils" para manejo de errores en caso de que los haya al iniciar sesión
-6. Modificamos el archivo "products.routes.js" para que solamente puedan crear, modificar o eliminar productos los usuarios cuyo rol sea admin
+6. Incluimos un archivo "app.routes.js" en la carpeta "routes" para importar ahí las rutas y dejar más limpio el archivo "app.js"
+7. Modificamos el archivo "products.routes.js" para que solamente puedan crear, modificar o eliminar productos los usuarios cuyo rol sea admin
 
 
 

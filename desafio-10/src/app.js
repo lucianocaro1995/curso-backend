@@ -19,11 +19,7 @@ import initializePassport from './config/passport.js'
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io'
 //Enrutador
-import userRouter from './routes/users.routes.js'
-import productRouter from './routes/products.routes.js'
-import cartRouter from './routes/carts.routes.js'
-import messageRouter from './routes/messages.routes.js'
-import sessionRouter from './routes/sessions.routes.js'
+import router from './routes/app.routes.js'
 //Modelos
 import { messageModel } from './dao/models/messages.models.js'
 import { productModel } from './dao/models/products.models.js'
@@ -185,8 +181,4 @@ io.on('connection', (socket)=> {
 
 
 //7) Rutas
-app.use('/api/users', userRouter)
-app.use('/api/products', productRouter)
-app.use('/api/carts', cartRouter)
-app.use('/api/messages', messageRouter)
-app.use('/api/sessions', sessionRouter)
+app.use('/', router)
