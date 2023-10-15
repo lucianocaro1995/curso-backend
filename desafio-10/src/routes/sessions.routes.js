@@ -80,26 +80,28 @@ sessionRouter.get('/githubCallback', passport.authenticate('github'), async (req
     console.log('Usuario logueado con éxito utilizando GitHub y redirigido a /home');
 })
 
-//6)
+//6) Get
+//Poner esto en la ruta: http://localhost:4000/api/sessions/testJWT
+//Verifica que el token enviado sea valido (se utiliza la misma contraseña en encriptación)
+sessionRouter.get('/testJWT', passport.authenticate('jwt', { session: false }), (req, res) => {
+    console.log(req)
+    res.send(req.user)
+})
+
+//7) GET
+//Poner esto en la ruta: http://localhost:4000/api/sessions/current
+//Nos permite manejar un filtro para que, las rutas de products solamente las pueda manejar el admin
+sessionRouter.get('/current', passportError('jwt'), authorization('Admin'), (req, res) => {
+    res.send(req.user)
+})
+
+//8)
 //Código necesario para "home.js" así muestro información personalizada para dar la bienvenida en "/home"
 sessionRouter.get('/user', (req, res) => {
     if (req.session.user) {
         const user = req.session.user
         res.status(200).send(user)
     }
-})
-
-//7)
-//Verifica que el token enviado sea valido (misma contraseña de encriptación)
-sessionRouter.get('/testJWT', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req)
-    res.send(req.user)
-})
-
-//8)
-//Poner esto en la ruta: http://localhost:4000/api/sessions/current
-sessionRouter.get('/current', passportError('jwt'), authorization('Admin'), (req, res) => {
-    res.send(req.user)
 })
 
 export default sessionRouter

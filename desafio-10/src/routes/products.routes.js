@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { ProductManager } from "../dao/DB/productsManager.js"
+import { passportError, authorization } from "../utils/messagesError.js";
 
 
 
@@ -7,7 +8,7 @@ const productRouter = Router()
 
 //1) GET
 //Poner esto en la ruta: http://localhost:4000/api/products
-productRouter.get('/', async (req, res) => {
+productRouter.get('/', passportError('jwt'), authorization('Admin'), async (req, res) => {
     const { limit, page, category, sort } = req.query;
 
     try {
@@ -34,7 +35,7 @@ productRouter.get('/', async (req, res) => {
 
 //2) GET(id)
 //Poner esto en la ruta: http://localhost:4000/api/products/id
-productRouter.get('/:id', async (req, res) => {
+productRouter.get('/:id', passportError('jwt'), authorization('Admin'), async (req, res) => {
     const { id } = req.params
 
     try {
@@ -50,7 +51,7 @@ productRouter.get('/:id', async (req, res) => {
 
 //3) POST
 //Poner esto en la ruta: http://localhost:4000/api/products
-productRouter.post('/', async (req, res) => {
+productRouter.post('/', passportError('jwt'), authorization('Admin'), async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {
         const prod = await ProductManager.create({ title, description, stock, code, price, category })
@@ -62,7 +63,7 @@ productRouter.post('/', async (req, res) => {
 
 //4) PUT(code)
 //Poner esto en la ruta: http://localhost:4000/api/products/code
-productRouter.put('/:code', async (req, res) => {
+productRouter.put('/:code', passportError('jwt'), authorization('Admin'), async (req, res) => {
     const { code } = req.params;
     console.log(code)
     const {title, description, price, status, stock, category} = req.body
@@ -79,7 +80,7 @@ productRouter.put('/:code', async (req, res) => {
 
 //5) DELETE(id)
 //Poner esto en la ruta: http://localhost:4000/api/products/id
-productRouter.delete('/:id', async (req, res) => {
+productRouter.delete('/:id', passportError('jwt'), authorization('Admin'), async (req, res) => {
     const { id } = req.params
 
     try {

@@ -24,8 +24,9 @@ export const generateToken = (user) => {
 
 
 
-//Una vez ya generado el token, ahora hacemos la validacion
-export const authToken = (req, res, next) => {
+//Una vez ya generado el token, ahora hacemos la validacion. Si pasamos estos filtros, vamos a generar sesión
+export const authToken = (req, res, next) => { //Generalmente next es un middleware
+    //Primer filtro: tenes el token?
     //Consultar al header para obtener el Token
     const authHeader = req.headers.Authorization
 
@@ -33,6 +34,7 @@ export const authToken = (req, res, next) => {
         return res.status(401).send({ error: 'Usuario no autenticado' })
     }
 
+    //Segundo filtro: el token es valido?
     const token = authHeader.split(' ')[1] //Obtengo el token y descarto el Bearer
 
     jwt.sign(token, process.env.JWT_SECRET, (error, credential) => {
@@ -41,7 +43,7 @@ export const authToken = (req, res, next) => {
         }
     })
 
-    //Usuario valido
+    //Filtros logrados exitosamente: usuario valido
     req.user = credential.user
     next()
 }

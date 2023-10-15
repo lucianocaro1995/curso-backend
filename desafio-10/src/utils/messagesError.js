@@ -9,7 +9,7 @@ export const passportError = (strategy) => { //Voy a enviar local, github o jwt
                 return next(error) //Que la funcion que me llame maneje como va a responder ante mi error
             }
             if (!user) {
-
+                //O me enviás un objeto con el atributo messages, o me enviás un string
                 return res.status(401).send({ error: info.messages ? info.messages : info.toString() })
 
             }
