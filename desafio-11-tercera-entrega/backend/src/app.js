@@ -16,17 +16,14 @@ import initializePassport from './config/passport.js'
 import cors from 'cors'
 //Enrutador
 import router from './routes/app.routes.js'
-//Modelos
-import { messageModel } from './dao/models/messages.models.js'
-import { productModel } from './dao/models/products.models.js'
 
 
 
 //2) Conexión al servidor
 const app = express()
 const PORT = 4000
-const serverExpress = app.listen(PORT, () => {
-    console.log(`Server on port ${PORT}`)
+app.listen(PORT, () => {
+    console.log(`Server on Port ${PORT}`)
 })
 
 

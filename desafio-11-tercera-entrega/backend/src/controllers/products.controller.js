@@ -1,4 +1,4 @@
-import { productModel } from "../dao/models/products.models.js";
+import { productModel } from "../models/products.models.js";
 
 /*
 En controllers normalmente se hace método HTTP + Modelo para referirse al nombre del controlador
@@ -54,7 +54,7 @@ export const postProduct = async (req, res) => {
         const prod = await productModel.create({ title, description, code, price, stock, category })
 
         if (prod) {
-            return res.status(201).send(product)
+            return res.status(201).send(prod)
         }
 
         res.status(400).send({ error: `Error en crear producto` })

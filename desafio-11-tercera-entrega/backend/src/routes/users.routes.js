@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userModel } from "../dao/models/users.models.js";
+import { userModel } from "../models/users.models.js";
 
 
 
@@ -36,9 +36,9 @@ userRouter.get('/:id', async (req, res) => {
 //Poner esto en la ruta: http://localhost:4000/api/users/id
 userRouter.put('/:id', async (req, res) => {
     const { id } = req.params
-    const { nombre, apellido, edad, email, password } = req.body
+    const { first_name, last_name, age, email, password } = req.body
     try {
-        const user = await userModel.findByIdAndUpdate(id, { nombre, apellido, edad, email, password })
+        const user = await userModel.findByIdAndUpdate(id, { first_name, last_name, age, email, password })
         if (user) {
             res.status(200).send({ respuesta: 'OK', mensaje: user })
         } else {
