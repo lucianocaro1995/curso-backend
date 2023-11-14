@@ -7,7 +7,8 @@
 5. Incluimos un archivo "messagesError.js" en la carpeta "utils" para manejo de errores en caso de que los haya al iniciar sesión
 6. Incluimos un archivo "app.routes.js" en la carpeta "routes" para importar ahí las rutas y dejar más limpio el archivo "app.js"
 7. Modificamos el archivo "products.routes.js" para que solamente puedan crear, modificar o eliminar productos los usuarios cuyo rol sea admin
-8. Modificamos el archivo "users.models.js" para que, cada vez que se cree un nuevo usuario, se cree un nuevo carrito asociado a ese usuario. Desde ahora el método POST en "carts.routes.js" queda obsoleto porque lo utilizábamos para practicar creando carritos desde Postman
+8. Modificamos el archivo "users.models.js" para que, cada vez que se cree un nuevo usuario, se cree un nuevo carrito asociado a ese usuario
+9. Queda obsoleto desde ahora el método POST en "carts.routes.js", porque lo utilizábamos para practicar creando carritos desde Postman, así que lo elimino. Ahora los carritos se crean una vez que nosotros creamos al usuario
 
 
 
