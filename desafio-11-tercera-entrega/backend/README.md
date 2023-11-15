@@ -4,14 +4,15 @@
    Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
 2. En este desafío trabajamos delegación de responsabilidades. El objetivo es mantener un flujo con actividades bien delegadas y así poder tener mejor control sobre el código <br>
    Vamos a tener un frontend(vistas hechas con React), un backend(controlador, rutas y modelo) y una base de datos
-3. Incluimos un archivo "products.controller.js" en la carpeta "controllers" donde creamos CRUDS <br>
+3. Incluyo un archivo "products.controller.js" en la carpeta "controllers" donde creamos CRUDS <br>
    Con este archivo buscamos dividir las responsabilidades entre controlador, modelo y rutas, y crear un código más limpio
-4. Modificamos el archivo "products.routes.js" borrando la importación de productModel ya que no la vamos a necesitar más, ahora importamos los controladores. Dentro de los archivos controllers importamos productModel <br>
-   Realizar lo mismo con todos los archivos dentro de routes (cart, products, sessions y users) y crear sus respectivos controllers
-5. Modificamos el archivo "products.models.js" agregándole paginate. Si queremos borramos el paginate de "users.models.js" ya que no es necesario, sólo lo hicimos para practicarlo en clase
-6. Eliminé las carpetas "dao", "public" y "views" ya que solamente utilizaré models de lo que estaba en la carpeta dao. Y public y views me quedan obsoletas al reemplazar Handlebars por React <br>
-   También eliminé el archivo "path.js" ya que lo estaba utilizando para Handlebars
-7. Comentario importante que se aclaró en la clase 14: cuándo utilizar "productManager" y cuándo "productModel" <br>
+4. Incluyo un archivo "mailer.js" en la carpeta "config" para poder enviar mails a las personas que compren productos en mi página web
+5. Modifico el archivo "products.routes.js" borrando la importación de productModel ya que no la vamos a necesitar más, ahora importamos los controladores. Dentro de los archivos controllers importamos productModel <br>
+   Realizar lo mismo con todos los archivos dentro de routes (carts, orders, products, sessions y users) y crear sus respectivos controllers
+6. Modifico el archivo "products.models.js" agregándole paginate. Si queremos borramos el paginate de "users.models.js" ya que no es necesario, sólo lo hicimos para practicarlo en clase
+7. Eliminé las carpetas "dao", "public" y "views" ya que solamente utilizaré models de lo que estaba en la carpeta dao. Y public y views me quedan obsoletas al reemplazar Handlebars por React
+8. El archivo "path.js" dejo de importarlo en "app.js" ya que lo necesitaba solamente para Handlebars, pero ahora lo importo en "mailer.js" para poder enviar imágenes en el mail
+9. Comentario importante que se aclaró en la clase 14: cuándo utilizar "productManager" y cuándo "productModel" <br>
    Yo los estaba utilizando mal, me convenía implementar productModel en todos los archivos de routes <br>
    Cuando utilizamos clases deberíamos utilizar productManager <br>
    Cuando utilizamos funciones deberíamos utilizar productModel <br>
