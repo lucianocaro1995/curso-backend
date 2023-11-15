@@ -1,6 +1,7 @@
 ## Comentarios:
 
-1. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente
+1. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
+   Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
 2. En este desafío trabajamos delegación de responsabilidades. El objetivo es mantener un flujo con actividades bien delegadas y así poder tener mejor control sobre el código <br>
    Vamos a tener un frontend(vistas hechas con React), un backend(controlador, rutas y modelo) y una base de datos
 3. Incluimos un archivo "products.controller.js" en la carpeta "controllers" donde creamos CRUDS <br>
@@ -36,3 +37,8 @@
    - Instalación: `npm i cors`
    - Instalarlo en backend
    - El paquete "cors" habilita el intercambio de recursos entre dominios, permitiendo solicitudes HTTP desde un dominio diferente al origen. Así evitamos los errores de cors policy
+
+4. **nodemailer**
+   - Instalación: `npm i nodemailer`
+   - Instalarlo en backend
+   - Esta dependencia sirve para enviar correos electrónicos fácilmente a través de diferentes servicios de correo.
