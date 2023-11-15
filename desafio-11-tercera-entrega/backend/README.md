@@ -43,3 +43,8 @@
    - Instalación: `npm i nodemailer`
    - Instalarlo en backend
    - Esta dependencia sirve para enviar correos electrónicos fácilmente a través de diferentes servicios de correo.
+
+5. **uuid**
+   - Instalación: `npm install uuid`
+   - Instalarlo en backend
+   - Esta dependencia permite generar identificadores únicos

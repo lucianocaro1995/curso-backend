@@ -7,7 +7,7 @@ Todo este archivo lleva la misma lógica que el productsManager, es decir debemo
 */
 
 //1)
-export const getProducts = async (req, res) => {
+const getProducts = async (req, res) => {
     //Incluimos paginate (también debimos agregar paginate a la colección products)
     const { limit, page, filter, sort } = req.query
 
@@ -26,11 +26,10 @@ export const getProducts = async (req, res) => {
     } catch (error) {
         res.status(500).send({ error: `Error en consultar productos ${error}` })
     }
-
 }
 
 //2)
-export const getProductById = async (req, res) => {
+const getProductById = async (req, res) => {
     const { id } = req.params
 
     try {
@@ -47,7 +46,7 @@ export const getProductById = async (req, res) => {
 }
 
 //3)
-export const postProduct = async (req, res) => {
+const postProduct = async (req, res) => {
     const { title, description, code, price, stock, category } = req.body
 
     try {
@@ -68,7 +67,7 @@ export const postProduct = async (req, res) => {
 }
 
 //4)
-export const putProductById = async (req, res) => {
+const putProductById = async (req, res) => {
     const { id } = req.params
     const { title, description, code, price, stock, category } = req.body
     try {
@@ -86,7 +85,7 @@ export const putProductById = async (req, res) => {
 }
 
 //5)
-export const deleteProductById = async (req, res) => {
+const deleteProductById = async (req, res) => {
     const { id } = req.params
 
     try {
@@ -101,4 +100,13 @@ export const deleteProductById = async (req, res) => {
     } catch (error) {
         res.status(500).send({ error: `Error en eliminar producto ${error}` })
     }
+}
+
+//Exportar todas las funciones juntas
+export const productController = {
+    getProducts,
+    getProductById,
+    postProduct,
+    putProductById,
+    deleteProductById
 }

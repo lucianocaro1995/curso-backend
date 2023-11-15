@@ -37,6 +37,7 @@ const userSchema = new Schema({
 })
 
 //Implemento el método paginate en el schema
+//Si queremos borramos este paginate ya que no es necesario, sólo lo hicimos para practicarlo en clase
 userSchema.plugin(paginate)
 
 //Crear nuevo carrito
