@@ -2,49 +2,23 @@
 
 1. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
    Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
-2. En este desafío trabajamos delegación de responsabilidades. El objetivo es mantener un flujo con actividades bien delegadas y así poder tener mejor control sobre el código <br>
-   Vamos a tener un frontend(vistas hechas con React), un backend(controlador, rutas y modelo) y una base de datos
-3. Creamos la carpeta "controllers" que vamos a utilizar para delegar responsabilidades <br>
-   Antes en nuestros archivos de la carpeta "routes" se creaban las rutas, los middlewares y los CRUDS (create, read, update, delete). Desde ahora estos CRUDS estarán en los archivos de la carpeta controllers <br>
-   Con esto buscamos dividir las responsabilidades entre controlador, modelo y rutas, y crear un código más limpio
-4. Modifico los archivos de la carpeta "routes" borrando la importación de productModel ya que no la vamos a necesitar más, ahora importamos los controladores. Dentro de los archivos controllers importamos productModel 
-5. Modifico el archivo "products.models.js" agregándole paginate. Si queremos borramos el paginate de "users.models.js" ya que no es necesario, sólo lo hicimos para practicarlo en clase
-6. Eliminé las carpetas "dao", "public" y "views" ya que solamente utilizaré models de lo que estaba en la carpeta dao. Y public y views me quedan obsoletas al reemplazar Handlebars por React
-7. Incluyo un archivo "mailer.js" en la carpeta "config" para poder enviar mails a las personas que compren productos en mi página web
-8. El archivo "path.js" dejo de importarlo en "app.js" ya que lo necesitaba solamente para Handlebars, pero ahora lo importo en "mailer.js" para poder enviar imágenes en el mail
-9. Comentario importante que se aclaró en la clase 14: cuándo utilizar "productManager" y cuándo "productModel" <br>
-   Yo los estaba utilizando mal, me convenía implementar productModel en todos los archivos de routes <br>
-   Cuando utilizamos clases deberíamos utilizar productManager <br>
-   Cuando utilizamos funciones deberíamos utilizar productModel <br>
-   Si tengo el modelo de mongoose, debería aplicar el modelo <br>
-   Al desfragmentar la app en controlador, modelo y ruta, el productManager ya pierde sentido <br>
-   De todas formas, en esta tercera pre-entrega dividimos las responsabilidades y tengo que limpiar los archivos routes e implementar productModel no en los archivos de routes, sino en los archivos de controllers
+2. En este desafío trabajamos mocking y manejo de errores
+3. Mocking: <br>
+   Debemos generar un módulo de Mocking para el servidor, con el fin de que, al inicializarse pueda generar y entregar 100 productos con el mismo formato que entregaría una petición de Mongo. Ésto sólo debe ocurrir en un endpoint determinado ("/mockingproducts") <br>
+   Mocks son imitaciones de un dato real. Es altamente útil para poder crear datos "supuestos" con el fin de probar la funcionalidad de alguna función <br>
+   Un dato mock no debe comprometer jamás una estructura productiva, por lo que sólo se usa en entornos de desarrollo. La mejor forma de encarar esto es tener una base de datos para desarrollo y otra base de datos para producción <br>
+   En resumen, es útil utilizar mocks cuando yo no quiero tocar o modificar una aplicación, pero sí quiero generar datos de prueba, pero siempre debe ser en una base de datos para desarrollo <br>
+   Faker.js es la herramienta que vamos a utilizar para poder hacer datos de prueba <br>
+   Creo un archivo "mocking.js" en la carpeta utils para hacer la lógica y crear estos datos. Luego, creo un archivo "mocking.controllers.js" en la carpeta controllers para que una función me traiga los datos, o me avise de error en caso de que lo haya. Y también debo crear el archivo "mocking.routes.js" en la carpeta routes para crear el endpoint pedido por la consigna del desafío, e incluir la función del controlador (delego las responsabilidades como vimos en el anterior desafío). Finalmente agrego este endpoint a "app.routes.js"
+4. Manejo de errores: <br>
+   El profesor nos pidió que hagamos un listado de posibles errores con el carrito de una aplicación, y que los nombremos en un archivo txt <br>
+   Ese listado vamos a utilizarlo en futuras aplicaciones para hacer un TDD (Test Driven Development)
 
 
 
 ## Dependencias instaladas para este desafío:
 
-1. **vite**
-   - Instalación: `npm install -g create-vite`
-   - Instalarlo en frontend
-   - Es una herramienta que nos permite crear sitios web desde el lado frontend, de manera más rápida y eficiente. Es similar a "Create React App", la herramienta que utilicé en el curso de React
-
-2. **react-router-dom**
-   - Instalación: `npm i react-router-dom`
-   - Instalarlo en frontend
-   - Es una dependencia que facilita la navegación y gestión de rutas en aplicaciones React, permitiendo crear rutas dinámicas para una experiencia de usuario fluida
-
-3. **cors**
-   - Instalación: `npm i cors`
+1. **faker**
+   - Instalación: `npm i @faker-js/faker`
    - Instalarlo en backend
-   - El paquete "cors" habilita el intercambio de recursos entre dominios, permitiendo solicitudes HTTP desde un dominio diferente al origen. Así evitamos los errores de cors policy
-
-4. **nodemailer**
-   - Instalación: `npm i nodemailer`
-   - Instalarlo en backend
-   - Esta dependencia sirve para enviar correos electrónicos fácilmente a través de diferentes servicios de correo.
-
-5. **uuid**
-   - Instalación: `npm install uuid`
-   - Instalarlo en backend
-   - Esta dependencia permite generar identificadores únicos
+   - Esta herramienta permite generar datos ficticios convincentes que nos van a servir para pruebas y desarrollo, como nombres, direcciones y otros, con el paquete Faker en JavaScript
