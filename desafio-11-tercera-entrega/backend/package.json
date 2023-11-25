@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "desafio-11",
+  "name": "backend",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {

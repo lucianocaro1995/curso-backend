@@ -11,14 +11,15 @@
    Faker.js es la herramienta que vamos a utilizar para poder hacer datos de prueba <br>
    Creo un archivo "mocking.js" en la carpeta utils para hacer la lógica y crear estos datos. Luego, creo un archivo "mocking.controllers.js" en la carpeta controllers para que una función me traiga los datos, o me avise de error en caso de que lo haya. Y también debo crear el archivo "mocking.routes.js" en la carpeta routes para crear el endpoint pedido por la consigna del desafío, e incluir la función del controlador (delego las responsabilidades como vimos en el anterior desafío). Finalmente agrego este endpoint a "app.routes.js"
 4. Manejo de errores: <br>
-   El profesor nos pidió que hagamos un listado de posibles errores con el carrito de una aplicación, y que los nombremos en un archivo txt <br>
-   Ese listado vamos a utilizarlo en futuras aplicaciones para hacer un TDD (Test Driven Development)
+   El profesor nos pidió que hagamos un listado de posibles errores con el carrito de una aplicación, y que los nombremos. Simplemente que los escribamos (lo haré en este mismo archivo) <br>
+   Este listado nos va a servir en futuras aplicaciones para hacer un TDD (Test Driven Development)
 
 
 
 ## Dependencias instaladas para este desafío:
 
 1. **faker**
+
    - Instalación: `npm i @faker-js/faker`
    - Instalarlo en backend
    - Esta herramienta permite generar datos ficticios convincentes que nos van a servir para pruebas y desarrollo, como nombres, direcciones y otros, con el paquete Faker en JavaScript
