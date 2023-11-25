@@ -8,7 +8,8 @@ productRouter.get('/', productController.getProducts)
 
 productRouter.get('/:id', productController.getProductById)
 
-//Utilizamos 2 filtros o middlewares, el de la token jwt y el de autorización como admin. Luego pasamos al controlador "postProduct"
+//Utilizamos 2 filtros o middlewares en estos endpoints, el de la token jwt y el de autorización como admin
+//Una vez superados los filtros, pasamos al controlador "productController"
 productRouter.post('/', passportError('jwt'), authorization('Admin'), productController.postProduct)
 
 productRouter.put('/:id', passportError('jwt'), authorization('Admin'), productController.putProductById)

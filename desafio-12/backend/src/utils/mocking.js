@@ -1,6 +1,4 @@
 import { faker } from "@faker-js/faker"
-import express from 'express'
-const app = express()
 
 
 
