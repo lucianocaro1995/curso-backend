@@ -2,13 +2,14 @@
 
 1. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
    Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
-2. En este desafío trabajamos delegación de responsabilidades. El objetivo es mantener un flujo con actividades bien delegadas y así poder tener mejor control sobre el código <br>
-   Vamos a tener un frontend(vistas hechas con React), un backend(controlador, rutas y modelo) y una base de datos
-3. Creamos la carpeta "controllers" que vamos a utilizar para delegar responsabilidades <br>
-   Antes en nuestros archivos de la carpeta "routes" se creaban las rutas, los middlewares y los CRUDS (create, read, update, delete). Desde ahora estos CRUDS estarán en los archivos de la carpeta controllers <br>
-   Con esto buscamos dividir las responsabilidades entre controlador, modelo y rutas, y crear un código más limpio
-4. Modifico los archivos de la carpeta "routes" borrando la importación de productModel ya que no la vamos a necesitar más, ahora importamos los controladores. Dentro de los archivos controllers importamos productModel 
-5. Modifico el archivo "products.models.js" agregándole paginate. Si queremos borramos el paginate de "users.models.js" ya que no es necesario, sólo lo hicimos para practicarlo en clase
+2. Desafío "Mejorando la arquitectura de nuestro servidor": <br>
+   En este desafío seguimos trabajando la delegación de responsabilidades <br>
+   Vamos a tener un frontend(desde ahora las vistas serán hechas con React), un backend(controlador, rutas y modelo) y una base de datos
+3. Creé el archivo "ticket.models.js" para poder enviarle al usuario un ticket luego de haber realizado una compra, informándole fecha y hora de la compra, monto y nombre del comprador <br>
+   Este modelo lo implemento en el controller y router de carts utilizando el endpoint "/:cid/purchase"
+4. Modifiqué el archivo "products.models.js" agregándole paginate. Si queremos borramos el paginate de "users.models.js" ya que no es necesario, sólo lo hicimos para practicarlo en clase
+5. Modifiqué el archivo "app.js" eliminando Handlebars y Socket.io <br>
+   Handlebars lo reemplazamos por React, y Socket.io lo utilizábamos para algunas vistas de Handlebars
 6. Eliminé las carpetas "dao", "public" y "views" ya que solamente utilizaré models de lo que estaba en la carpeta dao. Y public y views me quedan obsoletas al reemplazar Handlebars por React
 7. Incluyo un archivo "mailer.js" en la carpeta "config" para poder enviar mails a las personas que compren productos en mi página web
 8. El archivo "path.js" dejo de importarlo en "app.js" ya que lo necesitaba solamente para Handlebars, pero ahora lo importo en "mailer.js" para poder enviar imágenes en el mail

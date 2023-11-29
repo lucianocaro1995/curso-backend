@@ -1,11 +1,13 @@
 ## Comentarios:
 
 1. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver el localhost:4000 en mi navegador
-2. En este desafío sí utilizamos las vistas(handlebars) a diferencia de los 2 desafíos anteriores
-3. El usuario principal que es admin está por defecto en el formulario de /login. Nosotros debemos crear por una única vez a ese usuario admin
-4. Solo /signup es una ruta accesible sin tener el /login hecho previamente
-5. Una vez hecho el login se genera un sesión en MongoDB Atlas
-6. La ruta /realtimeproducts sólo está disponible para el o los usarios cuyo rol sea admin
+2. Desafío "Implementación de login": <br>
+    Debemos ajustar nuestro servidor para trabajar con un sistema de login
+3. En este desafío sí utilizamos las vistas(handlebars) a diferencia de los 2 desafíos anteriores
+4. El usuario principal que es admin está por defecto en el formulario de /login. Nosotros debemos crear por una única vez a ese usuario admin
+5. Solo /signup es una ruta accesible sin tener el /login hecho previamente
+6. Una vez hecho el login se genera un sesión en MongoDB Atlas
+7. La ruta /realtimeproducts sólo está disponible para el o los usarios cuyo rol sea admin
 
 
 
