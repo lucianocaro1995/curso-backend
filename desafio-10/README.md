@@ -14,7 +14,7 @@
    Es un pequeño archivo de texto que un servidor web envía al navegador del usuario y que se almacena en el dispositivo del usuario <br>
    Se crean cuando iniciamos sesión. Se utiliza para realizar un seguimiento de la actividad del usuario en un sitio web, contiene información como preferencias o datos de inicio de sesión <br>
    Verificar cookies: <br>
-   Para ver la información del usuario utilizando la cookie debo ir a Postman, utilizo el método POST, ingreso el endpoint "http://localhost:4000/api/sessions/login", ingreso la información del usuario en el body y cuando clickee en "send" me debería aparecer en cookies la llamada "jwtCookie" (así la nombré en el archivo "passport.js")
+   Para ver la información del usuario utilizando la cookie debo ir a Postman, utilizo el método POST, ingreso el endpoint "localhost:4000/api/sessions/login", ingreso la información del usuario en el body y cuando clickee en "send" me debería aparecer en cookies la llamada "jwtCookie" (así la nombré en el archivo "passport.js")
    Copio el texto de la cookie, voy a la página "jwt.io", lo pego en donde dice "pegar el token aquí" y del otro lado me debería aparecer la información del usuario
 7. Diferencias entre cookies y tokens: <br>
    En resumen, mientras que las cookies son archivos de texto que se almacenan en el lado del cliente y son gestionadas por el navegador, los tokens son cadenas de caracteres utilizados para la autenticación y autorización en aplicaciones web y pueden ser transmitidos de diversas maneras, incluyendo a través de cookies (como hago en este desafío)

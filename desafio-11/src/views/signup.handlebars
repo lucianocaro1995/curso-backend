@@ -1,0 +1,26 @@
+<!--Este código es HTML agregando handlebars-->
+<!--La única diferencia es que handlebars permite utilizar plantillas con llaves. Como puse en el main-->
+<!--Este archivo hace de mi body en el endpoint "http://localhost:4000/signup"-->
+
+
+
+<!--Formulario para registrarse y luego poder loguearse-->
+<h1>Registrarse</h1>
+<form id="signupForm">
+    <label for="firstName">Nombre</label>
+    <input required type="text" id="first_name" placeholder="Ingrese su nombre" name="firstName">
+
+    <label for="lastName">Apellido</label>
+    <input required type="text" id="last_name" placeholder="Ingrese su apellido" name="lastName">
+
+    <label for="age">Edad</label>
+    <input required type="number" id="age" placeholder="Ingrese su edad" name="age">
+
+    <label for="email">Email</label>
+    <input required type="text" id="email" placeholder="Ingrese su email" name="email">
+
+    <label for="password">Contraseña</label>
+    <input required type="text" id="password" placeholder="Ingrese su contraseña" name="password">
+
+    <button type="submit" id="submitButton">Enviar</button>
+</form>
