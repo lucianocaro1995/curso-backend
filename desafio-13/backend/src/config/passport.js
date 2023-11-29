@@ -3,7 +3,8 @@ import GithubStrategy from 'passport-github2'
 import jwt from 'passport-jwt'
 import passport from 'passport'
 import { createHash, validatePassword } from '../utils/bcrypt.js'
-import { userModel } from '../dao/models/users.models.js'
+import { userModel } from "../models/users.models.js";
+import 'dotenv/config'
 
 
 
@@ -16,8 +17,9 @@ const initializePassport = () => {
 
     //1) Capturar las cookies
     const cookieExtractor = req => {
-        //Acá le estoy dando nombre a la cookie, llamada jwtCookie
-        const token = req.cookies.jwtCookie ? req.cookies.jwtCookie : {} //Si existe la cookie la capturo, sino devuelvo un objeto vacío
+        //En lugar de tomar de las cookies, directamente todo de la petición
+        const token = req.headers.authorization ? req.headers.authorization : {}
+
         console.log("cookieExtractor", token)
         return token
     }
