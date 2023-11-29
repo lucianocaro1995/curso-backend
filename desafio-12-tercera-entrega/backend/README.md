@@ -4,7 +4,7 @@
    Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
 2. Desafío "Mejorando la arquitectura de nuestro servidor": <br>
    En este desafío seguimos trabajando la delegación de responsabilidades <br>
-   Vamos a tener un frontend(desde ahora las vistas serán hechas con React), un backend(controlador, rutas y modelo) y una base de datos
+   Vamos a tener un frontend(desde ahora las vistas serán hechas con React), un backend(controlador, modelo y rutas) y una base de datos(MongoDb Atlas)
 3. Creé el archivo "ticket.models.js" para poder enviarle al usuario un ticket luego de haber realizado una compra, informándole fecha y hora de la compra, monto y nombre del comprador <br>
    Este modelo lo implemento en el controller y router de carts utilizando el endpoint "/:cid/purchase"
 4. Modifiqué el archivo "products.models.js" agregándole paginate. Si queremos borramos el paginate de "users.models.js" ya que no es necesario, sólo lo hicimos para practicarlo en clase
