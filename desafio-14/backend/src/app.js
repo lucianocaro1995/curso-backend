@@ -55,8 +55,8 @@ const corsOptions = {
 //5) Configuración del servidor Express
 //Middlewares
 app.use(express.json())
-app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: true }))
+app.use(cors(corsOptions))
 app.use(cookieParser(process.env.SIGNED_COOKIE))
 app.use(session({
     //Configuración de sesiones en la base de datos

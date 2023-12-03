@@ -1,6 +1,5 @@
-import { cartModel } from "../models/carts.models.js";
-import { productModel } from "../models/products.models.js";
-import { ticketModel } from "../models/ticket.models.js";
+import { cartModel } from "../dao/models/carts.models.js";
+import { productModel } from "../dao/models/products.models.js";
 
 //1)
 const getCarrito = async (req, res) => {

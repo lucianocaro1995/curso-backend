@@ -11,9 +11,11 @@
 5. Modifiqué el archivo "app.js" eliminando Handlebars y Socket.io <br>
    Handlebars lo reemplazamos por React, y Socket.io lo utilizábamos para algunas vistas de Handlebars
 6. Eliminé las carpetas "dao", "public" y "views" ya que solamente utilizaré models de lo que estaba en la carpeta dao. Y public y views me quedan obsoletas al reemplazar Handlebars por React
-7. Incluyo un archivo "mailer.js" en la carpeta "config" para poder enviar mails a las personas que compren productos en mi página web
-8. El archivo "path.js" dejo de importarlo en "app.js" ya que lo necesitaba solamente para Handlebars, pero ahora lo importo en "mailer.js" para poder enviar imágenes en el mail
-9. Comentario importante que se aclaró en la clase 14: cuándo utilizar "productManager" y cuándo "productModel" <br>
+7. Eliminé todo lo relacionado al chat ya que no lo vamos a necesitar más. Solamente lo creamos en clase para practicar Socket.io
+   Los archivos que se eliminan son: "messages.controller.js", "messages.models.js", "messages.routes.js", "chat.handlebars" y "chat.js"
+8. Incluyo un archivo "mailer.js" en la carpeta "config" para poder enviar mails a las personas que compren productos en mi página web
+9. El archivo "path.js" dejo de importarlo en "app.js" ya que lo necesitaba solamente para Handlebars, pero ahora lo importo en "mailer.js" para poder enviar imágenes en el mail
+10. Comentario importante que se aclaró en la clase 14: cuándo utilizar "productManager" y cuándo "productModel" <br>
    Yo los estaba utilizando mal, me convenía implementar productModel en todos los archivos de routes <br>
    Cuando utilizamos clases deberíamos utilizar productManager <br>
    Cuando utilizamos funciones deberíamos utilizar productModel <br>

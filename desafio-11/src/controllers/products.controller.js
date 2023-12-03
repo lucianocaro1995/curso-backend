@@ -1,4 +1,4 @@
-import { productModel } from "../models/products.models.js";
+import { productModel } from "../dao/models/products.models.js";
 
 /*
 En controllers normalmente se hace método HTTP + Modelo para referirse al nombre del controlador
