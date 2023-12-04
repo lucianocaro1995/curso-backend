@@ -8,7 +8,8 @@
 3. Creé el archivo "logger.js" dentro de la carpeta "config" donde creo el sistema de niveles 
 4. Creé el archivo "logger.routes.js" dentro de la carpeta "routes" donde creo las rutas de cada uno de los niveles
 5. Modifiqué el archivo "app.routes.js" para crear el endpoint "/loggerTest". De esta manera puedo acceder a ese endpoint para probar todos los niveles <br>
-   Por ejemplo si quiero probar el nivel fatal, solamente debo escribir "localhost:4000/loggerTest/fatal" sobre el navegador o sobre Postman con el método GET <br>
+   Por ejemplo si quiero probar el nivel fatal, solamente debo escribir "localhost:4000/api/loggerTest/fatal" sobre el navegador o sobre Postman con el método GET <br>
+6. Los archivos "errors.log" y "loggers.log" se crean sólos al ejecutar la aplicación. Ahí registraré cada vez que acceda a alguno de los niveles
 
 
 ## Dependencias instaladas para este desafío:
@@ -19,4 +20,4 @@
    - Instalarlo en backend
    - Winston es un logger diseñado para poder trabajar con multitransportes para nuestra apicación, utiliza dos conceptos importantes: <br>
    Transporte: sistema de almacenamiento de nuestros logs <br>
-   Nivel: sistema de prioridad que tiene cada alog, para definir si un log tiene autorización para pasar por un transporte
+   Nivel: sistema de prioridad que tiene cada log, para definir si un log tiene autorización para pasar por un transporte

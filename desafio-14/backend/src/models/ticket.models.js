@@ -1,3 +1,7 @@
+//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre tickets
+
+
+
 import { Schema, model } from "mongoose";
 import { v4 as uuidv4 } from 'uuid'; //Para generar un id único
 
@@ -5,30 +9,22 @@ const ticketSchema = new Schema(
     {
         code: {
             type: String,
-            unique: true,
+            default: uuidv4()
         },
         purchase_datetime: {
             type: Date,
-            default: Date.now,
+            default: Date.now
         },
         amount: {
             type: Number,
-            required: true,
+            required: true
         },
         purchaser: {
             type: String,
-            required: true,
+            required: true
         },
     },
     { versionKey: false }
 );
 
-// Agregamos un pre-save middleware para generar el código automáticamente
-ticketSchema.pre("save", function (next) {
-    if (!this.code) {
-        this.code = uuidv4();
-    }
-    next();
-});
-
-export const ticketModel = model("Ticket", ticketSchema);
+export const ticketModel = model("tickets", ticketSchema);

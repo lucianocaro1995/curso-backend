@@ -1,24 +1,31 @@
 import { Router } from "express";
+import { passportError, authorization } from "../utils/messagesError.js";
 import { cartController } from "../controllers/carts.controller.js";
 
 const cartRouter = Router();
 
-cartRouter.get("/", cartController.getCarrito);
+//Utilizamos 2 filtros o middlewares en estos endpoints, el de la token jwt y el de autorización como admin
+//Una vez superados los filtros, pasamos al controlador "cartController"
+cartRouter.get("/", passportError('jwt'), authorization('admin'), cartController.getCarts);
 
-cartRouter.get("/:cid", cartController.getCarritoById);
+cartRouter.get("/:cid", passportError('jwt'), authorization('admin'), cartController.getCartById);
 
-cartRouter.post("/", cartController.postCarrito);
+cartRouter.delete("/:id", passportError('jwt'), authorization('user'), cartController.cleanCart);
 
-cartRouter.post("/:cid/products/:pid", cartController.postCarritoByProductId);
+cartRouter.delete("/:cid/products/:pid", passportError('jwt'), authorization('user'), cartController.deleteProductInCart);
 
-cartRouter.delete("/:id", cartController.deleteById);
+cartRouter.put("/:cid", passportError('jwt'), authorization('user'), cartController.updateCart);
 
-cartRouter.put("/:cid/products/:pid", cartController.putCarritoByProductId);
+//No le veo mucho sentido a este endpoint. Para qué me sirve actualizar la cantidad de un sólo producto y no actualizar el carrito entero?
+//Además el post "/:cid/products/:pid" hace casi lo mismo
+cartRouter.put("/:cid/products/:pid", passportError('jwt'), authorization('user'), cartController.updateProductQuantity);
 
-cartRouter.delete("/:cid/products/:pid", cartController.deleteProductById);
+//No tiene sentido crear un carrito ya que al crearse un usuario, éste se crea con su propio carrito
+//Solamente me serviría para crear un carrito en Postman y probar códigos en él, así no pruebo código sobre el carrito de un usuario
+cartRouter.post("/", passportError('jwt'), authorization('admin'), cartController.createCart);
 
-cartRouter.put("/:cid", cartController.putCarrito);
+cartRouter.post("/:cid/products/:pid", passportError('jwt'), authorization('user'), cartController.addOrUpdateProductInCart);
 
-cartRouter.post("/:cid/purchase", cartController.postCompra)
+cartRouter.post("/:cid/purchase", passportError('jwt'), authorization('user'), cartController.purchaseCart)
 
 export default cartRouter;

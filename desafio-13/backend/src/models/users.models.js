@@ -1,3 +1,7 @@
+//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre users
+
+
+
 import { Schema, model } from "mongoose";
 import paginate from 'mongoose-paginate-v2';
 import { cartModel } from './carts.models.js'

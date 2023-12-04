@@ -1,14 +1,15 @@
 import { Router } from "express";
+import { passportError, authorization } from "../utils/messagesError.js";
 import { userController } from "../controllers/users.controller.js";
 
 const userRouter = Router();
 
-userRouter.get("/", userController.getUsers);
+userRouter.get("/", passportError('jwt'), authorization('admin'), userController.getUsers);
 
-userRouter.get("/:id", userController.getUserById);
+userRouter.get("/:id", passportError('jwt'), authorization('admin'), userController.getUserById);
 
-userRouter.put("/:id", userController.putUser);
+userRouter.put("/:id", passportError('jwt'), authorization('admin'), userController.updateUser);
 
-userRouter.delete("/:id", userController.deleteUser);
+userRouter.delete("/:id", passportError('jwt'), authorization('admin'), userController.deleteUser);
 
 export default userRouter;

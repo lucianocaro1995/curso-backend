@@ -1,12 +1,11 @@
 import passport from "passport";
 
-//Funcion general para retornar errores es las estrategias de passport
-
+//Función general para retornar errores en las estrategias de passport
 export const passportError = (strategy) => { //Voy a enviar local, github o jwt
     return async (req, res, next) => {
         passport.authenticate(strategy, (error, user, info) => {
             if (error) {
-                return next(error) //Que la funcion que me llame maneje como va a responder ante mi error
+                return next(error) //Que la función que me llame maneje como va a responder ante mi error
             }
             if (!user) {
                 //O me enviás un objeto con el atributo messages, o me enviás un string
@@ -22,7 +21,7 @@ export const passportError = (strategy) => { //Voy a enviar local, github o jwt
 }
 
 //Recibo un rol y establezco la capacidad del usuario
-export const authorization = (rol) => { //rol = 'Admin' desde ruta 'Crear Producto'
+export const authorization = (rol) => { //rol = 'admin' desde ruta 'Crear Producto'
     return async (req, res, next) => {
 
         if (!req.user) {

@@ -18,7 +18,7 @@ const getProducts = async (req, res) => {
     try {
         const prods = await productModel.paginate({ filter: filter }, { limit: lim, page: pag, sort: { price: ord } })
         if (prods) {
-            return res.status(200).send(products)
+            return res.status(200).send(prods)
         }
         res.status(404).send({ error: "Productos no encontrados" })
     } catch (error) {
@@ -33,7 +33,7 @@ const getProductById = async (req, res) => {
     try {
         const prod = await productModel.findById(id)
         if (prod) {
-            return res.status(200).send(product)
+            return res.status(200).send(prod)
         }
         res.status(404).send({ error: "Producto no encontrado" })
     } catch (error) {
@@ -42,7 +42,7 @@ const getProductById = async (req, res) => {
 }
 
 //3)
-const postProduct = async (req, res) => {
+const createProduct = async (req, res) => {
     const { title, description, code, price, stock, category } = req.body
 
     try {
@@ -60,13 +60,14 @@ const postProduct = async (req, res) => {
 }
 
 //4)
-const putProductById = async (req, res) => {
+const updateProductById = async (req, res) => {
     const { id } = req.params
     const { title, description, code, price, stock, category } = req.body
     try {
-        const prod = await productModel.findByIdAndUpdate(id, { title, description, code, price, stock, category })
+        //Agregando { new: true } devuelvo el producto actualizado en lugar de devolver el producto original
+        const prod = await productModel.findByIdAndUpdate(id, { title, description, code, price, stock, category }, { new: true })
         if (prod) {
-            return res.status(200).send(product)
+            return res.status(200).send(prod)
         }
         res.status(404).send({ error: "Producto no encontrado" })
     } catch (error) {
@@ -81,7 +82,7 @@ const deleteProductById = async (req, res) => {
     try {
         const prod = await productModel.findByIdAndDelete(id)
         if (prod) {
-            return res.status(200).send(product)
+            return res.status(200).send(prod)
         }
         res.status(404).send({ error: "Producto no encontrado" })
     } catch (error) {
@@ -93,7 +94,7 @@ const deleteProductById = async (req, res) => {
 export const productController = {
     getProducts,
     getProductById,
-    postProduct,
-    putProductById,
+    createProduct,
+    updateProductById,
     deleteProductById
 }

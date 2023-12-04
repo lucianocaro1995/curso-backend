@@ -30,7 +30,7 @@ const getUserById = async (req, res) => {
 };
 
 //3)
-const putUser = async (req, res) => {
+const updateUser = async (req, res) => {
     const { id } = req.params;
     const { first_name, last_name, age, email, password } = req.body;
 
@@ -70,6 +70,6 @@ const deleteUser = async (req, res) => {
 export const userController = {
     getUsers,
     getUserById,
-    putUser,
+    updateUser,
     deleteUser
 }
