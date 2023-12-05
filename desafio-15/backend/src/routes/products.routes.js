@@ -4,7 +4,6 @@ import { productController } from "../controllers/products.controller.js";
 
 const productRouter = Router()
 
-//Estos 2 primeros endpoints no llevan autorización porque todos deberían poder ver los productos, incluso los que no se registraron
 productRouter.get('/', productController.getProducts)
 
 productRouter.get('/:id', productController.getProductById)

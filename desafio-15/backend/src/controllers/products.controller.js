@@ -1,11 +1,5 @@
 import { productModel } from "../models/products.models.js";
 
-/*
-En controllers normalmente se hace método HTTP + Modelo para referirse al nombre del controlador
-Ejemplo: getProducts. Get es el método, y products el modelo 
-Todo este archivo lleva la misma lógica que el productsManager, es decir debemos crear los CRUDS
-*/
-
 //1)
 const getProducts = async (req, res) => {
     //Incluimos paginate (también debimos agregar paginate a la colección products)

@@ -29,53 +29,6 @@ const getCartById = async (req, res) => {
 };
 
 //3)
-const cleanCart = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const cart = await cartModel.findById(id);
-        if (!cart) {
-            res.status(404).send({ respuesta: "Error al agregar producto al carrito", mensaje: "Carrito no encontrado" });
-        }
-
-        cart.products = [];
-        await cart.save();
-        res.status(200).send({ respuesta: "OK", mensaje: "Productos eliminados del carrito", carrito: cart });
-    } catch (error) {
-        res.status(500).send({ respuesta: "Error", mensaje: "Ha ocurrido un error en el servidor" });
-    }
-};
-
-//4)
-const deleteProductInCart = async (req, res) => {
-    const { cid, pid } = req.params;
-
-    try {
-        const cart = await cartModel.findById(cid);
-        if (!cart) {
-            res.status(404).send({ respuesta: "Carrito no encontrado", mensaje: "Not Found" });
-        }
-
-        const product = await productModel.findById(pid);
-        if (!product) {
-            res.status(404).send({ respuesta: "Producto no encontrado", mensaje: "Not Found" });
-        }
-
-        const index = cart.products.findIndex((prod) => prod.id_prod._id.toString() === pid);
-        if (index !== -1) {
-            cart.products.splice(index, 1);
-        } else {
-            res.status(404).send({ respuesta: "Producto no encontrado en carrito", mensaje: "Not Found" });
-        }
-
-        await cart.save();
-        res.status(200).send({ respuesta: "OK", mensaje: "Product removed" });
-    } catch (error) {
-        res.status(error.message.includes("not found") ? 404 : 400).send({ respuesta: "Error", mensaje: error.message });
-    }
-};
-
-//5)
 const updateCart = async (req, res) => {
     const { cid } = req.params;
     const productsArray = req.body.products;
@@ -117,13 +70,30 @@ const updateCart = async (req, res) => {
     }
 };
 
-//6)
-const updateProductQuantity = async (req, res) => {
-    try {
-        const { cid, pid } = req.params;
-        const { quantity } = req.body;
-        const cart = await cartModel.findById(cid);
+//4)
+const cleanCart = async (req, res) => {
+    const { id } = req.params;
 
+    try {
+        const cart = await cartModel.findById(id);
+        if (!cart) {
+            res.status(404).send({ respuesta: "Error al agregar producto al carrito", mensaje: "Carrito no encontrado" });
+        }
+
+        cart.products = [];
+        await cart.save();
+        res.status(200).send({ respuesta: "OK", mensaje: "Productos eliminados del carrito", carrito: cart });
+    } catch (error) {
+        res.status(500).send({ respuesta: "Error", mensaje: "Ha ocurrido un error en el servidor" });
+    }
+};
+
+//5)
+const deleteProductInCart = async (req, res) => {
+    const { cid, pid } = req.params;
+
+    try {
+        const cart = await cartModel.findById(cid);
         if (!cart) {
             res.status(404).send({ respuesta: "Carrito no encontrado", mensaje: "Not Found" });
         }
@@ -133,32 +103,21 @@ const updateProductQuantity = async (req, res) => {
             res.status(404).send({ respuesta: "Producto no encontrado", mensaje: "Not Found" });
         }
 
-        const indice = cart.products.findIndex((prod) => prod.id_prod._id.toString() === pid);
-        if (indice !== -1) {
-            cart.products[indice].quantity = quantity;
+        const index = cart.products.findIndex((prod) => prod.id_prod._id.toString() === pid);
+        if (index !== -1) {
+            cart.products.splice(index, 1);
         } else {
-            cart.products.push({ id_prod: pid, quantity: quantity });
+            res.status(404).send({ respuesta: "Producto no encontrado en carrito", mensaje: "Not Found" });
         }
 
         await cart.save();
-        res.status(200).send({ respuesta: "OK", mensaje: "Carrito actualizado", carrito: cart });
+        res.status(200).send({ respuesta: "OK", mensaje: "Product removed" });
     } catch (error) {
-        console.error(error);
-        res.status(500).send({ respuesta: "Error", mensaje: "Ha ocurrido un error en el servidor" });
+        res.status(error.message.includes("not found") ? 404 : 400).send({ respuesta: "Error", mensaje: error.message });
     }
 };
 
-//7)
-const createCart = async (req, res) => {
-    try {
-        const cart = await cartModel.create({});
-        res.status(200).send({ respuesta: "OK", mensaje: cart });
-    } catch (error) {
-        res.status(400).send({ respuesta: "Error en crear el carrito", mensaje: error });
-    }
-};
-
-//8)
+//6)
 const addOrUpdateProductInCart = async (req, res) => {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
@@ -189,7 +148,7 @@ const addOrUpdateProductInCart = async (req, res) => {
     }
 };
 
-//9)
+//7)
 const purchaseCart = async (req, res) => {
     const { cid } = req.params;
     const purchaser = req.user.user.email;
@@ -251,11 +210,9 @@ const purchaseCart = async (req, res) => {
 export const cartController = {
     getCarts,
     getCartById,
+    updateCart,
     cleanCart,
     deleteProductInCart,
-    updateCart,
-    updateProductQuantity,
-    createCart,
     addOrUpdateProductInCart,
     purchaseCart
 };
