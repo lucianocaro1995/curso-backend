@@ -52,4 +52,15 @@ userSchema.pre('save', async function (next) {
     }
 })
 
+userSchema.methods.processPurchase = async function (totalPrice) {
+    if (this.rol === 'premium') {
+        const discountPercentage = 0.25;
+        const discountAmount = totalPrice * discountPercentage;
+        this.discounts += discountAmount;
+        await this.save();
+        return totalPrice - discountAmount;
+    }
+    return totalPrice;
+}
+
 export const userModel = model('users', userSchema)
