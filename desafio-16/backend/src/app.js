@@ -57,7 +57,26 @@ const corsOptions = {
 
 
 
-//5) Configuración del servidor Express
+//5) Swagger
+const swaggerOptions = {
+    definition: {
+        openapi: '3.1.0',
+        info: {
+            title: "Documentación del curso de Backend",
+            description: "API Coder Backend"
+        }
+    },
+    apis: [`${__dirname}/docs/**/*.yaml`]
+    //** = indica una subcarpeta que no me interesa el nombre
+    //*.yaml = indica que en esa subcarpeta va a haber archivos. No me interesa el nombre de estos pero la extensión es yaml
+}
+
+//La forma en que voy a trabajar mi documentación
+const specs = swaggerJSDoc(swaggerOptions)
+
+
+
+//6) Configuración del servidor Express
 //Middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -83,29 +102,10 @@ app.use(session({
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
+//Middleware de Swagger
+app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs)) //En qué ruta se va a ejecutar, y bajo qué condiciones
 
 
 
-//6) Rutas
+//7) Rutas
 app.use('/', router)
-
-
-
-//7) Swagger
-const swaggerOptions = {
-    definition: {
-        openapi: '3.1.0',
-        info: {
-            title: "Documentación del curso de Backend",
-            description: "API Coder Backend"
-        }
-    },
-    apis: [`${__dirname}/docs/**/*.yaml`]
-    //** = indica una subcarpeta que no me interesa el nombre
-    //*.yaml = indica que en esa subcarpeta va a haber archivos. No me interesa el nombre de estos pero la extensión es yaml
-}
-
-//La forma en que voy a trabajar mi documentación
-const specs = swaggerJSDoc(swaggerOptions)
-//En qué ruta se va a ejecutar, y bajo qué condiciones
-app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))

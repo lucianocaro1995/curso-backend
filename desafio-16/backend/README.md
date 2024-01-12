@@ -4,11 +4,16 @@
    Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
 2. Desafío "Documentar API": <br>
    En este desafío debemos realizar la configuración necesaria para tener documentado nuestro proyecto final utilizando Swagger <br>
-   Debemos documentar el módulo de carrito y el módulo de productos. No es necesario hacer la documentación de sesiones
+   Debemos documentar carritos, productos, sesiones y usuario <br>
+   No es necesario crear todos los CRUDS que hicimos en la carpeta "routes". En sessions el profesor nos pidió que hagamos solamente el login, con eso ya es suficiente
 3. Modifiqué el archivo "app.js" para poder incluir Swagger y utilizarlo en nuestro proyecto
 4. Creé el archivo "path.js" nuevamente ya que le volvemos a dar uso <br>
 Es recomendado que el archivo path esté en el mismo directorio en donde se encuentra "app.js"
-5. Creé la carpeta "docs" en donde voy a documentar carritos y productos
+5. Creé la carpeta "docs" en donde voy a documentar lo pedido
+6. Importante: Para visualizar Swagger voy al endpoint "localhost:4000/apidocs" en el navegador <br>
+   Para poder utilizarlo y hacer CRUDS con los usuarios sin tener que loguearme, debo borrar los 2 middlewars en users.routes.js, tanto passportError('jwt') como authorization('admin') <br>
+   Si no hago esto, cuando ejecute dentro de Swagger me va a aparecer un error y no me va a funcionar la operación que quiera realizar con los usuarios ya que necesito logearme (obviamente debo hacer lo mismo con carritos, productos y sesiones)
+7. Aclaración: el archivo "users.yaml" es el que hizo el profesor en clase. Lo hice lo más parecido a lo que hizo el profesor, luego con el resto (carts y products principalmente) utilicé simplificaciones de código para no repetir tanto
 
 
 

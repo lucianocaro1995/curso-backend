@@ -10,7 +10,7 @@ cartRouter.get("/:cid", passportError('jwt'), authorization('admin'), cartContro
 
 cartRouter.put("/:cid", passportError('jwt'), authorization('user'), cartController.updateCart);
 
-cartRouter.delete("/:id", passportError('jwt'), authorization('user'), cartController.cleanCart);
+cartRouter.delete("/:cid", passportError('jwt'), authorization('user'), cartController.cleanCart);
 
 cartRouter.delete("/:cid/products/:pid", passportError('jwt'), authorization('user'), cartController.deleteProductInCart);
 
