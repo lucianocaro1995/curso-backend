@@ -10,6 +10,9 @@
 5. Modifiqué el archivo "app.routes.js" para crear el endpoint "/loggerTest". De esta manera puedo acceder a ese endpoint para probar todos los niveles <br>
    Por ejemplo si quiero probar el nivel fatal, solamente debo escribir "localhost:4000/api/loggerTest/fatal" sobre el navegador o sobre Postman con el método GET <br>
 6. Los archivos "errors.log" y "loggers.log" se crean sólos al ejecutar la aplicación. Ahí registraré cada vez que acceda a alguno de los niveles
+7. En el after vimos cómo ver todos los niveles de loggers en un archivo html (en vez de verlos en el archivo log como hacíamos anteriormente) <br>
+   Podemos ingresar los niveles desde Postman introduciendo cualquier endpoint como "localhost:4000/api/loggerTest/fatal" <br>
+   Luego, vamos a "loggers.html" o "errors.html" y hacemos click derecho y "open with live server" para visualizar los loggers en nuestro navegador
 
 
 ## Dependencias instaladas para este desafío:

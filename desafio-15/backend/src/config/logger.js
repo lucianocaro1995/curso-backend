@@ -19,6 +19,9 @@ const customLevelOptions = {
     }
 }
 
+/*
+//La diferencia de este código que comenté, con el de abajo, es que este lo utilizaba para los archivos log
+
 const logger = winston.createLogger({
     levels: customLevelOptions.levels,
     transports: [
@@ -26,6 +29,8 @@ const logger = winston.createLogger({
             filename: './errors.log',
             level: 'fatal',
             format: winston.format.combine(
+                //El colorize se marca así: [31mfatal[39m:
+                //Para el archivo .log conviene dejarlo. Para el archivo .html conviene borrarlo
                 winston.format.colorize({ colors: customLevelOptions.colors }),
                 winston.format.simple()
             )
@@ -72,6 +77,63 @@ const logger = winston.createLogger({
         })
     ]
 })
+*/
+
+//Esto lo vimos en el after:
+//Código necesario en caso de que quiera guardar los loggers en un archivo html, en vez de un archivo log:
+
+const logger = winston.createLogger({
+    levels: customLevelOptions.levels,
+    transports: [
+        new winston.transports.File({
+            filename: './errors.html',
+            level: 'fatal',
+            format: winston.format.combine(
+                winston.format.simple()
+            )
+        }),
+        new winston.transports.File({
+            filename: './errors.html',
+            level: 'error',
+            format: winston.format.combine(
+                winston.format.simple()
+            )
+        }),
+        new winston.transports.File({
+            filename: './loggers.html',
+            level: 'warning',
+            format: winston.format.combine(
+                winston.format.simple()
+            )
+        }),
+        new winston.transports.File({
+            filename: './loggers.html',
+            level: 'info',
+            format: winston.format.combine(
+                winston.format.simple()
+            )
+        }),
+        new winston.transports.File({
+            filename: './loggers.html',
+            level: 'http',
+            format: winston.format.combine(
+                winston.format.simple()
+            )
+        }),
+        new winston.transports.Console({
+            level: 'debug',
+            format: winston.format.combine(
+                //Acá sí es necesario el colorize porque sino no se ven los colores en la consola
+                winston.format.colorize({ colors: customLevelOptions.colors }),
+                winston.format.simple()
+            )
+        })
+    ]
+})
+
+
+
+
 
 export const addLogger = (req, res, next) => {
     req.logger = logger
