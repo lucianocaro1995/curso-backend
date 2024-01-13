@@ -95,6 +95,37 @@ paths:
                 '500':
                     description: Error interno del servidor
 
+    /api/users/password-recovery:
+        post:
+            summary: "Solicitar nueva contraseña"
+            tags:
+                -   Users
+            security:
+                -   jwt: []
+            responses:
+                200:
+                    description: "Solicitud de nueva contraseña exitosa"
+            x-auth-role: user
+
+    /api/users/reset-password/{token}:
+        post:
+            summary: "Reestablecer contraseña"
+            tags:
+                -   Users
+            security:
+                -   jwt: []
+            parameters:
+            -   name: token
+                in: path
+                required: true
+                description: "Token recibido para restablecer la contraseña"
+                schema:
+                    type: string
+            responses:
+                200:
+                    description: "Contraseña reestablecida correctamente"
+            x-auth-role: user
+
 components:
     schemas:
         User:
