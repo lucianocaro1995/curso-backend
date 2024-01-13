@@ -89,16 +89,16 @@ const requestPasswordReset = async (req, res) => {
 //6)
 const resetPassword = async (req, res) => {
     const { token } = req.params;
-    const { newPassword, newPassword2 } = req.body;
+    const { newPassword, confirmNewPassword } = req.body;
 
     try {
         const linkData = recoveryLinks[token];
         if (linkData && Date.now() - linkData.timestamp <= 3600000) {
-            console.log(newPassword, newPassword2);
+            console.log(newPassword, confirmNewPassword);
             const { email } = linkData;
             console.log(email);
             console.log(token);
-            if (newPassword == newPassword2) {
+            if (newPassword == confirmNewPassword) {
                 // Modificar usuario con nueva contraseña
                 delete recoveryLinks[token];
                 res.status(200).send('Contraseña modificada correctamente');
