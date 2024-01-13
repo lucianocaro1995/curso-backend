@@ -30,5 +30,8 @@
       "newPassword2": "1234" <br>
    } <br>
    Elimino los 2 middlewares en "users.routes.js" así me ahorro el paso de logearme, y me debería aparecer el mensaje "Contraseña modificada correctamente" en la consola de Postman <br>
+   Tener en cuenta que el token expira luego de un tiempo, y también expira cuando se cierra el servidor. Es decir cuando ejecute de nuevo con "npm run dev" debo volver a proceder con la primera función, si quiero poder realizar la segunda función
+
+
 
 ## Dependencias instaladas para este desafío:
