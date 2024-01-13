@@ -8,7 +8,7 @@
    No es necesario crear todos los CRUDS que hicimos en la carpeta "routes". En sessions el profesor nos pidió que hagamos solamente el login, con eso ya es suficiente
 3. Modifiqué el archivo "app.js" para poder incluir Swagger y utilizarlo en nuestro proyecto
 4. Creé el archivo "path.js" nuevamente ya que le volvemos a dar uso. Lo importo en "app.js" <br>
-Es recomendado que el archivo path esté en el mismo directorio en donde se encuentra "app.js"
+   Es recomendado que el archivo path esté en el mismo directorio en donde se encuentra "app.js" ya que de esta forma se maneja de forma más sencilla el tema de las rutas y se evita inconvenientes
 5. Creé la carpeta "docs" en donde voy a documentar lo pedido
 6. Importante: para visualizar Swagger voy al endpoint "localhost:4000/apidocs" en el navegador <br>
    Para poder utilizarlo y hacer CRUDS con los usuarios sin tener que loguearme, debo borrar los 2 middlewars en users.routes.js, tanto passportError('jwt') como authorization('admin') <br>

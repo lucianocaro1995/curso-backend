@@ -75,6 +75,7 @@ const requestPasswordReset = async (req, res) => {
     const { email } = req.body;
 
     try {
+        //Token único con el fin de que no haya 2 usuarios con el mismo link de recuperación
         const token = crypto.randomBytes(20).toString('hex');
         recoveryLinks[token] = { email: email, timestamp: Date.now() };
         const recoveryLink = `http://localhost:4000/api/users/reset-password/${token}`;

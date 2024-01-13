@@ -16,6 +16,19 @@
    La segunda resetPassword: completa el proceso de reestablecimiento. Modifica el valor de la contraseña en la base de datos
 6. Modifiqué el archivo "users.routes.js" para incluir los 2 endpoints con las funciones que acabo de crear en los controllers
 7. Modifiqué el archivo "users.models.js" para incluir un rol premium que tenga el beneficio de poder comprar productos con descuento
-
+8. Probar las 2 funciones creadas: <br>
+   `requestPasswordReset` <br>
+   Ingreso "localhost:4000/api/users/password-recovery" en Postman utilizando el método POST, luego en el body ingreso un email, como por ejemplo: <br>
+   { <br>
+      "email": "lucho_lp_1995@hotmail.com" <br>
+   } <br>
+   Elimino los 2 middlewares en "users.routes.js" así me ahorro el paso de logearme, y me debería aparecer el mensaje "Correo de recuperación enviado" en la consola de Postman <br>
+   `resetPassword` <br>
+   Copio el link que recibí en el mail, que es esto junto al string del token: "localhost:4000/api/users/reset-password/:token", lo ingreso en Postman utilizando el método POST, luego en el body ingreso un array con la nueva contraseña, como por ejemplo: <br>
+   { <br>
+      "newPassword": "1234", <br>
+      "newPassword2": "1234" <br>
+   } <br>
+   Elimino los 2 middlewares en "users.routes.js" así me ahorro el paso de logearme, y me debería aparecer el mensaje "Contraseña modificada correctamente" en la consola de Postman <br>
 
 ## Dependencias instaladas para este desafío:
