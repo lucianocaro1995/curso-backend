@@ -15,13 +15,11 @@
    Supertest: Es una biblioteca específica para realizar pruebas de API HTTP en Node.js. Se utiliza comúnmente con frameworks como Mocha o Jest para realizar solicitudes HTTP y realizar aserciones en las respuestas
 4. Creé una carpeta "test" en donde voy a crear los archivos supertests pedidos por la consigna, más el de usuarios <br>
    Los archivos "supertest.test.js", "users.test.js" y "usersChai.test.js" son los que realizó el profesor en clase, no los elimino para poder revisarlos y estudiarlos cuando lo necesite
-5. Debo ejecutar `npm run test` para probar el test de usuarios <br>
-   Debo ejecutar `npm run testChai` para probar el test de usuarios realizados con Chai. Es básicamente lo mismo pero en vez de utilizar el módulo nativo que tiene Node.js para hacer las comparaciones llamado Assert, utilizamos Chai <br>
-   Debo ejecutar `npm run supertest` para probar los supertest. Como tengo varios, debo introducir en la terminal `npx mocha ruta/a/carts.supertest.test.js` para probar carts o el que desee <br>
 6. Importante: las dependencias que se necesitan en este desafío deben ser instaladas dentro de nuestras dependencias de desarrollo. Esto se logra agregando -D al ejecutable (en package.json deben estar en devDependencies, no en dependencies) <br>
    La razón para instalarlas de esta manera, es que el testing sólo se debe realizar antes de entrar en un entorno productivo. Cuando nuestro proyecto se encuentre desplegado en la nube, no habrá necesidad de querer correr un test en éste
-7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados
-8. Probando:
+7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados ya que no tenemos una base de datos de prueba
+8. Para ejecutar cada uno de los test creados, debo verificar los nombres asignados en el package.json para ese archivo en particular e introducir en la terminal npm run + (nombre), por ejemplo si quiero ejecutar el supertest de carts debo ejecutar "npm run cartssupertest" <br>
+   Estos son los nombres que asigné:
 <pre>
    <code class="language-json">
       {
