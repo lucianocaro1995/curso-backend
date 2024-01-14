@@ -21,12 +21,13 @@
 6. Importante: las dependencias que se necesitan en este desafío deben ser instaladas dentro de nuestras dependencias de desarrollo. Esto se logra agregando -D al ejecutable (en package.json deben estar en devDependencies, no en dependencies) <br>
    La razón para instalarlas de esta manera, es que el testing sólo se debe realizar antes de entrar en un entorno productivo. Cuando nuestro proyecto se encuentre desplegado en la nube, no habrá necesidad de querer correr un test en éste
 7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados
-8. <div data-copyable>
+8. Probando:
+<div data-copyable>
       def hola_mundo():
          print("¡Hola, mundo!")
 
       hola_mundo()
-   </div>
+</div>
 
 
 ## Dependencias instaladas para este desafío:
