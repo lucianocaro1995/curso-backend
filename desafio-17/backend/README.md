@@ -17,10 +17,18 @@
    Los archivos "supertest.test.js", "users.test.js" y "usersChai.test.js" son los que realizó el profesor en clase, no los elimino para poder revisarlos y estudiarlos cuando lo necesite
 5. Debo ejecutar `npm run test` para probar el test de usuarios <br>
    Debo ejecutar `npm run testChai` para probar el test de usuarios realizados con Chai. Es básicamente lo mismo pero en vez de utilizar el módulo nativo que tiene Node.js para hacer las comparaciones llamado Assert, utilizamos Chai <br>
-   Debo ejecutar `npm run supertest` para probar el test llamado supertest <br>
+   Debo ejecutar `npm run supertest` para probar los supertest. Como tengo varios, debo introducir en la terminal `npx mocha ruta/a/carts.supertest.test.js` para probar carts o el que desee <br>
 6. Importante: las dependencias que se necesitan en este desafío deben ser instaladas dentro de nuestras dependencias de desarrollo. Esto se logra agregando -D al ejecutable (en package.json deben estar en devDependencies, no en dependencies) <br>
    La razón para instalarlas de esta manera, es que el testing sólo se debe realizar antes de entrar en un entorno productivo. Cuando nuestro proyecto se encuentre desplegado en la nube, no habrá necesidad de querer correr un test en éste
 7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados
+8. ```markdown
+```python
+<div data-copyable>
+   def hola_mundo():
+      print("¡Hola, mundo!")
+
+  hola_mundo()
+</div>
 
 
 ## Dependencias instaladas para este desafío:
