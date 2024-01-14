@@ -65,6 +65,7 @@ components:
                 - status
                 - title
                 - description
+                - category
                 - price
                 - stock
                 - code
@@ -79,6 +80,8 @@ components:
                 title:
                     type: string
                 description:
+                    type: string
+                category:
                     type: string
                 price:
                     type: number
@@ -160,6 +163,7 @@ components:
                 status: true
                 title: Camisa blanca
                 description: Camisa para uniforme escolar
+                category: Indumentaria
                 price: 900
                 stock: 600
                 code: abc123

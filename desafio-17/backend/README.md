@@ -6,10 +6,10 @@
    En este trabajo debemos realizar 3 supertests: para products, carts y sessions <br>
    En clase vimos tanto test (de users) como supertest (de sessions), pero para el desafío se pide entregar solamente supertests. Todos los supertests también deben implementar mocha y chai <br>
    También es importante agregar los nombres de los test en "package.json" para que funcionen correctamente, en la sección de scripts <br>
-   Para `products` debemos realizar distintos métodos, y también tener en consideración realizar la estrategia de login para el usuario admin, debe enviar email y contraseña, y esa cookie que genera se va a poder utilizar en cada una de las rutas <br>
+   Para `products` debemos tener en consideración realizar la estrategia de login para el usuario admin, debe enviar email y contraseña, y esa cookie que genera se va a poder utilizar en cada una de las rutas <br>
    Para `carts` con realizar un método ya alcanza. Podemos crear un nuevo usuario con su carrito correspondiente, o con un usuario y un carrito previamente creados, implementar un método ya sea para agregar un producto al carrito, marcar stock o finalizar la compra <br>
-   El supertest de `sessions` ya lo realizamos en clase <br>
-   El test de `users` no es pedido por la consigna, pero como también lo realizamos en clase, yo tomé los mismos métodos y reemplacé parte del código para implementarle supertest, mocha y chai <br>
+   El supertest de `sessions` ya lo realizamos en clase en el archivo "supertest.test.js" <br>
+   El supertest de `users` no es pedido por la consigna, pero como realizamos un test de users en clase, yo tomé los mismos métodos y reemplacé parte del código para implementarle supertest, mocha y chai <br>
 3. Diferencias entre test y supertest: <br>
    Test: En el contexto de Node.js, "test" no se refiere a una biblioteca específica, sino a la categoría general de bibliotecas de pruebas. Ejemplos incluyen Mocha, Jest, entre otros. Test por sí solo no es una biblioteca reconocida en Node.js <br>
    Supertest: Es una biblioteca específica para realizar pruebas de API HTTP en Node.js. Se utiliza comúnmente con frameworks como Mocha o Jest para realizar solicitudes HTTP y realizar aserciones en las respuestas
@@ -20,6 +20,7 @@
    Debo ejecutar `npm run supertest` para probar el test llamado supertest <br>
 6. Importante: las dependencias que se necesitan en este desafío deben ser instaladas dentro de nuestras dependencias de desarrollo. Esto se logra agregando -D al ejecutable (en package.json deben estar en devDependencies, no en dependencies) <br>
    La razón para instalarlas de esta manera, es que el testing sólo se debe realizar antes de entrar en un entorno productivo. Cuando nuestro proyecto se encuentre desplegado en la nube, no habrá necesidad de querer correr un test en éste
+7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados
 
 
 ## Dependencias instaladas para este desafío:

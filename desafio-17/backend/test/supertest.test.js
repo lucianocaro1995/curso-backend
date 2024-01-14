@@ -1,13 +1,17 @@
-import chai from 'chai'
-import mongoose from 'mongoose'
-import supertest from 'supertest'
+import mongoose from 'mongoose';
+import supertest from 'supertest';
+import chai from 'chai';
+import 'dotenv/config';
 import __dirname from '../src/__dirname.js'
-import 'dotenv/config'
 
 const expect = chai.expect
 const requester = supertest('http://localhost:4000')
 
 await mongoose.connect(process.env.MONGO_URL)
+
+
+
+
 
 /*
 describe('Test CRUD de Mascotas en la ruta api/pets', function () {
@@ -70,6 +74,8 @@ describe('Test CRUD de Mascotas en la ruta api/pets', function () {
 
 })
 */
+
+
 
 
 
