@@ -20,25 +20,20 @@
 7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados ya que no tenemos una base de datos de prueba
 8. Para ejecutar cada uno de los test creados, debo verificar los nombres asignados en el package.json para ese archivo en particular e introducir en la terminal npm run + (nombre), por ejemplo si quiero ejecutar el supertest de carts debo ejecutar "npm run cartssupertest" <br>
    Estos son los nombres que asigné:
-<!-- Esto es un comentario -->
-<pre>
-   <code class="language-json">
-      {
-         "scripts": {
-            "dev": "nodemon src/app.js",
-            "test": "mocha test/users.test.js",
-            "testChai": "mocha test/usersChai.test.js",
-            "supertest": "mocha test/supertest.test.js",
-            "userssupertest": "mocha test/users.supertest.test.js",
-            "productssupertest": "mocha test/products.supertest.test.js",
-            "cartssupertest": "mocha test/carts.supertest.test.js",
-            "sessionssupertest": "mocha test/sessions.supertest.test.js"
-         }
+```
+   {
+      "scripts": {
+         "dev": "nodemon src/app.js",
+         "test": "mocha test/users.test.js",
+         "testChai": "mocha test/usersChai.test.js",
+         "supertest": "mocha test/supertest.test.js",
+         "userssupertest": "mocha test/users.supertest.test.js",
+         "productssupertest": "mocha test/products.supertest.test.js",
+         "cartssupertest": "mocha test/carts.supertest.test.js",
+         "sessionssupertest": "mocha test/sessions.supertest.test.js"
       }
-   </code>
-</pre>
-
-
+   }
+```
 
 
 ## Dependencias instaladas para este desafío:
