@@ -20,7 +20,7 @@
 7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados ya que no tenemos una base de datos de prueba
 8. Para ejecutar cada uno de los test creados, debo verificar los nombres asignados en el package.json para ese archivo en particular e introducir en la terminal npm run + (nombre), por ejemplo si quiero ejecutar el supertest de carts debo ejecutar "npm run cartssupertest" <br>
    Estos son los nombres que asigné:
-<pre>
+<pre style="margin: 0; padding: 0;">
    <code class="language-json">
       {
          "scripts": {
