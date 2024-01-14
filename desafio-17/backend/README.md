@@ -18,9 +18,9 @@
 6. Importante: las dependencias que se necesitan en este desafío deben ser instaladas dentro de nuestras dependencias de desarrollo. Esto se logra agregando -D al ejecutable (en package.json deben estar en devDependencies, no en dependencies) <br>
    La razón para instalarlas de esta manera, es que el testing sólo se debe realizar antes de entrar en un entorno productivo. Cuando nuestro proyecto se encuentre desplegado en la nube, no habrá necesidad de querer correr un test en éste
 7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados ya que no tenemos una base de datos de prueba
-8. Para ejecutar cada uno de los test creados, debo verificar los nombres asignados en el package.json para ese archivo en particular e introducir en la terminal npm run + (nombre), por ejemplo si quiero ejecutar el supertest de carts debo ejecutar "npm run cartssupertest" <br>
+8. Para ejecutar cada uno de los test creados, debo verificar los nombres asignados en el package.json para ese archivo en particular e introducir en la terminal npm run + (nombre), por ejemplo si quiero ejecutar el supertest de carts debo ingresar "npm run cartssupertest" <br>
    Estos son los nombres que asigné:
-```
+```json
    {
       "scripts": {
          "dev": "nodemon src/app.js",

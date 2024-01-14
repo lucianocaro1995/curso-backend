@@ -1,0 +1,170 @@
+paths:
+    /api/products/:
+        get:
+            summary: Obtener todos los productos
+            tags:
+                - Products
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessArray'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+        post:
+            summary: Crear un nuevo producto
+            tags:
+                - Products
+            requestBody:
+                $ref: '#/components/requestBodies/Product'
+            responses:
+                '201':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+
+    /api/products/{pid}:
+        get:
+            summary: Obtener un sólo producto
+            tags:
+                - Products
+            parameters:
+                - $ref: '#/components/parameters/ProductId'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+        put:
+            summary: Actualizar un producto
+            tags:
+                - Products
+            parameters:
+                - $ref: '#/components/parameters/ProductId'
+                - $ref: '#/components/parameters/RequestBodyProduct'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+        delete:
+            summary: Eliminar un producto
+            tags:
+                - Products
+            parameters:
+                - $ref: '#/components/parameters/ProductId'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+
+components:
+    schemas:
+        Product:
+            type: object
+            required:
+                - status
+                - title
+                - description
+                - category
+                - price
+                - stock
+                - code
+                - thumbnail
+            properties:
+                _id:
+                    type: string
+                    description: ID autogenerado por MongoDB
+                status:
+                    type: boolean
+                    description: Estado del producto (true o false)
+                title:
+                    type: string
+                description:
+                    type: string
+                category:
+                    type: string
+                price:
+                    type: number
+                    format: float
+                stock:
+                    type: integer
+                    format: int64
+                code:
+                    type: string
+                thumbnail:
+                    type: array
+                    items:
+                        type: string
+        Error:
+            type: object
+            required:
+                - code
+                - message
+            properties:
+                code:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+
+    parameters:
+        ProductId:
+            in: path
+            required: true
+            schema:
+                type: string
+            description: ID del producto
+        RequestBodyProduct:
+            in: body
+            required: true
+            schema:
+                $ref: '#/components/schemas/Product'
+
+    responses:
+        SuccessSingle:
+            description: Operación exitosa
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Product'
+        SuccessArray:
+            description: Operación exitosa
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/Product'
+        ServerError:
+            description: Error interno del servidor
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+
+    requestBodies:
+        Product:
+            type: object
+            description: Producto que debe agregarse a la tienda
+            properties:
+                title:
+                    type: string
+                description:
+                    type: string
+                code:
+                    type: string
+                price:
+                    type: number
+                    format: float
+                stock:
+                    type: integer
+                    format: int64
+            example:
+                status: true
+                title: Camisa blanca
+                description: Camisa para uniforme escolar
+                category: Indumentaria
+                price: 900
+                stock: 600
+                code: abc123
+                thumbnail: [image1.jpg, image2.jpg]
