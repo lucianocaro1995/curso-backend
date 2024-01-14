@@ -22,11 +22,19 @@
    La razón para instalarlas de esta manera, es que el testing sólo se debe realizar antes de entrar en un entorno productivo. Cuando nuestro proyecto se encuentre desplegado en la nube, no habrá necesidad de querer correr un test en éste
 7. Importante: tanto Swagger utilizado en el desafío anterior para documentar, como estos tests, realizan cambios en nuestra base de datos cuando ejecutamos los métodos creados
 8. Probando:
-<div data-copyable>
-      def hola_mundo():
-         print("¡Hola, mundo!")
-      hola_mundo()
-</div>
+```json
+{
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "mocha test/users.test.js",
+    "testChai": "mocha test/usersChai.test.js",
+    "supertest": "mocha test/supertest.test.js",
+    "userssupertest": "mocha test/users.supertest.test.js",
+    "productssupertest": "mocha test/products.supertest.test.js",
+    "cartssupertest": "mocha test/carts.supertest.test.js",
+    "sessionssupertest": "mocha test/sessions.supertest.test.js"
+  }
+}
 
 
 ## Dependencias instaladas para este desafío:
