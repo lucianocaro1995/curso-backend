@@ -7,9 +7,11 @@
     "dev": "nodemon src/app.js",
     "test": "mocha test/users.test.js",
     "testChai": "mocha test/usersChai.test.js",
+    "supertest": "mocha test/supertest.test.js",
     "userssupertest": "mocha test/users.supertest.test.js",
     "productssupertest": "mocha test/products.supertest.test.js",
-    "cartssupertest": "mocha test/carts.supertest.test.js"
+    "cartssupertest": "mocha test/carts.supertest.test.js",
+    "sessionssupertest": "mocha test/sessions.supertest.test.js"
   },
   "keywords": [],
   "author": "",

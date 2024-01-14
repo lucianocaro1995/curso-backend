@@ -14,6 +14,7 @@
    Para poder utilizarlo y hacer CRUDS con los usuarios sin tener que loguearme, debo borrar los 2 middlewars en users.routes.js, tanto passportError('jwt') como authorization('admin') <br>
    Si no hago esto, cuando ejecute dentro de Swagger me va a aparecer un error y no me va a funcionar la operación que quiera realizar con los usuarios ya que necesito logearme (obviamente debo hacer lo mismo con carritos, productos y sesiones)
 7. Aclaración: el archivo "users.yaml" es el que hizo el profesor en clase. Lo hice lo más parecido a lo que hizo el profesor, luego con el resto (carts y products principalmente) utilicé simplificaciones de código para no repetir tanto
+8. Aclaración: utilizar Swagger también modifica la base de datos. Sirve para documentar y también para manipular la base de datos desde el frontend
 
 
 
