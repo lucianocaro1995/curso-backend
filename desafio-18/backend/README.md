@@ -14,10 +14,11 @@
    Si se sube la imagen de un producto, deberá guardarse en la carpeta products <br>
    Si se carga un documento, deberá guardarse en documents <br>
 3. Creé el archivo "multer.js" en la carpeta config justamente para configurar Multer según lo pedido por la consigna
-4. Modifiqué "users.controller.js" para agregar la función que me permita subir documentos
-5. Modifiqué "users.routes.js" para agregar el endpoint solicitado
-6. Modifiqué "users.models.js" para agregarle las propiedades documents y last_connection
-7. Subir una imagen desde Postman:
+4. Creé la carpeta "uploads" en donde voy a guardar las imágenes y separarlas en categorías
+5. Modifiqué "users.controller.js" para agregar la función que me permita subir documentos
+6. Modifiqué "users.routes.js" para agregar el endpoint solicitado
+7. Modifiqué "users.models.js" para agregarle las propiedades documents y last_connection
+8. Cómo subir una imagen desde Postman: <br>
    Ingreso el endpoint "localhost:4000/api/users/651a2ea1e59e5ab04fe5d4d4/documents" <br>
    Utilizo el método POST <br>
    Voy a la pestaña body y clickeo la opción form-data <br>
