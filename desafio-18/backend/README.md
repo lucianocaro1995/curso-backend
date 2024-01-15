@@ -18,7 +18,7 @@
 5. Modifiqué "users.controller.js" para agregar la función que me permita subir documentos
 6. Modifiqué "users.routes.js" para agregar el endpoint solicitado
 7. Modifiqué "users.models.js" para agregarle las propiedades documents y last_connection
-8. Cómo subir una imagen desde Postman: <br>
+8. Cómo subir una imagen a la base de datos desde Postman: <br>
    Ingreso el endpoint "localhost:4000/api/users/651a2ea1e59e5ab04fe5d4d4/documents" utilizando el id de alguno de los usuarios de mi base de datos <br>
    Utilizo el método POST <br>
    Voy a la pestaña body y clickeo la opción form-data <br>
