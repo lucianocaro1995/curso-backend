@@ -6,11 +6,11 @@ const userRouter = Router();
 
 userRouter.get("/", passportError('jwt'), authorization('admin'), userController.getUsers);
 
-userRouter.get("/:id", passportError('jwt'), authorization('admin'), userController.getUserById);
+userRouter.get("/:uid", passportError('jwt'), authorization('admin'), userController.getUserById);
 
-userRouter.put("/:id", passportError('jwt'), authorization('admin'), userController.updateUser);
+userRouter.put("/:uid", passportError('jwt'), authorization('admin'), userController.updateUser);
 
-userRouter.delete("/:id", passportError('jwt'), authorization('admin'), userController.deleteUser);
+userRouter.delete("/:uid", passportError('jwt'), authorization('admin'), userController.deleteUser);
 
 userRouter.post("/password-recovery", passportError('jwt'), authorization('user'), userController.requestPasswordReset);
 

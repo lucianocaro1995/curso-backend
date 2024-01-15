@@ -1,0 +1,174 @@
+paths:
+    /api/carts/:
+        get:
+            summary: Obtener todos los carritos
+            tags:
+                - Carts
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessArray'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+
+    /api/carts/{cid}:
+        get:
+            summary: Obtener el carrito seleccionado
+            tags:
+                - Carts
+            parameters:
+                - $ref: '#/components/parameters/CartId'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+        put:
+            summary: Actualizar el carrito seleccionado
+            tags:
+                - Carts
+            parameters:
+                - $ref: '#/components/parameters/CartId'
+                - $ref: '#/components/parameters/RequestBody'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+        delete:
+            summary: Limpiar el carrito seleccionado
+            tags:
+                - Carts
+            parameters:
+                - $ref: '#/components/parameters/CartId'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+
+    /api/carts/{cid}/products/{pid}:
+        delete:
+            summary: Eliminar un producto del carrito
+            tags:
+                - Carts
+            parameters:
+                - $ref: '#/components/parameters/CartId'
+                - $ref: '#/components/parameters/ProductId'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+        post:
+            summary: Agregar o actualizar un producto en el carrito
+            tags:
+                - Carts
+            parameters:
+                - $ref: '#/components/parameters/CartId'
+                - $ref: '#/components/parameters/ProductId'
+                - $ref: '#/components/parameters/RequestBody'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+
+    /api/carts/{cid}/purchase:
+        post:
+            summary: Comprar productos del carrito
+            tags:
+                - Carts
+            parameters:
+                - $ref: '#/components/parameters/CartId'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SuccessSingle'
+                '500':
+                    $ref: '#/components/responses/ServerError'
+
+components:
+    schemas:
+        Cart:
+            type: object
+            required:
+                - _id
+                - id_prod
+                - quantity
+            properties:
+                _id:
+                    type: string
+                    description: ID autogenerado por MongoDB
+                id_prod:
+                    type: string
+                    description: ID del producto en el carrito
+                quantity:
+                    type: integer
+                    format: int64
+
+        Error:
+            type: object
+            required:
+                - code
+                - message
+            properties:
+                code:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+
+    parameters:
+        CartId:
+            in: path
+            required: true
+            schema:
+                type: string
+            description: ID del carrito
+        ProductId:
+            in: path
+            required: true
+            schema:
+                type: string
+            description: ID del producto
+        RequestBody:
+            in: body
+            required: true
+            schema:
+                $ref: '#/components/requestBodies/AddToCart'
+
+    responses:
+        SuccessSingle:
+            description: Operación exitosa
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Cart'
+        SuccessArray:
+            description: Operación exitosa
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/Cart'
+        ServerError:
+            description: Error interno del servidor
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+
+    requestBodies:
+        AddToCart:
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        required:
+                            - quantity
+                        properties:
+                            quantity:
+                                type: integer
+                                format: int64
+            example:
+                quantity: 1

@@ -17,6 +17,14 @@
 4. Modifiqué "users.controller.js" para agregar la función que me permita subir documentos
 5. Modifiqué "users.routes.js" para agregar el endpoint solicitado
 6. Modifiqué "users.models.js" para agregarle las propiedades documents y last_connection
+7. Subir una imagen desde Postman:
+   Ingreso el endpoint "localhost:4000/api/users/651a2ea1e59e5ab04fe5d4d4/documents" <br>
+   Utilizo el método POST <br>
+   Voy a la pestaña body y clickeo la opción form-data <br>
+   Ingreso el nombre "document" dentro del campo Key, ya que puse document en el middleware en "users.routes.js" <br>
+   En este mismo campo Key elijo la opción file <br>
+   Dentro del campo Value clickeo en select file y busco la imagen que deseo subir. Debe estar en la carpeta uploads porque así lo configuré en "multer.js". Si la imagen está en otro lado, no va a funcionar <br>
+   Clickeo en send <br>
 
 
 
