@@ -1,5 +1,5 @@
 import { userModel } from "../models/users.models.js";
-//Para las 2 últimas funciones:
+//Para las funciones 5 y 6:
 import { sendRecoveryMail } from "../config/nodemailer.js";
 import crypto from 'crypto';
 const recoveryLinks = {};
@@ -113,6 +113,32 @@ const resetPassword = async (req, res) => {
     }
 };
 
+//7)
+const uploadUserDocuments = async (req, res) => {
+    const userId = req.params.uid;
+    const files = req.files;
+    if (!files || files.length === 0) {
+        return res.status(400).send({ message: 'No se subieron archivos.' });
+    }
+
+    try {
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).send({ message: 'Usuario no encontrado.' });
+        }
+        const updatedDocuments = files.map(file => ({
+            name: file.originalname,
+            reference: file.path
+        }));
+        user.documents.push(...updatedDocuments);
+        await user.save();
+        res.status(200).send({ message: 'Documentos subidos exitosamente.', documents: user.documents });
+    } catch (error) {
+        console.error('Error al subir documentos:', error);
+        res.status(500).send({ message: 'Error al subir documentos' });
+    }
+};
+
 //Exportar todas las funciones juntas
 export const userController = {
     getUsers,
@@ -120,5 +146,6 @@ export const userController = {
     updateUser,
     deleteUser,
     requestPasswordReset,
-    resetPassword
+    resetPassword,
+    uploadUserDocuments
 }

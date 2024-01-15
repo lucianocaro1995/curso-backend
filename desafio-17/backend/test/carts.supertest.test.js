@@ -20,15 +20,15 @@ describe('Test CRUD de carritos en la ruta api/carts', function () {
     //1)
     it('Agregar un producto al carrito o actualizar su cantidad mediante método POST', async () => {
         const productToAdd = {
-            productId: productId,
-            quantity: 2,
+            id: productId,
+            quantity: 1,
         };
 
         const response = await api.post('/api/carts')
             .send(productToAdd);
 
         expect(response.body).to.be.an('object');
-        expect(response.body.productId).to.equal(productToAdd.productId);
+        expect(response.body.productId).to.equal(productToAdd.id);
         expect(response.body.quantity).to.equal(productToAdd.quantity);
 
         //Guardar el ID del carrito para usarlo en los siguientes tests
@@ -71,4 +71,5 @@ describe('Test CRUD de carritos en la ruta api/carts', function () {
         expect(response.body).to.be.an('object');
         expect(response.body.message).to.equal('Compra realizada con éxito');
     });
+    
 });

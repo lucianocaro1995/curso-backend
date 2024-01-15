@@ -8,12 +8,13 @@ const api = supertest('http://localhost:4000');
 
 await mongoose.connect(process.env.MONGO_URL);
 
+let cookie = {}
+
 
 
 
 
 describe('Test CRUD de sesiones en la ruta api/sessions', function () {
-    let cookie = {}
 
     //1) Registrar/Crear un nuevo usuario para agregarlo a la base de datos
     it("Ruta: api/sessions/register con metodo POST", async () => {

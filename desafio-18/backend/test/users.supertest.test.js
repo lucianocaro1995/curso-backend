@@ -57,5 +57,5 @@ describe('Test CRUD de usuarios en la ruta api/users', function () {
         const response = await api.delete(`/api/users/${userId}`);
         expect(response.body).to.be.an('object');
     });
-    
+
 });

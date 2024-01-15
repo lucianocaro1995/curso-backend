@@ -29,19 +29,20 @@ before(async () => {
 });
 
 describe('Test CRUD de productos en la ruta api/products', function () {
-    // 1)
+    
+    //1)
     it('Obtener todos los productos mediante método GET', async () => {
         const response = await api.get('/api/products').set('Cookie', [adminCookie]);
         expect(response.body).to.be.an('array');
     });
 
-    // 2)
+    //2)
     it('Obtener un producto mediante método GET ingresando su ID', async () => {
         const response = await api.get(`/api/products/${productId}`).set('Cookie', [adminCookie]);
         expect(response.body._id).to.be.ok;
     });
 
-    // 3)
+    //3)
     it('Crear un producto mediante método POST', async () => {
         const newProduct = {
             title: 'Producto de prueba',
@@ -58,7 +59,7 @@ describe('Test CRUD de productos en la ruta api/products', function () {
         expect(response.body.status).to.be.true; //Verificar que el status sea true por defecto
     });
 
-    // 4)
+    //4)
     it('Actualizar un producto mediante método PUT ingresando su ID', async () => {
         const updatedProduct = {
             title: 'Producto actualizado',
@@ -75,7 +76,7 @@ describe('Test CRUD de productos en la ruta api/products', function () {
         expect(response.body.title).to.equal('Producto actualizado');
     });
 
-    // 5)
+    //5)
     it('Eliminar un producto mediante método DELETE ingresando su ID', async () => {
         const response = await api.delete(`/api/products/${productId}`).set('Cookie', [adminCookie]);
         expect(response.body).to.be.an('object');
