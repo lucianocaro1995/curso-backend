@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import supertest from 'supertest';
-import chai from 'chai';
-import 'dotenv/config';
-import __dirname from '../src/__dirname.js'
+import mongoose from 'mongoose'
+import supertest from 'supertest'
+import { expect } from 'chai'
+import 'dotenv/config'
+//Lo comento porque no tengo un archivo "__dirname.js". Este lo utilizó el profesor para poder subir una imagen. Yo debería importar "path.js"
+//import __dirname from '../src/__dirname.js'
 
-const expect = chai.expect
 const requester = supertest('http://localhost:4000')
 
 await mongoose.connect(process.env.MONGO_URL)

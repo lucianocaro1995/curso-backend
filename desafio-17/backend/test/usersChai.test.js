@@ -1,10 +1,12 @@
-import chai from 'chai'
-import mongoose from "mongoose";
-import { userModel } from '../src/models/users.models.js';
-
-const expect = chai.expect
+import mongoose from 'mongoose'
+import { expect } from 'chai'
+import { userModel } from '../src/models/users.models.js'
 
 await mongoose.connect(process.env.MONGO_URL)
+
+
+
+
 
 describe('Test CRUD Users con chai en api/users', function () {
 

@@ -1,15 +1,14 @@
-import mongoose from 'mongoose';
-import supertest from 'supertest';
-import chai from 'chai';
-import 'dotenv/config';
+import mongoose from 'mongoose'
+import supertest from 'supertest'
+import { expect } from 'chai'
+import 'dotenv/config'
 
-const expect = chai.expect;
-const api = supertest('http://localhost:4000');
+const api = supertest('http://localhost:4000')
 
-await mongoose.connect(process.env.MONGO_URL);
+await mongoose.connect(process.env.MONGO_URL)
 
-let cartId = null;
-let productId = '650636d0d3c359de670f30a8';
+let cartId = null
+let productId = '650636d0d3c359de670f30a8'
 
 
 
@@ -24,14 +23,15 @@ describe('Test CRUD de carritos en la ruta api/carts', function () {
             quantity: 1,
         };
 
-        const response = await api.post('/api/carts')
-            .send(productToAdd);
+        //Acá yo estoy creando un nuevo carrito, por eso puse valor null en la variable cartId
+        //Creo un nuevo carrito para los tests, así no utilizo el carrito de un usuario
+        const response = await api.post('/api/carts').send(productToAdd);
 
         expect(response.body).to.be.an('object');
         expect(response.body.productId).to.equal(productToAdd.id);
         expect(response.body.quantity).to.equal(productToAdd.quantity);
 
-        //Guardar el ID del carrito para usarlo en los siguientes tests
+        //Guardo el ID del carrito para usarlo en los siguientes tests
         cartId = response.body._id;
     });
 
@@ -41,7 +41,7 @@ describe('Test CRUD de carritos en la ruta api/carts', function () {
             throw new Error('No hay un carrito válido para realizar este test');
         }
 
-        const response = await api.delete(`/api/carts/${cartId}/${productId}`);
+        const response = await api.delete(`/api/carts/${cartId}/products/${productId}`);
 
         expect(response.body).to.be.an('object');
         expect(response.body.productId).to.equal(productId);
@@ -66,7 +66,7 @@ describe('Test CRUD de carritos en la ruta api/carts', function () {
             throw new Error('No hay un carrito válido para realizar este test');
         }
 
-        const response = await api.post(`/api/carts/${cartId}/buy`);
+        const response = await api.post(`/api/carts/${cartId}/purchase`);
 
         expect(response.body).to.be.an('object');
         expect(response.body.message).to.equal('Compra realizada con éxito');

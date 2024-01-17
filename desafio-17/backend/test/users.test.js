@@ -1,11 +1,15 @@
-import mongoose from "mongoose";
-import { userModel } from '../src/models/users.models.js';
+import mongoose from 'mongoose'
 import Assert from 'assert'
 import 'dotenv/config'
+import { userModel } from '../src/models/users.models.js'
 
 const assert = Assert.strict
 
 await mongoose.connect(process.env.MONGO_URL)
+
+
+
+
 
 describe('Test CRUD de Usuarios en la ruta api/users', function () {
     //Previo a comenzar todo el test

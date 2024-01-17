@@ -1,14 +1,13 @@
-import mongoose from 'mongoose';
-import supertest from 'supertest';
-import chai from 'chai';
-import 'dotenv/config';
+import mongoose from 'mongoose'
+import supertest from 'supertest'
+import { expect } from 'chai'
+import 'dotenv/config'
 
-const expect = chai.expect;
-const api = supertest('http://localhost:4000');
+const api = supertest('http://localhost:4000')
 
-await mongoose.connect(process.env.MONGO_URL);
+await mongoose.connect(process.env.MONGO_URL)
 
-let userId = '65a2749a463b6e861d4f7aa8';
+let userId = '65a2749a463b6e861d4f7aa8'
 
 
 
@@ -57,5 +56,5 @@ describe('Test CRUD de usuarios en la ruta api/users', function () {
         const response = await api.delete(`/api/users/${userId}`);
         expect(response.body).to.be.an('object');
     });
-    
+
 });

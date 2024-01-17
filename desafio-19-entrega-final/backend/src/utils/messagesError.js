@@ -20,16 +20,18 @@ export const passportError = (strategy) => { //Voy a enviar local, github o jwt
     }
 }
 
-//Recibo un rol y establezco la capacidad del usuario
-export const authorization = (rol) => { //rol = 'admin' desde ruta 'Crear Producto'
+//Authorization para permitir múltiples roles y administradores
+export const authorization = (roles) => {
     return async (req, res, next) => {
-
         if (!req.user) {
-            return res.status(401).send({ error: 'User no autorizado' })
+            return res.status(401).send({ error: 'Usuario no autorizado' });
         }
-        if (req.user.user.rol != rol) {
-            return res.status(403).send({ error: 'Usuario no tiene los permisos necesarios' })
+
+        // Verificar si el rol del usuario está en los roles permitidos
+        if (!roles.includes(req.user.user.rol) && !(req.user.user.rol === 'admin' && roles.includes('admin'))) {
+            return res.status(403).send({ error: 'Usuario no tiene los permisos necesarios' });
         }
-        next()
-    }
+
+        next();
+    };
 }
