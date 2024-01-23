@@ -12,8 +12,9 @@ userRouter.put("/:uid", passportError('jwt'), authorization('admin'), userContro
 
 userRouter.delete("/:uid", passportError('jwt'), authorization('admin'), userController.deleteUser);
 
-userRouter.post("/password-recovery", passportError('jwt'), authorization('user'), userController.requestPasswordReset);
+//No pongo middlewares en estos 2 endpoints ya que el usuario o admin no se va a poder logear, es por eso que piden reestablecer la contraseña
+userRouter.post("/password-recovery", userController.requestPasswordReset);
 
-userRouter.post("/reset-password/:token", passportError('jwt'), authorization('user'), userController.resetPassword);
+userRouter.post("/reset-password/:token", userController.resetPassword);
 
 export default userRouter;

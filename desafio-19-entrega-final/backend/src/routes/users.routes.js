@@ -13,9 +13,9 @@ userRouter.put("/:uid", passportError('jwt'), authorization('admin'), userContro
 
 userRouter.delete("/:uid", passportError('jwt'), authorization('admin'), userController.deleteUser);
 
-userRouter.post("/password-recovery", passportError('jwt'), authorization(['user', 'admin']), userController.requestPasswordReset);
+userRouter.post("/password-recovery", userController.requestPasswordReset);
 
-userRouter.post("/reset-password/:token", passportError('jwt'), authorization(['user', 'admin']), userController.resetPassword);
+userRouter.post("/reset-password/:token", userController.resetPassword);
 
 userRouter.post("/:uid/documents", upload.array('document', 2), userController.uploadUserDocuments);
 
