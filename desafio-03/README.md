@@ -24,9 +24,6 @@
    },
    ```
 
-   Nodemon es una herramienta que detecta automáticamente cambios en los archivos y reiniciar el servidor. Esto significa que no hay que reiniciar manualmente el servidor cada vez que realizo modificaciones en el código
-
-
 
 
 ## Configuración inicial de un proyecto Node.js:
@@ -45,3 +42,11 @@
 
    - Instalación: `npm install express`
    - Este comando instala Express, un marco web para Node.js. Facilita la creación de servidores, gestión de rutas y manipulación de solicitudes y respuestas, simplificando el desarrollo rápido y efectivo de aplicaciones web
+
+2. **nodemon**
+
+   - Instalación: `npm install nodemon -D`
+   - Nodemon es una herramienta que detecta automáticamente cambios en los archivos sin necesidad de reiniciar el servidor. Esto significa que no hay que reiniciar manualmente el servidor ingresando npm run dev en la terminal cada vez que realice modificaciones en el código
+   - Se recomienda instalarlo de manera local y no de manera global
+      De manera global: significa que no debo instalarlo nuevamente en el package.json porque lo quiero utilizar en cualquier proyecto
+      De manera local: significa que agrego esta dependencia al proyecto actual, limitando su uso solamente a este proyecto. Nodemon no necesariamente lo voy a usar en cualquier proyecto
