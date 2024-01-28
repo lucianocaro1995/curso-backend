@@ -39,7 +39,7 @@
 ## Dependencias instaladas para este desafío:
 
 1. **mocha**
-   - Instalación: `npm install -D mocha`
+- Instalación: `npm install -D mocha`
    - Instalarlo en backend
    - Es un marco de prueba en JavaScript que se utiliza para realizar pruebas unitarias y de integración en desarrollo web
 
