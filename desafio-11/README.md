@@ -10,3 +10,7 @@
    También debo modificar los archivos de la carpeta routes borrando la importación de productModel ya que no la vamos a necesitar más, ahora importamos los controladores. Dentro de los archivos controllers importamos productModel
 4. En el próximo desafío eliminaré Handlebars y Socket.io por completo ya que vamos a utilizar React para hacer el frontend <br>
    También eliminaré todo lo relacionado al chat ya que no lo vamos a necesitar más. Solamente lo creamos en clase para practicar Socket.io
+
+
+
+## Dependencias instaladas para este desafío:

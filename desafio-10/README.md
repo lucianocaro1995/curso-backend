@@ -1,7 +1,7 @@
 ## Comentarios:
 
 1. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver el localhost:4000 en mi navegador
-2. Desafío "Práctica de integración sobre tu ecommerce": <br>
+2. Desafío "Segunda práctica de integración sobre tu ecommerce": <br>
    En este desafío complementario trabajamos tokens, jwt y cookies
 3. No estamos trabajando con vistas (handlebars) en este desafío. Todo probado desde Postman
 4. Tokens: <br>
