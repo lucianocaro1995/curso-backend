@@ -75,6 +75,7 @@ app.set('view engine', 'handlebars')
 app.set('views', path.resolve(__dirname, './views'))
 
 //Middlewares para archivos estáticos
+//Estas son las vistas, no las que aparecen en el 7)
 app.use('/chat', express.static(path.join(__dirname, '/public')))
 app.use('/home', express.static(path.join(__dirname, '/public')))
 app.use('/login', express.static(path.join(__dirname, '/public')))

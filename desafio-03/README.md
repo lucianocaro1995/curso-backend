@@ -15,7 +15,10 @@
 4. Creé la carpeta "src" en donde guardaré las carpetas y archivos principales de mi proyecto
 5. Creé el archivo "app.js" dentro de src, en donde desarrollé el servidor express e importé el ProductManager
 6. Modifiqué "ProductManager.js" para incluirle el export y luego poder importarlo en "app.js"
-7. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
+7. Cómo ver las rutas creadas desde el navegador: <br>
+   Ingresando "localhost:4000/products" veo todos los productos disponibles <br>
+   Ingresando "localhost:8080/products/2" veo el producto cuyo id sea 2
+8. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
    Ahora ejecuto con un comando diferente porque en el package.json le asigné dev al nombre que se va a utilizar para ejecutar al archivo "app.js":
 
 ```json
@@ -37,7 +40,7 @@
 
 
 
-## Dependencias instaladas en este desafío:
+## Dependencias instaladas para este desafío:
 
 1. **express**
 

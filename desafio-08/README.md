@@ -13,22 +13,16 @@
 
 ## Dependencias instaladas para este desafío:
 
-1. **dotenv**
-   - Instalación: `npm i dotenv`
-   - Nos permite manejar variables de entorno dentro de nuestra aplicación. Sirve para ocultar contraseñas y no subirlas a GitHub <br>
-    Copio toda la URL que escribí en la conexión con MongoDB Atlas y la pego en el archivo ".env". Luego donde estaba la URL pongo "process.env.MONGO_URL" <br>
-    En la versión nueva de Node lo tenemos de forma nativa, pero en esta versión tengo que instalarlo desde la terminal
-
-2. **cookie-parser**
+1. **cookie-parser**
    - Instalación: `npm i cookie-parser`
    - Nos permite trabajar con cookies. Cookies: formas de guardar información en el cliente
 
 
-3. **express-session**
+2. **express-session**
    - Instalación: `npm i express-session`
    - Nos permite manejar las sesiones de mi aplicación que se guardan en el servidor, no en la base de datos. No tiene nada que ver con las cookies
 
-4. **connect-mongo**
+3. **connect-mongo**
    - Instalación: `npm i connect-mongo`
    - Nos permite trabajar con sesiones guardadas en la base de datos MongoDB (ya que guardarlas en un servidor no es recomendable porque se caen seguido)
 

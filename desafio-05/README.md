@@ -14,7 +14,8 @@
 4. Modifiqué "app.js" para agregar los endpoints solicitados por la consigna: "/home" y "/realtimeproducts" <br>
    También agregué otro endpoint "/upload" que no es pedido por la consigna, pero lo creamos para ir practicando cómo utilizar Multer <br>
    Estas primeras 2 rutas se van a poder ver desde el navegador, pero la ruta para utilizar con Multer no porque esta utiliza el método POST y solamente se pueden ver las rutas que utilicen GET <br>
-   Por último, en este mismo archivo configuré Socket.io para poder utilizarlo en los archivos JS de mis vistas
+   En este mismo archivo realicé las conexiones entre los endpoints y sus archivos html (handlebars), js y css correspondientes <br>
+   Por último, en este archivo configuré Socket.io para poder utilizarlo en los archivos JS de mis vistas
 5. Modifiqué "public" y la dividí en las subcarpetas css, img y js
 6. Carpetas creadas que no son pedidas por la consigna del desafío: <br>
    Creamos estas carpetas con el fin de ir conociendo cómo se suele dividir un proyecto backend conectado a una base de datos <br>
@@ -40,7 +41,7 @@
    En este mismo campo Key elijo la opción file <br>
    Dentro del campo Value clickeo en select file y busco la imagen que deseo subir <br>
    Clickeo en send <br>
-   La consola de Postman me debe decir "Imagen cargada" y esta se va a guardar en la subcarpeta img de la carpeta public
+   La consola de Postman me debe decir "Imagen cargada" y esta se va a guardar en la subcarpeta img de la carpeta public porque así lo configuré en "app.js"
 9. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
 
 

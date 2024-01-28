@@ -37,7 +37,7 @@
    Ingresando "localhost:8080/static" veo el html creado en la carpeta public <br>
    Ingresando "localhost:8080/api/products/2" veo el producto cuyo id sea 2 <br>
    Ingresando "localhost:8080/api/carts/2" veo el carrito cuyo id sea 2 <br>
-   Tener en cuenta que desde el navegador solamente puedo utilizar el método GET. Para poder aplicar los demás métodos debo utilizar Postman <br>
+   Tener en cuenta que desde el navegador solamente puedo ver las rutas que utilicen el método GET. Para poder trabajar con los demás métodos debo utilizar Postman <br>
 7. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
 
 

@@ -10,6 +10,7 @@ La paginación nos permite segmentar los resultados en pequeños trozos de infor
 //Módulos
 import express from 'express';
 import mongoose from 'mongoose';
+import 'dotenv/config'
 //Rutas
 import userRouter from './routes/users.routes.js'
 import productRouter from './routes/products.routes.js'
@@ -23,7 +24,7 @@ const app = express()
 
 
 //Conectar Mongodb Atlas con mi aplicación de visual studio code:
-mongoose.connect('mongodb+srv://luciano1995:primerabasededatos@cluster0.azwpqmd.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URL)
 .then(async () => {
     console.log('Base de datos conectada');
 

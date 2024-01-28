@@ -18,7 +18,7 @@
    Debe tener un método `getProductById` el cual debe recibir un id, y tras leer el archivo, debe buscar el producto con id especificado y devolverlo en formato de objeto <br>
    Debe tener un método `updateProduct` el cual debe recibir el id del producto a actualizar, así también como el campo a actualizar (puede ser el objeto completo, como en una base de datos) y debe actualizar el producto que tenga ese id en el archivo. No debe borrarse su id <br>
    Debe tener un método `deleteProduct` el cual debe recibir un id y debe eliminar el producto que tenga ese id en el archivo <br>
-2. Creé un archivo "package.json" que diga "type": "module" <br>
+2. Creé un archivo "package.json" que diga { "type": "module" } <br>
    Esto me sirve para indicar que el proyecto utiliza módulos ECMAScript (ES6) en lugar de CommonJS, permitiendo la importación/exportación de archivos JavaScript de manera más moderna y consistente <br>
 3. Creé un archivo "productos.json" el cual debe tener dentro un array vacío (utilizando 2 corchetes []) en donde voy a guardar los productos creados en el ProductManager.js
 4. Modifiqué "ProductManager.js" para incluir los nuevos requerimientos
