@@ -14,7 +14,7 @@
    localhost:4000/home <br>
    localhost:4000/realtimeproducts <br>
    localhost:4000/chat <br>
-   La vista de multer no se va a poder ver porque utiliza el método POST, no el GET
+   La vista localhost:4000/upload que utiliza multer no se va a poder ver porque se emplea con el método POST, no con el GET. Además no tiene asignado ningún archivo html, js o css
 5. Modifiqué "views" para hacer una vista que contenga un chat <br>
    Modifiqué "public" para hacer el archivo js de este chat <br>
    Esta vista que contiene un chat va a ser el encargado de enviar los mensajes que se van a recibir en la colección "messages" de mi base de datos <br>
@@ -30,6 +30,7 @@
    Debo conseguir 2 cosas para lograr la conexión: <br>
    -  URL de mi base de datos <br>
    -  Contraseña de mi base de datos (no es la misma contraseña que utilizo para entrar a MongoDB Atlas) <br>
+   
    En la página web de MongoDB Atlas clickeo la pestaña "database", clickeo "Connect", clickeo "Drivers" y se me va a abrir una ventana con mi URL <br>
    Debo modificar esa URL, pongo mi contraseña donde dice "<password>". Luego de entregar este desafío cambio la contraseña <br>
    En la línea 52 de mi archivo "app.js" pego mi URL y contraseña
