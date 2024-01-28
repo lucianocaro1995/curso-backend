@@ -16,7 +16,7 @@
 5. Creé el archivo "app.js" dentro de src, en donde desarrollé el servidor express e importé el ProductManager
 6. Modifiqué "ProductManager" para incluirle el export y luego poder importarlo en "app.js"
 7. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
-   Ahora ejecuto de manera diferente porque en el package.json le asigné el nombre dev al comando que se va a utilizar para ejecutar al archivo "app.js": <br>
+   Ahora ejecuto de manera diferente porque en el package.json le asigné el nombre dev al comando que se va a utilizar para ejecutar al archivo "app.js":
    
    ```json
    "scripts": {
