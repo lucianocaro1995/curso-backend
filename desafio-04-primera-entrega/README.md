@@ -30,14 +30,14 @@
 2. Creé "CartManager.js" para poder tener un manager de los carritos
 3. Creé "carts.json" para poder guardar los carritos creados y la cantidad de productos dentro de cada carrito
 4. Creé la carpeta "routes" en donde voy a guardar las rutas/endpoints solicitados, tanto para products como para carts
-5. Creé la carpeta "public" en donde voy a guardar un pequeño html
+5. Creé la carpeta "public" en donde voy a guardar un pequeño html <br>
    Esto no es pedido por la consigna, pero me sirve como inicio para saber cómo crear un pequeño html y añadirlo a mi configuración del servidor express en "app.js". Si voy a la ruta "localhost:8080/static" voy a poder visualizarlo desde el navegador
 5. Modifiqué "app.js" para importar las rutas de mi aplicación
-6. Cómo ver las rutas creadas desde el navegador:
-   Ingresando "localhost:8080/static" veo el html creado en la carpeta public
-   Ingresando "localhost:8080/api/products/2" veo el producto cuyo id sea 2
-   Ingresando "localhost:8080/api/carts/2" veo el carrito cuyo id sea 2
-   Tener en cuenta que desde el navegador solamente puedo utilizar el método GET. Para poder aplicar los demás métodos debo utilizar Postman
+6. Cómo ver las rutas creadas desde el navegador: <br>
+   Ingresando "localhost:8080/static" veo el html creado en la carpeta public <br>
+   Ingresando "localhost:8080/api/products/2" veo el producto cuyo id sea 2 <br>
+   Ingresando "localhost:8080/api/carts/2" veo el carrito cuyo id sea 2 <br>
+   Tener en cuenta que desde el navegador solamente puedo utilizar el método GET. Para poder aplicar los demás métodos debo utilizar Postman <br>
 7. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
 
 
