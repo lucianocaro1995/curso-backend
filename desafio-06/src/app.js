@@ -32,7 +32,8 @@ import userRouter from './routes/users.routes.js'
 import productRouter from './routes/products.routes.js'
 import cartRouter from './routes/carts.routes.js'
 import messageRouter from './routes/messages.routes.js'
-//Constantes:
+//Managers/modelos
+import { messageModel } from './dao/models/messages.models.js'
 import ProductManager from './dao/fileSystem/productsManager.js';
 const manager = new ProductManager();
 //Servidor
@@ -106,17 +107,27 @@ const io = new Server(serverExpress)
 io.on('connection', (socket) => {
     console.log('Servidor de socket io conectado')
 
+    //1) chat.js
+    socket.on('add-message', async ({email, mensaje}) => {
+        console.log(mensaje)
+        await messageModel.create({email: email, message: mensaje})
+        const messages = await messageModel.find();
+        socket.emit('show-messages', messages);
+    })
 
+    //2) chat.js
+    socket.on('load-chat', async() =>{
+        const messages = await messageModel.find();
+        socket.emit('show-messages', messages);
+    })
 
-    //1) Obtiene los productos y envía la lista actualizada en el cliente. Esto lo uso en ambas páginas, "home.js" y "realTimeProducts.js"
+    //3) Obtiene los productos y envía la lista actualizada en el cliente. Esto lo uso en ambas páginas, "home.js" y "realTimeProducts.js"
     socket.on('actualizarProductos', async () => {
         const products = await manager.getProducts();
         socket.emit('products-data', products);
     });
 
-
-
-    //2) Agrega un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
+    //4) Agrega un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
     //La verificación de completar todos los campos existentes no tengo que hacerla sobre la consola, porque el navegador ya obliga al cliente a rellenar todos los campos
     socket.on('nuevoProducto', async (nuevoProd) => {
         const { title, description, category, thumbnail, price, stock, code } = nuevoProd;
@@ -138,9 +149,7 @@ io.on('connection', (socket) => {
         }
     });
 
-
-
-    //3) Elimina un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
+    //5) Elimina un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
     socket.on('eliminarProducto', async (id) => {
         try {
             const idNotFound = await manager.deleteProduct(id);

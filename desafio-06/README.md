@@ -15,6 +15,7 @@
    localhost:4000/realtimeproducts <br>
    localhost:4000/chat <br>
    La ruta localhost:4000/upload que utiliza multer no se va a poder ver porque se emplea con el método POST, no con el GET. Además no tiene asignado ningún archivo html, js o css
+   En el próximo desafío voy a eliminar esta ruta y la configuración de multer ya que solamente lo hicimos para practicar
 5. Modifiqué "views" para hacer una vista que contenga un chat <br>
    Modifiqué "public" para hacer el archivo js de este chat <br>
    Esta vista que contiene un chat va a ser el encargado de enviar los mensajes que se van a recibir en la colección "messages" de mi base de datos <br>
