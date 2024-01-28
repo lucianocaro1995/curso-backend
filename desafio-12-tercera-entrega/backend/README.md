@@ -28,26 +28,31 @@
 ## Dependencias instaladas para este desafío:
 
 1. **vite**
+
    - Instalación: `npm install -g create-vite`
    - Instalarlo en frontend
    - Es una herramienta que nos permite crear sitios web desde el lado frontend, de manera más rápida y eficiente. Es similar a "Create React App", la herramienta que utilicé en el curso de React
 
 2. **react-router-dom**
+
    - Instalación: `npm i react-router-dom`
    - Instalarlo en frontend
    - Es una dependencia que facilita la navegación y gestión de rutas en aplicaciones React, permitiendo crear rutas dinámicas para una experiencia de usuario fluida
 
 3. **cors**
+
    - Instalación: `npm i cors`
    - Instalarlo en backend
    - El paquete "cors" habilita el intercambio de recursos entre dominios, permitiendo solicitudes HTTP desde un dominio diferente al origen. Así evitamos los errores de cors policy
 
 4. **nodemailer**
+
    - Instalación: `npm i nodemailer`
    - Instalarlo en backend
    - Esta dependencia sirve para enviar correos electrónicos fácilmente a través de diferentes servicios de correo.
 
 5. **uuid**
+
    - Instalación: `npm install uuid`
    - Instalarlo en backend
    - Esta dependencia permite generar identificadores únicos

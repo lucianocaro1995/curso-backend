@@ -13,6 +13,7 @@
    En esta carpeta crearemos las vistas hechas con Handlebars que veremos en nuestro navegador, tanto home como realTimeProducts
 4. Modifiqué "app.js" para agregar los endpoints solicitados por la consigna: "/home" y "/realtimeproducts" <br>
    También agregué otro endpoint "/upload" que no es pedido por la consigna, pero lo creamos para ir practicando cómo utilizar Multer <br>
+   Estas primeras 2 rutas se van a poder ver desde el navegador, pero la ruta para utilizar con Multer no porque esta utiliza el método POST y solamente se pueden ver las rutas que utilicen GET <br>
    Por último, en este mismo archivo configuré Socket.io para poder utilizarlo en los archivos JS de mis vistas
 5. Modifiqué "public" y la dividí en las subcarpetas css, img y js
 6. Carpetas creadas que no son pedidas por la consigna del desafío: <br>
@@ -31,7 +32,16 @@
 7. Diferencias entre Socket.io y Websockets: <br>
    Socket.io es una librería de JavaScript para comunicación bidireccional en tiempo real entre clientes y servidores, utilizando WebSockets y otros métodos de transporte <br>
    WebSockets es un protocolo bidireccional que facilita conexiones persistentes entre clientes y servidores, permitiendo una comunicación eficiente sin la necesidad de múltiples conexiones como en HTTP
-8. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
+8. Cómo subir una imagen a mi carpeta public desde Postman: <br>
+   Ingreso el endpoint "localhost:8080/upload" <br>
+   Utilizo el método POST <br>
+   Voy a la pestaña body y clickeo la opción form-data <br>
+   Ingreso el nombre "product" dentro del campo Key, ya que puse esa palabra en "app.js" <br>
+   En este mismo campo Key elijo la opción file <br>
+   Dentro del campo Value clickeo en select file y busco la imagen que deseo subir <br>
+   Clickeo en send <br>
+   La consola de Postman me debe decir "Imagen cargada" y esta se va a guardar en la subcarpeta img de la carpeta public
+9. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
 
 
 
