@@ -17,6 +17,7 @@
 6. Modifiqué "ProductManager" para incluirle el export y luego poder importarlo en "app.js"
 7. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
    Ahora ejecuto de manera diferente porque en el package.json le asigné el nombre dev al comando que se va a utilizar para ejecutar al archivo "app.js":
+
 ```json
    "scripts": {
       "dev": "nodemon src/app.js"
@@ -46,6 +47,6 @@
 
    - Instalación: `npm install nodemon -D`
    - Nodemon es una herramienta que detecta automáticamente cambios en los archivos sin necesidad de reiniciar el servidor. Esto significa que no hay que reiniciar manualmente el servidor ingresando npm run dev en la terminal cada vez que realice modificaciones en el código
-   - Se recomienda instalarlo de manera local y no de manera global
-      De manera global: significa que no debo instalarlo nuevamente en el package.json porque lo quiero utilizar en cualquier proyecto
+   - Se recomienda instalarlo de manera local y no de manera global <br>
+      De manera global: significa que no debo instalarlo nuevamente en el package.json porque lo quiero utilizar en cualquier proyecto <br>
       De manera local: significa que agrego esta dependencia al proyecto actual, limitando su uso solamente a este proyecto. Nodemon no necesariamente lo voy a usar en cualquier proyecto
