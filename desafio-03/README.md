@@ -10,19 +10,18 @@
    Si no se recibe query de límite, se devolverán todos los productos <br>
    Si se recibe un límite, sólo devolver el número de productos solicitados <br>
    Ruta `/products/:pid` la cual debe recibir por req.params el pid (product Id) y devolver sólo el producto solicitado, en lugar de todos los productos
-2. En primer lugar ingresé el comando para configurar mi proyecto Node.js y luego instalé la dependencia express
+2. En primer lugar ingresé el comando para configurar mi proyecto Node.js y luego instalé las dependencias necesarias
 3. Creé el archivo ".gitignore" para que la carpeta node_modules no se suba a mi repositorio en github
 4. Creé la carpeta "src" en donde guardaré las carpetas y archivos principales de mi proyecto
 5. Creé el archivo "app.js" dentro de src, en donde desarrollé el servidor express e importé el ProductManager
 6. Modifiqué "ProductManager" para incluirle el export y luego poder importarlo en "app.js"
 7. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
    Ahora ejecuto de manera diferente porque en el package.json le asigné el nombre dev al comando que se va a utilizar para ejecutar al archivo "app.js":
-   
-   ```json
+```json
    "scripts": {
       "dev": "nodemon src/app.js"
    },
-   ```
+```
 
 
 
