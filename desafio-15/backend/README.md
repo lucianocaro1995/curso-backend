@@ -17,7 +17,6 @@
 6. Modifiqué el archivo "users.routes.js" para incluir los 2 endpoints con las funciones que acabo de crear en los controllers
 7. Modifiqué el archivo "users.models.js" para incluir un rol premium que tenga el beneficio de poder comprar productos con descuento
 8. Probar la primera función creada: <br>
-
    `requestPasswordReset` <br>
    Elimino los 2 middlewares en "users.routes.js" así me ahorro el paso de logearme <br>
    Luego ingreso "localhost:4000/api/users/password-recovery" en Postman utilizando el método POST, y en el body escribo un email <br>
@@ -27,6 +26,21 @@
 ```json
    {
       "email": "lucho_lp_1995@hotmail.com"
+   }
+```
+
+9. Probar la segunda función creada: <br>
+   `resetPassword` <br>
+   Elimino los 2 middlewares en "users.routes.js" así me ahorro el paso de logearme <br>
+   Copio el link que recibí en el mail, que es esta ruta junto al string del token: "localhost:4000/api/users/reset-password/:token", lo ingreso en Postman utilizando el método POST y luego en el body ingreso un array con la nueva contraseña <br>
+   Al clickear send me debería aparecer el mensaje "Contraseña modificada correctamente" en la consola de Postman <br>
+   Tener en cuenta que el token expira luego de un tiempo, y también expira cuando se cierra el servidor. Es decir cuando ejecute de nuevo con "npm run dev" debo volver a proceder con la primera función, si quiero poder realizar la segunda función <br>
+   Ejemplo de nueva contraseña para ingresar:
+
+```json
+   {
+      "newPassword": "1234",
+      "confirmNewPassword": "1234"
    }
 ```
 
