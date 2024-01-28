@@ -51,13 +51,9 @@
 4. Una vez hecho esto, importo dotenv en el archivo que desee utilizarlo
 5. Voy al código y reemplazo en "app.js" utilizando process.env. + (nombre asignado), es decir yo voy a poner en este caso "process.env.MONGO_URL" <br>
    Cómo se veía antes: <br>
-```
-mongoose.connect('mongodb+srv://luciano1995:password@cluster0.azwpqmd.mongodb.net/?retryWrites=true&w=majority')
-```
+   `mongoose.connect('mongodb+srv://luciano1995:password@cluster0.azwpqmd.mongodb.net/?retryWrites=true&w=majority')` <br>
    Cómo se ve ahora la línea de código reemplazada: <br>
-```
-   mongoose.connect(process.env.MONGO_URL)
-```
+   `mongoose.connect(process.env.MONGO_URL)`
 6. Finalmente debo agregar este archivo ".env" al .gitignore para que no se suba al repositorio de github y las personas no puedan ver las contraseñas
 
 
