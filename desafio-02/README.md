@@ -2,7 +2,7 @@
 
 1. Desafío "Manejo de archivos": <br>
    En este trabajo debemos seguir elaborando el manager del desafío anterior <br>
-   Principalmente debemos agregarle filesystem para que el array que creamos, ahora se guarde en un archivo JSON <br>
+   Principalmente debemos agregarle filesystem para que los productos que creamos, ahora se guarden en un archivo TXT o un archivo JSON, es lo mismo <br>
    Ahora el productManager debe poder agregar, consultar, modificar y eliminar un producto, y manejarlo en persistencia de archivos <br>
    La clase debe contar con una variable "this.path", el cual se inicializará desde el constructor y debe recibir la ruta a trabajar desde el momento de generar su instancia <br>
    Debe guardar objetos con el siguiente formato: <br>
@@ -22,7 +22,9 @@
    Esto me sirve para indicar que el proyecto utiliza módulos ECMAScript (ES6) en lugar de CommonJS, permitiendo la importación/exportación de archivos JavaScript de manera más moderna y consistente <br>
 3. Creé un archivo "productos.json" el cual debe tener dentro un array vacío (utilizando 2 corchetes []) en donde voy a guardar los productos creados en el ProductManager.js
 4. Modifiqué "ProductManager.js" para incluir los nuevos requerimientos
-5. Debo ejecutar `node ProductManager.js` en la terminal para poder ver el resultado del código creado <br>
+5. Importante: en este desafío estamos trabajando con persistencia en memoria, esto se refiere a la capacidad de almacenar datos de forma duradera en la memoria de un sistema, permitiendo su recuperación incluso después de reinicios o apagados <br>
+   Nosotros vamos a poder guardar nuestros productos en el archivo JSON, lo cual no podíamos hacer en el desafío anterior
+6. Debo ejecutar `node ProductManager.js` en la terminal para poder ver el resultado del código creado <br>
    En este desafío, el archivo "productos.json" actúa como si fuera una base de datos
 
 
