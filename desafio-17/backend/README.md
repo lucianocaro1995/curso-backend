@@ -39,16 +39,16 @@
 ## Dependencias instaladas para este desafío:
 
 1. **mocha**
-- Instalación: `npm install -D mocha`
-- Instalarlo en backend
-- Es un marco de prueba en JavaScript que se utiliza para realizar pruebas unitarias y de integración en desarrollo web
+   - Instalación: `npm install -D mocha`
+   - Instalarlo en backend
+   - Es un marco de prueba en JavaScript que se utiliza para realizar pruebas unitarias y de integración en desarrollo web
 
 2. **chai**
-- Instalación: `npm install -D chai`
-- Instalarlo en backend
-- Chai es una biblioteca de aserciones en JavaScript utilizada para escribir pruebas más expresivas y legibles, integrándose comúnmente con el framework de pruebas Mocha para facilitar el desarrollo y la validación del código
+   - Instalación: `npm install -D chai`
+   - Instalarlo en backend
+   - Chai es una biblioteca de aserciones en JavaScript utilizada para escribir pruebas más expresivas y legibles, integrándose comúnmente con el framework de pruebas Mocha para facilitar el desarrollo y la validación del código
 
 3. **supertest**
-- Instalación: `npm install -D supertest`
-- Instalarlo en backend
-- Es una biblioteca de pruebas para Node.js que simula solicitudes HTTP, permitiendo realizar pruebas de integración y verificar respuestas de APIs y aplicaciones web de manera automatizada
+   - Instalación: `npm install -D supertest`
+   - Instalarlo en backend
+   - Es una biblioteca de pruebas para Node.js que simula solicitudes HTTP, permitiendo realizar pruebas de integración y verificar respuestas de APIs y aplicaciones web de manera automatizada

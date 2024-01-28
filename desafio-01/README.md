@@ -15,6 +15,7 @@
    Debe contar con un método "getProductById" el cual debe buscar en el arreglo el producto que coincida con el id. En caso de no coincidir con ningún id, mostrar en consola un error que diga "not found" <br>
 2. Creé el archivo "ProductManager.js" para elaborar esta clase que gestione productos según lo pedido por la consigna <br>
 3. Debo ejecutar `node ProductManager.js` en la terminal para poder ver el resultado del código creado <br>
+   Solamente lo veo en la terminal gracias a los console.log, por el momento no estamos trabajando con una base de datos
 
 
 
