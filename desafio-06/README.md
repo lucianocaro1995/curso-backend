@@ -8,15 +8,15 @@
 2. Creé la carpeta "dao" con las subcarpetas solicitadas
 3. Creé el archivo ".env" para ocultar contraseñas
 4. Modifiqué "app.js" para hacer la conexión con la base de datos e incluyo la nueva vista del chat
-5. Modifiqué "views" para hacer una vista que contenga un chat <br>
-   Modifiqué "public" para hacer el archivo js de este chat <br>
-   Esta vista que contiene un chat va a ser el encargado de enviar los mensajes que se van a recibir en la colección "messages" de mi base de datos <br>
+5. Modifiqué "views" para hacer una vista que contenga un chat
+6. Modifiqué "public" para hacer el archivo js de este chat <br>
+   Este chat va a ser el encargado de enviar los mensajes que se van a recibir en la colección "messages" de mi base de datos <br>
    Lo hicimos más que nada para practicar Socket.io y ver cómo se modifica la vista en tiempo real <br>
    Para ver el chat debo ingresar esta ruta en el navegador: "localhost:4000/chat"
-6. Eliminé todo lo referido a Multer ya que solamente lo hicimos en el desafío anterior para practicar
-7. Importante: este va a ser el último desafío en que utilice los managers de la carpeta DB (CartManager, MessagesManager y ProductManager) en los archivos de routes <br>
+7. Eliminé todo lo referido a Multer ya que solamente lo hicimos en el desafío anterior para practicar
+8. Importante: este va a ser el último desafío en que utilice los managers de la carpeta DB (CartManager, MessagesManager y ProductManager) en los archivos de routes <br>
    Me conviene empezar a utilizar los modelos que yo creo con Mongoose, por ejemplo cartModel, ya que me permite aprovechar las funciones nativas de Mongoose, simplificando aún más mi código
-8. Rutas que se van a poder ver desde el navegador: <br>
+9. Rutas que se van a poder ver desde el navegador: <br>
    `localhost:4000/home` <br>
    `localhost:4000/realtimeproducts` <br>
    `localhost:4000/chat` <br><br>
@@ -25,7 +25,7 @@
    `localhost:4000/api/products` <br>
    `localhost:4000/api/carts` <br>
    `localhost:4000/api/messages` <br>
-9. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
+10. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
 
 
 
