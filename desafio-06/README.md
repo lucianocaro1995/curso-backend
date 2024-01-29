@@ -17,9 +17,15 @@
    Para ver el chat debo ingresar esta ruta en el navegador: "localhost:4000/chat"
 6. Eliminé todo lo referido a Multer ya que solamente lo hicimos en el desafío anterior para practicar
 7. Rutas que se van a poder ver desde el navegador: <br>
-   localhost:4000/home <br>
-   localhost:4000/realtimeproducts <br>
-   localhost:4000/chat <br>
+   `localhost:4000/home` <br>
+   `localhost:4000/realtimeproducts` <br>
+   `localhost:4000/chat` <br><br>
+
+   Rutas que se van a poder ver desde el navegador (en las que sólo se verá un json): <br>
+   `localhost:4000/api/users` <br>
+   `localhost:4000/api/products` <br>
+   `localhost:4000/api/carts` <br>
+   `localhost:4000/api/messages` <br>
 8. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
 
 

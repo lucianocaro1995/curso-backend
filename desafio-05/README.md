@@ -43,10 +43,10 @@
    Clickeo en send <br>
    La consola de Postman me debe decir "Imagen cargada" y esta se va a guardar en la subcarpeta img de la carpeta public porque así lo configuré en "app.js"
 9. Rutas que se van a poder ver desde el navegador: <br>
-   localhost:8080/home <br>
-   localhost:8080/realtimeproducts <br>
-   localhost:8080/api/carts/1 (se verá un json solamente)<br>
-   localhost:8080/api/products/1 (se verá un json solamente)<br><br>
+   `localhost:8080/home` <br>
+   `localhost:8080/realtimeproducts` <br>
+   `localhost:8080/api/products/1` (se verá un json solamente)<br>
+   `localhost:8080/api/carts/1` (se verá un json solamente)<br><br>
    Esas rutas se van a poder ver desde el navegador, pero la ruta localhost:4000/upload para utilizar con Multer no porque esta utiliza el método POST y solamente se pueden ver las rutas que utilicen GET. Además no tiene asignado ningún archivo html, js o css <br>
    En el próximo desafío voy a eliminar esta ruta y la configuración de multer ya que solamente lo hicimos para practicar
 10. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
