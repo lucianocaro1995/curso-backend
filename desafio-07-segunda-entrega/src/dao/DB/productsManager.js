@@ -38,8 +38,8 @@ class ProductDAO {
     }
 
     //4)
-    async updateById(id, productData) {
-        return await productModel.findByIdAndUpdate(mongoose.Types.ObjectId(id), productData, { new: true });
+    async updateById(id, updateData) {
+        return await productModel.findByIdAndUpdate(id, updateData, { new: true });
     }
 
     //5)

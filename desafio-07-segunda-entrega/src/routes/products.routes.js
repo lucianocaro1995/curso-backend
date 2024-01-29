@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ProductManager } from "../dao/DB/productsManager.js"
+import { productModel } from "../dao/models/products.models.js"
 
 
 
@@ -11,7 +11,7 @@ productRouter.get('/', async (req, res) => {
     const { limit, page, category, sort } = req.query;
 
     try {
-        const result = await ProductManager.findAll(limit, page, category, sort);
+        const result = await productModel.findAll(limit, page, category, sort);
 
         const response = {
             status: "success",
@@ -38,7 +38,7 @@ productRouter.get('/:id', async (req, res) => {
     const { id } = req.params
 
     try {
-        const prod = await ProductManager.findById(id)
+        const prod = await productModel.findById(id)
         if (prod)
             res.status(200).send({ respuesta: 'OK', mensaje: prod })
         else
@@ -53,7 +53,7 @@ productRouter.get('/:id', async (req, res) => {
 productRouter.post('/', async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {
-        const prod = await ProductManager.create({ title, description, stock, code, price, category })
+        const prod = await productModel.create({ title, description, stock, code, price, category })
         res.status(200).send({ respuesta: 'OK', mensaje: prod })
     } catch (error) {
         res.status(400).send({ respuesta: 'Error en crear productos', mensaje: error })
@@ -63,19 +63,17 @@ productRouter.post('/', async (req, res) => {
 //4) PUT(id)
 productRouter.put('/:id', async (req, res) => {
     const { id } = req.params;
-    console.log(id);
-    const {title, description, price, status, stock, category} = req.body;
+    const { title, description, price, status, stock, category } = req.body;
     try {
-        const product = await ProductManager.updateById({ _id: id }, { title, description, price, stock, category, status});
+        const product = await productModel.findByIdAndUpdate(id, { title, description, price, stock, category, status }, { new: true })
         if (product)
-            res.status(200).send({respuesta: 'ok product updated', mensaje: product});
+            res.status(200).send({ respuesta: 'OK product updated', mensaje: product });
         else 
-            res.status(404).send({respuesta: 'Error', mensaje: 'Product not found'});
-    } catch (error){
-        res.status(400).send({respuesta: 'Error updating product', mensaje: error});
+            res.status(404).send({ respuesta: 'Error', mensaje: 'Product not found' });
+    } catch (error) {
+        res.status(400).send({ respuesta: 'Error updating product', mensaje: error.message });
     }
 });
-
 
 //5) DELETE(id)
 //Poner esto en la ruta: localhost:4000/api/products/650636d0d3c359de670f30a8
@@ -83,7 +81,7 @@ productRouter.delete('/:id', async (req, res) => {
     const { id } = req.params
 
     try {
-        const prod = await ProductManager.deleteById(id)
+        const prod = await productModel.deleteById(id)
         if (prod)
             res.status(200).send({ respuesta: 'OK', mensaje: 'Producto eliminado' })
         else
