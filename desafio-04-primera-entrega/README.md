@@ -1,32 +1,10 @@
 ## Comentarios:
 
 1. Desafío "Primera entrega": <br>
-   En este trabajo debemos desarrollar un servidor basado en Node.JS y express, que escuche en el puerto 8080 y disponga de 2 grupos de rutas: "/products" y "/carts". Dichos endpoints estarán implementados con el router de express con las siguientes especificaciones: <br><br>
-   Para el manejo de `products`, el cual tendrá su router en "/api/products", configurar las siguientes rutas: <br>
-   La ruta raíz GET "/" deberá listar todos los productos de la base <br>
-   La ruta GET "/:pid" deberá traer sólo el producto con el id proporcionado <br>
-   La ruta raíz POST "/" deberá agregar un nuevo producto con los campos: <br>
-   id: number/string (A tu elección. El id no se manda desde el body, se autogenera como lo hemos visto desde los primeros desafíos, asegurando que nunca se repetirán los ids en el archivo) <br>
-   title: string <br>
-   description: string <br>
-   code: string <br>
-   price: number <br>
-   status: boolean <br>
-   stock: number <br>
-   category: string <br>
-   thumbnails: array de strings (que contengan las rutas donde están almacenadas las imágenes referentes a dicho producto) <br>
-   La ruta PUT "/:pid" deberá tomar un producto y actualizarlo por los campos enviados desde el body. Nunca se debe actualizar o eliminar el id al momento de hacer dicha actualización <br>
-   La ruta DELETE "/:pid" deberá eliminar el producto con el id proporcionado <br><br>
-   Para el manejo de `carts`, el cual tendrá su router en "/api/carts", configurar 2 rutas: <br>
-   La ruta raíz POST "/" deberá crear un nuevo carrito con la siguiente estructura: <br>
-   id: number/string (A tu elección. De igual manera como con los productos, debes asegurar que nunca se dupliquen los ids y que este se autogenere) <br>
-   products: array (que contendrá objetos que representen cada producto) <br>
-   La ruta GET "/:cid" deberá listar los productos que pertenezcan al carrito con el parámetro id proporcionado <br>
-   La ruta POST "/:cid/product/:pid" deberá agregar el producto al array "products" del carrito seleccionado, agregándose como un objeto bajo el siguiente formato: <br>
-   product: sólo debe contener el id del producto (es crucial que no agregues el producto completo) <br>
-   quantity: debe contener el número de ejemplares de dicho producto. El producto de momento se agregará de uno en uno <br>
-   Además, si un producto ya existente intenta agregarse al producto, incrementar el campo quantity de dicho producto <br>
-   La persistencia de la información se implementará utilizando file system, donde los archivos "products.json" y "carts.json" guardarán la información
+   En este trabajo debemos desarrollar un servidor basado en Node.JS y express, que escuche en el puerto 8080 y disponga de 2 grupos: products y carts <br>
+   Dichos grupos estarán implementados con el router de express con las siguientes especificaciones: <br>
+   Products deberá tener su router en "/api/products" mientras que Carts deberá tener su router en "/api/carts". Para ambos debemos crear unos endpoints específicos pedidos por la consigna del trabajo
+   La persistencia de la información se debe implementar utilizando file system, donde los archivos "products.json" y "carts.json" guarden la información
 2. Creé "CartManager.js" para poder tener un manager de los carritos
 3. Creé "carts.json" para poder guardar los carritos creados y la cantidad de productos dentro de cada carrito
 4. Creé la carpeta "routes" en donde voy a guardar las rutas/endpoints solicitados, tanto para products como para carts
