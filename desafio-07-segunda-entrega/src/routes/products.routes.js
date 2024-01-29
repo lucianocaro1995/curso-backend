@@ -9,26 +9,25 @@ const productRouter = Router()
 //Poner esto en la ruta: localhost:4000/api/products
 productRouter.get('/', async (req, res) => {
     const { limit, page, category, sort } = req.query;
-
     try {
-        const result = await productModel.findAll(limit, page, category, sort);
+        const prods = await productModel.paginate({ category: category }, { limit: limit, page: page, sort: { price: sort } });
 
         const response = {
             status: "success",
-            payload: result.docs, //Resultado de los productos solicitados
-            totalPages: result.totalPages,
-            prevPage: result.prevPage,
-            nextPage: result.nextPage,
-            page: result.page,
-            hasPrevPage: result.hasPrevPage,
-            hasNextPage: result.hasNextPage,
-            prevLink: result.hasPrevPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${result.prevPage}&category=${category}&sort=${sort}` : null,
-            nextLink: result.hasNextPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${result.nextPage}&category=${category}&sort=${sort}` : null
+            payload: prods.docs,
+            totalPages: prods.totalPages,
+            prevPage: prods.prevPage,
+            nextPage: prods.nextPage,
+            page: prods.page,
+            hasPrevPage: prods.hasPrevPage,
+            hasNextPage: prods.hasNextPage,
+            prevLink: prods.hasPrevPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${prods.prevPage}&category=${category}&sort=${sort}` : null,
+            nextLink: prods.hasNextPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${prods.nextPage}&category=${category}&sort=${sort}` : null
         };
 
         res.status(200).send(response);
-    } catch (error){
-        res.status(400).send({respuesta: 'Error', mensaje: error})
+    } catch (error) {
+        res.status(400).send({ respuesta: 'Error', mensaje: error.message, error: error });
     }
 })
 
@@ -68,7 +67,7 @@ productRouter.put('/:id', async (req, res) => {
         const product = await productModel.findByIdAndUpdate(id, { title, description, price, stock, category, status }, { new: true })
         if (product)
             res.status(200).send({ respuesta: 'OK product updated', mensaje: product });
-        else 
+        else
             res.status(404).send({ respuesta: 'Error', mensaje: 'Product not found' });
     } catch (error) {
         res.status(400).send({ respuesta: 'Error updating product', mensaje: error.message });

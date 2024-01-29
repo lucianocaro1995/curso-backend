@@ -1,4 +1,10 @@
-const socket = io.connect('http://localhost:8080')
+//Este archivo js lo utilizo junto con la lógica del socket.io
+//Socket.io es una biblioteca de JavaScript que se utiliza para desarrollar aplicaciones web en tiempo real
+//Su principal función es permitir la comunicación bidireccional en tiempo real entre el servidor y el cliente a través de WebSocket, una tecnología que habilita conexiones persistentes y de baja latencia
+
+
+
+const socket = io.connect('http://localhost:4000')
 const addForm = document.getElementById('addForm')
 const removeform = document.getElementById('removeForm')
 
@@ -16,7 +22,7 @@ addForm.addEventListener('submit', async (event) => {
     const stock = parseInt(document.getElementById('stock-addform').value);
     const code = document.getElementById('code-addform').value;
 
-    await socket.emit('nuevoProducto', {
+    await socket.emit('add-product', { //Evento personalizado add-product creado en app.js
         title: title,
         description: description,
         category: category,
@@ -26,23 +32,8 @@ addForm.addEventListener('submit', async (event) => {
         code: code
     });
 
-    await socket.emit('actualizarProductos');
+    await socket.emit('update-products'); //Evento personalizado update-products creado en app.js
     event.target.reset();
-});
-
-//Evento para mostrar "Ya existe un producto con ese código"
-socket.on('code-exists', (errorMessage) => {
-    console.log(errorMessage);
-});
-
-//Evento para mostrar "Producto agregado exitosamente"
-socket.on('product-added', (errorMessage) => {
-    console.log(errorMessage);
-});
-
-//Evento para mostrar "No se pudo procesar la solicitud"
-socket.on('product-add-error', (errorMessage) => {
-    console.log(errorMessage);
 });
 
 
@@ -50,32 +41,16 @@ socket.on('product-add-error', (errorMessage) => {
 //2)Evento para eliminar un producto
 removeform.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const id = parseInt(document.getElementById('id-removeform').value);
-    await socket.emit('eliminarProducto', id);
-    await socket.emit('actualizarProductos');
+    const code = document.getElementById('code-removeform').value;
+    await socket.emit('remove-product', code); //Evento personalizado remove-product creado en app.js
+    await socket.emit('update-products'); //Evento personalizado update-products creado en app.js
     event.target.reset();
 });
-
-//Evento para mostrar "Producto eliminado exitosamente"
-socket.on('product-removed', (message) => {
-    console.log(message);
-});
-
-//Evento para mostrar "No existe un producto con ese ID"
-socket.on('product-not-found', (errorMessage) => {
-    console.log(errorMessage);
-});
-
-//Evento para mostrar "No se pudo procesar la solicitud"
-socket.on('product-remove-error', (errorMessage) => {
-    console.log(errorMessage);
-});
-
 
 
 
 //3) Tabla para ver en tiempo real los productos que tengo en la lista
-socket.on('products-data', (products) => {
+socket.on('show-products', (products) => { //Evento personalizado show-products creado en app.js
     const tableBody = document.querySelector("#productsTable tbody");
     let tableContent = '';
 
@@ -101,4 +76,4 @@ socket.on('products-data', (products) => {
 
 
 //Solicitar la actualización de los productos al cargar la página
-socket.emit('actualizarProductos');
+socket.emit('update-products'); //Evento personalizado update-products creado en app.js

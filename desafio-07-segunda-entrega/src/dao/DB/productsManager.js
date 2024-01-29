@@ -29,23 +29,23 @@ class ProductDAO {
 
     //2)
     async findById(id) {
-        return await productModel.findById(id);
-    }
+    return await productModel.findById(id);
+}
 
     //3)
     async create(productData) {
-        return await productModel.create(productData);
-    }
+    return await productModel.create(productData);
+}
 
     //4)
     async updateById(id, updateData) {
-        return await productModel.findByIdAndUpdate(id, updateData, { new: true });
-    }
+    return await productModel.findByIdAndUpdate(id, updateData, { new: true });
+}
 
     //5)
     async deleteById(id) {
-        return await productModel.findByIdAndDelete(id);
-    }
+    return await productModel.findByIdAndDelete(id);
+}
 }
 
 export const ProductManager = new ProductDAO();
