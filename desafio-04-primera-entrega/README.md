@@ -55,6 +55,7 @@
       "id": 5
    }
 ```
+
 7. Rutas que se van a poder ver desde el navegador: <br>
    `localhost:8080/static` <br>
    `localhost:8080/api/products` (se verá un json solamente, mostrando todos los productos) <br>
