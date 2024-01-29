@@ -1,34 +1,30 @@
-import { Router } from "express"
-import { MessagesManager } from "../dao/DB/messagesManager.js";
-
-
+import { Router } from "express";
+import { messageModel } from "../dao/models/messages.models.js";
 
 const messageRouter = Router();
 
 //1) GET
-//Poner esto en la ruta: localhost:4000/api/messages
+//Ir a esta ruta para poder utilizar el chat: localhost:4000/chat
 messageRouter.get('/', async (req, res) => {
-    const {limit} = req.query
+    const { limit } = req.query;
     try {
-        const message = await MessagesManager.findAll(limit);
-        res.status(200).send({respuesta: 'ok', mensaje: message})
-    } catch (error){
-        res.status(400).send({respuesta: 'Error', mensaje: error})
+        const messages = await messageModel.find().limit(limit);
+        res.status(200).send({ respuesta: 'ok', mensaje: messages });
+    } catch (error) {
+        res.status(400).send({ respuesta: 'Error', mensaje: error });
     }
-})
+});
 
 //2) POST
-//Poner esto en la ruta: localhost:4000/api/messages
+//Ir a esta ruta para poder utilizar el chat: localhost:4000/chat
 messageRouter.post('/', async (req, res) => {
-    const {email, message} = req.body
+    const { email, message } = req.body;
     try {
-        const respuesta = await MessagesManager.create({email, message});
-        res.status(200).send({respuesta: 'OK message send', mensaje: respuesta})
-    } catch (error){
-        res.status(400).send({respuesta: 'Error sending message', mensaje: error})
+        const newMessage = await messageModel.create({ email, message });
+        res.status(200).send({ respuesta: 'OK message send', mensaje: newMessage });
+    } catch (error) {
+        res.status(400).send({ respuesta: 'Error sending message', mensaje: error });
     }
-})
-
-
+});
 
 export default messageRouter;

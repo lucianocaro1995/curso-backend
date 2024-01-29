@@ -41,7 +41,6 @@ const serverExpress = app.listen(PORT, () => {
 mongoose.connect(process.env.MONGO_URL)
 .then(async () => {
     console.log('Base de datos conectada');
-
     /*
     Paginate:
     En los paréntesis agregamos 2 filtros al paginate, separados con llaves

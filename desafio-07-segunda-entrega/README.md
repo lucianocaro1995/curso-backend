@@ -32,8 +32,15 @@
    Crear una vista en el router de views /products para visualizar todos los productos con su respectiva paginación. Cada producto mostrado puede resolverse de dos formas: <br>
    Llevar a una nueva vista con el producto seleccionado con su descripción completa, detalles de precio, categoría, etc. además de un botón para agregar al carrito <br>
    Contar con el botón de "agregar al carrito" directamente, sin necesidad de abrir una página adicional con los detalles del producto
-2. En este desafío dejo de utilizar los managers de la carpeta DB (como productManager), ahora utilizo los managers propios de mongoose (como productModel) <br>
-
+2. Importante: en este desafío dejo de utilizar los managers (CartManager, MessagesManager y ProductManager) en los archivos de routes. Desde ahora sólo utilizo los modelos que yo creo con Mongoose, por ejemplo cartModel, ya que me permite aprovechar las funciones nativas de Mongoose, simplificando aún más mi código <br>
+   Todo lo de dao, excepto la carpeta models, pasa a ser obsoleto
+3. Modifiqué todos los archivos de la carpeta routes para cumplir con lo solicitado por la consigna
+4. Modifiqué "products.models.js" y "users.models.js" para agregarle paginate. El paginate en products es pedido por la consigna, el paginate en users lo hicimos en clase para practicar
 
 
 ## Dependencias instaladas para este desafío:
+
+1. **paginate**
+
+   - Instalación: `npm i mongoose-paginate-v2`
+   - Esta dependencia instala el paquete que amplía Mongoose para proporcionar funcionalidad de paginación eficiente al interactuar con bases de datos MongoDB, facilitando la gestión y presentación de grandes conjuntos de datos

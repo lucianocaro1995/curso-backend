@@ -16,8 +16,8 @@
    Lo hicimos más que nada para practicar Socket.io y ver cómo se modifica la vista en tiempo real <br>
    Para ver el chat debo ingresar esta ruta en el navegador: "localhost:4000/chat"
 6. Eliminé todo lo referido a Multer ya que solamente lo hicimos en el desafío anterior para practicar
-7. Aclaración: este va a ser el único desafío en que utilice los managers (CartManager, MessagesManager y ProductManager) en los archivos de routes. Me conviene empezar a utilizar los modelos de mongoose <br>
-   Luego dejaré de darle uso tanto a los archivos de la carpeta DB como a los archivos de fileSystem, exceptuando por el MessagesManager que lo usaré hasta que elimine la vista del chat <br>
+7. Importante: este va a ser el último desafío en que utilice los managers (CartManager, MessagesManager y ProductManager) en los archivos de routes <br>
+   Me conviene empezar a utilizar los modelos que yo creo con Mongoose, por ejemplo cartModel, ya que me permite aprovechar las funciones nativas de Mongoose, simplificando aún más mi código
 8. Rutas que se van a poder ver desde el navegador: <br>
    `localhost:4000/home` <br>
    `localhost:4000/realtimeproducts` <br>

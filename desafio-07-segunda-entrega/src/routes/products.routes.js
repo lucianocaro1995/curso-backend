@@ -6,7 +6,7 @@ import { productModel } from "../dao/models/products.models.js"
 const productRouter = Router()
 
 //1) GET
-//Poner esto en la ruta: localhost:4000/api/products
+//Poner esto en la ruta: localhost:4000/api/products?limit=10&page=1&category=Calzado&sort=asc
 productRouter.get('/', async (req, res) => {
     const { limit, page, category, sort } = req.query;
     try {
