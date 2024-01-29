@@ -8,34 +8,33 @@ const productRouter = Router()
 
 //1) GET
 //Poner esto en la ruta: http://localhost:4000/api/products
-productRouter.get('/', passportError('jwt'), authorization('Admin'), async (req, res) => {
+productRouter.get('/', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { limit, page, category, sort } = req.query;
-
     try {
-        const result = await productModel.findAll(limit, page, category, sort);
+        const prods = await productModel.paginate({ category: category }, { limit: limit, page: page, sort: { price: sort } });
 
         const response = {
             status: "success",
-            payload: result.docs, //Resultado de los productos solicitados
-            totalPages: result.totalPages,
-            prevPage: result.prevPage,
-            nextPage: result.nextPage,
-            page: result.page,
-            hasPrevPage: result.hasPrevPage,
-            hasNextPage: result.hasNextPage,
-            prevLink: result.hasPrevPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${result.prevPage}&category=${category}&sort=${sort}` : null,
-            nextLink: result.hasNextPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${result.nextPage}&category=${category}&sort=${sort}` : null
+            payload: prods.docs,
+            totalPages: prods.totalPages,
+            prevPage: prods.prevPage,
+            nextPage: prods.nextPage,
+            page: prods.page,
+            hasPrevPage: prods.hasPrevPage,
+            hasNextPage: prods.hasNextPage,
+            prevLink: prods.hasPrevPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${prods.prevPage}&category=${category}&sort=${sort}` : null,
+            nextLink: prods.hasNextPage ? `http://${req.headers.host}${req.baseUrl}?limit=${limit}&page=${prods.nextPage}&category=${category}&sort=${sort}` : null
         };
 
         res.status(200).send(response);
-    } catch (error){
-        res.status(400).send({respuesta: 'Error', mensaje: error})
+    } catch (error) {
+        res.status(400).send({ respuesta: 'Error', mensaje: error.message, error: error });
     }
 })
 
 //2) GET(id)
 //Poner esto en la ruta: http://localhost:4000/api/products/id
-productRouter.get('/:id', passportError('jwt'), authorization('Admin'), async (req, res) => {
+productRouter.get('/:id', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { id } = req.params
 
     try {
@@ -51,7 +50,7 @@ productRouter.get('/:id', passportError('jwt'), authorization('Admin'), async (r
 
 //3) POST
 //Poner esto en la ruta: http://localhost:4000/api/products
-productRouter.post('/', passportError('jwt'), authorization('Admin'), async (req, res) => {
+productRouter.post('/', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { title, description, stock, code, price, category } = req.body
     try {
         const prod = await productModel.create({ title, description, stock, code, price, category })
@@ -62,14 +61,14 @@ productRouter.post('/', passportError('jwt'), authorization('Admin'), async (req
 })
 
 //4) PUT(id)
-productRouter.put('/:id', async (req, res) => {
+productRouter.put('/:id', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { id } = req.params;
     const { title, description, price, status, stock, category } = req.body;
     try {
         const product = await productModel.findByIdAndUpdate(id, { title, description, price, stock, category, status }, { new: true })
         if (product)
             res.status(200).send({ respuesta: 'OK product updated', mensaje: product });
-        else 
+        else
             res.status(404).send({ respuesta: 'Error', mensaje: 'Product not found' });
     } catch (error) {
         res.status(400).send({ respuesta: 'Error updating product', mensaje: error.message });
@@ -78,7 +77,7 @@ productRouter.put('/:id', async (req, res) => {
 
 //5) DELETE(id)
 //Poner esto en la ruta: http://localhost:4000/api/products/id
-productRouter.delete('/:id', passportError('jwt'), authorization('Admin'), async (req, res) => {
+productRouter.delete('/:id', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { id } = req.params
 
     try {

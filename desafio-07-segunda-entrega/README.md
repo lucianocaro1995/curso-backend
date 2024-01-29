@@ -1,7 +1,7 @@
 ## Comentarios:
 
 1. Desafío "Profesionalizando la base de datos": <br>
-   En este desafío nos pidieron realizar modificaciones tanto en el router de carts como en el de products: debemos profesionalizar las consultas de productos con filtros, paginación y ordenamientos, y también profesionalizar la gestión del carrito implementando populate
+   En este desafío nos pidieron realizar modificaciones tanto en el router de carts como en el de products: debemos agregar varias rutas/endpoints, profesionalizar las consultas de productos con filtros, paginación y ordenamientos, y también profesionalizar la gestión del carrito implementando populate
 2. Modifiqué todos los archivos de la carpeta routes: <br>
    Products y carts para cumplir con lo pedido de la consigna <br>
    Messages y users para reemplazar los antiguos managers

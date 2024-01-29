@@ -3,7 +3,7 @@
 1. Desafío "Primera entrega": <br>
    En este trabajo debemos desarrollar un servidor basado en Node.JS y express, que escuche en el puerto 8080 y disponga de 2 grupos: products y carts <br>
    Dichos grupos estarán implementados con el router de express con las siguientes especificaciones: <br>
-   Products deberá tener su router en "/api/products" mientras que Carts deberá tener su router en "/api/carts". Para ambos debemos crear unos endpoints específicos pedidos por la consigna del trabajo
+   Products deberá tener su router en "/api/products" mientras que Carts deberá tener su router en "/api/carts". Para ambos debemos crear unos endpoints específicos pedidos por la consigna del trabajo <br>
    La persistencia de la información se debe implementar utilizando file system, donde los archivos "products.json" y "carts.json" guarden la información
 2. Creé "CartManager.js" para poder tener un manager de los carritos
 3. Creé "carts.json" para poder guardar los carritos creados y la cantidad de productos dentro de cada carrito
