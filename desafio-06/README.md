@@ -20,7 +20,6 @@
    `localhost:4000/home` <br>
    `localhost:4000/realtimeproducts` <br>
    `localhost:4000/chat` <br><br>
-
    Rutas que se van a poder ver desde el navegador (en las que sólo se verá un json): <br>
    `localhost:4000/api/users` <br>
    `localhost:4000/api/products` <br>
