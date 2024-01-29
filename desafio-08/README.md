@@ -2,13 +2,14 @@
 
 1. Desafío "Implementación de login": <br>
     En este trabajo debemos modificar nuestro servidor para que tenga un sistema de login <br>
-    Debemos realizar todas las vistas hechas en clase, así también como las rutas de router para procesar el registro y el login
+    Debemos realizar todas las vistas hechas en clase, así también como las rutas de router para procesar el registro y el login <br>
+    Debemos crear un usuario cuyo rol sea "admin", todos los demás deben tener rol "user" 
 2. En este desafío sí utilizamos las vistas(handlebars) a diferencia de los 2 desafíos anteriores
-3. Creé el archivo "sessions.routes.js"
+3. Creé el archivo "sessions.routes.js" en donde voy a manejar la autenticación de usuarios y la desconexión (login y logout)
 4. Modifiqué las carpetas "views" y "public" para incluir todas las vistas pedidas en la consigna
 5. Modifiqué "app.js" para incluir todas las nuevas vistas y para configurar el servidor express agregando sesiones
 6. Cómo funciona mi aplicación agregando sesiones: <br>
-    El usuario principal que es admin está por defecto en el formulario de /login. Nosotros debemos crear por una única vez a ese usuario admin <br>
+    El usuario principal que es admin está por defecto en el formulario de /login, es decir no hay necesidad de que se registre, ya que nosotros debemos crear por una única vez a ese usuario admin <br>
     Solo /signup debe ser una ruta accesible sin tener el /login hecho previamente <br>
     Una vez hecho el login se genera un sesión en MongoDB Atlas <br>
     La ruta /realtimeproducts sólo debe estar disponible para el o los usarios cuyo rol sea admin 

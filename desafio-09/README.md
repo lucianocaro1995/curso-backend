@@ -1,15 +1,18 @@
 ## Comentarios:
 
-1. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver el localhost:4000 en mi navegador
-2. Desafío "Refactor a nuestro login": <br>
+1. Desafío "Refactor a nuestro login": <br>
     En este desafío trabajamos autenticación de manera local (ingresar a nuestra aplicación con email y contraseña) y autenticación por terceros (ingresar a nuestra aplicación utilizando github)
-3. No estamos trabajando con vistas (handlebars) en este desafío. Todo probado desde Postman
-4. Creé un archivo "bcrypt.js" para generar un hasheo de contraseña. Nos permite encriptar las contraseñas guardadas en la base de datos
-5. Creé un archivo "passport.js" en donde hago los códigos necesarios para registrarnos y loguearnos
-6. Modifiqué el archivo "session.routes.js". Aquí creo el código para register, login y logout de manera local, y también register y login utilizando github
-7. Es común tener redirecciones tanto en el servidor ("session.routes.js") como en el cliente ("signup.js", "login.js", "logout.js") <br>
+2. No estamos trabajando con vistas (handlebars) en este desafío. Todo probado desde Postman
+3. Creé un archivo "bcrypt.js" para generar un hasheo de contraseña. Nos permite encriptar las contraseñas guardadas en la base de datos
+4. Creé un archivo "passport.js" en donde hago los códigos necesarios para registrarnos y loguearnos <br>
+    Todo lo creado en este archivo, lo utilizamos como middleware en "sessions.routes.js" <br>
+    Es la primera vez que utilizamos middlewares en las rutas/endpoints <br>
+    Incluir un middleware en un endpoint permite realizar acciones específicas (como validar autorización, preprocesar datos, etc) antes de la autenticación. En simples palabras, los middlewares son pasos previos que se deben cumplir antes del proceso de autenticación
+5. Modifiqué el archivo "session.routes.js". Aquí creo el código para register, login y logout de manera local, y también register y login utilizando github
+6. Aclaración: es común tener redirecciones tanto en el servidor ("session.routes.js") como en el cliente ("signup.js", "login.js", "logout.js") <br>
     En el servidor, la redirección se utiliza para indicar al navegador que debe cargar la página de inicio de sesión. Esto es importante para garantizar que el navegador del usuario sepa a dónde debe ir después de realizar la acción de registro <br>
     En el cliente, la redirección se maneja después de recibir la respuesta del servidor. Aquí, la redirección se utiliza para cambiar efectivamente la ubicación del navegador después de completar el registro y mostrar un mensaje de éxito. Es una buena práctica manejar las redirecciones del lado del cliente para proporcionar una experiencia de usuario más fluida
+7. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
 
 
 
@@ -30,7 +33,7 @@
 
 
 
-## Comentarios sobre el archivo "bcrypt.js"
+## Comentarios sobre el archivo "bcrypt.js":
 
 Aquí vamos a generar 2 funciones:
 
