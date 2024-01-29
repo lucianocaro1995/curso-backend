@@ -4,9 +4,7 @@
    En este trabajo debemos hacer la conexión de nuestro proyecto con una base de datos: <br>
    Utilizaremos Mongo y mongoose para agregar el modelo de persistencia a nuestro proyecto <br>
    Debemos crear una base de datos llamada "ecommerce" dentro de Mongodb Atlas, crear sus colecciones "carts", "messages", "products" y sus respectivos schemas <br>
-   Debemos separar los managers de fileSystem de los managers de Mongodb en una sola carpeta "dao". Dentro de dao, agregar también una carpeta "models" donde vivirán los esquemas de Mongodb. La estructura deberá ser igual a la vista en clase. En resumen, debemos contener todos los managers (fileSystem y DB) en una carpeta llamada "dao" <br>
-   Debemos reajustar los servicios con el fin de que puedan funcionar con Mongoose en lugar de fileSystem <br>
-   A pesar de que ya no utilizaremos fileSystem, por el momento no lo borremos
+   Debemos separar los managers de fileSystem de los managers de Mongodb en una sola carpeta "dao". Dentro de dao, agregar también una carpeta "models" donde vivirán los esquemas de Mongodb
 2. Creé la carpeta "dao" con las subcarpetas solicitadas
 3. Creé el archivo ".env" para ocultar contraseñas
 4. Modifiqué "app.js" para hacer la conexión con la base de datos e incluyo la nueva vista del chat

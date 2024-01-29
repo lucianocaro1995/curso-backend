@@ -172,9 +172,9 @@ io.on('connection', (socket)=> {
         socket.emit('show-products', products);
     });
     //realTimeProducts.js
-    socket.on('remove-product', async ({ code }) => {
+    socket.on('remove-product', async ({ id }) => {
         try {
-            await productModel.deleteOne({ code: code });
+            await productModel.deleteOne({ id: id });
             const products = await productModel.find();
             socket.emit('show-products', products);
         } catch (error) {

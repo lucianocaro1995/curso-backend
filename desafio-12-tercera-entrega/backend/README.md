@@ -11,7 +11,7 @@
 5. Eliminé las carpetas "dao", "public" y "views" ya que solamente utilizaré models de lo que estaba en la carpeta dao. Y public y views me quedan obsoletas al reemplazar Handlebars por React
 6. Eliminé todo lo relacionado al chat ya que no lo vamos a necesitar más. Solamente lo creamos en clase para practicar Socket.io
    Los archivos que se eliminan son: "messages.controller.js", "messages.models.js", "messages.routes.js", "chat.handlebars" y "chat.js". También se modifica "app.routes.js" para eliminar el endpoint del chat
-7. Incluyo un archivo "mailer.js" en la carpeta "config" para poder enviar mails a las personas que compren productos en mi página web
+7. Creé el archivo "mailer.js" en la carpeta "config" para poder enviar mails a las personas que compren productos en mi página web
 8. El archivo "path.js" dejo de importarlo en "app.js" ya que lo necesitaba solamente para Handlebars, pero ahora lo importo en "mailer.js" para poder enviar imágenes en el mail
 9. Comentario importante que se aclaró en la clase 14: cuándo utilizar "productManager" y cuándo "productModel" <br>
    Cuando utilizamos clases deberíamos utilizar productManager <br>
@@ -24,7 +24,7 @@
 
 
 
-## Cómo generar una contraseña desde Gmail para poder utilizar Nodemailer
+## Cómo generar una contraseña desde Gmail para poder utilizar Nodemailer:
 
 1. Voy a gmail
 2. Clickeo sobre el logo de mi perfil en la esquina derecha, y me aparece una ventana, ahí clickeo sobre "Gestionar tu cuenta de Google"

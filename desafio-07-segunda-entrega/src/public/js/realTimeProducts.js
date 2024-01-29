@@ -41,8 +41,8 @@ addForm.addEventListener('submit', async (event) => {
 //2)Evento para eliminar un producto
 removeform.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const code = document.getElementById('code-removeform').value;
-    await socket.emit('remove-product', code); //Evento personalizado remove-product creado en app.js
+    const id = document.getElementById('id-removeform').value;
+    await socket.emit('remove-product', id); //Evento personalizado remove-product creado en app.js
     await socket.emit('update-products'); //Evento personalizado update-products creado en app.js
     event.target.reset();
 });

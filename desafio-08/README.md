@@ -1,13 +1,25 @@
 ## Comentarios:
 
 1. Desafío "Implementación de login": <br>
-    En este trabajo debemos
-3. En este desafío sí utilizamos las vistas(handlebars) a diferencia de los 2 desafíos anteriores
-4. El usuario principal que es admin está por defecto en el formulario de /login. Nosotros debemos crear por una única vez a ese usuario admin
-5. Solo /signup es una ruta accesible sin tener el /login hecho previamente
-6. Una vez hecho el login se genera un sesión en MongoDB Atlas
-7. La ruta /realtimeproducts sólo está disponible para el o los usarios cuyo rol sea admin
-6. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
+    En este trabajo debemos modificar nuestro servidor para que tenga un sistema de login <br>
+    Debemos realizar todas las vistas hechas en clase, así también como las rutas de router para procesar el registro y el login
+2. En este desafío sí utilizamos las vistas(handlebars) a diferencia de los 2 desafíos anteriores
+3. Creé el archivo "sessions.routes.js"
+4. Modifiqué las carpetas "views" y "public" para incluir todas las vistas pedidas en la consigna
+5. Modifiqué "app.js" para incluir todas las nuevas vistas y para configurar el servidor express agregando sesiones
+6. Cómo funciona mi aplicación agregando sesiones: <br>
+    El usuario principal que es admin está por defecto en el formulario de /login. Nosotros debemos crear por una única vez a ese usuario admin <br>
+    Solo /signup debe ser una ruta accesible sin tener el /login hecho previamente <br>
+    Una vez hecho el login se genera un sesión en MongoDB Atlas <br>
+    La ruta /realtimeproducts sólo debe estar disponible para el o los usarios cuyo rol sea admin 
+7. Rutas que se van a poder ver desde el navegador: <br>
+    `localhost:4000/chat` <br>
+    `localhost:4000/home` <br>
+    `localhost:4000/login` <br>
+    `localhost:4000/logout` <br>
+    `localhost:4000/realtimeproducts` <br>
+    `localhost:4000/signup` <br>
+8. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
 
 
 
@@ -31,7 +43,7 @@
 
 
 
-## Comentarios sobre la configuración del servidor Express en "app.js"
+## Comentarios sobre la configuración del servidor Express en "app.js":
 
 1. app.use(cookieParser(process.env.SIGNED_COOKIE)) <br>
     En esta línea de código la cookie está firmada, eso la hace más segura
