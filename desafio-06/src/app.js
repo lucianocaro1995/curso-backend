@@ -31,10 +31,9 @@ import userRouter from './routes/users.routes.js'
 import productRouter from './routes/products.routes.js'
 import cartRouter from './routes/carts.routes.js'
 import messageRouter from './routes/messages.routes.js'
-//Managers/modelos
+//Modelos
 import { messageModel } from './dao/models/messages.models.js'
-import ProductManager from './dao/fileSystem/productsManager.js';
-const manager = new ProductManager();
+import { productModel } from './dao/models/products.models.js';
 //Servidor
 const PORT = 4000
 const app = express()
@@ -89,70 +88,42 @@ const io = new Server(serverExpress)
 //Socket.io sirve para enviar datos y eventos desde un cliente a un servidor (o entre diferentes clientes) en una aplicación web en tiempo real
 //Sintaxis: se utiliza socket.on y socket.emit
 //Sintaxis de socket.emit: socket.emit('nombreEvento', variable);
-io.on('connection', (socket) => {
-    console.log('Servidor de socket io conectado')
-
-    //1) chat.js
+io.on('connection', (socket)=> {
+    console.log('servidor de socket io conectado')
+    //chat.js
     socket.on('add-message', async ({email, mensaje}) => {
-        console.log(mensaje)
-        await messageModel.create({email: email, message: mensaje})
+        console.log(mensaje);
+        await messageModel.create({email: email, message: mensaje});
         const messages = await messageModel.find();
         socket.emit('show-messages', messages);
-    })
-
-    //2) chat.js
+    });
+    //chat.js
     socket.on('load-chat', async() =>{
         const messages = await messageModel.find();
         socket.emit('show-messages', messages);
     })
-
-    //3) Obtiene los productos y envía la lista actualizada en el cliente. Esto lo uso en ambas páginas, "home.js" y "realTimeProducts.js"
-    socket.on('actualizarProductos', async () => {
-        const products = await manager.getProducts();
-        socket.emit('products-data', products);
-    });
-
-    //4) Agrega un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
-    //La verificación de completar todos los campos existentes no tengo que hacerla sobre la consola, porque el navegador ya obliga al cliente a rellenar todos los campos
-    socket.on('nuevoProducto', async (nuevoProd) => {
+    //realTimeProducts.js
+    socket.on('add-product', async (nuevoProd) => {
         const { title, description, category, thumbnail, price, stock, code } = nuevoProd;
-
-        const codeAlreadyExists = await manager.getProductByCode(code);
-        if (codeAlreadyExists) {
-            socket.emit('code-exists', 'Ya existe un producto con ese código');
-            return;
-        }
-
-        try {
-            await manager.addProduct(title, description, category, thumbnail, price, stock, code);
-            const products = await manager.getProducts();
-            socket.emit('products-data', products);
-            socket.emit('product-added', 'Producto agregado exitosamente');
-        } catch (error) {
-            socket.emit('product-add-error', 'Error al agregar producto');
-            console.error(error);
-        }
+        await productModel.create({title: title, description: description, category: category, thumbnail: thumbnail, price: price, stock: stock, code: code});
+        const products = await productModel.find();
+        socket.emit('show-products', products);
+    })
+    //realTimeProducts.js - home.js
+    socket.on('update-products', async () => {
+        const products = await productModel.find();
+        socket.emit('show-products', products);
     });
-
-    //5) Elimina un producto y envía la lista actualizada al cliente. Esto lo uso en "realTimeProducts.js"
-    socket.on('eliminarProducto', async (id) => {
+    //realTimeProducts.js
+    socket.on('remove-product', async ({ code }) => {
         try {
-            const idNotFound = await manager.deleteProduct(id);
-            
-            if (idNotFound) {
-                socket.emit('product-removed', 'Producto eliminado exitosamente');
-            } else {
-                socket.emit('product-not-found', 'No existe un producto con ese ID');
-            }
-            
-            const products = await manager.getProducts();
-            socket.emit('products-data', products);
+            await productModel.deleteOne({ code: code });
+            const products = await productModel.find();
+            socket.emit('show-products', products);
         } catch (error) {
-            socket.emit('product-remove-error', 'Error al eliminar producto');
-            console.error(error);
+            console.error('Error al eliminar producto:', error);
         }
-    });
-    
+    })
 })
 
 

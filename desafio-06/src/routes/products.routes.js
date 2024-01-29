@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { productModel } from "../dao/models/products.models.js"
+import { productModel } from "../dao/models/products.models.js";
 
 
 
@@ -7,14 +7,22 @@ const productRouter = Router()
 
 //1) GET
 productRouter.get('/', async (req, res) => {
-    const {limit} = req.query
+    const { limit } = req.query;
     try {
-        const products = await productModel.findAll(limit);
-        res.status(200).send({respuesta: 'ok', mensaje: products})
-    } catch (error){
-        res.status(400).send({respuesta: 'Error', mensaje: error})
+        let options = {};
+
+        if (limit && !isNaN(parseInt(limit))) {
+            options.limit = parseInt(limit);
+        }
+
+        const products = await productModel.find(options);
+        res.status(200).send({ respuesta: 'ok', mensaje: products });
+    } catch (error) {
+        console.error(error);
+        res.status(400).send({ respuesta: 'Error', mensaje: error.message });
     }
-})
+});
+
 
 //2) GET(id)
 productRouter.get('/:id', async (req, res) => {
