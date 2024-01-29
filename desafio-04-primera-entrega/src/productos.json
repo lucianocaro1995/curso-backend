@@ -42,5 +42,16 @@
         "category": "Ca",
         "thumbnail": "ejemploImagen4.jpg",
         "id": 4
+    },
+    {
+        "title": "Producto 5",
+        "description": "Este es el producto 5",
+        "price": 10,
+        "code": "PROD005",
+        "status": true,
+        "stock": 10,
+        "category": "Reloj de pulsera",
+        "thumbnail": "ejemploImagen5.jpg",
+        "id": 5
     }
 ]
