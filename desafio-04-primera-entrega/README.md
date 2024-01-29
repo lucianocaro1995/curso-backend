@@ -39,20 +39,22 @@
    Clickeo en body y debajo clickeo la opción raw <br>
    Elijo la opción JSON <br>
    Escribo un objeto con los atributos del nuevo producto a agregar y clickeo en send <br>
-   Ejemplo de nuevo producto: <br>
+   Ejemplo de nuevo producto:
+
 ```json
-{
-   "title": "Producto 5",
-   "description": "Este es el producto 5",
-   "price": 10,
-   "code": "PROD005",
-   "status": true,
-   "stock": 10,
-   "category": "Reloj de pulsera",
-   "thumbnail": "ejemploImagen5.jpg",
-   "id": 5
-}
+   {
+      "title": "Producto 5",
+      "description": "Este es el producto 5",
+      "price": 10,
+      "code": "PROD005",
+      "status": true,
+      "stock": 10,
+      "category": "Reloj de pulsera",
+      "thumbnail": "ejemploImagen5.jpg",
+      "id": 5
+   }
 ```
+
    Por el momento estos nuevos productos se agregarán al archivo JSON de productos. Cuando conectemos nuestra aplicación con una base de datos en el desafío 6, estos productos se agregarán a la base de datos
 7. Rutas que se van a poder ver desde el navegador: <br>
    `localhost:8080/static` <br>
