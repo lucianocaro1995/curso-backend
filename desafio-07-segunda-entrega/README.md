@@ -1,8 +1,10 @@
 ## Comentarios:
 
 1. Desafío "Profesionalizando la base de datos": <br>
-   En este trabajo debemos profesionalizar las consultas de productos con filtros, paginación y ordenamientos. También profesionalizar la gestión del carrito para implementar los últimos conceptos vistos <br><br>
-   Con base en nuestra implementación actual de `products`, modificar el método GET para que cumpla con los siguientes puntos: <br>
+   En este trabajo debemos profesionalizar las consultas de productos con filtros, paginación y ordenamientos <br>
+   También profesionalizar la gestión del carrito para implementar los últimos conceptos vistos <br><br>
+   Para el router de `products`: <br>
+   Modificar el método GET para que cumpla con los siguientes puntos: <br>
    Deberá poder recibir por query params un limit, una page, un sort y un query: <br>
    Limit permitirá devolver sólo el número de elementos solicitamos al momento de la petición. En caso de no recibir limit, éste será de 10 <br>
    Page permitirá devolver la página que queremos buscar. En caso de no recibir page, ésta será de 1 <br>
@@ -22,20 +24,17 @@
       nextLink: Link directo a la página siguiente (null si hasNextPage = false) <br>
    } <br>
    Se deberá poder buscar productos por categoría o disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio <br><br>
-   Además, agregar al router de `carts` los siguientes endpoints: <br>
+   Para el router de `carts` agregar las siguientes rutas: <br>
    DELETE api/carts/:cid/products/:pid deberá eliminar del carrito el producto seleccionado <br>
    PUT api/carts/:cid deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba <br>
    PUT api/carts/:cid/products/:pid deberá poder actualizar sólo la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body <br>
    DELETE api/carts/:cid deberá eliminar todos los productos del carrito <br>
    Esta vez, para el modelo de Carts, en su propiedad products, el id de cada producto generado dentro del array tiene que hacer referencia al modelo de Products. Modificar la ruta /:cid para que al traer todos los productos, los traiga completos mediante un "populate". De esta manera almacenamos sólo el id, pero al solicitarlo podemos desglosar los productos asociados <br>
-   Agregar una vista en /carts/:cid para visualizar un carrito específico, donde se deberán listar sólo los productos que pertenezcan a dicho carrito <br><br>
-   Crear una vista en el router de views /products para visualizar todos los productos con su respectiva paginación. Cada producto mostrado puede resolverse de dos formas: <br>
-   Llevar a una nueva vista con el producto seleccionado con su descripción completa, detalles de precio, categoría, etc. además de un botón para agregar al carrito <br>
-   Contar con el botón de "agregar al carrito" directamente, sin necesidad de abrir una página adicional con los detalles del producto
 2. Importante: en este desafío dejo de utilizar los managers (CartManager, MessagesManager y ProductManager) en los archivos de routes. Desde ahora sólo utilizo los modelos que yo creo con Mongoose, por ejemplo cartModel, ya que me permite aprovechar las funciones nativas de Mongoose, simplificando aún más mi código <br>
    Todo lo de dao, excepto la carpeta models, pasa a ser obsoleto
 3. Modifiqué todos los archivos de la carpeta routes para cumplir con lo solicitado por la consigna
 4. Modifiqué "products.models.js" y "users.models.js" para agregarle paginate. El paginate en products es pedido por la consigna, el paginate en users lo hicimos en clase para practicar
+5. Modifiqué "carts.models.js" para agregarle populate
 
 
 ## Dependencias instaladas para este desafío:
