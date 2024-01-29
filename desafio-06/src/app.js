@@ -21,7 +21,6 @@ Esta dependencia nos permite manipular las colecciones y documentos de la base d
 import 'dotenv/config'
 import express from 'express';
 import mongoose from 'mongoose';
-import multer from 'multer';
 import { engine } from 'express-handlebars';
 import { Server } from 'socket.io';
 //Path
@@ -39,18 +38,6 @@ const manager = new ProductManager();
 //Servidor
 const PORT = 4000
 const app = express()
-
-
-
-//Configuración de multer:
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'src/public/img')
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}${file.originalname}`)
-    }
-})
 
 
 
@@ -93,8 +80,6 @@ app.use('/static', express.static(path.join(__dirname, '/public'))) //Path.join:
 app.engine('handlebars', engine()) //Defino que motor de plantillas voy a utilizar y su configuración
 app.set('view engine', 'handlebars') //Configuración de mi aplicación de handlebars
 app.set('views', path.resolve(__dirname, './views')) //Path.resolve: resolver rutas absolutas a través de rutas relativas
-//Configuración de multer (genero una constante que va a contener la configuración de multer):
-const upload = multer({ storage: storage })
 
 
 
@@ -199,13 +184,6 @@ app.get('/realtimeproducts', (req, res) => {
         title: "Products",
         js: "realTimeProducts.js"
     })
-})
-
-//Genero una ruta para que se suban imágenes gracias a multer
-app.post('/upload', upload.single('product'), (req, res) => {
-    console.log(req.file)
-    console.log(req.body)
-    res.status(200).send("Imagen cargada")
 })
 
 app.get('/chat', (req, res) => {

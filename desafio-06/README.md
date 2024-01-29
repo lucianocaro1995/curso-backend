@@ -9,19 +9,18 @@
    A pesar de que ya no utilizaremos fileSystem, por el momento no lo borremos
 2. Creé la carpeta "dao" con las subcarpetas solicitadas
 3. Creé el archivo ".env" para ocultar contraseñas
-4. Modifiqué "app.js" para hacer la conexión con la base de datos e incluyo la nueva vista <br>
-   En total las rutas que se van a poder ver desde el navegador son 3: <br>
-   localhost:4000/home <br>
-   localhost:4000/realtimeproducts <br>
-   localhost:4000/chat <br>
-   La ruta localhost:4000/upload que utiliza multer no se va a poder ver porque se emplea con el método POST, no con el GET. Además no tiene asignado ningún archivo html, js o css
-   En el próximo desafío voy a eliminar esta ruta y la configuración de multer ya que solamente lo hicimos para practicar
+4. Modifiqué "app.js" para hacer la conexión con la base de datos e incluyo la nueva vista del chat
 5. Modifiqué "views" para hacer una vista que contenga un chat <br>
    Modifiqué "public" para hacer el archivo js de este chat <br>
    Esta vista que contiene un chat va a ser el encargado de enviar los mensajes que se van a recibir en la colección "messages" de mi base de datos <br>
    Lo hicimos más que nada para practicar Socket.io y ver cómo se modifica la vista en tiempo real <br>
    Para ver el chat debo ingresar esta ruta en el navegador: "localhost:4000/chat"
-6. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
+6. Eliminé todo lo referido a Multer ya que solamente lo hicimos en el desafío anterior para practicar
+7. Rutas que se van a poder ver desde el navegador: <br>
+   localhost:4000/home <br>
+   localhost:4000/realtimeproducts <br>
+   localhost:4000/chat <br>
+8. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000
 
 
 

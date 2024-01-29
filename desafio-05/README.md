@@ -11,11 +11,11 @@
    Sirve para que todos puedan ver el trabajo sin importar si la otra persona utiliza Windows, Linux o Mac
 3. Creé la carpeta "views" la cual dividiré en 2 subcarpetas: layouts y partials. Las divido así ya que es la estructura convencional para trabajar con Handlebars <br>
    En esta carpeta crearemos las vistas hechas con Handlebars que veremos en nuestro navegador, tanto home como realTimeProducts
-4. Modifiqué "app.js" para agregar los endpoints solicitados por la consigna: "/home" y "/realtimeproducts" <br>
-   También agregué otro endpoint "/upload" que no es pedido por la consigna, pero lo creamos para ir practicando cómo utilizar Multer <br>
-   Estas primeras 2 rutas se van a poder ver desde el navegador, pero la ruta para utilizar con Multer no porque esta utiliza el método POST y solamente se pueden ver las rutas que utilicen GET <br>
-   En este mismo archivo realicé las conexiones entre los endpoints y sus archivos html (handlebars), js y css correspondientes <br>
-   Por último, en este archivo configuré Socket.io para poder utilizarlo en los archivos JS de mis vistas
+4. Modifiqué "app.js": <br>
+   Agregué los endpoints solicitados por la consigna: "/home" y "/realtimeproducts" <br>
+   Agregué otro endpoint "/upload" que no es pedido por la consigna, pero lo creamos para ir practicando cómo utilizar Multer <br>
+   Realicé las conexiones entre los endpoints y sus archivos html (handlebars), js y css correspondientes <br>
+   Y por último configuré Socket.io para poder utilizarlo en los archivos JS de mis vistas
 5. Modifiqué "public" y la dividí en las subcarpetas css, img y js
 6. Carpetas creadas que no son pedidas por la consigna del desafío: <br>
    Creamos estas carpetas con el fin de ir conociendo cómo se suele dividir un proyecto backend conectado a una base de datos <br>
@@ -42,7 +42,14 @@
    Dentro del campo Value clickeo en select file y busco la imagen que deseo subir <br>
    Clickeo en send <br>
    La consola de Postman me debe decir "Imagen cargada" y esta se va a guardar en la subcarpeta img de la carpeta public porque así lo configuré en "app.js"
-9. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
+9. Rutas que se van a poder ver desde el navegador: <br>
+   localhost:8080/home <br>
+   localhost:8080/realtimeproducts <br>
+   localhost:8080/api/carts/1 (se verá un json solamente)<br>
+   localhost:8080/api/products/1 (se verá un json solamente)<br><br>
+   Esas rutas se van a poder ver desde el navegador, pero la ruta localhost:4000/upload para utilizar con Multer no porque esta utiliza el método POST y solamente se pueden ver las rutas que utilicen GET. Además no tiene asignado ningún archivo html, js o css <br>
+   En el próximo desafío voy a eliminar esta ruta y la configuración de multer ya que solamente lo hicimos para practicar
+10. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:8080
 
 
 
