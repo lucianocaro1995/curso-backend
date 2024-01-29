@@ -60,22 +60,22 @@ productRouter.post('/', async (req, res) => {
     }
 })
 
-//4) PUT(code)
-//Poner esto en la ruta: localhost:4000/api/products/PROD001
-productRouter.put('/:code', async (req, res) => {
-    const { code } = req.params;
-    console.log(code)
-    const {title, description, price, status, stock, category} = req.body
+//4) PUT(id)
+productRouter.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const {title, description, price, status, stock, category} = req.body;
     try {
-        const product = await ProductManager.updateByCode({ code: code }, { title, description, price, code,  stock, category, status});
+        const product = await ProductManager.updateById({ _id: id }, { title, description, price, stock, category, status});
         if (product)
-            res.status(200).send({respuesta: 'ok product updated', mensaje: product})
+            res.status(200).send({respuesta: 'ok product updated', mensaje: product});
         else 
-            res.status(404).send({respuesta: 'Error', mensaje: 'Product not found'})
+            res.status(404).send({respuesta: 'Error', mensaje: 'Product not found'});
     } catch (error){
-        res.status(400).send({respuesta: 'Error updating product', mensaje: error})
+        res.status(400).send({respuesta: 'Error updating product', mensaje: error});
     }
-})
+});
+
 
 //5) DELETE(id)
 //Poner esto en la ruta: localhost:4000/api/products/650636d0d3c359de670f30a8

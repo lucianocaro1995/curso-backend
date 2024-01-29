@@ -17,24 +17,32 @@ prodsRouter.get('/', async (req, res) => {
     try {
         const { limit } = req.query;
 
-        //Validar y asegurarse de que limit sea un número positivo
-        const parsedLimit = parseInt(limit);
-        if (isNaN(parsedLimit) || parsedLimit <= 0) {
-            return res.status(400).json({ error: "El parámetro 'limit' debe ser un número positivo válido" });
+        //Verificar si se proporciona un límite
+        if (limit) {
+            //Validar y asegurarse de que limit sea un número positivo
+            const parsedLimit = parseInt(limit);
+            if (isNaN(parsedLimit) || parsedLimit <= 0) {
+                return res.status(400).json({ error: "El parámetro 'limit' debe ser un número positivo válido" });
+            }
+
+            //Obtener la lista completa de productos
+            const allProducts = await productManager.getProducts();
+
+            //Limitar la lista de productos según el valor proporcionado
+            const limitedProducts = allProducts.slice(0, parsedLimit);
+
+            //Enviar la respuesta con los productos limitados
+            return res.status(200).json(limitedProducts);
         }
 
-        //Obtener la lista completa de productos
+        //Si no se proporciona ningún límite, devolver todos los productos
         const allProducts = await productManager.getProducts();
-
-        //Limitar la lista de productos según el valor proporcionado
-        const limitedProducts = allProducts.slice(0, parsedLimit);
-
-        //Enviar la respuesta con los productos limitados
-        res.status(200).json(limitedProducts);
+        res.status(200).json(allProducts);
     } catch (error) {
         res.status(500).json(error.message);
     }
 });
+
 
 //2) GET(pid = product id)
 //Método para consultar por un producto, utilizando su id

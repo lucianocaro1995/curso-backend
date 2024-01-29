@@ -18,8 +18,8 @@ class ProductDAO {
         return await productModel.create(productData);
     }
 
-    async updateByCode(code, productData) {
-        return await productModel.findOneAndUpdate({ code: code }, productData, { new: true });
+    async updateById(id, updateData) {
+        return await productModel.findByIdAndUpdate(id, updateData, { new: true });
     }
 
     async deleteById(id) {

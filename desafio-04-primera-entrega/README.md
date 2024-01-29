@@ -35,6 +35,7 @@
 5. Modifiqué "app.js" para importar las rutas de mi aplicación
 6. Rutas que se van a poder ver desde el navegador: <br>
    `localhost:8080/static` <br>
+   `localhost:8080/api/products` (se verá un json solamente, mostrando todos los productos) <br>
    `localhost:8080/api/products?limit=2` (se verá un json solamente, mostrando los primeros 2 productos) <br>
    `localhost:8080/api/products/2` (se verá un json solamente, mostrando el producto cuyo id sea 2) <br>
    `localhost:8080/api/carts/2` (se verá un json solamente, mostrando el carrito cuyo id sea 2) <br><br>
