@@ -42,17 +42,17 @@
    Ejemplo de nuevo producto:
 
 ```json
-   {
-   "title": "Producto 5",
-   "description": "Este es el producto 5",
-   "price": 10,
-   "code": "PROD005",
-   "status": true,
-   "stock": 10,
-   "category": "Reloj de pulsera",
-   "thumbnail": "ejemploImagen5.jpg",
-   "id": 5
-}
+      {
+      "title": "Producto 5",
+      "description": "Este es el producto 5",
+      "price": 10,
+      "code": "PROD005",
+      "status": true,
+      "stock": 10,
+      "category": "Reloj de pulsera",
+      "thumbnail": "ejemploImagen5.jpg",
+      "id": 5
+   }
 ```
 
    Por el momento estos nuevos productos se agregarán al archivo JSON de productos. Cuando conectemos nuestra aplicación con una base de datos en el desafío 6, estos productos se agregarán a la base de datos
