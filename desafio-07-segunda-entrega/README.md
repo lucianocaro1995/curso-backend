@@ -14,7 +14,7 @@
 
 ## Dependencias instaladas para este desafío:
 
-1. **paginate**
+1. **mongoose-paginate-v2**
 
    - Instalación: `npm i mongoose-paginate-v2`
    - Esta dependencia instala el paquete que amplía Mongoose para proporcionar funcionalidad de paginación eficiente al interactuar con bases de datos MongoDB, facilitando la gestión y presentación de grandes conjuntos de datos
