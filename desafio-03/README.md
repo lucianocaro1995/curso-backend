@@ -19,7 +19,8 @@
    `localhost:4000/products` (se verá un json solamente, mostrando todos los productos) <br>
    `localhost:4000/products/2` (se verá un json solamente, mostrando el producto cuyo id sea 2) <br>
 8. Debo ejecutar `npm run dev` en la terminal para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
-   Ahora ejecuto con un comando diferente porque en el package.json le asigné dev al nombre que se va a utilizar para ejecutar al archivo "app.js":
+   Ahora uso un comando diferente porque "npm run" se utiliza para ejecutar scripts definidos en la sección "scripts" de mi archivo package.json. Y asigné el nombre "dev" como identificador para la ejecución del archivo "app.js"
+   La estructura básica es npm run + (nombre del script):
 
 ```json
    "scripts": {
