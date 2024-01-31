@@ -16,26 +16,6 @@
 
 
 
-## Dependencias instaladas para este desafío:
-
-1. **bcrypt**
-   - Instalación: `npm i bcrypt`
-   - Nos permite encriptar las contraseñas guardadas en la base de datos
-
-2. **passport**
-   - Instalación: `npm i passport`
-   - Passport sirve para facilitar el uso de varias formas de autenticarse. Agrupa todas las estrategias de autenticación, así sea por email, por contraseña, por redes sociales, etc
-
-3. **passport-local**
-   - Instalación: `npm i passport-local`
-   - Passport-local permite autenticar usuarios utilizando credenciales (nombre de usuario y contraseña) en aplicaciones Node.js
-
-4. **passport-github2**
-   - Instalación: `npm i passport-github2`
-   - Esto nos permite poder autenticarnos con github para ingresar a nuestra aplicación, en vez de utilizar una autenticación local ingresando nuestro email y contraseña
-
-
-
 ## Comentarios sobre el archivo "bcrypt.js":
 
 Aquí vamos a generar 2 funciones:
@@ -66,3 +46,23 @@ Para hacer console.log de las 2 funciones:
 
 Para ejecutar de manera local utils: <br>
 Nos paramos en la carpeta utils utilizando cd, e ingresamos node bcrypt.js
+
+
+
+## Dependencias instaladas para este desafío:
+
+1. **bcrypt**
+   - Instalación: `npm i bcrypt`
+   - Nos permite encriptar las contraseñas guardadas en la base de datos
+
+2. **passport**
+   - Instalación: `npm i passport`
+   - Passport sirve para facilitar el uso de varias formas de autenticarse. Agrupa todas las estrategias de autenticación, así sea por email, por contraseña, por redes sociales, etc
+
+3. **passport-local**
+   - Instalación: `npm i passport-local`
+   - Passport-local permite autenticar usuarios utilizando credenciales (nombre de usuario y contraseña) en aplicaciones Node.js
+
+4. **passport-github2**
+   - Instalación: `npm i passport-github2`
+   - Esto nos permite poder autenticarnos con github para ingresar a nuestra aplicación, en vez de utilizar una autenticación local ingresando nuestro email y contraseña

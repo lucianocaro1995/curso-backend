@@ -12,7 +12,8 @@ const transport = nodemailer.createTransport({
     }
 })
 
-export const sendRecoveryMail = (email, recoveryLink) => {
+//1) Función para reestablecer contraseña
+const sendRecoveryMail = (email, recoveryLink) => {
     const mailOptions = {
         from: 'luciano.caro.1995@gmail.com',
         to: email,
@@ -26,4 +27,27 @@ export const sendRecoveryMail = (email, recoveryLink) => {
         else
             console.log('Email enviado correctamente')
     })
+}
+
+//2) Función para eliminar usuarios inactivos
+const sendAccountDeletionMail = async (destinatario) => {
+    const mailOptions = {
+        from: 'luciano.caro.1995@gmail.com',
+        to: destinatario,
+        subject: 'Eliminación de cuenta por inactividad',
+        text: 'Tu cuenta ha sido eliminada debido a la inactividad en los últimos 2 días.',
+    };
+
+    transport.sendMail(mailOptions, (error, info) => {
+        if (error)
+            console.log(error)
+        else
+            console.log('Email enviado correctamente')
+    })
+};
+
+//Exportar todas las funciones juntas
+export const nodemailer = {
+    sendRecoveryMail,
+    sendAccountDeletionMail
 }

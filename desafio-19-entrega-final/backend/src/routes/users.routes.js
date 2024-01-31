@@ -7,11 +7,15 @@ const userRouter = Router();
 
 userRouter.get("/", passportError('jwt'), authorization('admin'), userController.getUsers);
 
+userRouter.get("/", passportError('jwt'), authorization('admin'), userController.getUsersNamesAndEmails);
+
 userRouter.get("/:uid", passportError('jwt'), authorization('admin'), userController.getUserById);
 
 userRouter.put("/:uid", passportError('jwt'), authorization('admin'), userController.updateUser);
 
 userRouter.delete("/:uid", passportError('jwt'), authorization('admin'), userController.deleteUser);
+
+userRouter.delete("/", passportError('jwt'), authorization('admin'), userController.deleteInactiveUsers);
 
 userRouter.post("/password-recovery", userController.requestPasswordReset);
 

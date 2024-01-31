@@ -1,6 +1,5 @@
 import { userModel } from "../models/users.models.js";
-//Para las funciones 5 y 6:
-import { sendRecoveryMail } from "../config/nodemailer.js";
+import { nodemailer } from "../config/nodemailer.js"
 import crypto from 'crypto';
 const recoveryLinks = {};
 
@@ -19,6 +18,28 @@ const getUsers = async (req, res) => {
 };
 
 //2)
+const getUsersNamesAndEmails = async (req, res) => {
+    try {
+        const users = await userModel.find();
+
+        if (users.length > 0) {
+            //Mapear la lista de usuarios para obtener sólo nombre y correo electrónico
+            const usersData = users.map(user => ({
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email
+            }));
+
+            return res.status(200).send(usersData);
+        }
+
+        res.status(400).send({ error: "Usuarios no encontrados" });
+    } catch (error) {
+        res.status(500).send({ error: `Error en consultar los usuarios: ${error}` });
+    }
+};
+
+//3)
 const getUserById = async (req, res) => {
     const { id } = req.params;
 
@@ -33,7 +54,7 @@ const getUserById = async (req, res) => {
     }
 };
 
-//3)
+//4)
 const updateUser = async (req, res) => {
     const { id } = req.params;
     const { first_name, last_name, age, email, password } = req.body;
@@ -55,7 +76,7 @@ const updateUser = async (req, res) => {
     }
 };
 
-//4)
+//5)
 const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {
@@ -70,7 +91,38 @@ const deleteUser = async (req, res) => {
     }
 };
 
-//5)
+//6)
+const deleteInactiveUsers = async (req, res) => {
+    try {
+        //Obtener usuarios inactivos en los últimos 2 días
+        const limiteInactividad = new Date();
+        limiteInactividad.setDate(limiteInactividad.getDate() - 2);
+
+        /*
+        30 minutos de inactividad para probar
+        const limiteInactividad = new Date();
+        limiteInactividad.setMinutes(limiteInactividad.getMinutes() - 30);
+        */
+
+        const usuariosInactivos = await userModel.find({ last_connection: { $lt: limiteInactividad } });
+
+        if (usuariosInactivos.length > 0) {
+            //Enviar correos electrónicos de notificación y eliminar usuarios
+            for (const usuario of usuariosInactivos) {
+                await nodemailer.sendAccountDeletionMail(usuario.email);
+                await userModel.findByIdAndDelete(usuario._id);
+            }
+
+            return res.status(200).send({ mensaje: "Usuarios inactivos eliminados y notificados correctamente" });
+        }
+
+        res.status(400).send({ error: "No hay usuarios inactivos para eliminar" });
+    } catch (error) {
+        res.status(500).send({ error: `Error en eliminar usuarios inactivos: ${error}` });
+    }
+};
+
+//7)
 const requestPasswordReset = async (req, res) => {
     const { email } = req.body;
 
@@ -79,14 +131,14 @@ const requestPasswordReset = async (req, res) => {
         const token = crypto.randomBytes(20).toString('hex');
         recoveryLinks[token] = { email: email, timestamp: Date.now() };
         const recoveryLink = `http://localhost:4000/api/users/reset-password/${token}`;
-        sendRecoveryMail(email, recoveryLink);
+        nodemailer.sendRecoveryMail(email, recoveryLink);
         res.status(200).send('Correo de recuperación enviado');
     } catch (error) {
         res.status(500).send(`Error al enviar el mail ${error}`);
     }
 };
 
-//6)
+//8)
 const resetPassword = async (req, res) => {
     const { token } = req.params;
     const { newPassword, confirmNewPassword } = req.body;
@@ -113,7 +165,7 @@ const resetPassword = async (req, res) => {
     }
 };
 
-//7)
+//9)
 const uploadUserDocuments = async (req, res) => {
     const userId = req.params.uid;
     const files = req.files;
@@ -142,9 +194,11 @@ const uploadUserDocuments = async (req, res) => {
 //Exportar todas las funciones juntas
 export const userController = {
     getUsers,
+    getUsersNamesAndEmails,
     getUserById,
     updateUser,
     deleteUser,
+    deleteInactiveUsers,
     requestPasswordReset,
     resetPassword,
     uploadUserDocuments
