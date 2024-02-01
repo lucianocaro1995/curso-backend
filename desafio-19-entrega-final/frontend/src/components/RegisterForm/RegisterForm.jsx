@@ -1,5 +1,7 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 
 const RegisterForm = () => {
 
@@ -27,33 +29,42 @@ const RegisterForm = () => {
         }
     }
     return (
-        <div className="container">
-            <h2>Formulario de Registro</h2>
-            <form onSubmit={handleSumbit} ref={formRef}>
-                <div className="mb-3">
-                    <label htmlFor="first_name" className="form-label">Nombre: </label>
-                    <input type="text" name="first_name" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="last_name" className="form-label">Apellido: </label>
-                    <input type="text" name="last_name" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="age" className="form-label">Edad: </label>
-                    <input type="number" name="age" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email: </label>
-                    <input type="email" name="email" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Contraseña: </label>
-                    <input type="password" name="password" className="form-control" />
-                </div>
-                <button type="submit" className="btn btn-primary">Registrarse</button>
-            </form>
+        <>
+            <Header />
 
-        </div>
+
+
+            <div className="container">
+                <h2>Formulario de Registro</h2>
+                <form onSubmit={handleSumbit} ref={formRef}>
+                    <div className="mb-3">
+                        <label htmlFor="first_name" className="form-label">Nombre: </label>
+                        <input type="text" name="first_name" className="form-control" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="last_name" className="form-label">Apellido: </label>
+                        <input type="text" name="last_name" className="form-control" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="age" className="form-label">Edad: </label>
+                        <input type="number" name="age" className="form-control" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email: </label>
+                        <input type="email" name="email" className="form-control" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label">Contraseña: </label>
+                        <input type="password" name="password" className="form-control" />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Registrarse</button>
+                </form>
+            </div>
+
+
+
+            <Footer />
+        </>
     )
 }
 

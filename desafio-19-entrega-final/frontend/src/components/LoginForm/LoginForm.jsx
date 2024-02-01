@@ -1,5 +1,7 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 
 
 const LoginForm = () => {
@@ -31,21 +33,30 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="container">
-            <h2>Formulario de Login</h2>
-            <form onSubmit={handleSumbit} ref={formRef}>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email: </label>
-                    <input type="email" name="email" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password: </label>
-                    <input type="password" name="password" className="form-control" />
-                </div>
-                <button type="submit" className="btn btn-primary">Iniciar Sesion</button>
-            </form>
+        <>
+            <Header />
 
-        </div>
+
+
+            <div className="container">
+                <h2>Formulario de Login</h2>
+                <form onSubmit={handleSumbit} ref={formRef}>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email: </label>
+                        <input type="email" name="email" className="form-control" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label">Password: </label>
+                        <input type="password" name="password" className="form-control" />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Iniciar Sesion</button>
+                </form>
+            </div>
+
+
+
+            <Footer />
+        </>
     )
 }
 
