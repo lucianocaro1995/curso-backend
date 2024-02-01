@@ -1,7 +1,7 @@
 import { cartModel } from "../models/carts.models.js";
 import { productModel } from "../models/products.models.js";
 import { ticketModel } from "../models/ticket.models.js";
-import { nodemailer } from "./nodemailer.js";
+import { mailer } from "../config/nodemailer.js"
 
 //1)
 const getCarts = async (req, res) => {
@@ -189,7 +189,7 @@ const purchaseCart = async (req, res) => {
             cart.products = productosConStock;
             const updatedCart = await cartModel.findByIdAndUpdate(cid, { products: cart.products }, { new: true });
             //Envío el correo al usuario
-            await nodemailer.sendPurchaseConfirmation(purchaser, ticket._id);
+            await mailer.sendPurchaseConfirmation(purchaser, ticket._id);
             if (updatedCart) {
                 return res.status(200).send({ message: "exito" });
             }

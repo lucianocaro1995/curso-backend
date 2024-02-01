@@ -80,7 +80,7 @@ const sendPurchaseConfirmation = async (email, ticketId) => {
 }
 
 //Exportar todas las funciones juntas
-export const nodemailer = {
+export const mailer = {
     sendRecoveryMail,
     sendAccountDeletionMail,
     sendPurchaseConfirmation

@@ -26,7 +26,7 @@ import router from './routes/app.routes.js'
 
 //2) Conexión al servidor
 const app = express()
-const PORT = 4000
+const PORT = 3000
 app.listen(PORT, () => {
     console.log(`Server on Port ${PORT}`)
 })

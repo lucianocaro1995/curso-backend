@@ -17,9 +17,9 @@ const initializePassport = () => {
 
     //1) Capturar las cookies
     const cookieExtractor = req => {
-        //En lugar de tomar de las cookies, directamente todo de la petición
+        //En lugar de tomar de las cookies directamente todo de la peticion
         const token = req.headers.authorization ? req.headers.authorization : {}
-
+        //const token = req.cookies.jwtCookie ? req.cookies.jwtCookie : {}
         console.log("cookieExtractor", token)
         return token
     }
@@ -62,20 +62,23 @@ const initializePassport = () => {
 
     //4) Estrategia login
     passport.use('login', new LocalStrategy(
-        { usernameField: 'email' }, async (username, password, done) => {
+        { usernameField: 'email' }, async (email, password, done) => { // Cambié 'username' a 'email'
             try {
-                const user = await userModel.findOne({ email: username })
+                console.log("Login Strategy - Email:", email);
+                const user = await userModel.findOne({ email: email });
+                console.log("User found:", user);
                 if (!user) {
-                    return done(null, false)
+                    return done(null, false);
                 }
                 if (validatePassword(password, user.password)) {
-                    return done(null, user)
+                    return done(null, user);
                 }
-                return done(null, false)
+                return done(null, false);
             } catch (error) {
-                return done(error)
+                return done(error);
             }
-        }))
+        }
+    ));    
 
     //5) Estrategia utilizando github
     passport.use('github', new GithubStrategy({

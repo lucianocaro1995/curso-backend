@@ -1,5 +1,5 @@
 import { userModel } from "../models/users.models.js";
-import { nodemailer } from "../config/nodemailer.js"
+import { mailer } from "../config/nodemailer.js"
 import crypto from 'crypto';
 const recoveryLinks = {};
 
@@ -109,7 +109,7 @@ const deleteInactiveUsers = async (req, res) => {
         if (usuariosInactivos.length > 0) {
             //Enviar correos electrónicos de notificación y eliminar usuarios
             for (const usuario of usuariosInactivos) {
-                await nodemailer.sendAccountDeletionMail(usuario.email);
+                await mailer.sendAccountDeletionMail(usuario.email);
                 await userModel.findByIdAndDelete(usuario._id);
             }
 
@@ -131,7 +131,7 @@ const requestPasswordReset = async (req, res) => {
         const token = crypto.randomBytes(20).toString('hex');
         recoveryLinks[token] = { email: email, timestamp: Date.now() };
         const recoveryLink = `http://localhost:4000/api/users/reset-password/${token}`;
-        await nodemailer.sendRecoveryMail(email, recoveryLink);
+        await mailer.sendRecoveryMail(email, recoveryLink);
         res.status(200).send('Correo de recuperación enviado');
     } catch (error) {
         res.status(500).send(`Error al enviar el mail ${error}`);

@@ -1,29 +1,29 @@
-import { generateToken, authToken } from "../utils/jwt.js";
+import { generateToken } from "../utils/jwt.js";
 
 //1)
 const postLogin = async (req, res) => {
     try {
         if (!req.user) {
-            return res.status(401).send({ mensaje: "Usuario invalido" });
+            return res.status(401).send({ mensaje: "Usuario invalido" })
         }
-
         /*
-        Si se sigue con sesiones en base de datos esto no se borra, si se usa JWT sí se borra
+        Si siguen con sesiones en BDD, esto no se bora. Si usan JWT si
         req.session.user = {
             first_name: req.user.first_name,
             last_name: req.user.last_name,
             age: req.user.age,
-            email: req.user.email,
-            res.status(200).send({mensaje: Usuario Logeado})
-        };
-        */
+            email: req.user.email
+            res.status(200).send({mensaje: "Usuario logueado"})
+        }*/
 
         const token = generateToken(req.user)
+
         res.status(200).send({ token })
     } catch (error) {
-        res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` });
+        res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` })
     }
-};
+
+}
 
 //2)
 const postRegister = async (req, res) => {

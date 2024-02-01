@@ -1,6 +1,8 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { getCookiesByName } from "../../utils/formsUtils.js"
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 
 const NewProductsForm = () => {
     const formRef = useRef(null)
@@ -30,37 +32,56 @@ const NewProductsForm = () => {
     }
 
     return (
-        <div className="container">
-            <h2>Creacion de nuevo Producto</h2>
-            <form onSubmit={handleSumbit} ref={formRef}>
-                <div className="mb-3">
-                    <label htmlFor="title" className="form-label">Nombre: </label>
-                    <input type="text" name="title" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Descripcion: </label>
-                    <input type="text" name="description" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="category" className="form-label">Categoria: </label>
-                    <input type="text" name="category" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="code" className="form-label">Codigo: </label>
-                    <input type="text" name="code" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="price" className="form-label">Precio: </label>
-                    <input type="number" name="price" className="form-control" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="stock" className="form-label">Stock: </label>
-                    <input type="number" name="stock" className="form-control" />
-                </div>
-                <button type="submit" className="btn btn-primary">Crear Producto</button>
-            </form>
+        <>
+            <Header />
 
-        </div>
+
+
+            <section class="text-gray-400 bg-gray-900 body-font py-24">
+                <div class="container px-1 mx-auto">
+                    <div class="flex flex-col text-center w-full mb-12">
+                        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-1 text-gray-400">Agregar nuevo producto al inventario</h1>
+                    </div>
+                    <div class="max-w-md mx-auto">
+                        <div class="mb-4">
+                            <label for="product-name" class="block text-sm text-gray-400">Nombre</label>
+                            <input type="text" id="product-name" name="product-name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="product-description" class="block text-sm text-gray-400">Descripción</label>
+                            <input type="text" id="product-description" name="product-description" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="product-category" class="block text-sm text-gray-400">Categoría</label>
+                            <input type="text" id="product-category" name="product-category" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="product-code" class="block text-sm text-gray-400">Código</label>
+                            <input type="text" id="product-code" name="product-code" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="product-price" class="block text-sm text-gray-400">Precio</label>
+                            <input type="text" id="product-price" name="product-price" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="product-stock" class="block text-sm text-gray-400">Stock</label>
+                            <input type="number" id="product-stock" name="product-stock" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="product-image" class="block text-sm text-gray-400">Imagen</label>
+                            <input type="file" id="product-image" name="product-image" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        </div>
+                        <div class="mb-4 text-center py-2">
+                            <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Agregar Producto</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <Footer />
+        </>
     )
 }
 

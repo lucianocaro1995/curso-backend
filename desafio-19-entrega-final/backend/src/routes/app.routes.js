@@ -13,7 +13,7 @@ const router = Router()
 router.use('/api/carts', cartRouter)
 router.use('/api/loggerTest', loggerRouter)
 router.use('/api/products', productRouter)
-router.use('/api/sessions', sessionRouter)
+router.use('/api/session', sessionRouter)
 router.use('/api/users', userRouter)
 router.use('/api/mockingproducts', mockingRouter)
 

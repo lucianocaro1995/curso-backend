@@ -11,7 +11,7 @@ import Error404 from './components/Error404/Error404'
 import RegisterForm from './components/RegisterForm/RegisterForm'
 import LoginForm from './components/LoginForm/LoginForm'
 import NewProductsForm from './components/NewProductsForm/NewProductsForm'
-//import UsersForm from './components/UsersForm/UsersForm
+import UsersForm from './components/UsersForm/UsersForm'
 
 
 
@@ -31,7 +31,7 @@ const App = () => {
                     <Route path='/login' element={<LoginForm />} />
 
                     <Route path='/admin/new-products' element={<NewProductsForm />} />
-                {/* <Route path='/admin/users-form' element={<UsersForm />} />                 */}
+                    <Route path='/admin/users-form' element={<UsersForm />} />
                 </Routes>
             </BrowserRouter>
         </>
