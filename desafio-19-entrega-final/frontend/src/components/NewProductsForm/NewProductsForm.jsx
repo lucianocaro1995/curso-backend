@@ -2,7 +2,11 @@ import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { getCookiesByName } from "../utils/formsUtils.js"
 
-export const NewProducts = () => {
+
+
+
+
+const NewProductsForm = () => {
     const formRef = useRef(null)
     const navigate = useNavigate()
 
@@ -29,6 +33,7 @@ export const NewProducts = () => {
         }
     }
 
+    //html
     return (
         <div className="container">
             <h2>Creacion de nuevo Producto</h2>
@@ -59,7 +64,8 @@ export const NewProducts = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Crear Producto</button>
             </form>
-
         </div>
     )
 }
+
+export default NewProductsForm;

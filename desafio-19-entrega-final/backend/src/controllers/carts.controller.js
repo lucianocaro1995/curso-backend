@@ -1,6 +1,7 @@
 import { cartModel } from "../models/carts.models.js";
 import { productModel } from "../models/products.models.js";
 import { ticketModel } from "../models/ticket.models.js";
+import { nodemailer } from "./nodemailer.js";
 
 //1)
 const getCarts = async (req, res) => {
@@ -152,28 +153,23 @@ const addOrUpdateProductInCart = async (req, res) => {
 const purchaseCart = async (req, res) => {
     const { cid } = req.params;
     const purchaser = req.user.user.email;
-
     try {
         //Obtengo el carrito
         const cart = await cartModel.findById(cid);
-        //Si no existe el carrito que me avise
+        //Si no existe el carrito, que me avise
         if (!cart) {
             res.status(404).send({ res: 'Error en finalización de compra', message: `El carrito con el ID ${cid} no existe` });
         }
-
         let montoTotal = 0;
         const productosConStock = [];
         const productosSinStock = [];
-
         //Recorro todos los productos del carrito
         for (const cartProduct of cart.products) {
             //Obtengo el id del producto actual
             const product = await productModel.findById(cartProduct.id_prod);
-
             if (!product) {
                 return res.status(404).send({ respuesta: "Error", mensaje: `Producto con ID ${cartProduct.id_prod} no encontrado` });
             }
-
             //Si hay suficiente stock en la base de datos: actualiza monto y stock, guarda producto, agrega a productos con stock
             //Si no: agrega a productos sin stock
             if (cartProduct.quantity <= product.stock) {
@@ -186,19 +182,18 @@ const purchaseCart = async (req, res) => {
                 productosSinStock.push(cartProduct);
             }
         }
-
         //Creo el ticket
         const ticket = await ticketModel.create({ amount: montoTotal, purchaser: purchaser });
         if (ticket) {
             //Actualizo el carrito con los productos que tienen stock
             cart.products = productosConStock;
             const updatedCart = await cartModel.findByIdAndUpdate(cid, { products: cart.products }, { new: true });
-
+            //Envío el correo al usuario
+            await nodemailer.sendPurchaseConfirmation(purchaser, ticket._id);
             if (updatedCart) {
                 return res.status(200).send({ message: "exito" });
             }
         }
-
         console.log("Productos sin stock:", productosSinStock);
         res.status(500).send({ respuesta: "Error", mensaje: "Ha ocurrido un error en el servidor" });
     } catch (error) {

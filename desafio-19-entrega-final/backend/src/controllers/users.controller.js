@@ -131,7 +131,7 @@ const requestPasswordReset = async (req, res) => {
         const token = crypto.randomBytes(20).toString('hex');
         recoveryLinks[token] = { email: email, timestamp: Date.now() };
         const recoveryLink = `http://localhost:4000/api/users/reset-password/${token}`;
-        nodemailer.sendRecoveryMail(email, recoveryLink);
+        await nodemailer.sendRecoveryMail(email, recoveryLink);
         res.status(200).send('Correo de recuperación enviado');
     } catch (error) {
         res.status(500).send(`Error al enviar el mail ${error}`);

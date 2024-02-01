@@ -7,13 +7,13 @@ export const passportError = (strategy) => { //Voy a enviar local, github o jwt
             if (error) {
                 return next(error) //Que la función que me llame maneje como va a responder ante mi error
             }
-            if (!user) {
+            if (!req.user) {
                 //O me enviás un objeto con el atributo messages, o me enviás un string
                 return res.status(401).send({ error: info.messages ? info.messages : info.toString() })
 
             }
 
-            req.user = user
+            user = req.user
             next()
         })(req, res, next) //Esto es por que me va a llamar un middleware
 
