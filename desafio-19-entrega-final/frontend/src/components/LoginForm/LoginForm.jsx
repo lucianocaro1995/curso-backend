@@ -2,10 +2,7 @@ import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 
 
-
-
-
-export const LoginForm = () => {
+const LoginForm = () => {
 
     const formRef = useRef(null)
     const navigate = useNavigate()
@@ -33,7 +30,6 @@ export const LoginForm = () => {
         }
     }
 
-    //html
     return (
         <div className="container">
             <h2>Formulario de Login</h2>
@@ -48,8 +44,9 @@ export const LoginForm = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Iniciar Sesion</button>
             </form>
+
         </div>
     )
 }
 
-export default LoginForm;
+export default LoginForm

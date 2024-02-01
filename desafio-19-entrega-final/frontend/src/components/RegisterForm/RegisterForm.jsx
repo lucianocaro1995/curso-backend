@@ -1,11 +1,8 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 
-
-
-
-
 const RegisterForm = () => {
+
     const formRef = useRef(null)
     const navigate = useNavigate()
 
@@ -29,8 +26,6 @@ const RegisterForm = () => {
             console.log(response)
         }
     }
-
-    //html
     return (
         <div className="container">
             <h2>Formulario de Registro</h2>
@@ -57,8 +52,9 @@ const RegisterForm = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Registrarse</button>
             </form>
+
         </div>
     )
 }
 
-export default RegisterForm;
+export default RegisterForm
