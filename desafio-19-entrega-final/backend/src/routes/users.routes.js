@@ -5,8 +5,18 @@ import upload from "../config/multer.js"
 
 const userRouter = Router();
 
+
+
+
+
+//Ruta pedida en el test de Postman:
 userRouter.get("/", passportError('jwt'), authorization('admin'), userController.getUsers);
 
+
+
+
+
+//Rutas no pedidas en el test de Postman:
 userRouter.get("/names-emails", passportError('jwt'), authorization('admin'), userController.getUsersNamesAndEmails);
 
 userRouter.get("/:uid", passportError('jwt'), authorization('admin'), userController.getUserById);

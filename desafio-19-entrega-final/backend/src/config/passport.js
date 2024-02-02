@@ -8,7 +8,6 @@ import 'dotenv/config'
 
 
 
-
 //Defino la estregia a utilizar: autenticación de manera local, utilizando email y contraseña
 const LocalStrategy = local.Strategy
 const JWTStrategy = jwt.Strategy
@@ -28,12 +27,10 @@ const initializePassport = () => {
             const authHeader = req.headers.authorization;
             token = authHeader.replace('Bearer ', ''); // Elimina "Bearer " del valor del token
         }
-    
         console.log("cookieExtractor: ", { name: "jwtCookie", value: token });
         return token;
     }
-    
-    
+
     //2) Estrategia utilizando cookies
     passport.use('jwt', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), //el token vendra desde cookieExtractor.

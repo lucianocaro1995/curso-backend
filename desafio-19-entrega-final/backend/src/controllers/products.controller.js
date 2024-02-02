@@ -2,23 +2,33 @@ import { productModel } from "../models/products.models.js";
 
 //1)
 const getProducts = async (req, res) => {
-    //Incluimos paginate (también debimos agregar paginate a la colección products)
-    const { limit, page, filter, sort } = req.query
+    // Obtén los parámetros de consulta
+    const { limit, page, sort, category } = req.query;
 
-    const pag = page ? page : 1
-    const lim = limit ? limit : 10
-    const ord = sort == 'asc' ? 1 : -1
+    // Configura las opciones de paginación y orden
+    const pag = page ? page : 1;
+    const lim = limit ? limit : 10;
+    const ord = sort == 'asc' ? 1 : -1;
+
+    // Configura la condición de la consulta basada en la categoría
+    const queryCondition = category ? { category, status: true } : { status: true };
 
     try {
-        const prods = await productModel.paginate({ filter: filter }, { limit: lim, page: pag, sort: { price: ord } })
+        // Realiza la consulta a la base de datos con la condición de categoría
+        const prods = await productModel.paginate(
+            queryCondition,
+            { limit: lim, page: pag, sort: { price: ord } }
+        );
+
         if (prods) {
-            return res.status(200).send(prods)
+            return res.status(200).send(prods);
         }
-        res.status(404).send({ error: "Productos no encontrados" })
+
+        res.status(404).send({ error: "Productos no encontrados" });
     } catch (error) {
-        res.status(500).send({ error: `Error en consultar productos ${error}` })
+        res.status(500).send({ error: `Error en consultar productos ${error}` });
     }
-}
+};
 
 //2)
 const getProductById = async (req, res) => {
@@ -54,7 +64,7 @@ const createProduct = async (req, res) => {
 }
 
 //4)
-const updateProductById = async (req, res) => {
+const updateProduct = async (req, res) => {
     const { id } = req.params
     const { title, description, code, price, stock, category } = req.body
     try {
@@ -70,7 +80,7 @@ const updateProductById = async (req, res) => {
 }
 
 //5)
-const deleteProductById = async (req, res) => {
+const deleteProduct = async (req, res) => {
     const { id } = req.params
 
     try {
@@ -89,6 +99,6 @@ export const productController = {
     getProducts,
     getProductById,
     createProduct,
-    updateProductById,
-    deleteProductById
+    updateProduct,
+    deleteProduct
 }

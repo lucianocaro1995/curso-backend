@@ -30,7 +30,7 @@ const getCartById = async (req, res) => {
 };
 
 //3)
-const updateCart = async (req, res) => {
+const updateCartsProducts = async (req, res) => {
     const { cid } = req.params;
     const productsArray = req.body.products;
 
@@ -72,7 +72,7 @@ const updateCart = async (req, res) => {
 };
 
 //4)
-const cleanCart = async (req, res) => {
+const deleteCartProducts = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -90,7 +90,7 @@ const cleanCart = async (req, res) => {
 };
 
 //5)
-const deleteProductInCart = async (req, res) => {
+const deleteCartProduct = async (req, res) => {
     const { cid, pid } = req.params;
 
     try {
@@ -119,7 +119,7 @@ const deleteProductInCart = async (req, res) => {
 };
 
 //6)
-const addOrUpdateProductInCart = async (req, res) => {
+const addProductCart = async (req, res) => {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
 
@@ -150,7 +150,7 @@ const addOrUpdateProductInCart = async (req, res) => {
 };
 
 //7)
-const purchaseCart = async (req, res) => {
+const createTicket = async (req, res) => {
     const { cid } = req.params;
     const purchaser = req.user.user.email;
     try {
@@ -201,13 +201,39 @@ const purchaseCart = async (req, res) => {
     }
 };
 
+//8)
+const updateProductQuantity = async (req, res) => {
+    const { id } = req.params;
+    const { quantity } = req.body;
+
+    try {
+        // Verifica si el producto existe
+        const existingProduct = await productModel.findById(id);
+        
+        if (!existingProduct) {
+            return res.status(404).send({ error: "Producto no encontrado" });
+        }
+
+        // Actualiza la cantidad del producto en el carrito
+        existingProduct.quantity = quantity;
+
+        // Guarda los cambios en la base de datos
+        const updatedProduct = await existingProduct.save();
+
+        return res.status(200).send(updatedProduct);
+    } catch (error) {
+        res.status(500).send({ error: `Error en actualizar cantidad del producto ${error}` });
+    }
+};
+
 //Exportar todas las funciones juntas
 export const cartController = {
     getCarts,
     getCartById,
-    updateCart,
-    cleanCart,
-    deleteProductInCart,
-    addOrUpdateProductInCart,
-    purchaseCart
+    updateCartsProducts,
+    deleteCartProducts,
+    deleteCartProduct,
+    addProductCart,
+    createTicket,
+    updateProductQuantity
 };

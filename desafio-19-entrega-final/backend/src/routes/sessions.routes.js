@@ -5,16 +5,26 @@ import { sessionController } from "../controllers/sessions.controller.js";
 
 const sessionRouter = Router();
 
-sessionRouter.post("/login", passport.authenticate("login"), sessionController.postLogin);
 
-sessionRouter.post("/register", passport.authenticate("register"), sessionController.postRegister);
 
+
+
+//Rutas en orden desde la primera hasta la última pedidas en el test de Postman:
+sessionRouter.get("/current", passportError("jwt"), authorization('admin'), sessionController.currentSession);
+
+sessionRouter.post("/register", passport.authenticate("register"), sessionController.registerUsers);
+
+sessionRouter.post("/login", passport.authenticate("login"), sessionController.loginUsers);
+
+
+
+
+
+//Rutas no pedidas por el test de Postman:
 sessionRouter.get("/github", passport.authenticate("github", { scope: ["user: email"] }), sessionController.getGithub);
 
-sessionRouter.get("/githubCallback", passport.authenticate("github"), sessionController.getGihubCallback);
+sessionRouter.get("/githubCallback", passport.authenticate("github"), sessionController.getGithubCallback);
 
 sessionRouter.get("/logout", sessionController.getLogout);
-
-sessionRouter.get("/current", passportError("jwt"), authorization(['user', 'premium', 'admin']), (req, res) => {res.send(req.user);});
 
 export default sessionRouter;

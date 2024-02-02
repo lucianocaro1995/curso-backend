@@ -4,14 +4,24 @@ import { productController } from "../controllers/products.controller.js";
 
 const productRouter = Router()
 
-productRouter.get('/', productController.getProducts)
 
-productRouter.get('/:pid', productController.getProductById)
+
+
+
+//Rutas en orden desde la primera hasta la última pedidas en el test de Postman:
+productRouter.get('/', productController.getProducts)
 
 productRouter.post('/', passportError('jwt'), authorization('admin'), productController.createProduct)
 
-productRouter.put('/:pid', passportError('jwt'), authorization('admin'), productController.updateProductById)
+productRouter.put('/:id', passportError('jwt'), authorization('admin'), productController.updateProduct)
 
-productRouter.delete('/:pid', passportError('jwt'), authorization('admin'), productController.deleteProductById)
+productRouter.delete('/:id', passportError('jwt'), authorization('admin'), productController.deleteProduct)
+
+
+
+
+
+//Rutas no pedidas por el test de Postman:
+productRouter.get('/:id', productController.getProductById)
 
 export default productRouter

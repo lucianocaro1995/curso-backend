@@ -2,7 +2,7 @@ import { generateToken } from "../utils/jwt.js";
 import { userModel } from "../models/users.models.js";
 
 //1)
-const postLogin = async (req, res) => {
+const loginUsers = async (req, res) => {
     try {
         if (!req.user) {
             return res.status(401).send({ mensaje: "Usuario inválido" });
@@ -18,7 +18,7 @@ const postLogin = async (req, res) => {
 }
 
 //2)
-const postRegister = async (req, res) => {
+const registerUsers = async (req, res) => {
     try {
         if (!req.user) {
             return res.status(400).send({ mensaje: "Usuario ya existente" });
@@ -35,7 +35,7 @@ const getGithub = async (req, res) => {
 };
 
 //4)
-const getGihubCallback = async (req, res) => {
+const getGithubCallback = async (req, res) => {
     req.session.user = req.user;
     res.status(200).send({ mensaje: "Usuario logueado" });
 };
@@ -50,11 +50,17 @@ const getLogout = async (req, res) => {
     res.status(200).send({ resultado: "Usuario deslogueado" });
 };
 
+//6)
+const currentSession = (req, res) => {
+    res.send(req.user)
+}
+
 //Exportar todas las funciones juntas
 export const sessionController = {
-    postLogin,
-    postRegister,
+    loginUsers,
+    registerUsers,
     getGithub,
-    getGihubCallback,
-    getLogout
+    getGithubCallback,
+    getLogout,
+    currentSession
 }

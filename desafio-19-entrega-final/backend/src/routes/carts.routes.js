@@ -4,18 +4,30 @@ import { cartController } from "../controllers/carts.controller.js";
 
 const cartRouter = Router();
 
+
+
+
+
+//Rutas en orden desde la primera hasta la última pedidas en el test de Postman:
 cartRouter.get("/", passportError('jwt'), authorization('admin'), cartController.getCarts);
 
+cartRouter.post("/:cid/products/:id", passportError('jwt'), authorization(['user','premium']), cartController.addProductCart);
+
+cartRouter.post("/", passportError('jwt'), authorization(['user','premium']), cartController.createTicket)
+
+cartRouter.put("/", passportError('jwt'), authorization(['user','premium']), cartController.updateCartsProducts);
+
+cartRouter.put("/product/:id", passportError('jwt'), authorization(['user','premium']), cartController.updateProductQuantity);
+
+cartRouter.delete("/", passportError('jwt'), authorization(['user','premium']), cartController.deleteCartProducts);
+
+cartRouter.delete("/products/:id", passportError('jwt'), authorization(['user','premium']), cartController.deleteCartProduct);
+
+
+
+
+
+//Rutas no pedidas por el test de Postman:
 cartRouter.get("/:cid", passportError('jwt'), authorization('admin'), cartController.getCartById);
-
-cartRouter.put("/:cid", passportError('jwt'), authorization(['user','premium']), cartController.updateCart);
-
-cartRouter.delete("/:cid", passportError('jwt'), authorization(['user','premium']), cartController.cleanCart);
-
-cartRouter.delete("/:cid/products/:pid", passportError('jwt'), authorization(['user','premium']), cartController.deleteProductInCart);
-
-cartRouter.post("/:cid/products/:pid", passportError('jwt'), authorization(['user','premium']), cartController.addOrUpdateProductInCart);
-
-cartRouter.post("/:cid/purchase", passportError('jwt'), authorization(['user','premium']), cartController.purchaseCart)
 
 export default cartRouter;
