@@ -43,7 +43,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 //4) Cors
-const whiteList = ['http://127.0.0.1:5173']
+const whiteList = ['http://127.0.0.1:5173', 'http://localhost:5173']
 
 const corsOptions = {
     origin: function (origin, callback) {
@@ -104,8 +104,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 //Middleware de Swagger
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs)) //En qué ruta se va a ejecutar, y bajo qué condiciones
-
-
+// Middleware para servir imágenes
+app.use('/uploads/products', express.static(`${__dirname}/uploads/products`));
 
 //7) Rutas
 app.use('/', router)

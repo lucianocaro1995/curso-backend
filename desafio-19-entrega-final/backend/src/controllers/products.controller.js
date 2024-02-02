@@ -19,7 +19,7 @@ const getProducts = async (req, res) => {
             queryCondition,
             { limit: lim, page: pag, sort: { price: ord } }
         );
-
+        
         if (prods) {
             return res.status(200).send(prods);
         }
@@ -94,11 +94,55 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+//6)
+// En products.controllers.js
+
+const uploadProductImages = async (req, res) => {
+    const productId = req.params.pid;
+    const files = req.files;
+
+    if (!files || files.length === 0) {
+        return res.status(400).send('No se subieron archivos.');
+    }
+
+    try {
+        const product = await productModel.findById(productId);
+
+        if (!product) {
+            return res.status(404).send('Producto no encontrado.');
+        }
+
+        const updatedThumbnails = files.map(file => ({
+            name: file.originalname,
+            reference: file.path
+        }));
+
+        // Asegúrate de que product.thumbnails esté inicializado como un array
+        if (!product.thumbnails) {
+            product.thumbnails = [];
+        }
+
+        // Utiliza un método seguro para añadir elementos al array
+        product.thumbnails.push(...updatedThumbnails);
+
+        await product.save();
+        res.status(200).send('Imágenes cargadas correctamente en los thumbnails');
+    } catch (error) {
+        console.error('Error al subir imágenes:', error);
+        res.status(500).send('Error al subir imágenes');
+    }
+};
+
+export { uploadProductImages };
+
+
+
 //Exportar todas las funciones juntas
 export const productController = {
     getProducts,
     getProductById,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    uploadProductImages
 }

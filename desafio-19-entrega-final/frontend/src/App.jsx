@@ -3,15 +3,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 
 
-import ItemListContainer from './components/ItemListContainer/ItemListContainer'
-//import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
-//import Cart from './components/Cart/Cart'
-//import Checkout from './components/Checkout/Checkout'
-import Error404 from './components/Error404/Error404'
-import RegisterForm from './components/RegisterForm/RegisterForm'
-import LoginForm from './components/LoginForm/LoginForm'
-import NewProductsForm from './components/NewProductsForm/NewProductsForm'
-import UsersForm from './components/UsersForm/UsersForm'
+import ItemListContainer from './components/ItemListContainer'
+//import ItemDetailContainer from './components/ItemDetailContainer'
+//import Cart from './components/Cart'
+//import Checkout from './components/Checkout'
+import Error404 from './components/Error404'
+import RegisterForm from './components/RegisterForm'
+import LoginForm from './components/LoginForm'
+import NewProductsForm from './components/NewProductsForm'
+import UsersForm from './components/UsersForm'
 
 
 
