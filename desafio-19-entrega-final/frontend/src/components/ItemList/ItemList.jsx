@@ -1,9 +1,8 @@
-import React from "react";
-import Item from "./Item";
+import Item from "../Item/Item";
 
 const ItemList = ({ products }) => {
     return (
-        <div className=" bg-slate-900 p-5">
+        <>
             {products ? (
                 products.map((product) => (
                     <Item key={product._id} product={product} />
@@ -11,7 +10,7 @@ const ItemList = ({ products }) => {
             ) : (
                 <p>Cargando productos...</p>
             )}
-        </div>
+        </>
     );
 };
 

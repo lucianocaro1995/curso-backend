@@ -1,0 +1,28 @@
+.item-list-container {
+    background-image: linear-gradient(135deg, black, #000814, #0c0a3e);
+}
+
+.titulo-productos {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: normal;
+    color: #ff64f7;
+    padding-top: 150px;
+    padding-bottom: 100px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.seccion-productos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}

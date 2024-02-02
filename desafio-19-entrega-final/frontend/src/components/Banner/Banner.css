@@ -1,0 +1,21 @@
+.banner {
+    height: 85vh;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://i.ibb.co/JmJ9qm3/1.jpg");
+}
+
+.banner-container {
+    text-align: center;
+    padding: 15% 0;
+}
+
+.banner p {
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    color: white;
+    opacity: 0.7;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ItemList from "./ItemList";
-import Header from "./Header";
-import Footer from "./Footer";
+import "./ItemListContainer.css";
+import ItemList from "../ItemList/ItemList";
+import Footer from "../Footer/Footer";
+import Navbar from "../Navbar/Navbar";
+import Header from "../Header/Header";
+import Banner from "../Banner/Banner";
 
 const ItemListContainer = () => {
     const [products, setProducts] = useState([]);
@@ -26,11 +29,33 @@ const ItemListContainer = () => {
         fetchProducts();
     }, []);    
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <>
             <Header />
-            <ItemList products={products} />
-            <Footer />
+            <Banner />
+            <div className="item-list-container">
+                <h2 className="titulo-productos">Compra por categorías</h2>
+                <Navbar />
+                <div className="seccion-productos">
+                    <ItemList products={products} />
+                </div>
+                <Footer />
+            </div>
         </>
     );
 };
