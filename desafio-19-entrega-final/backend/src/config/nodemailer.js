@@ -51,18 +51,20 @@ const sendAccountDeletionMail = async (email) => {
 //3) Función para confirmar la compra. Se usa en purchaseCart de "carts.controller.js"
 const sendPurchaseConfirmation = async (email, ticketId) => {
     try {
-        //Obtener información del ticket
+        // Obtener información del ticket
         const ticket = await ticketModel.findById(ticketId);
         if (!ticket) {
             console.log('Ticket no encontrado');
             return;
         }
-        //Obtener información del usuario
+
+        // Obtener información del usuario
         const user = await userModel.findOne({ email: email });
         if (!user) {
             console.log('Usuario no encontrado');
             return;
         }
+
         const mailOptions = {
             from: 'luciano.caro.1995@gmail.com',
             to: email,
@@ -71,13 +73,14 @@ const sendPurchaseConfirmation = async (email, ticketId) => {
                     Número de ticket: ${ticket._id}\n
                     Monto total: ${ticket.amount}\n
                     Fecha de compra: ${ticket.purchase_datetime}\n`
-        }
+        };
+
         await transport.sendMail(mailOptions);
         console.log('Email de confirmación de compra enviado correctamente');
     } catch (error) {
         console.log('Error al obtener información del ticket o usuario:', error);
     }
-}
+};
 
 //Exportar todas las funciones juntas
 export const mailer = {

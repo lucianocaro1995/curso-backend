@@ -1,7 +1,3 @@
-//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre products
-
-
-
 import { Schema, model } from "mongoose";
 import paginate from 'mongoose-paginate-v2'
 

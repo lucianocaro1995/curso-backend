@@ -1,7 +1,3 @@
-//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre users
-
-
-
 import { Schema, model } from "mongoose";
 import { cartModel } from './carts.models.js'
 
@@ -54,12 +50,13 @@ const userSchema = new Schema({
 
 userSchema.pre('save', async function (next) {
     try {
-        const newCart = await cartModel.create({})
-        this.cart = newCart._id
+        const newCart = await cartModel.create({});
+        this.cart = newCart._id;
+        await newCart.save();
     } catch (error) {
-        next(error)
+        next(error);
     }
-})
+});
 
 userSchema.methods.processPurchase = async function (totalPrice) {
     if (this.rol === 'premium') {

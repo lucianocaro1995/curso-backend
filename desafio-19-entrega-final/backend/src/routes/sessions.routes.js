@@ -9,8 +9,8 @@ const sessionRouter = Router();
 
 
 
-//Rutas en orden desde la primera hasta la última pedidas en el test de Postman:
-sessionRouter.get("/current", passportError("jwt"), authorization('admin'), sessionController.currentSession);
+//Rutas en orden pedidas en el test de Postman:
+sessionRouter.get("/current", passportError("jwt"), authorization(['user', 'premium', 'admin']), sessionController.currentSession);
 
 sessionRouter.post("/register", passport.authenticate("register"), sessionController.registerUsers);
 

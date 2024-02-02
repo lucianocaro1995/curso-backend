@@ -8,7 +8,7 @@ const productRouter = Router()
 
 
 
-//Rutas en orden desde la primera hasta la última pedidas en el test de Postman:
+//Rutas en orden pedidas en el test de Postman:
 productRouter.get('/', productController.getProducts)
 
 productRouter.post('/', passportError('jwt'), authorization('admin'), productController.createProduct)

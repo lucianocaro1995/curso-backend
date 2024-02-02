@@ -1,7 +1,7 @@
 ## Comentarios:
 
 1. Desafío "Backend de una aplicación ecommerce": <br>
-   En este trabajo debemos conseguir una experiencia de compra completa uniendo backend con frontend <br>
+   En este trabajo debemos conseguir una experiencia de compra completa uniendo frontend, backend y base de datos <br>
    Además debemos agregar 2 rutas en /api/users: <br>
    GET "/" deberá obtener todos los usuarios. Éste sólo debe devolver los datos principales como nombre, correo, rol (con nombre y correo alcanza) <br>
    DELETE "/" deberá limpiar a todos los usuarios que no hayan tenido conexión en los últimos 2 días (puedes hacer pruebas con los últimos 30 minutos por ejemplo). Deberá enviarse un correo indicando al usuario que su cuenta ha sido eliminada por inactividad (el profesor nos dijo que lo hagamos utilizando un time.now o date.now) <br>
