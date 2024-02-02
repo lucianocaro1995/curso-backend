@@ -15,6 +15,6 @@ sessionRouter.get("/githubCallback", passport.authenticate("github"), sessionCon
 
 sessionRouter.get("/logout", sessionController.getLogout);
 
-sessionRouter.get("/current", passportError("jwt"), authorization(['user','premium', 'admin']), (req, res) => {res.send(req.user);});
+sessionRouter.get("/current", passportError("jwt"), authorization(['user', 'premium', 'admin']), (req, res) => {res.send(req.user);});
 
 export default sessionRouter;

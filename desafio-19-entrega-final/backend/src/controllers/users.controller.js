@@ -3,6 +3,10 @@ import { mailer } from "../config/nodemailer.js"
 import crypto from 'crypto';
 const recoveryLinks = {};
 
+
+
+
+
 //1)
 const getUsers = async (req, res) => {
     try {
@@ -201,5 +205,5 @@ export const userController = {
     deleteInactiveUsers,
     requestPasswordReset,
     resetPassword,
-    uploadUserDocuments
+    uploadUserDocuments,
 }

@@ -8,6 +8,7 @@ import 'dotenv/config'
 
 
 
+
 //Defino la estregia a utilizar: autenticación de manera local, utilizando email y contraseña
 const LocalStrategy = local.Strategy
 const JWTStrategy = jwt.Strategy
@@ -17,23 +18,32 @@ const initializePassport = () => {
 
     //1) Capturar las cookies
     const cookieExtractor = req => {
-        //En lugar de tomar de las cookies directamente todo de la peticion
-        const token = req.headers.authorization ? req.headers.authorization : {}
-        //const token = req.cookies.jwtCookie ? req.cookies.jwtCookie : {}
-        console.log("cookieExtractor", token)
-        return token
+        let token = '';
+    
+        if (req.cookies.jwtCookie) {
+            // Si el token está almacenado en las cookies
+            token = req.cookies.jwtCookie;
+        } else if (req.headers.authorization) {
+            // Si el token está en la cabecera de autorización
+            const authHeader = req.headers.authorization;
+            token = authHeader.replace('Bearer ', ''); // Elimina "Bearer " del valor del token
+        }
+    
+        console.log("cookieExtractor: ", { name: "jwtCookie", value: token });
+        return token;
     }
-
+    
+    
     //2) Estrategia utilizando cookies
     passport.use('jwt', new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), //El token va a venir desde cookieExtractor
+        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]), //el token vendra desde cookieExtractor.
         secretOrKey: process.env.JWT_SECRET
-    }, async (jwt_payload, done) => { //jwt_payload = info del token (en este caso, datos del cliente)
+    }, async (jwt_payload, done) => {//jwt_payload = info del token (en este caso datos del cliente)                            
         try {
-            console.log("JWT", jwt_payload)
-            return done(null, jwt_payload)
+            console.log("payload: ", jwt_payload);
+            return done(null, jwt_payload);
         } catch (error) {
-            return done(error)
+            return done(error);
         }
     }))
 
@@ -78,7 +88,7 @@ const initializePassport = () => {
                 return done(error);
             }
         }
-    ));    
+    ));
 
     //5) Estrategia utilizando github
     passport.use('github', new GithubStrategy({

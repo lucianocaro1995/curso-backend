@@ -7,7 +7,7 @@ const userRouter = Router();
 
 userRouter.get("/", passportError('jwt'), authorization('admin'), userController.getUsers);
 
-userRouter.get("/", passportError('jwt'), authorization('admin'), userController.getUsersNamesAndEmails);
+userRouter.get("/names-emails", passportError('jwt'), authorization('admin'), userController.getUsersNamesAndEmails);
 
 userRouter.get("/:uid", passportError('jwt'), authorization('admin'), userController.getUserById);
 

@@ -1,28 +1,20 @@
 import { generateToken } from "../utils/jwt.js";
+import { userModel } from "../models/users.models.js";
 
 //1)
 const postLogin = async (req, res) => {
     try {
         if (!req.user) {
-            return res.status(401).send({ mensaje: "Usuario invalido" })
+            return res.status(401).send({ mensaje: "Usuario inválido" });
         }
-        /*
-        Si siguen con sesiones en BDD, esto no se bora. Si usan JWT si
-        req.session.user = {
-            first_name: req.user.first_name,
-            last_name: req.user.last_name,
-            age: req.user.age,
-            email: req.user.email
-            res.status(200).send({mensaje: "Usuario logueado"})
-        }*/
-
-        const token = generateToken(req.user)
-
-        res.status(200).send({ token })
+        //Actualizar last_connection al momento del inicio de sesión
+        await userModel.findByIdAndUpdate(req.user._id, { last_connection: new Date() });
+        const token = generateToken(req.user);
+        res.status(200).send({ token });
     } catch (error) {
-        res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` })
+        console.error("Error en postLogin:", error);
+        res.status(500).send({ mensaje: `Error al iniciar sesión ${error.message}` });
     }
-
 }
 
 //2)
