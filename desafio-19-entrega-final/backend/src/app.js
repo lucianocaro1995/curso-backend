@@ -104,7 +104,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 //Middleware de Swagger
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs)) //En qué ruta se va a ejecutar, y bajo qué condiciones
-// Middleware para servir imágenes
+// Middleware para subir imágenes
 app.use('/uploads/products', express.static(`${__dirname}/uploads/products`));
 
 //7) Rutas
