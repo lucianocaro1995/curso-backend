@@ -12,7 +12,7 @@
    Modifiqué "passport.js", "jwt.js" y "messagesError.js" también para cumplir con el test de Postman
 3. Multer: <br>
    Modifiqué el controller y route de products para crear un endpoint que me permita subir imágenes de los productos a la base de datos <br>
-   Modifiqué "app.js" para agregar el middleware de multer. Raramente no necesité este middleware para que me funcione bien multer en el desafío 18 <br>
+   Modifiqué "app.js" para agregar el middleware de multer. Esto no es necesario para subir la imagen a la base de datos, pero sí para que se vea la imagen en el frontend <br>
    El archivo "multer.js" no necesitó modificaciones
 4. Nodemailer: <br>
    Agregué 2 funciones, así que en total voy a tener 3 funciones en "nodemailer.js": <br>
@@ -29,7 +29,8 @@
 
 ## Cómo utilizar correctamente Postman:
 
-1. Para iniciar voy a necesitar loguearme: <br>
+1. Explicación de la ruta login: <br>
+   Tener en cuenta que para poder loguearme ya debo estar registrado en la base de datos <br>
    Al loguearme recibo un token, el cual voy a poder utilizar para poder ejecutar las rutas que necesiten autorización <br>
    Para las rutas que sean de uso exclusivo del admin, voy a necesitar loguearme como el admin <br>
    Para las rutas que sean de uso de los usuarios "user" y "premium", voy a necesitar loguearme como usuario
