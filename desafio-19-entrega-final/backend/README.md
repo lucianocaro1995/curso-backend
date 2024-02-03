@@ -29,7 +29,7 @@
 
 ## Cómo utilizar correctamente Postman:
 
-1. Para iniciar voy a necesitar loguearme:
+1. Para iniciar voy a necesitar loguearme: <br>
    Al loguearme recibo un token, el cual voy a poder utilizar para poder ejecutar las rutas que necesiten autorización <br>
    Para las rutas que sean de uso exclusivo del admin, voy a necesitar loguearme como el admin <br>
    Para las rutas que sean de uso de los usuarios "user" y "premium", voy a necesitar loguearme como usuario
@@ -40,14 +40,14 @@
 3. Cómo utilizar la ruta current: <br>
    Sirve para introducir un token y que me devuelva la información del usuario asociada a ese token <br>
    Primero debo introducir un token de autorización como expliqué en el punto 2  <br>
-   Luego dedo clickear la opción "Headers" y me va a aparecer una tabla con varias Keys. Busco la key que dice "Authorization" y en el value que por defecto en nuestro test de Postman dice "Bearer {{jwt_token}}" debo introducir el token del usuario para buscar su información <br>
+   Luego debo clickear la opción "Headers" y me va a aparecer una tabla con varias Keys. Busco la key que dice "Authorization" y en el value que por defecto en nuestro test de Postman dice "Bearer {{jwt_token}}" debo introducir el token del usuario para buscar su información <br>
    Importante: sólo vamos a poder buscar la información nuestra. Si primero pongo un token de autorización de un usuario Luciano, y luego pongo el token a buscar sobre el usuario Matías, al clickear send voy a ver en la consola la información del usuario Luciano <br>
    Para ver sin problemas la información de un usuario, debo ingresar el mismo token tanto en Authorization como en Headers
 4. Cómo utilizar todas las rutas: <br>
    Verifico si la ruta necesita autorización. Si lo necesita me logueo e ingreso el token que me pida, ya sea de user, premium o admin <br>
    Verifico el método: GET, POST, PUT, DELETE <br>
    Verifico la ruta, reemplazo los id en caso de ser necesario con algún id existente en mi base de datos <br>
-   Verifico si la ruta necesita que complete escribiendo en el body, por ejemplo para crear un producto voy a tener que escribir en el body un objeto con los valores title, description, price, stock, code, category
+   Verifico si la ruta necesita que complete escribiendo en el body, por ejemplo para crear un producto voy a tener que escribir en el body un objeto con los atributos title, description, price, stock, code, category
 
 
 
