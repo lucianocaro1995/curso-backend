@@ -41,14 +41,15 @@
    Debo copiar esa URL y pegarla en mi archivo "app.js" para hacer la conexión a la base de datos <br>
    Finalmente, hay una parte de la URL que dice "password", ahí debo borrar esa palabra y reemplazarla por mi contraseña
 2. ¿Cómo configuré mi contraseña? <br>
-   Al hacer los primeros pasos yo clickié en la pestaña "Quikstart". Aquí es donde configuré mi nombre de usuario y contraseña que voy a utilizar para conectar el backend de mi aplicación con la base de datos (no es el mismo usuario y contraseña que utilizo para entrar a MongoDB Atlas)
+   Al hacer los primeros pasos yo clickié en la pestaña "Quikstart". Aquí es donde configuré mi nombre de usuario y contraseña que voy a utilizar para conectar el backend de mi aplicación con la base de datos (no es el mismo usuario y contraseña que utilizo para entrar a MongoDB Atlas) <br>
    Esta pestaña no nos va a aparecer una vez que tengamos creado al menos un usuario para usar una base de datos
 3. ¿Cómo cambio mi contraseña? <br>
    Clickeo la pestaña "Database Access" y clickeo "Edit" sobre el usuario que desee cambiarle la contraseña <br>
 4. ¿Cómo accedo a las colecciones de mi base de datos? <br>
    Clickeo "Database" y luego clickeo "browse collections"
 5. ¿Cómo se crean las colecciones? <br>
-   Cuando inicie la conexión con "npm run dev" me va a aparecer en la pestaña "browseCollections" las colecciones que yo haya creado en la carpeta models. Estas colecciones siempre se crean o modifican al hacer conexión con la base de datos
+   Cuando inicie la conexión con "npm run dev" me va a aparecer en la pestaña "browseCollections" las colecciones que yo haya creado en la carpeta models <br>
+   Estas colecciones siempre se crean o modifican al hacer conexión con la base de datos
 6. Importante: <br>
    Vamos a tener 2 contraseñas, una para hacer inicio de sesión en MongoDb Atlas y la otra para conectar el backend de mi aplicación con la base de datos: <br>
    La primera se modifica clickeando en "forgot password?" al iniciar sesión <br>

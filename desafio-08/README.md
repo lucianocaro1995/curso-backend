@@ -28,20 +28,15 @@
 
 1. app.use(cookieParser(process.env.SIGNED_COOKIE)) <br>
     En esta línea de código la cookie está firmada, eso la hace más segura
-
 2. useNewUrlParser: true <br>
     Establezco que la conexión sea mediante URL
-
 3. useUnifiedTopology: true <br>
     Manejo de clusters de manera dinámica
-
 4. ttl: 60 <br>
     Duración de la sesión en la base de datos en segundos, no en milisegundos
-
 5. resave: false <br>
     Resave permite mantener la sesión activa en caso de que la sesión se mantenga inactiva <br>
     Si se deja en false, la sesión morirá en caso de que exista cierto tiempo de inactividad
-
 6. saveUninitialized: false <br>
     SaveUninitialized permite guardar cualquier sesión aún cuando el objeto de sesión no tenga nada por contener <br>
     Si se deja en false, la sesión no se guardará si el objeto de sesión está vacío al final de la consulta
