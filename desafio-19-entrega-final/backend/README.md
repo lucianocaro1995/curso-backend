@@ -17,13 +17,13 @@
 4. Nodemailer: <br>
    Agregué 2 funciones, así que en total voy a tener 3 funciones en "nodemailer.js": <br>
    Una función para reestablecer contraseña <br>
-   Una función que notifique por mail a los usuarios cuyas cuentas sean eliminadas después de 2 días de inactividad <br>
+   Una función que notifique a los usuarios cuyas cuentas sean eliminadas después de 2 días de inactividad <br>
    Una función para agradecerle al usuario por su compra <br>
-   Las primeras 2 funciones modifican los controllers y routes de users y la última modifica a carts
+   Las primeras 2 funciones modifican los controllers y routes de users, la última modifica a carts
 5. Frontend: <br>
    Modifiqué la carpeta frontend poder realizar un flujo completo de compra, es decir crear un ecommerce 
-6. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
-   Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
+6. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:3000 <br>
+   Es necesario abrir las 2 carpetas de backend y frontend y ejecutar el comando en ambas carpetas. Si lo ejecuto en la carpeta del desafío, me va a aparecer un error
 
 
 

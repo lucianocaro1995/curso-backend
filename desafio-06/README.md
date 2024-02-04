@@ -37,29 +37,40 @@
    -  Contraseña de mi base de datos (no es la misma contraseña que utilizo para entrar a MongoDB Atlas) <br>
    
    En la página web de MongoDB Atlas clickeo la pestaña "database", clickeo "Connect", clickeo "Drivers" y se me va a abrir una ventana con mi URL <br>
-   Debo modificar esa URL, pongo mi contraseña donde dice "password". Luego de entregar este desafío cambio la contraseña <br>
-   En la línea 52 de mi archivo "app.js" pego mi URL y contraseña
-2. ¿Cómo cambio mi contraseña? <br>
-   Clickeo la pestaña "Database Access" y clickeo "Edit" sobre el usuario que desea cambiarle la contraseña <br>
-   Cuando inicie la conexión con "npm run dev" me va a aparecer en la pestaña "browseCollections" la colección "users" que yo creé
-3. ¿Cómo accedo a las colecciones de mi base de datos? <br>
-   Clickeo "database" y luego clickeo "browse collections"
-
+   Debo copiar esa URL y pegarla en mi archivo "app.js" para hacer la conexión a la base de datos <br>
+   Finalmente, hay una parte de la URL que dice "password", ahí debo borrar esa palabra y reemplazarla por mi contraseña
+2. ¿Cómo configuré mi contraseña? <br>
+   Al hacer los primeros pasos yo clickié en la pestaña "Quikstart". Aquí es donde configuré mi nombre de usuario y contraseña que voy a utilizar para conectar el backend de mi aplicación con la base de datos (no es el mismo usuario y contraseña que utilizo para entrar a MongoDB Atlas)
+   Esta pestaña no nos va a aparecer una vez que tengamos creado al menos un usuario para usar una base de datos
+3. ¿Cómo cambio mi contraseña? <br>
+   Clickeo la pestaña "Database Access" y clickeo "Edit" sobre el usuario que desee cambiarle la contraseña <br>
+4. ¿Cómo accedo a las colecciones de mi base de datos? <br>
+   Clickeo "Database" y luego clickeo "browse collections"
+5. ¿Cómo se crean las colecciones? <br>
+   Cuando inicie la conexión con "npm run dev" me va a aparecer en la pestaña "browseCollections" las colecciones que yo haya creado en la carpeta models. Estas colecciones siempre se crean o modifican al hacer conexión con la base de datos
+6. Importante:
+   Vamos a tener 2 contraseñas, una para hacer inicio de sesión en MongoDb Atlas y la otra para conectar el backend de mi aplicación con la base de datos:
+   La primera se modifica clickeando en "forgot password?" al iniciar sesión
+   La segunda lo expliqué en el punto 3
+7. Cluster:
+   Un cluster es un conjunto de servidores interconectados que colaboran para almacenar y gestionar datos de manera distribuida
+   En MongoDB Atlas, "Cluster0" es el nombre predeterminado para el clúster principal creado al configurar una base de datos en la nube
 
 
 ## Cómo utilizar dotenv para ocultar contraseñas
 
-1. Una vez que finalice la instalación utilizando "npm i dotenv", creo el archivo ".env"
-2. En este archivo creo el nombre de una variable, le asigno un nombre a la contraseña que deseo ocultar <br>
+1. Debo instalar la dependencia dotenv utilizando el comando "npm i dotenv"
+2. Luego creo el archivo ".env"
+3. En este archivo creo el nombre de una variable, le asigno un nombre a la contraseña que deseo ocultar <br>
    Yo asigné el nombre "MONGO_URL" para ocultar mi contraseña que me conecta con mi base de datos, para que nadie pueda manipular mis colecciones de usuarios, productos, etc
-3. A este nombre le pongo un igual "=" y le asigno el valor de la contraseña
-4. Una vez hecho esto, importo dotenv en el archivo que desee utilizarlo
-5. Voy al código y reemplazo en "app.js" utilizando process.env. + (nombre asignado), es decir yo voy a poner en este caso "process.env.MONGO_URL" <br>
-   Cómo se veía antes: <br>
+4. A este nombre le pongo un igual "=" y le asigno el valor de la contraseña
+5. Una vez hecho esto, importo dotenv en el archivo que desee utilizarlo
+6. Voy al código y reemplazo en "app.js" utilizando process.env. + (nombre asignado), es decir yo voy a poner en este caso "process.env.MONGO_URL" <br>
+   Cómo se veía antes (debo escribir mi contraseña donde dice password): <br>
    `mongoose.connect('mongodb+srv://luciano1995:<password>@cluster0.azwpqmd.mongodb.net/?retryWrites=true&w=majority')` <br>
    Cómo se ve ahora la línea de código reemplazada: <br>
    `mongoose.connect(process.env.MONGO_URL)`
-6. Finalmente debo agregar este archivo ".env" al .gitignore para que no se suba al repositorio de github y las personas no puedan ver las contraseñas
+7. Finalmente debo agregar este archivo ".env" al .gitignore para que no se suba al repositorio de github y las personas no puedan ver las contraseñas
 
 
 

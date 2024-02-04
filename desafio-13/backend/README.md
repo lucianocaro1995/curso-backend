@@ -14,8 +14,8 @@
    El profesor nos pidió que hagamos un listado de posibles errores relacionados al carrito de una aplicación. Simplemente que los escribamos (lo haré en este mismo archivo) <br>
    Este listado nos va a servir en futuras aplicaciones para hacer un TDD (Test Driven Development)
 4. Eliminé el archivo "mailer.js" de la carpeta config ya que por ahora no lo estamos utilizando en nuestro proyecto (ni tampoco lo estaba vinculando a la aplicación, solamente había creado el archivo). Seguramente lo utilicemos más adelante cuando tenga terminada la aplicación y el cliente finalice la compra de algún producto. También eliminé la carpeta "img" y el archivo "path.js" que solamente los estaba utilizando para el "mailer.js"
-5. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
-   Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
+5. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
+   Es necesario abrir las 2 carpetas de backend y frontend y ejecutar el comando en ambas carpetas. Si lo ejecuto en la carpeta del desafío, me va a aparecer un error
 
 
 

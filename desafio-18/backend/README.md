@@ -24,8 +24,8 @@
    En este mismo campo Key elijo la opción file <br>
    Dentro del campo Value clickeo en select file y busco la imagen que deseo subir. Debe estar en la carpeta uploads porque así lo configuré en "multer.js". Si la imagen está en otro lado, no va a funcionar <br>
    Clickeo en send <br>
-8. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
-   Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
+8. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
+   Es necesario abrir las 2 carpetas de backend y frontend y ejecutar el comando en ambas carpetas. Si lo ejecuto en la carpeta del desafío, me va a aparecer un error
 
 
 

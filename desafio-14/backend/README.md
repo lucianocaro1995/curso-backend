@@ -11,8 +11,8 @@
 6. En el after vimos cómo ver todos los niveles de loggers en un archivo html (en vez de verlos en el archivo log como hacíamos anteriormente) <br>
    Podemos ingresar los niveles desde Postman introduciendo cualquier endpoint como "localhost:4000/api/loggerTest/fatal" <br>
    Luego, vamos a "loggers.html" o "errors.html" y hacemos click derecho y "open with live server" para visualizar los loggers en nuestro navegador
-7. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
-   Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
+7. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
+   Es necesario abrir las 2 carpetas de backend y frontend y ejecutar el comando en ambas carpetas. Si lo ejecuto en la carpeta del desafío, me va a aparecer un error
 
 
 

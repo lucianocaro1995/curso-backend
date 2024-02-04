@@ -77,11 +77,15 @@ const specs = swaggerJSDoc(swaggerOptions)
 
 
 //6) Configuración del servidor Express
-//Middlewares
+//Middleware de análisis JSON
 app.use(express.json())
+//Middleware de análisis URL-encoded
 app.use(express.urlencoded({ extended: true }))
+//Middleware de cors
 app.use(cors(corsOptions))
+//Middleware de cookies
 app.use(cookieParser(process.env.SIGNED_COOKIE))
+//Middleware de sesiones
 app.use(session({
     //Configuración de sesiones en la base de datos
     store: MongoStore.create({
@@ -104,8 +108,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 //Middleware de Swagger
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs)) //En qué ruta se va a ejecutar, y bajo qué condiciones
-// Middleware para subir imágenes
+//Middleware de Multer
 app.use('/uploads/products', express.static(`${__dirname}/uploads/products`));
-
-//7) Rutas
+//Middleware de enrutamiento principal
 app.use('/', router)

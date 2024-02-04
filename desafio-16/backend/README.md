@@ -13,8 +13,8 @@
    Si no hago esto, cuando ejecute dentro de Swagger me va a aparecer un error y no me va a funcionar la operación que quiera realizar con los usuarios ya que necesito logearme (obviamente debo hacer lo mismo con carritos, productos y sesiones)
 6. Aclaración: el archivo "users.yaml" es el que hizo el profesor en clase. Lo hice lo más parecido a lo que hizo el profesor, luego con el resto (carts y products principalmente) utilicé simplificaciones de código para no repetir tanto
 7. Aclaración: generalmente se utiliza Swagger para probar y documentar la API interactuando desde el frontend con una base de datos de prueba, pero nosotros en el curso no creamos una base de datos de prueba, así que cuando ejecute los  métodos va a modificar la base de datos de mi aplicación
-8. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para poder ver mi app en el navegador y que funcione correctamente <br>
-   Es recomendable abrir las 2 terminales, tanto para backend como frontend, así reconozco los errores de cada uno en caso de que aparezcan
+8. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:4000 <br>
+   Es necesario abrir las 2 carpetas de backend y frontend y ejecutar el comando en ambas carpetas. Si lo ejecuto en la carpeta del desafío, me va a aparecer un error
 
 
 
