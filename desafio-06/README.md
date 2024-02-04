@@ -32,9 +32,9 @@
 ## Cómo utilizar la base de datos Mongodb Atlas
 
 1. ¿Cómo conectar la base de datos Mongodb Atlas con mi aplicación en visual studio code? <br>
-   Debo conseguir 2 cosas para lograr la conexión: <br>
+   Debo conseguir 2 cosas para lograr la conexión: <br><br>
    -  URL de mi base de datos <br>
-   -  Contraseña de mi base de datos (no es la misma contraseña que utilizo para entrar a MongoDB Atlas) <br>
+   -  Contraseña de mi base de datos (no es la misma contraseña que utilizo para entrar a MongoDB Atlas) <br><br>
    En la página web de MongoDB Atlas clickeo la pestaña "database", clickeo "Connect", clickeo "Drivers" y se me va a abrir una ventana con mi URL <br>
    Debo copiar esa URL y pegarla en mi archivo "app.js" para hacer la conexión a la base de datos <br>
    Finalmente, hay una parte de la URL que dice "password", ahí debo borrar esa palabra y reemplazarla por mi contraseña
