@@ -29,11 +29,11 @@
 
 
 
-## Cómo utilizar la base de datos Mongodb Atlas
+## Cómo utilizar la base de datos Mongodb Atlas:
 
 1. ¿Cómo conectar la base de datos Mongodb Atlas con mi aplicación en visual studio code? <br>
    Debo conseguir 2 cosas para lograr la conexión: <br>
-   
+
    -  URL de mi base de datos <br>
    -  Contraseña de mi base de datos (no es la misma contraseña que utilizo para entrar a MongoDB Atlas) <br>
 
@@ -58,7 +58,7 @@
    En MongoDB Atlas, "Cluster0" es el nombre predeterminado para el clúster principal creado al configurar una base de datos en la nube
 
 
-## Cómo utilizar dotenv para ocultar contraseñas
+## Cómo utilizar dotenv para ocultar contraseñas:
 
 1. Debo instalar la dependencia dotenv utilizando el comando "npm i dotenv"
 2. Luego creo el archivo ".env"
