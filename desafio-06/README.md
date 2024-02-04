@@ -35,7 +35,6 @@
    Debo conseguir 2 cosas para lograr la conexión: <br>
    -  URL de mi base de datos <br>
    -  Contraseña de mi base de datos (no es la misma contraseña que utilizo para entrar a MongoDB Atlas) <br>
-   
    En la página web de MongoDB Atlas clickeo la pestaña "database", clickeo "Connect", clickeo "Drivers" y se me va a abrir una ventana con mi URL <br>
    Debo copiar esa URL y pegarla en mi archivo "app.js" para hacer la conexión a la base de datos <br>
    Finalmente, hay una parte de la URL que dice "password", ahí debo borrar esa palabra y reemplazarla por mi contraseña
@@ -48,12 +47,12 @@
    Clickeo "Database" y luego clickeo "browse collections"
 5. ¿Cómo se crean las colecciones? <br>
    Cuando inicie la conexión con "npm run dev" me va a aparecer en la pestaña "browseCollections" las colecciones que yo haya creado en la carpeta models. Estas colecciones siempre se crean o modifican al hacer conexión con la base de datos
-6. Importante:
-   Vamos a tener 2 contraseñas, una para hacer inicio de sesión en MongoDb Atlas y la otra para conectar el backend de mi aplicación con la base de datos:
-   La primera se modifica clickeando en "forgot password?" al iniciar sesión
-   La segunda lo expliqué en el punto 3
-7. Cluster:
-   Un cluster es un conjunto de servidores interconectados que colaboran para almacenar y gestionar datos de manera distribuida
+6. Importante: <br>
+   Vamos a tener 2 contraseñas, una para hacer inicio de sesión en MongoDb Atlas y la otra para conectar el backend de mi aplicación con la base de datos: <br>
+   La primera se modifica clickeando en "forgot password?" al iniciar sesión <br>
+   La segunda lo expliqué en el punto 3 <br>
+7. Cluster: <br>
+   Un cluster es un conjunto de servidores interconectados que colaboran para almacenar y gestionar datos de manera distribuida <br>
    En MongoDB Atlas, "Cluster0" es el nombre predeterminado para el clúster principal creado al configurar una base de datos en la nube
 
 
