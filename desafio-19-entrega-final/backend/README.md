@@ -10,6 +10,7 @@
 2. Test de Postman: <br>
    Modifiqué tanto controllers como routes para que me diera bien todas las rutas/endpoints del test de Postman <br>
    Modifiqué "passport.js", "jwt.js" y "messagesError.js" también para cumplir con el test de Postman
+   Modifiqué "app.js" para utilizar el puerto 3000 como me pide el test
 3. Multer: <br>
    Modifiqué el controller y route de products para crear un endpoint que me permita subir imágenes de los productos a la base de datos <br>
    Modifiqué "app.js" para agregar el middleware de multer. Esto no es necesario para subir la imagen a la base de datos, pero sí para que se vea la imagen en el frontend <br>

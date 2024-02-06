@@ -1,14 +1,16 @@
-import { useRef } from "react"
-import { useNavigate } from "react-router-dom"
-import Header from './Header/Header'
-import Footer from './Footer/Footer'
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer';
+
+
+
 
 
 const LoginForm = () => {
-
+    const [error, setError] = useState(null);
     const formRef = useRef(null)
     const navigate = useNavigate()
-
     const handleSumbit = async (e) => {
         e.preventDefault()
         const datForm = new FormData(formRef.current)
@@ -26,7 +28,7 @@ const LoginForm = () => {
             console.log(datos)
             document.cookie = `jwtCookie=${datos.token}; expires${new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toUTCString()};path=/;`
             navigate('/')
-
+            window.location.reload(); // Recarga la página después de iniciar sesión
         } else {
             console.log(response)
         }
@@ -35,7 +37,6 @@ const LoginForm = () => {
     return (
         <>
             <Header />
-
 
             <section className="text-gray-400 bg-gray-900 body-font py-20">
                 <div className="container px-5 py-24 mx-auto">
@@ -55,18 +56,14 @@ const LoginForm = () => {
                             </div>
                             <button type="submit" className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Iniciar</button>
                         </div>
+                        {error && <p className="text-red-500 mt-2">{error}</p>}
                     </form>
                 </div>
             </section>
 
-
-
-
-
-
             <Footer />
         </>
-    )
-}
+    );
+};
 
-export default LoginForm
+export default LoginForm;

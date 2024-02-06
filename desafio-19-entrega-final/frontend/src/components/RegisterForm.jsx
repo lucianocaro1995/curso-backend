@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
-import Header from './Header/Header'
-import Footer from './Footer/Footer'
+import Header from './Header'
+import Footer from './Footer'
 
 const RegisterForm = () => {
 
@@ -12,7 +12,7 @@ const RegisterForm = () => {
         e.preventDefault()
         const datForm = new FormData(formRef.current) //Tranformo un HTML en un object iterator
         const data = Object.fromEntries(datForm)
-        const response = await fetch('http://localhost:4000/api/sessions/register', {
+        const response = await fetch('http://localhost:3000/api/session/register', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -23,7 +23,7 @@ const RegisterForm = () => {
             const datos = await response.json()
             console.log(datos)
             navigate('/login')
-
+            window.location.reload()
         } else {
             console.log(response)
         }

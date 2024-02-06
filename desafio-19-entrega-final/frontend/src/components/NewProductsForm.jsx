@@ -1,8 +1,8 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { getCookiesByName } from "../utils/formsUtils.js"
-import Header from './Header/Header'
-import Footer from './Footer/Footer'
+import Header from './Header'
+import Footer from './Footer'
 
 const NewProductsForm = () => {
     const formRef = useRef(null)

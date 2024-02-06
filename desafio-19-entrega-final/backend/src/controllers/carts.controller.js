@@ -85,7 +85,6 @@ const deleteCartProducts = async (req, res) => {
     }
 };
 
-
 //5)
 const deleteCartProduct = async (req, res) => {
     const { cid, pid } = req.params;
@@ -120,8 +119,6 @@ const deleteCartProduct = async (req, res) => {
     }
 };
 
-
-
 //6)
 const addProductCart = async (req, res) => {
     const { cid, pid } = req.params;
@@ -130,20 +127,24 @@ const addProductCart = async (req, res) => {
     try {
         const cart = await cartModel.findById(cid);
         if (!cart) {
-            res.status(404).send({ respuesta: "Error al agregar producto al carrito", mensaje: "Carrito no encontrado" });
+            return res.status(404).send({ respuesta: "Error al agregar producto al carrito", mensaje: "Carrito no encontrado" });
         }
 
         const product = await productModel.findById(pid);
         if (!product) {
-            res.status(404).send({ respuesta: "Error al agregar producto al carrito", mensaje: "Producto no encontrado" });
+            return res.status(404).send({ respuesta: "Error al agregar producto al carrito", mensaje: "Producto no encontrado" });
         }
 
         const existingProductIndex = cart.products.findIndex((prod) => prod.id_prod === pid);
         if (existingProductIndex !== -1) {
-            cart.products[existingProductIndex].quantity = quantity;
+            cart.products[existingProductIndex].quantity += quantity;
         } else {
-            cart.products.push({ id_prod: pid, quantity: quantity });
+            cart.products.push({ id_prod: pid, quantity });
         }
+
+        // Reducir el stock del producto en la base de datos
+        product.stock -= quantity;
+        await product.save();
 
         const updatedCart = await cartModel.findByIdAndUpdate(cid, { products: cart.products }, { new: true });
         res.status(200).send({ respuesta: "OK", mensaje: "Producto agregado al carrito", carrito: updatedCart });

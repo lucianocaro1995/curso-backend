@@ -108,7 +108,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 //Middleware de Swagger
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs)) //En qué ruta se va a ejecutar, y bajo qué condiciones
-//Middleware de Multer
+//Middlewares de archivos estáticos para las rutas que utilizan Multer
+app.use('/uploads/documents', express.static(`${__dirname}/uploads/documents`));
 app.use('/uploads/products', express.static(`${__dirname}/uploads/products`));
+app.use('/uploads/profiles', express.static(`${__dirname}/uploads/profiles`));
 //Middleware de enrutamiento principal
 app.use('/', router)
