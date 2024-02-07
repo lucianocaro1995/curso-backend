@@ -52,7 +52,8 @@ const corsOptions = {
         } else {
             callback(new Error("Acceso denegado"))
         }
-    }
+    },
+    credentials: true
 }
 
 

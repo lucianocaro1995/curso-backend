@@ -28,6 +28,6 @@ cartRouter.delete("/:cid/product/:pid", passportError('jwt'), authorization(['us
 
 
 //Rutas no pedidas por el test de Postman:
-cartRouter.get("/:cid", passportError('jwt'), authorization('admin'), cartController.getCartById);
+cartRouter.get("/:cid", passportError('jwt'), authorization(['user','premium','admin']), cartController.getCartById);
 
 export default cartRouter;

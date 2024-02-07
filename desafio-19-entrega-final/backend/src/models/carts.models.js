@@ -4,14 +4,14 @@ const cartSchema = new Schema({
     products: {
         type: [
             {
-                id_prod: {
+                _id: {
                     type: Schema.Types.ObjectId,
                     ref: 'products',
                     required: true
                 },
                 quantity: {
                     type: Number,
-                    required: false
+                    required: true
                 }
             }
         ],
@@ -19,10 +19,11 @@ const cartSchema = new Schema({
             return [];
         }
     }
-})
+}
+)
 
 cartSchema.pre('findOne', function () {
-    this.populate('products.id_prod')
+    this.populate('products._id')
 })
 
 export const cartModel = model('carts', cartSchema)

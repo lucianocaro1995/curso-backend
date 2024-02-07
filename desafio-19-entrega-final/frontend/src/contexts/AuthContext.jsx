@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
+    const [initialized, setInitialized] = useState(false);
 
     useEffect(() => {
         const initializeToken = () => {
@@ -14,14 +15,23 @@ const AuthProvider = ({ children }) => {
                 if (storedToken) {
                     const userObject = JSON.parse(atob(storedToken.split('.')[1])).user;
                     setToken(userObject);
+                    console.log('Token:', userObject);
+                    if (userObject && userObject.cart) {
+                        console.log('cartId:', userObject.cart);
+                    }
                 }
             } catch (error) {
                 console.error('Error parsing token:', error);
+            } finally {
+                setInitialized(true); // Marcar como inicializado después de procesar el token
             }
         };
 
-        initializeToken();
-    }, []);
+        if (!initialized) { // Ejecutar solo si no está inicializado
+            initializeToken();
+        }
+    }, [initialized]);
+
 
     const login = async (email, password) => {
         try {

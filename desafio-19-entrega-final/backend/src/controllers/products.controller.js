@@ -95,8 +95,6 @@ const deleteProduct = async (req, res) => {
 }
 
 //6)
-// En products.controllers.js
-
 const uploadProductImages = async (req, res) => {
     const productId = req.params.pid;
     const files = req.files;
@@ -132,10 +130,6 @@ const uploadProductImages = async (req, res) => {
         res.status(500).send('Error al subir imágenes');
     }
 };
-
-export { uploadProductImages };
-
-
 
 //Exportar todas las funciones juntas
 export const productController = {

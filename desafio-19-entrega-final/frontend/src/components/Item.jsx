@@ -17,7 +17,7 @@ const Item = ({ product }) => {
                 <div className="mt-4">
                     <h3 className="text-xs tracking-widest title-font mb-1">{category}</h3>
                     <h2 className="title-font text-lg font-medium">{title}</h2>
-                    <p className="mt-1">${price.toFixed(2)}</p>
+                    <p className="mt-1">${price}</p>
                 </div>
 
             </Link >
