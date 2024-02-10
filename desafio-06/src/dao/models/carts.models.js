@@ -1,16 +1,10 @@
-//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre carts
-
-
-
 import { Schema, model } from "mongoose";
 
-//Array de lo que tenga el carrito
-//El id nosotros lo creabamos como un número. Ahora lo genera automáticamente Mongodb Atlas no como un número, sino como un objectId 
 const cartSchema = new Schema({
     products: {
         type: [
             {
-                id_prod: {
+                _id: {
                     type: Schema.Types.ObjectId,
                     ref: 'products',
                     required: true
@@ -27,5 +21,9 @@ const cartSchema = new Schema({
     }
 }
 )
+
+cartSchema.pre('findOne', function () {
+    this.populate('products._id')
+})
 
 export const cartModel = model('carts', cartSchema)

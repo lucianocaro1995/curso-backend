@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
     "test": "mocha test/users.test.js",
     "testChai": "mocha test/usersChai.test.js",
     "supertest": "mocha test/supertest.test.js",

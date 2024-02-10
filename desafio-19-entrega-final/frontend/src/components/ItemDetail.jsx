@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import ItemCount from './ItemCount'
 
+const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+
 const ItemDetail = ({ product, onAddToCart }) => {
     const { title, category, thumbnails, description, stock, price } = product;
     const { token } = useAuth();
 
     const thumbnailUrl = thumbnails && thumbnails.length > 0
-        ? `http://localhost:3000/uploads/products/${thumbnails[0].name}`
+        ? `${URL}/uploads/products/${thumbnails[0].name}`
         : '';
 
     const renderUser = () => (

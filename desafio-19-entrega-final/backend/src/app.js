@@ -43,18 +43,18 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 //4) Cors
-const whiteList = ['http://127.0.0.1:5173', 'http://localhost:5173']
+const whiteList = process.env.FRONTEND_URL.split(',');
 
 const corsOptions = {
     origin: function (origin, callback) {
-        if (whiteList.indexOf(origin) != -1 || !origin) {
-            callback(null, true)
+        if (whiteList.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
         } else {
-            callback(new Error("Acceso denegado"))
+            callback(new Error("Acceso denegado"));
         }
     },
     credentials: true
-}
+};
 
 
 

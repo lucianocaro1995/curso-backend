@@ -5,12 +5,17 @@ import { useAuth } from "../contexts/AuthContext";
 const Header = () => {
     const { token, logout } = useAuth();
 
+    //Limpiar la consola al hacer clic en cualquier enlace
+    const handleLinkClick = () => {
+        console.clear();
+    };
+
     const renderUserButtons = () => (
         <>
             <Link to="/cart" className="mr-5 hover:text-pink-500">
                 Mi carrito
             </Link>
-            <Link to="/logout" className="mr-5 hover:text-pink-500">
+            <Link to="/logout" className="mr-5 hover:text-pink-500" onClick={handleLinkClick}>
                 Cerrar sesión
             </Link>
         </>
@@ -24,7 +29,7 @@ const Header = () => {
             <Link to="/admin/new-products" className="mr-5 hover:text-pink-500">
                 Cargar productos
             </Link>
-            <Link to="/logout" className="mr-5 hover:text-pink-500">
+            <Link to="/logout" className="mr-5 hover:text-pink-500" onClick={handleLinkClick}>
                 Cerrar sesión
             </Link>
         </>

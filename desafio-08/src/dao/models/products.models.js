@@ -1,15 +1,7 @@
-//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre products
-
-
-
 import { Schema, model } from "mongoose";
 import paginate from 'mongoose-paginate-v2'
 
 const productSchema = new Schema({
-    status: {
-        type: Boolean,
-        default: true
-    },
     title: {
         type: String,
         required: true
@@ -18,12 +10,6 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-    category: {
-        type: String,
-        required: true,
-        index: true
-    },
-    thumbnail: [],
     price: {
         type: Number,
         required: true
@@ -32,11 +18,21 @@ const productSchema = new Schema({
         type: Number,
         required: true
     },
+    category: {
+        type: String,
+        required: true,
+        index: true
+    },
+    status: {
+        type: Boolean,
+        default: true
+    },
     code: {
         type: String,
         required: true,
         unique: true
-    }
+    },
+    thumbnails: []
 })
 
 productSchema.plugin(paginate)

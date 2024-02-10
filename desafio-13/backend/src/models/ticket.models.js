@@ -1,9 +1,5 @@
-//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre tickets
-
-
-
 import { Schema, model } from "mongoose";
-import { v4 as uuidv4 } from 'uuid'; //Para generar un id único
+import { v4 as uuidv4 } from 'uuid';
 
 const ticketSchema = new Schema(
     {

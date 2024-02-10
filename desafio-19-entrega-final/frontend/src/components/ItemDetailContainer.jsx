@@ -6,6 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 import ItemDetail from './ItemDetail';
 
+const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
 
 
@@ -25,7 +26,7 @@ const ItemDetailContainer = () => {
                     return;
                 }
 
-                const response = await fetch(`http://localhost:3000/api/products/${productId}`, {
+                const response = await fetch(`${URL}/api/products/${productId}`, {
                     method: 'GET',
                     headers: {
                         'Content-type': 'application/json'
@@ -56,13 +57,13 @@ const ItemDetailContainer = () => {
             }
 
             const cartId = token.cart;
-            console.log('_id:', _id); // Modificación aquí
             console.log('cartId:', cartId);
+            console.log('productId:', productId);
             console.log('quantity:', quantity);
 
             // Realizar el fetch para agregar el producto al carrito
             try {
-                const response = await fetch(`http://localhost:3000/api/carts/${cartId}/product/${productId}`, { // Modificación aquí
+                const response = await fetch(`${URL}/api/carts/${cartId}/product/${productId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

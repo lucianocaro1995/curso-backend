@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
+const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+
 const Item = ({ product }) => {
     const { title, price, category, thumbnails, _id } = product;
 
     const thumbnailUrl = thumbnails && thumbnails.length > 0
-        ? `http://localhost:3000/uploads/products/${thumbnails[0].name}`
+        ? `${URL}/uploads/products/${thumbnails[0].name}`
         : '' ; // No muestra ninguna imagen pero permitirá que la etiqueta de imagen esté presente
 
     return (

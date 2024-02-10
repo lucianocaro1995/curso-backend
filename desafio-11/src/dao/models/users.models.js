@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import paginate from 'mongoose-paginate-v2';
 import { cartModel } from './carts.models.js'
 
 const userSchema = new Schema({
@@ -14,7 +13,7 @@ const userSchema = new Schema({
     },
     age: {
         type: Number,
-        required: true
+        required: false
     },
     email: {
         type: String,
@@ -27,27 +26,47 @@ const userSchema = new Schema({
     },
     rol: {
         type: String,
-        default: 'user'
+        default: 'user',
+        enum: ['user', 'premium']
     },
-    //Cuando creo un nuevo usuario, creo un nuevo carrito asociado a ese usuario
+    discounts: {
+        type: Number,
+        default: 0
+    },
     cart: {
         type: Schema.Types.ObjectId,
-        ref: 'carts' //Nombre de colección
+        ref: 'carts'
+    },
+    documents: [{
+        name: String,
+        reference: String
+    }],
+    last_connection: {
+        type: Date,
+        default: null,
+        index: true
     }
 })
 
-//Implemento el método paginate en el schema
-userSchema.plugin(paginate)
-
-//Crear nuevo carrito
 userSchema.pre('save', async function (next) {
     try {
-        const newCart = await cartModel.create({})
-        this.cart = newCart._id
+        const newCart = await cartModel.create({});
+        this.cart = newCart._id;
+        await newCart.save();
     } catch (error) {
-        next(error)
+        next(error);
     }
-})
+});
 
-//Parámetro 1:Nombre colección - Parámetro 2: Schema 
+userSchema.methods.processPurchase = async function (totalPrice) {
+    if (this.rol === 'premium') {
+        const discountPercentage = 0.25;
+        const discountAmount = totalPrice * discountPercentage;
+        this.discounts += discountAmount;
+        await this.save();
+        return totalPrice - discountAmount;
+    }
+    return totalPrice;
+}
+
 export const userModel = model('users', userSchema)

@@ -4,6 +4,8 @@ import { getCookiesByName } from "../utils/formsUtils.js"
 import Header from './Header'
 import Footer from './Footer'
 
+const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+
 const NewProductsForm = () => {
     const formRef = useRef(null)
     const navigate = useNavigate()
@@ -14,7 +16,7 @@ const NewProductsForm = () => {
         const data = Object.fromEntries(datForm)
         const token = getCookiesByName('jwtCookie')
         console.log(token)
-        const response = await fetch('http://localhost:3000/api/products', {
+        const response = await fetch(`${URL}/api/products`, {
             method: 'POST',
             headers: {
                 'Authorization': `${token}`,

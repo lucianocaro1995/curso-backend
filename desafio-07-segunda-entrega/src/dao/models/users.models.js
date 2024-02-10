@@ -1,47 +1,72 @@
-//Acá estoy creando una colección que va a aparecer en MongoDB Atlas con el nombre users
+import { Schema, model } from "mongoose";
+import { cartModel } from './carts.models.js'
 
-
-
-//Genero los datos que yo necesito para trabajar con mi usuario
-import { Schema, model } from 'mongoose';
-//Paginación
-import paginate from 'mongoose-paginate-v2'
-
-//Un schema/esquema en Mongoose especifica qué campos deben estar presentes en un documento
-//También qué tipo de datos deben contener esos campos y otras restricciones (como si un campo es requerido o si tiene un valor predeterminado)
 const userSchema = new Schema({
-    nombre: {
+    first_name: {
         type: String,
         required: true
     },
-    apellido: {
+    last_name: {
         type: String,
         required: true,
         index: true
-        //Me genera un index en la base de datos para los apellidos. ID y email ya tienen un index por tener atributo unique
-        //Los index o índices se utilizan para mejorar las consultas y encontrar fácilmente el elemento solicitado
-        //¿Cómo encuentro los índices de mis colecciones?
-        //Clickeo database, clickeo browse collections, clickeo sobre alguna colección creada, clickeo indexes
     },
-    edad: {
+    age: {
         type: Number,
-        required: true
+        required: false
     },
     email: {
         type: String,
-        unique: true, //Que salte un error si intento crear 2 usuarios con el mismo mail
+        unique: true,
         required: true
     },
     password: {
         type: String,
         required: true
+    },
+    rol: {
+        type: String,
+        default: 'user',
+        enum: ['user', 'premium']
+    },
+    discounts: {
+        type: Number,
+        default: 0
+    },
+    cart: {
+        type: Schema.Types.ObjectId,
+        ref: 'carts'
+    },
+    documents: [{
+        name: String,
+        reference: String
+    }],
+    last_connection: {
+        type: Date,
+        default: null,
+        index: true
     }
 })
 
-//Implementar el método paginate en el schema
-userSchema.plugin(paginate)
+userSchema.pre('save', async function (next) {
+    try {
+        const newCart = await cartModel.create({});
+        this.cart = newCart._id;
+        await newCart.save();
+    } catch (error) {
+        next(error);
+    }
+});
 
-//Exporto una constante llamada userModel que va a ser igual al modelo de mi base de datos
-//Parámetro 1: nombre de la colección - Parámetro 2: Schema
-//Con estos 2 elementos voy a hacer un CRUD(Create, Read, Update, Delete) en MongoDb
+userSchema.methods.processPurchase = async function (totalPrice) {
+    if (this.rol === 'premium') {
+        const discountPercentage = 0.25;
+        const discountAmount = totalPrice * discountPercentage;
+        this.discounts += discountAmount;
+        await this.save();
+        return totalPrice - discountAmount;
+    }
+    return totalPrice;
+}
+
 export const userModel = model('users', userSchema)

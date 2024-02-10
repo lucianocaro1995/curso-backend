@@ -22,8 +22,13 @@
    Una función para agradecerle al usuario por su compra <br>
    Las primeras 2 funciones modifican los controllers y routes de users, la última modifica a carts
 5. Frontend: <br>
-   Modifiqué la carpeta frontend poder realizar un flujo completo de compra, es decir crear un ecommerce 
-6. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:3000 <br>
+   Modifiqué la carpeta frontend poder realizar un flujo completo de compra, es decir crear un ecommerce
+6. Importante: <br>
+   Modifiqué "carts.models.js" y "carts.controller.js" <br>
+   La base de datos MongoDb Atlas genera por defecto un id llamado "_id", mientras que yo en el modelo de carts estaba creando un id llamado "id_prod". Entonces en la colección de carts tenía 2 ids lo cual era innecesario y me generaba problemas <br>
+   Modifiqué el modelo de carts para utilizar el mismo id que genera Mongo, luego modifiqué el controlador de carts para que todas las funciones utilicen _id y no id_prod <br>
+   Siempre que se ejecuta el comando "npm run dev", si el modelo tiene modificaciones entonces se va a modificar la colección en la base de datos. Para evitar problemas en caso de que ejecute desafíos anteriores, copié los modelos de este desafío 19 y los pegué en los desafíos anteriores
+7. Debo ejecutar `npm run dev` en la terminal de ambas carpetas (backend y frontend) para iniciar el servidor y poder ver la aplicación localmente en mi navegador utilizando el puerto localhost:3000 <br>
    Es necesario abrir las 2 carpetas de backend y frontend y ejecutar el comando en ambas carpetas. Si lo ejecuto en la carpeta del desafío, me va a aparecer un error
 
 
